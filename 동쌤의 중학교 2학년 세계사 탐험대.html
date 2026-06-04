@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>역사 탐험대 - 잃어버린 시대를 찾아서</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  * { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif; }
+  body { margin: 0; background: #0f172a; color: #fff; min-height: 100vh; }
+  .screen { display: none; }
+  .screen.active { display: block; }
+  .card-hover { transition: all 0.2s; cursor: pointer; }
+  .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+  .fade-in { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .btn-primary { background: #F59E0B; color: #1E3A8A; font-weight: 700; padding: 12px 24px; border-radius: 12px; border: none; cursor: pointer; transition: all 0.15s; }
+  .btn-primary:hover { background: #FBBF24; transform: scale(1.02); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-secondary { background: #475569; color: #fff; padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer; }
+  .btn-secondary:hover { background: #64748b; }
+  .quiz-option { background: #1e293b; padding: 16px; border-radius: 12px; cursor: pointer; transition: all 0.15s; border: 2px solid transparent; text-align: left; }
+  .quiz-option:hover { background: #334155; border-color: #F59E0B; }
+  .quiz-option.correct { background: #16a34a !important; border-color: #22c55e; }
+  .quiz-option.wrong { background: #dc2626 !important; border-color: #ef4444; }
+  .dex-card { perspective: 1000px; cursor: pointer; }
+  .dex-inner { transition: transform 0.5s; transform-style: preserve-3d; position: relative; width: 100%; height: 140px; }
+  .dex-card.flipped .dex-inner { transform: rotateY(180deg); }
+  .dex-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .dex-back { transform: rotateY(180deg); }
+  .gauge-bar { height: 12px; background: #1e293b; border-radius: 6px; overflow: hidden; }
+  .gauge-fill { height: 100%; background: linear-gradient(90deg, #F59E0B, #FBBF24); transition: width 0.4s; }
+  .flash-wrong { animation: flashWrong 0.5s; }
+  @keyframes flashWrong { 0%, 100% { background: #0f172a; } 50% { background: #7f1d1d; } }
+  .star-burst { position: fixed; pointer-events: none; font-size: 40px; animation: starBurst 1s ease-out forwards; }
+  @keyframes starBurst { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(2); opacity: 0; } }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #334155; }
+  th { background: #1e293b; font-weight: 600; }
+  .tab-btn { padding: 12px 16px; cursor: pointer; border-left: 4px solid transparent; }
+  .tab-btn.active { background: #1e293b; border-left-color: #3B82F6; }
+  .tab-btn:hover { background: #1e293b; }
+  .kpi-card { background: #1e293b; padding: 16px; border-radius: 8px; border: 1px solid #334155; }
+  .green { color: #22c55e; }
+  .yellow { color: #facc15; }
+  .red { color: #ef4444; }
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+  .modal-content { background: #1e293b; padding: 24px; border-radius: 16px; max-width: 90%; width: 400px; }
+  input, select { background: #334155; color: #fff; padding: 10px 12px; border-radius: 8px; border: 1px solid #475569; width: 100%; }
+  input:focus, select:focus { outline: 2px solid #F59E0B; }
+</style>
+</head>
+<body>
+
+<!-- ====================== 화면 1: 모드 선택 ====================== -->
+<div id="screen-mode" class="screen active">
+  <div class="min-h-screen flex flex-col items-center justify-center p-6">
+    <div class="text-center mb-8">
+      <div class="text-6xl mb-4">🏛️</div>
+      <h1 class="text-4xl font-bold mb-2" style="color:#F59E0B">동쌤의 중학교 2학년 역사 탐험대</h1>
+      <p class="text-xl text-slate-300">잃어버린 시대를 찾아서</p>
+      <p class="text-sm text-slate-400 mt-2">중1 역사 1단원 · 20분 한 판 · 30개 핵심 키워드</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 max-w-4xl w-full">
+      <button id="btn-student" class="card-hover bg-blue-900 p-8 rounded-2xl text-left border-2 border-blue-700">
+        <div class="text-5xl mb-3">🎒</div>
+        <h2 class="text-2xl font-bold mb-2">학생 모드</h2>
+        <p class="text-sm text-slate-300">수호가 되어 5개 시대를 탐험하며 30개 키워드를 자동 암기합니다.</p>
+        <div class="mt-4 text-amber-400 font-bold">탐험 시작 →</div>
+      </button>
+      <button id="btn-teacher" class="card-hover bg-slate-800 p-8 rounded-2xl text-left border-2 border-slate-600">
+        <div class="text-5xl mb-3">👩‍🏫</div>
+        <h2 class="text-2xl font-bold mb-2">교사 모드</h2>
+        <p class="text-sm text-slate-300">비밀번호 입력 후 학생 학습 현황 대시보드를 봅니다.</p>
+        <div class="mt-4 text-blue-400 font-bold">대시보드 진입 →</div>
+      </button>
+      <button id="btn-review" class="card-hover bg-amber-900 p-8 rounded-2xl text-left border-2 border-amber-700">
+        <div class="text-5xl mb-3">📚</div>
+        <h2 class="text-2xl font-bold mb-2">5분 복습</h2>
+        <p class="text-sm text-slate-300">30개 키워드 카드를 휙휙 넘기며 시험 직전 빠른 복습.</p>
+        <div class="mt-4 text-amber-300 font-bold">복습 시작 →</div>
+      </button>
+    </div>
+    <p class="text-xs text-slate-500 mt-8">© 데이터는 이 브라우저에만 저장됩니다</p>
+  </div>
+</div>
+
+<!-- ====================== 화면 2: 학생 로그인 ====================== -->
+<div id="screen-student-login" class="screen">
+  <div class="min-h-screen flex items-center justify-center p-6">
+    <div class="bg-slate-800 rounded-2xl p-8 max-w-md w-full">
+      <button class="btn-back text-slate-400 mb-4">← 뒤로</button>
+      <h2 class="text-2xl font-bold mb-6">🎒 학생 정보 입력</h2>
+      <div class="space-y-4">
+        <div>
+          <label class="text-sm text-slate-300">학년</label>
+          <select id="in-grade"><option value="1">1학년</option><option value="2">2학년</option><option value="3">3학년</option></select>
+        </div>
+        <div>
+          <label class="text-sm text-slate-300">반</label>
+          <select id="in-class"></select>
+        </div>
+        <div>
+          <label class="text-sm text-slate-300">번호</label>
+          <select id="in-num"></select>
+        </div>
+        <div>
+          <label class="text-sm text-slate-300">이름 (한글 2~4자)</label>
+          <input id="in-name" type="text" maxlength="4" placeholder="예: 김수호">
+        </div>
+        <button id="btn-start-game" class="btn-primary w-full">탐험 시작 →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== 화면 3: 교사 로그인 ====================== -->
+<div id="screen-teacher-login" class="screen">
+  <div class="min-h-screen flex items-center justify-center p-6">
+    <div class="bg-slate-800 rounded-2xl p-8 max-w-md w-full">
+      <button class="btn-back text-slate-400 mb-4">← 뒤로</button>
+      <h2 class="text-2xl font-bold mb-2">👩‍🏫 교사 모드</h2>
+      <p class="text-sm text-slate-400 mb-6">비밀번호를 입력하세요</p>
+      <input id="in-pw" type="password" placeholder="비밀번호" class="mb-4">
+      <button id="btn-pw-check" class="btn-primary w-full">확인</button>
+      <p id="pw-msg" class="text-sm text-red-400 mt-3 min-h-[20px]"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== 화면 4: 게임 ====================== -->
+<div id="screen-game" class="screen">
+  <div class="min-h-screen p-4 max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-3">
+      <div class="text-sm">스테이지 <span id="stage-num">1</span>/5</div>
+      <div class="text-sm">⭐ <span id="score">0</span>점 · 🔥 <span id="combo">0</span>콤보</div>
+      <div class="flex gap-2">
+        <button id="btn-dex" class="btn-secondary text-sm">📖 도감</button>
+        <button id="btn-exit" class="btn-secondary text-sm">🚪 나가기</button>
+      </div>
+    </div>
+    <div class="gauge-bar mb-4"><div id="gauge" class="gauge-fill" style="width:0%"></div></div>
+    <div id="game-body" class="bg-slate-800 rounded-2xl p-6 min-h-[400px]"></div>
+    <div class="mt-4 flex items-start gap-3 bg-slate-800 rounded-xl p-4">
+      <div class="text-3xl">🤖</div>
+      <div>
+        <div class="text-xs text-amber-400 font-bold">역사봇 클리오</div>
+        <div id="clio-msg" class="text-sm text-slate-200">반가워요! 함께 시대 여행을 떠나볼까요?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== 화면 5: 복습 모드 ====================== -->
+<div id="screen-review" class="screen">
+  <div class="min-h-screen p-6 max-w-2xl mx-auto">
+    <button class="btn-back text-slate-400 mb-4">← 뒤로</button>
+    <h2 class="text-2xl font-bold mb-4">📚 5분 복습 모드</h2>
+    <div id="rev-card" class="bg-slate-800 rounded-2xl p-8 min-h-[300px] flex flex-col justify-center"></div>
+    <div class="flex justify-between mt-4">
+      <button id="rev-prev" class="btn-secondary">← 이전</button>
+      <div class="text-slate-400"><span id="rev-cur">1</span> / 30</div>
+      <button id="rev-next" class="btn-secondary">다음 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== 화면 6: 결과 ====================== -->
+<div id="screen-result" class="screen">
+  <div class="min-h-screen p-6 max-w-2xl mx-auto">
+    <div class="bg-slate-800 rounded-2xl p-8 text-center">
+      <div class="text-6xl mb-4">🏆</div>
+      <h2 class="text-3xl font-bold mb-2">탐험 완료!</h2>
+      <p id="res-name" class="text-slate-300 mb-6"></p>
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="kpi-card"><div class="text-xs text-slate-400">최종 점수</div><div id="res-score" class="text-2xl font-bold text-amber-400">0</div></div>
+        <div class="kpi-card"><div class="text-xs text-slate-400">정답률</div><div id="res-acc" class="text-2xl font-bold green">0%</div></div>
+        <div class="kpi-card"><div class="text-xs text-slate-400">플레이 시간</div><div id="res-time" class="text-2xl font-bold">0분</div></div>
+      </div>
+      <div class="text-left mb-6">
+        <h3 class="font-bold mb-2 text-green-400">⭐ 잘 외운 키워드 TOP 5</h3>
+        <ul id="res-strong" class="text-sm space-y-1 mb-4"></ul>
+        <h3 class="font-bold mb-2 text-red-400">📝 더 공부할 키워드 TOP 3</h3>
+        <ul id="res-weak" class="text-sm space-y-1"></ul>
+      </div>
+      <button id="btn-result-home" class="btn-primary">처음 화면으로</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== 화면 7: 교사 대시보드 ====================== -->
+<div id="screen-dashboard" class="screen">
+  <div class="flex min-h-screen">
+    <aside class="w-56 bg-slate-900 border-r border-slate-700">
+      <div class="p-4 border-b border-slate-700">
+        <div class="text-lg font-bold">👩‍🏫 교사 대시보드</div>
+        <div class="text-xs text-slate-400"></div>
+      </div>
+      <nav id="tab-nav">
+        <div class="tab-btn active" data-tab="1">📊 학습 현황</div>
+        <div class="tab-btn" data-tab="2">👤 학생별 상세</div>
+        <div class="tab-btn" data-tab="3">❓ 문항별 분석</div>
+        <div class="tab-btn" data-tab="4">📈 학급 통계</div>
+        <div class="tab-btn" data-tab="5">⚙️ 데이터 관리</div>
+      </nav>
+      <div class="p-4 mt-4">
+        <button id="btn-dash-home" class="btn-secondary w-full text-sm">처음 화면으로</button>
+      </div>
+    </aside>
+    <main id="dash-body" class="flex-1 p-6 overflow-auto"></main>
+  </div>
+</div>
+
+<!-- ====================== 도감 모달 ====================== -->
+<div id="dex-modal" class="modal" style="display:none">
+  <div class="modal-content" style="width:90%; max-width:700px; max-height:80vh; overflow:auto">
+    <div class="flex justify-between mb-4">
+      <h3 class="text-xl font-bold">📖 키워드 도감</h3>
+      <button id="dex-close" class="text-2xl">×</button>
+    </div>
+    <div id="dex-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+  </div>
+</div>
+
+<script>
+// =========================================================
+// 1. 키워드 & 문항 데이터 (30 키워드 + 52 문항)
+// =========================================================
+const KEYWORDS = [
+  {id:1, stage:1, name:"오스트랄로피테쿠스 아파렌시스", summary:"약 400만 년 전, 아프리카, 직립 보행 시작"},
+  {id:2, stage:1, name:"호모 에렉투스", summary:"약 180만 년 전, 불과 언어 사용, 베이징인·자와인"},
+  {id:3, stage:1, name:"호모 네안데르탈렌시스", summary:"약 40만 년 전, 죽은 사람을 꽃과 함께 매장"},
+  {id:4, stage:1, name:"호모 사피엔스", summary:"약 20만 년 전, 현생 인류의 조상"},
+  {id:5, stage:2, name:"뗀석기", summary:"구석기, 돌을 깨뜨려 만든 도구 (주먹도끼·찌르개)"},
+  {id:6, stage:2, name:"간석기", summary:"신석기, 돌을 갈아서 만든 정교한 도구"},
+  {id:7, stage:2, name:"토기(빗살무늬토기)", summary:"신석기, 식량 저장과 조리에 사용"},
+  {id:8, stage:2, name:"농경과 목축", summary:"신석기, 정착 생활과 식량 생산의 시작"},
+  {id:9, stage:2, name:"신석기 혁명", summary:"식량 채집→식량 생산으로의 큰 변화 ★"},
+  {id:10, stage:2, name:"사유 재산과 계급 발생", summary:"잉여 생산물 등장으로 평등 사회 해체"},
+  {id:11, stage:3, name:"메소포타미아 문명", summary:"티그리스·유프라테스강, 개방적 지형"},
+  {id:12, stage:3, name:"함무라비 법전", summary:"눈에는 눈, 이에는 이 — 신분에 따라 차등 적용"},
+  {id:13, stage:3, name:"이집트 문명", summary:"나일강, 폐쇄적 지형으로 통일 왕국 오래 유지"},
+  {id:14, stage:3, name:"파라오", summary:"이집트의 신권 정치 통치자, 살아있는 신"},
+  {id:15, stage:3, name:"인도 문명", summary:"인더스강, 모헨조다로·하라파의 계획도시"},
+  {id:16, stage:3, name:"카스트제", summary:"엄격한 신분제, 브라만교에서 비롯됨"},
+  {id:17, stage:3, name:"중국 문명", summary:"황허강, 신석기 채도·흑도 문화 위에 성립"},
+  {id:18, stage:3, name:"갑골문", summary:"상나라, 거북 등딱지·소 뼈에 새긴 점복 기록"},
+  {id:19, stage:3, name:"봉건제", summary:"주나라, 천명사상에 기반한 혈연적 지방 분권 체제"},
+  {id:20, stage:3, name:"문명의 공통점", summary:"큰 강, 청동기, 문자, 도시 국가 발달"},
+  {id:21, stage:4, name:"아케메네스 왕조 페르시아", summary:"서아시아 최초 통일 제국"},
+  {id:22, stage:4, name:"다리우스 1세", summary:"관용 정책 + 왕의 길 건설로 제국 정비"},
+  {id:23, stage:4, name:"조로아스터교", summary:"페르시아 종교, 선과 악의 이원론"},
+  {id:24, stage:4, name:"폴리스", summary:"아테네·스파르타 등 그리스 도시 국가"},
+  {id:25, stage:4, name:"아테네 민주 정치", summary:"솔론→클레이스테네스→페리클레스로 발전"},
+  {id:26, stage:5, name:"공화정", summary:"원로원·민회·집정관·호민관의 견제 체제"},
+  {id:27, stage:5, name:"포에니 전쟁", summary:"로마 vs 카르타고, 로마가 지중해 장악"},
+  {id:28, stage:5, name:"그라쿠스 형제", summary:"평민 보호를 위한 토지 개혁 시도, 실패"},
+  {id:29, stage:5, name:"옥타비아누스(아우구스투스)", summary:"제정 시작, '존엄한 자' 칭호"},
+  {id:30, stage:5, name:"크리스트교", summary:"박해→밀라노 칙령(313)→국교화"}
+];
+
+const QUESTIONS = [
+  // Stage 1 (10문항)
+  {id:"Q01",stage:1,kw:1,q:"약 400만 년 전 아프리카에서 직립 보행을 시작한 인류는?",opts:["오스트랄로피테쿠스 아파렌시스","호모 에렉투스","네안데르탈인","호모 사피엔스"],ans:0,exp:"가장 이른 시기의 인류로, 두 발로 걷기 시작했어요."},
+  {id:"Q02",stage:1,kw:2,q:"불과 언어를 처음 사용한 인류는?",opts:["네안데르탈인","호모 에렉투스","오스트랄로피테쿠스","호모 사피엔스"],ans:1,exp:"베이징인·자와인이 대표적인 호모 에렉투스예요."},
+  {id:"Q03",stage:1,kw:3,q:"죽은 사람을 꽃과 함께 매장한 인류는?",opts:["호모 사피엔스","오스트랄로피테쿠스","네안데르탈인","호모 에렉투스"],ans:2,exp:"네안데르탈인은 사후 세계 관념을 가졌던 것으로 추정돼요."},
+  {id:"Q04",stage:1,kw:4,q:"현생 인류의 직접 조상인 인류는?",opts:["호모 사피엔스","네안데르탈인","호모 에렉투스","오스트랄로피테쿠스"],ans:0,exp:"약 20만 년 전 등장한 호모 사피엔스가 우리의 조상이에요."},
+  {id:"Q05",stage:1,kw:1,q:"오스트랄로피테쿠스 화석이 주로 발견된 대륙은?",opts:["아시아","유럽","아프리카","아메리카"],ans:2,exp:"인류는 아프리카에서 처음 출현했어요."},
+  {id:"Q06",stage:1,kw:2,q:"호모 에렉투스의 등장 시기는?",opts:["약 400만 년 전","약 180만 년 전","약 40만 년 전","약 20만 년 전"],ans:1,exp:"약 180만 년 전 등장했어요."},
+  {id:"Q07",stage:1,kw:3,q:"네안데르탈인의 특징이 아닌 것은?",opts:["매장 풍습","약 40만 년 전 등장","불 최초 사용","유럽에서 발견"],ans:2,exp:"불은 호모 에렉투스가 먼저 사용했어요."},
+  {id:"Q08",stage:1,kw:4,q:"인류 4종을 시기 순으로 옳게 배열한 것은?",opts:["오스트랄로→사피엔스→에렉투스→네안데르탈","오스트랄로→에렉투스→네안데르탈→사피엔스","사피엔스→네안데르탈→에렉투스→오스트랄로","에렉투스→오스트랄로→네안데르탈→사피엔스"],ans:1,exp:"오스트랄로피테쿠스 → 호모 에렉투스 → 네안데르탈인 → 호모 사피엔스 순이에요."},
+  {id:"Q09",stage:1,kw:2,q:"베이징인과 자와인이 속한 인류는?",opts:["오스트랄로피테쿠스","호모 에렉투스","네안데르탈인","호모 사피엔스"],ans:1,exp:"베이징인·자와인은 호모 에렉투스의 대표 화석이에요."},
+  {id:"Q10",stage:1,kw:1,q:"직립 보행의 의미로 옳은 것은?",opts:["두 발로 걷는 것","불을 쓰는 것","도구를 만드는 것","말을 하는 것"],ans:0,exp:"두 발로 걷게 되면서 손이 자유로워져 도구를 만들 수 있게 되었어요."},
+
+  // Stage 2 (10문항)
+  {id:"Q11",stage:2,kw:5,q:"구석기 시대의 대표적인 도구는?",opts:["간석기","뗀석기","빗살무늬토기","청동검"],ans:1,exp:"돌을 깨뜨려 만든 뗀석기가 구석기의 대표 도구예요."},
+  {id:"Q12",stage:2,kw:6,q:"신석기 시대의 대표적인 도구 제작 방식은?",opts:["깨뜨려 만듦","갈아서 만듦","녹여 만듦","두드려 만듦"],ans:1,exp:"신석기는 돌을 갈아 만든 간석기를 사용했어요."},
+  {id:"Q13",stage:2,kw:7,q:"신석기 시대에 식량을 저장하기 위해 만든 것은?",opts:["청동기","토기","철기","뗀석기"],ans:1,exp:"빗살무늬토기가 신석기의 대표 토기예요."},
+  {id:"Q14",stage:2,kw:8,q:"신석기 시대 정착 생활의 가장 큰 원인은?",opts:["사냥","채집","농경과 목축","전쟁"],ans:2,exp:"농사를 짓고 가축을 기르면서 한 곳에 머물게 되었어요."},
+  {id:"Q15",stage:2,kw:9,q:"식량 채집에서 식량 생산으로 변화한 큰 사건을 무엇이라 부르나요?",opts:["산업 혁명","신석기 혁명","청동기 혁명","농업 혁명"],ans:1,exp:"이 변화를 '신석기 혁명'이라고 해요. 시험에 꼭 나와요!"},
+  {id:"Q16",stage:2,kw:10,q:"신석기 후기에 생긴 사회 변화가 아닌 것은?",opts:["사유 재산 발생","계급 발생","평등 사회 유지","잉여 생산물 발생"],ans:2,exp:"오히려 평등 사회가 깨지고 계급이 생겼어요."},
+  {id:"Q17",stage:2,kw:7,q:"빗살무늬토기의 주요 용도는?",opts:["무기","장신구","식량 저장과 조리","제사 도구"],ans:2,exp:"토기 덕분에 식량을 오래 보관할 수 있게 되었어요."},
+  {id:"Q18",stage:2,kw:5,q:"주먹도끼는 어느 시대의 유물인가요?",opts:["구석기","신석기","청동기","철기"],ans:0,exp:"주먹도끼는 대표적인 뗀석기예요."},
+  {id:"Q19",stage:2,kw:8,q:"신석기 시대 사람들이 주로 살았던 곳은?",opts:["산꼭대기","사막","강가·바닷가","동굴 깊은 곳"],ans:2,exp:"물을 구하기 쉬운 강가·바닷가에 정착했어요."},
+  {id:"Q20",stage:2,kw:9,q:"신석기 혁명의 결과로 옳지 않은 것은?",opts:["정착 생활","농경 시작","뗀석기 사용","토기 제작"],ans:2,exp:"뗀석기는 구석기 도구예요. 신석기는 간석기를 썼어요."},
+
+  // Stage 3 (12문항)
+  {id:"Q21",stage:3,kw:11,q:"티그리스·유프라테스강 유역에서 발생한 문명은?",opts:["이집트","메소포타미아","인도","중국"],ans:1,exp:"메소포타미아는 '강 사이의 땅'이라는 뜻이에요."},
+  {id:"Q22",stage:3,kw:12,q:"'눈에는 눈, 이에는 이'로 유명한 법전은?",opts:["로마법","함무라비 법전","12표법","마누 법전"],ans:1,exp:"함무라비 법전은 신분에 따라 처벌이 달랐어요."},
+  {id:"Q23",stage:3,kw:13,q:"나일강 유역의 폐쇄적 지형에서 발생한 문명은?",opts:["메소포타미아","이집트","인도","중국"],ans:1,exp:"이집트는 사막과 바다로 둘러싸여 통일 왕국이 오래 유지되었어요."},
+  {id:"Q24",stage:3,kw:14,q:"이집트의 신권 정치 통치자를 부르는 말은?",opts:["황제","파라오","천자","술탄"],ans:1,exp:"파라오는 '살아있는 신'으로 여겨졌어요."},
+  {id:"Q25",stage:3,kw:15,q:"모헨조다로·하라파가 속한 문명은?",opts:["메소포타미아","이집트","인도","중국"],ans:2,exp:"인더스강 유역의 계획 도시예요."},
+  {id:"Q26",stage:3,kw:16,q:"인도의 엄격한 신분제를 무엇이라 하나요?",opts:["봉건제","카스트제","공화제","과거제"],ans:1,exp:"브라만교에서 비롯된 신분제예요."},
+  {id:"Q27",stage:3,kw:17,q:"황허강 유역에서 발생한 문명은?",opts:["메소포타미아","이집트","인도","중국"],ans:3,exp:"황허 문명이라고 해요."},
+  {id:"Q28",stage:3,kw:18,q:"상나라의 점복에 사용된 문자는?",opts:["설형문자","상형문자","갑골문","알파벳"],ans:2,exp:"거북 등딱지·소 뼈에 새긴 갑골문이에요."},
+  {id:"Q29",stage:3,kw:19,q:"주나라가 시행한 혈연 기반 지방 분권 제도는?",opts:["군현제","봉건제","과거제","조공제"],ans:1,exp:"천명 사상에 기반한 봉건제예요."},
+  {id:"Q30",stage:3,kw:20,q:"4대 문명의 공통점이 아닌 것은?",opts:["큰 강 유역","문자 발달","철기 사용","청동기 사용"],ans:2,exp:"4대 문명은 청동기 시대에 발생했어요. 철기는 더 늦게 등장해요."},
+  {id:"Q31",stage:3,kw:11,q:"메소포타미아 문명의 특징은?",opts:["폐쇄적 지형","개방적 지형으로 잦은 침입","사막 한가운데","섬나라"],ans:1,exp:"개방적 지형이라 여러 민족이 흥망성쇠를 거듭했어요."},
+  {id:"Q32",stage:3,kw:13,q:"이집트의 대표 유물·건축물이 아닌 것은?",opts:["피라미드","스핑크스","미라","지구라트"],ans:3,exp:"지구라트는 메소포타미아 신전이에요."},
+
+  // Stage 4 (10문항)
+  {id:"Q33",stage:4,kw:21,q:"서아시아 최초의 통일 제국은?",opts:["로마 제국","아케메네스 페르시아","마우리아 왕조","알렉산드로스 제국"],ans:1,exp:"아케메네스 왕조 페르시아예요."},
+  {id:"Q34",stage:4,kw:22,q:"왕의 길을 건설하고 관용 정책을 편 왕은?",opts:["키루스 2세","다리우스 1세","크세르크세스","알렉산드로스"],ans:1,exp:"다리우스 1세는 도로·역참 정비로 제국을 통합했어요."},
+  {id:"Q35",stage:4,kw:23,q:"페르시아의 대표 종교는?",opts:["불교","조로아스터교","유대교","크리스트교"],ans:1,exp:"선과 악의 이원론을 가진 조로아스터교예요."},
+  {id:"Q36",stage:4,kw:24,q:"그리스의 도시 국가를 부르는 말은?",opts:["폴리스","코뮌","칸톤","주"],ans:0,exp:"아테네·스파르타가 대표적 폴리스예요."},
+  {id:"Q37",stage:4,kw:25,q:"아테네 민주 정치 발전 순서로 옳은 것은?",opts:["페리클레스→솔론→클레이스테네스","솔론→클레이스테네스→페리클레스","클레이스테네스→솔론→페리클레스","솔론→페리클레스→클레이스테네스"],ans:1,exp:"솔론(금권정치)→클레이스테네스(도편추방제)→페리클레스(직접민주정치) 순이에요."},
+  {id:"Q38",stage:4,kw:25,q:"도편 추방제를 시행한 인물은?",opts:["솔론","클레이스테네스","페리클레스","드라콘"],ans:1,exp:"도자기 조각에 이름을 적어 추방했어요."},
+  {id:"Q39",stage:4,kw:25,q:"페리클레스 시대 아테네 민주 정치의 특징은?",opts:["여성도 참여","공직자 추첨 + 수당 지급","왕이 결정","귀족만 참여"],ans:1,exp:"가난한 시민도 참여할 수 있게 수당을 주었어요."},
+  {id:"Q40",stage:4,kw:24,q:"스파르타의 특징으로 옳은 것은?",opts:["상업 발달","엄격한 군사 훈련 사회","민주 정치 발달","해상 무역 중심"],ans:1,exp:"스파르타는 군사 중심 폴리스였어요."},
+  {id:"Q41",stage:4,kw:22,q:"다리우스 1세의 관용 정책 내용은?",opts:["피정복민 종교·문화 인정","피정복민 강제 개종","피정복민 모두 노예화","피정복민 추방"],ans:0,exp:"관용 정책 덕분에 제국이 안정되었어요."},
+  {id:"Q42",stage:4,kw:25,q:"아테네 민회에 참여할 수 없었던 사람은?",opts:["20세 이상 남성 시민","여성","-","-"],ans:1,exp:"여성·노예·외국인은 참여할 수 없었어요. 이것이 한계예요."},
+
+  // Stage 5 (10문항)
+  {id:"Q43",stage:5,kw:26,q:"로마 공화정의 구성 요소가 아닌 것은?",opts:["원로원","집정관","민회","파라오"],ans:3,exp:"파라오는 이집트의 통치자예요."},
+  {id:"Q44",stage:5,kw:26,q:"평민의 권리를 지키기 위해 선출된 평민 대표는?",opts:["집정관","호민관","원로원","독재관"],ans:1,exp:"호민관은 평민회에서 선출했어요."},
+  {id:"Q45",stage:5,kw:27,q:"로마 vs 카르타고의 전쟁을 무엇이라 하나요?",opts:["트로이 전쟁","페르시아 전쟁","포에니 전쟁","펠로폰네소스 전쟁"],ans:2,exp:"포에니 전쟁으로 로마가 지중해를 장악했어요."},
+  {id:"Q46",stage:5,kw:28,q:"평민 보호 개혁을 시도하다 실패한 형제는?",opts:["그라쿠스 형제","카이사르 형제","스키피오 형제","호라티우스 형제"],ans:0,exp:"대토지 소유 제한·곡물 분배 개혁을 시도했어요."},
+  {id:"Q47",stage:5,kw:29,q:"로마 제정을 시작한 인물은?",opts:["카이사르","옥타비아누스","네로","콘스탄티누스"],ans:1,exp:"'아우구스투스(존엄한 자)' 칭호를 받았어요."},
+  {id:"Q48",stage:5,kw:30,q:"313년 크리스트교를 공인한 칙령은?",opts:["밀라노 칙령","낭트 칙령","베스트팔렌 조약","대헌장"],ans:0,exp:"콘스탄티누스 대제의 밀라노 칙령이에요."},
+  {id:"Q49",stage:5,kw:30,q:"크리스트교 발전 과정 순서로 옳은 것은?",opts:["국교화→박해→공인","박해→공인(밀라노)→국교화","공인→박해→국교화","박해→국교화→공인"],ans:1,exp:"박해 → 313년 밀라노 칙령(공인) → 392년 국교화 순이에요."},
+  {id:"Q50",stage:5,kw:26,q:"로마 공화정에서 자문 기구 역할을 한 것은?",opts:["원로원","집정관","민회","호민관"],ans:0,exp:"원로원이 자문 기구였어요."},
+  {id:"Q51",stage:5,kw:29,q:"'아우구스투스'의 뜻은?",opts:["정복자","존엄한 자","위대한 자","신성한 왕"],ans:1,exp:"'존엄한 자'라는 뜻의 칭호예요."},
+  {id:"Q52",stage:5,kw:27,q:"포에니 전쟁의 결과로 옳은 것은?",opts:["카르타고 승리","로마의 지중해 장악","무승부","페르시아 멸망"],ans:1,exp:"로마가 지중해 세계의 패권을 차지했어요."}
+];
+
+// =========================================================
+// 2. 전역 상태 & 유틸
+// =========================================================
+const DB_KEY = "historyGame_records";
+const LOCK_KEY = "historyGame_teacherLock";
+const FAIL_KEY = "historyGame_teacherFails";
+const TEACHER_PW_HASH = "ZG9uZ3NzYW0="; // btoa("dongssam")
+
+let student = null;
+let session = null;
+let curStage = 1;
+let score = 0;
+let combo = 0;
+let dexCollected = new Set();
+let stageScores = [0,0,0,0,0];
+let curRev = 0;
+
+function loadDB() {
+  try {
+    const raw = localStorage.getItem(DB_KEY);
+    if (!raw) return { students: [], meta: { totalSessions: 0 } };
+    return JSON.parse(raw);
+  } catch(e) { return { students: [], meta: { totalSessions: 0 } }; }
+}
+function saveDB(db) {
+  db.meta = db.meta || {};
+  db.meta.lastUpdated = new Date().toISOString();
+  localStorage.setItem(DB_KEY, JSON.stringify(db));
+}
+function uuid() { return 'xxxxxxxx-xxxx-4xxx'.replace(/x/g, () => (Math.random()*16|0).toString(16)); }
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) {
+    el.classList.add('active');
+    el.classList.add('fade-in');
+    setTimeout(() => el.classList.remove('fade-in'), 500);
+  }
+  window.scrollTo(0,0);
+}
+
+// =========================================================
+// 3. 사운드 (Web Audio API)
+// =========================================================
+let actx = null;
+function getCtx() {
+  if (!actx) {
+    try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+  }
+  return actx;
+}
+function beep(freq, dur, type='sine', vol=0.1) {
+  const ctx = getCtx(); if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = type; osc.frequency.value = freq;
+  gain.gain.value = vol;
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.start();
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+  osc.stop(ctx.currentTime + dur);
+}
+function playCorrect() { beep(880, 0.15, 'sine', 0.15); setTimeout(()=>beep(1320, 0.2, 'sine', 0.15), 100); }
+function playWrong() { beep(220, 0.3, 'sawtooth', 0.1); }
+function playFanfare() { [523, 659, 784, 1047].forEach((f,i)=>setTimeout(()=>beep(f, 0.2, 'sine', 0.15), i*120)); }
+
+// =========================================================
+// 4. 모드 선택 & 화면 이동
+// =========================================================
+function goHome() { show('screen-mode'); }
+
+function setupStudentLogin() {
+  const classSel = document.getElementById('in-class');
+  const numSel = document.getElementById('in-num');
+  if (classSel.children.length === 0) {
+    for (let i=1; i<=10; i++) classSel.innerHTML += `<option value="${i}">${i}반</option>`;
+    for (let i=1; i<=35; i++) numSel.innerHTML += `<option value="${i}">${i}번</option>`;
+  }
+}
+
+function startGame() {
+  const name = document.getElementById('in-name').value.trim();
+  if (!name || name.length < 2 || name.length > 4) {
+    alert("이름을 한글 2~4자로 입력해 주세요");
+    return;
+  }
+  student = {
+    grade: parseInt(document.getElementById('in-grade').value),
+    class: parseInt(document.getElementById('in-class').value),
+    number: parseInt(document.getElementById('in-num').value),
+    name: name
+  };
+  student.id = `${student.grade}-${student.class}-${student.number}`;
+  session = {
+    sessionId: uuid(),
+    startTime: new Date().toISOString(),
+    endTime: null,
+    playDuration: 0,
+    finalScore: 0,
+    maxStage: 1,
+    stageScores: [0,0,0,0,0],
+    answers: [],
+    collectedCards: 0,
+    weakKeywords: []
+  };
+  curStage = 1; score = 0; combo = 0;
+  stageScores = [0,0,0,0,0];
+  dexCollected = new Set();
+  document.getElementById('score').textContent = 0;
+  document.getElementById('combo').textContent = 0;
+  document.getElementById('gauge').style.width = '0%';
+  show('screen-game');
+  startStage(1);
+}
+
+// =========================================================
+// 5. 게임 진행
+// =========================================================
+function startStage(n) {
+  curStage = n;
+  document.getElementById('stage-num').textContent = n;
+  session.maxStage = Math.max(session.maxStage, n);
+  const titles = [
+    "Stage 1: 최초의 발자국을 따라서",
+    "Stage 2: 도구로 쓰는 역사",
+    "Stage 3: 강이 키운 4대 문명",
+    "Stage 4: 제국과 민주주의의 탄생",
+    "Stage 5: 공화정에서 제국으로"
+  ];
+  const intros = [
+    "약 400만 년 전, 아프리카의 한 부족이 두 발로 일어섰어요. 인류의 진화 여정을 따라가 봐요.",
+    "구석기와 신석기, 인류의 도구가 진화하며 삶이 완전히 바뀌었어요.",
+    "큰 강을 따라 인류 4대 문명이 꽃피웠어요. 각 문명의 특징을 살펴봐요.",
+    "페르시아의 거대 제국, 그리고 아테네의 민주 정치가 같은 시대에 발전했어요.",
+    "작은 도시 로마가 어떻게 거대 제국이 되었을까요? 마지막 여정이에요."
+  ];
+  setClio(intros[n-1]);
+  const body = document.getElementById('game-body');
+  body.innerHTML = `
+    <div class="text-center">
+      <div class="text-5xl mb-4">${['🦴','🪨','🌊','🏛️','🦅'][n-1]}</div>
+      <h2 class="text-2xl font-bold mb-4">${titles[n-1]}</h2>
+      <p class="text-slate-300 mb-6">${intros[n-1]}</p>
+      <button class="btn-primary" id="btn-go-study">학습 카드 보기 →</button>
+    </div>
+  `;
+  document.getElementById('btn-go-study').addEventListener('click', () => showStudyCards(n));
+}
+
+function showStudyCards(n) {
+  const cards = KEYWORDS.filter(k => k.stage === n);
+  cards.forEach(c => dexCollected.add(c.id));
+  setClio("이 키워드들이 이번 스테이지에서 다 나와요. 한 번씩 살펴봐요!");
+  const body = document.getElementById('game-body');
+  body.innerHTML = `
+    <h3 class="text-lg font-bold mb-4">📌 핵심 키워드 미리 보기</h3>
+    <div class="grid md:grid-cols-2 gap-3 mb-6">
+      ${cards.map(c => `
+        <div class="bg-slate-700 p-4 rounded-xl">
+          <div class="font-bold text-amber-400">${c.name}</div>
+          <div class="text-sm text-slate-300 mt-1">${c.summary}</div>
+        </div>`).join('')}
+    </div>
+    <div class="text-center"><button class="btn-primary" id="btn-go-quiz">문제 풀러 가기 →</button></div>
+  `;
+  document.getElementById('btn-go-quiz').addEventListener('click', () => startBossRound(n));
+}
+
+let bossQ = [];
+let bossIdx = 0;
+let bossCorrect = 0;
+let stageStartScore = 0;
+
+function startBossRound(n) {
+  bossQ = QUESTIONS.filter(q => q.stage === n).sort(() => Math.random() - 0.5).slice(0, 5);
+  bossIdx = 0;
+  bossCorrect = 0;
+  stageStartScore = score;
+  setClio("자, 이제 5문제 도전! 차근차근 풀어봐요.");
+  nextBossQ();
+}
+
+function nextBossQ() {
+  if (bossIdx >= bossQ.length) { endStage(); return; }
+  const q = bossQ[bossIdx];
+  const body = document.getElementById('game-body');
+  body.innerHTML = `
+    <div class="text-sm text-slate-400 mb-2">문제 ${bossIdx+1} / ${bossQ.length}</div>
+    <h3 class="text-lg font-bold mb-4">${q.q}</h3>
+    <div class="space-y-2" id="opts"></div>
+    <div id="exp" class="mt-4 p-3 rounded-lg" style="display:none"></div>
+  `;
+  const opts = document.getElementById('opts');
+  q.opts.forEach((opt, i) => {
+    if (opt === "-") return;
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option w-full';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => handleAnswer(i, q, btn));
+    opts.appendChild(btn);
+  });
+  q._startT = Date.now();
+}
+
+function handleAnswer(idx, q, btn) {
+  const correct = idx === q.ans;
+  const timeSpent = Math.round((Date.now() - q._startT) / 1000);
+  session.answers.push({
+    questionId: q.id, keyword: KEYWORDS.find(k=>k.id===q.kw).name,
+    stage: q.stage, isCorrect: correct, timeSpent: timeSpent
+  });
+
+  document.querySelectorAll('#opts button').forEach(b => b.disabled = true);
+  if (correct) {
+    btn.classList.add('correct');
+    combo++;
+    let mult = 1;
+    if (combo >= 5) mult = 2;
+    else if (combo >= 3) mult = 1.5;
+    const pts = Math.round(10 * mult);
+    score += pts;
+    bossCorrect++;
+    playCorrect();
+    spawnStar();
+    setClio(`정확해요! ${combo}콤보 (+${pts}점) ${combo>=3?'⚡ 보너스 적용!':''}`);
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('#opts button')[q.ans].classList.add('correct');
+    combo = 0;
+    playWrong();
+    document.body.classList.add('flash-wrong');
+    setTimeout(() => document.body.classList.remove('flash-wrong'), 500);
+    setClio(`아쉬워요. 정답은 "${q.opts[q.ans]}"예요.`);
+  }
+  document.getElementById('score').textContent = score;
+  document.getElementById('combo').textContent = combo;
+  const exp = document.getElementById('exp');
+  exp.style.display = 'block';
+  exp.className = `mt-4 p-3 rounded-lg ${correct?'bg-green-900':'bg-red-900'}`;
+  exp.innerHTML = `<div class="text-sm">💡 ${q.exp}</div>
+    <button class="btn-primary mt-3" id="btn-next">${bossIdx+1 < bossQ.length ? '다음 문제 →' : '결과 보기 →'}</button>`;
+  document.getElementById('btn-next').addEventListener('click', () => { bossIdx++; nextBossQ(); });
+}
+
+function endStage() {
+  const gained = score - stageStartScore;
+  stageScores[curStage-1] = gained;
+  session.stageScores[curStage-1] = gained;
+  document.getElementById('gauge').style.width = (curStage * 20) + '%';
+  const body = document.getElementById('game-body');
+  body.innerHTML = `
+    <div class="text-center">
+      <div class="text-5xl mb-4">${bossCorrect >= 4 ? '🌟' : bossCorrect >= 3 ? '⭐' : '💪'}</div>
+      <h2 class="text-2xl font-bold mb-2">스테이지 ${curStage} 완료!</h2>
+      <p class="text-slate-300 mb-4">${bossCorrect}/5 정답 · ${gained}점 획득</p>
+      <p class="text-amber-400 mb-6">${KEYWORDS.filter(k=>k.stage===curStage).length}개 카드를 도감에 모았어요!</p>
+      ${curStage < 5 ?
+        '<button class="btn-primary" id="btn-next-stage">다음 스테이지 →</button>' :
+        '<button class="btn-primary" id="btn-final">🔥 최종 라이트닝 라운드 →</button>'}
+    </div>
+  `;
+  playFanfare();
+  if (curStage < 5) {
+    document.getElementById('btn-next-stage').addEventListener('click', () => startStage(curStage + 1));
+  } else {
+    document.getElementById('btn-final').addEventListener('click', startFinalBoss);
+  }
+}
+
+let finalQ = [];
+let finalIdx = 0;
+
+function startFinalBoss() {
+  finalQ = QUESTIONS.sort(() => Math.random() - 0.5).slice(0, 10);
+  finalIdx = 0;
+  setClio("마지막이에요! 30개 키워드 중 랜덤 10문제 라이트닝 라운드!");
+  document.getElementById('stage-num').textContent = '★';
+  nextFinalQ();
+}
+function nextFinalQ() {
+  if (finalIdx >= finalQ.length) { finishGame(); return; }
+  const q = finalQ[finalIdx];
+  const body = document.getElementById('game-body');
+  body.innerHTML = `
+    <div class="text-sm text-amber-400 mb-2">⚡ 라이트닝 ${finalIdx+1} / 10</div>
+    <h3 class="text-lg font-bold mb-4">${q.q}</h3>
+    <div class="space-y-2" id="opts"></div>
+    <div id="exp" class="mt-4 p-3 rounded-lg" style="display:none"></div>
+  `;
+  const opts = document.getElementById('opts');
+  q.opts.forEach((opt, i) => {
+    if (opt === "-") return;
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option w-full';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => handleFinalAns(i, q, btn));
+    opts.appendChild(btn);
+  });
+  q._startT = Date.now();
+}
+function handleFinalAns(idx, q, btn) {
+  const correct = idx === q.ans;
+  const timeSpent = Math.round((Date.now() - q._startT) / 1000);
+  session.answers.push({
+    questionId: q.id+'_F', keyword: KEYWORDS.find(k=>k.id===q.kw).name,
+    stage: 6, isCorrect: correct, timeSpent: timeSpent
+  });
+  document.querySelectorAll('#opts button').forEach(b => b.disabled = true);
+  if (correct) {
+    btn.classList.add('correct'); combo++; score += 15; playCorrect();
+    setClio("정확해요!");
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('#opts button')[q.ans].classList.add('correct');
+    combo = 0; playWrong();
+    setClio(`정답은 "${q.opts[q.ans]}"예요.`);
+  }
+  document.getElementById('score').textContent = score;
+  document.getElementById('combo').textContent = combo;
+  const exp = document.getElementById('exp');
+  exp.style.display = 'block';
+  exp.className = `mt-4 p-3 rounded-lg ${correct?'bg-green-900':'bg-red-900'}`;
+  exp.innerHTML = `<div class="text-sm">💡 ${q.exp}</div>
+    <button class="btn-primary mt-3" id="btn-next">${finalIdx+1 < 10 ? '다음 →' : '결과 →'}</button>`;
+  document.getElementById('btn-next').addEventListener('click', () => { finalIdx++; nextFinalQ(); });
+}
+
+function finishGame() {
+  session.endTime = new Date().toISOString();
+  session.playDuration = Math.round((new Date(session.endTime) - new Date(session.startTime)) / 1000);
+  session.finalScore = score;
+  session.collectedCards = dexCollected.size;
+
+  // 약점 키워드
+  const kwStat = {};
+  session.answers.forEach(a => {
+    if (!kwStat[a.keyword]) kwStat[a.keyword] = {c:0,w:0};
+    if (a.isCorrect) kwStat[a.keyword].c++; else kwStat[a.keyword].w++;
+  });
+  session.weakKeywords = Object.entries(kwStat)
+    .filter(([k,v]) => v.w > 0).sort((a,b) => b[1].w - a[1].w)
+    .slice(0,3).map(e=>e[0]);
+
+  // DB 저장
+  const db = loadDB();
+  let sObj = db.students.find(s => s.id === student.id);
+  if (!sObj) {
+    sObj = { ...student, sessions: [] };
+    db.students.push(sObj);
+  }
+  sObj.sessions.push(session);
+  db.meta.totalSessions = (db.meta.totalSessions || 0) + 1;
+  saveDB(db);
+
+  // 결과 표시
+  const total = session.answers.length;
+  const correct = session.answers.filter(a=>a.isCorrect).length;
+  const acc = total ? Math.round(correct/total*100) : 0;
+  document.getElementById('res-name').textContent = `${student.grade}학년 ${student.class}반 ${student.number}번 ${student.name}`;
+  document.getElementById('res-score').textContent = score;
+  document.getElementById('res-acc').textContent = acc + '%';
+  document.getElementById('res-time').textContent = Math.floor(session.playDuration/60) + '분 ' + (session.playDuration%60) + '초';
+
+  const strongKw = Object.entries(kwStat).filter(([k,v])=>v.c>0&&v.w===0).slice(0,5);
+  const weakKw = Object.entries(kwStat).filter(([k,v])=>v.w>0).sort((a,b)=>b[1].w-a[1].w).slice(0,3);
+  document.getElementById('res-strong').innerHTML = strongKw.length ? strongKw.map(([k,v])=>`<li class="text-green-300">✓ ${k}</li>`).join('') : '<li class="text-slate-400">기록이 부족해요</li>';
+  document.getElementById('res-weak').innerHTML = weakKw.length ? weakKw.map(([k,v])=>`<li class="text-red-300">✗ ${k} (오답 ${v.w}회)</li>`).join('') : '<li class="text-slate-400">모두 잘했어요!</li>';
+  show('screen-result');
+  playFanfare();
+}
+
+function setClio(msg) { document.getElementById('clio-msg').textContent = msg; }
+
+function spawnStar() {
+  const star = document.createElement('div');
+  star.className = 'star-burst';
+  star.textContent = '✨';
+  star.style.left = (window.innerWidth/2) + 'px';
+  star.style.top = (window.innerHeight/2) + 'px';
+  document.body.appendChild(star);
+  setTimeout(()=>star.remove(), 1000);
+}
+
+// =========================================================
+// 6. 도감
+// =========================================================
+function openDex() {
+  const grid = document.getElementById('dex-grid');
+  grid.innerHTML = KEYWORDS.map(k => `
+    <div class="dex-card" data-id="${k.id}">
+      <div class="dex-inner">
+        <div class="dex-face ${dexCollected.has(k.id)?'bg-amber-700':'bg-slate-700'}">
+          <div>
+            <div class="text-sm font-bold">${dexCollected.has(k.id)?k.name:'???'}</div>
+            <div class="text-xs mt-1">${dexCollected.has(k.id)?'클릭해 뒷면 보기':'미수집'}</div>
+          </div>
+        </div>
+        <div class="dex-face dex-back bg-blue-900">
+          <div class="text-xs">${k.summary}</div>
+        </div>
+      </div>
+    </div>`).join('');
+  grid.querySelectorAll('.dex-card').forEach(c => {
+    c.addEventListener('click', () => {
+      const id = parseInt(c.dataset.id);
+      if (dexCollected.has(id)) c.classList.toggle('flipped');
+    });
+  });
+  document.getElementById('dex-modal').style.display = 'flex';
+}
+function closeDex() { document.getElementById('dex-modal').style.display = 'none'; }
+
+// =========================================================
+// 7. 복습 모드
+// =========================================================
+function startReview() {
+  curRev = 0;
+  show('screen-review');
+  renderRev();
+}
+function renderRev() {
+  const k = KEYWORDS[curRev];
+  document.getElementById('rev-card').innerHTML = `
+    <div class="text-center">
+      <div class="text-xs text-slate-400 mb-2">키워드 ${curRev+1} (스테이지 ${k.stage})</div>
+      <div class="text-3xl font-bold text-amber-400 mb-6">${k.name}</div>
+      <div class="text-lg text-slate-200">${k.summary}</div>
+    </div>
+  `;
+  document.getElementById('rev-cur').textContent = curRev + 1;
+}
+
+// =========================================================
+// 8. 교사 로그인
+// =========================================================
+function openTeacherLogin() {
+  document.getElementById('pw-msg').textContent = '';
+  document.getElementById('in-pw').value = '';
+  show('screen-teacher-login');
+  // 잠금 체크
+  const lock = localStorage.getItem(LOCK_KEY);
+  if (lock && Date.now() < parseInt(lock)) {
+    const mins = Math.ceil((parseInt(lock) - Date.now()) / 60000);
+    document.getElementById('pw-msg').textContent = `${mins}분 후 다시 시도해 주세요`;
+  }
+}
+function checkTeacherPw() {
+  const lock = localStorage.getItem(LOCK_KEY);
+  if (lock && Date.now() < parseInt(lock)) {
+    const mins = Math.ceil((parseInt(lock) - Date.now()) / 60000);
+    document.getElementById('pw-msg').textContent = `${mins}분 후 다시 시도해 주세요`;
+    return;
+  }
+  const pw = document.getElementById('in-pw').value;
+  if (btoa(pw) === TEACHER_PW_HASH) {
+    localStorage.setItem(FAIL_KEY, "0");
+    show('screen-dashboard');
+    switchTab(1);
+  } else {
+    let fails = parseInt(localStorage.getItem(FAIL_KEY) || "0") + 1;
+    localStorage.setItem(FAIL_KEY, fails);
+    if (fails >= 5) {
+      const until = Date.now() + 10*60*1000;
+      localStorage.setItem(LOCK_KEY, until);
+      document.getElementById('pw-msg').textContent = '5회 실패. 10분간 잠금되었어요.';
+    } else {
+      document.getElementById('pw-msg').textContent = `비밀번호가 일치하지 않습니다 (${fails}/5)`;
+    }
+  }
+}
+
+// =========================================================
+// 9. 교사 대시보드
+// =========================================================
+let curTab = 1;
+let curChart = null;
+
+function switchTab(n) {
+  curTab = n;
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.toggle('active', parseInt(t.dataset.tab)===n));
+  if (curChart) { curChart.destroy(); curChart = null; }
+  if (n===1) renderTab1();
+  else if (n===2) renderTab2();
+  else if (n===3) renderTab3();
+  else if (n===4) renderTab4();
+  else if (n===5) renderTab5();
+}
+
+function flatSessions() {
+  const db = loadDB();
+  const rows = [];
+  db.students.forEach(s => s.sessions.forEach(ss => rows.push({ student: s, session: ss })));
+  return rows;
+}
+
+let maskNames = false;
+function maskName(name) {
+  if (!maskNames || !name || name.length < 2) return name;
+  return name[0] + '*' + (name.length>2 ? name.slice(2) : '');
+}
+
+function renderTab1() {
+  const rows = flatSessions();
+  const body = document.getElementById('dash-body');
+  if (rows.length === 0) {
+    body.innerHTML = noDataHTML();
+    return;
+  }
+  const totalStudents = new Set(rows.map(r=>r.student.id)).size;
+  const avgScore = Math.round(rows.reduce((a,r)=>a+r.session.finalScore,0)/rows.length);
+  const avgTime = Math.round(rows.reduce((a,r)=>a+r.session.playDuration,0)/rows.length);
+  const avgAcc = Math.round(rows.reduce((a,r)=>{
+    const t=r.session.answers.length, c=r.session.answers.filter(x=>x.isCorrect).length;
+    return a + (t? c/t*100 : 0);
+  },0)/rows.length);
+
+  body.innerHTML = `
+    <h2 class="text-2xl font-bold mb-4">📊 학습 현황</h2>
+    <div class="grid grid-cols-4 gap-3 mb-6">
+      <div class="kpi-card"><div class="text-xs text-slate-400">총 학생</div><div class="text-2xl font-bold">${totalStudents}명</div></div>
+      <div class="kpi-card"><div class="text-xs text-slate-400">평균 점수</div><div class="text-2xl font-bold text-amber-400">${avgScore}점</div></div>
+      <div class="kpi-card"><div class="text-xs text-slate-400">평균 시간</div><div class="text-2xl font-bold">${Math.floor(avgTime/60)}분</div></div>
+      <div class="kpi-card"><div class="text-xs text-slate-400">평균 정답률</div><div class="text-2xl font-bold green">${avgAcc}%</div></div>
+    </div>
+    <div class="flex gap-2 mb-4">
+      <label class="text-sm">이름 마스킹</label>
+      <input type="checkbox" id="mask-toggle" ${maskNames?'checked':''} style="width:auto">
+    </div>
+    <div class="bg-slate-800 rounded-xl p-4 overflow-auto">
+      <table>
+        <thead><tr>
+          <th>학번</th><th>이름</th><th>접속일시</th><th>스테이지</th>
+          <th class="text-right">점수</th><th class="text-right">시간</th><th class="text-right">정답률</th>
+        </tr></thead>
+        <tbody>${rows.map(r => {
+          const t = r.session.answers.length, c = r.session.answers.filter(x=>x.isCorrect).length;
+          const acc = t? Math.round(c/t*100) : 0;
+          const cls = acc>=90?'green':acc>=70?'yellow':'red';
+          return `<tr>
+            <td>${r.student.grade}-${r.student.class}-${r.student.number}</td>
+            <td>${maskName(r.student.name)}</td>
+            <td>${new Date(r.session.startTime).toLocaleString('ko-KR')}</td>
+            <td>${r.session.maxStage}/5</td>
+            <td class="text-right">${r.session.finalScore}</td>
+            <td class="text-right">${Math.floor(r.session.playDuration/60)}분</td>
+            <td class="text-right ${cls}">${acc}%</td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table>
+    </div>
+  `;
+  document.getElementById('mask-toggle').addEventListener('change', e => { maskNames = e.target.checked; renderTab1(); });
+}
+
+function renderTab2() {
+  const db = loadDB();
+  const body = document.getElementById('dash-body');
+  if (db.students.length === 0) { body.innerHTML = noDataHTML(); return; }
+  body.innerHTML = `
+    <h2 class="text-2xl font-bold mb-4">👤 학생별 상세</h2>
+    <select id="stud-sel" class="mb-4" style="max-width:300px">
+      ${db.students.map(s=>`<option value="${s.id}">${s.grade}-${s.class}-${s.number} ${maskName(s.name)}</option>`).join('')}
+    </select>
+    <div id="stud-detail"></div>
+  `;
+  document.getElementById('stud-sel').addEventListener('change', e => showStudent(e.target.value));
+  showStudent(db.students[0].id);
+}
+
+function showStudent(id) {
+  const db = loadDB();
+  const s = db.students.find(x => x.id === id);
+  if (!s || s.sessions.length === 0) { document.getElementById('stud-detail').innerHTML = '<p class="text-slate-400">데이터 없음</p>'; return; }
+  const total = s.sessions.length;
+  const best = Math.max(...s.sessions.map(ss=>ss.finalScore));
+  const avg = Math.round(s.sessions.reduce((a,ss)=>a+ss.finalScore,0)/total);
+  const last = s.sessions[s.sessions.length-1];
+  // 자주 틀린 문항
+  const wrongMap = {};
+  s.sessions.forEach(ss => ss.answers.forEach(a => {
+    if (!a.isCorrect) wrongMap[a.keyword] = (wrongMap[a.keyword]||0) + 1;
+  }));
+  const top5 = Object.entries(wrongMap).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const rec = top5.length ? `이 학생은 "${top5[0][0]}" 키워드 복습이 필요합니다.` : "모든 키워드를 잘 학습했습니다.";
+
+  document.getElementById('stud-detail').innerHTML = `
+    <div class="grid grid-cols-4 gap-3 mb-4">
+      <div class="kpi-card"><div class="text-xs text-slate-400">총 플레이</div><div class="text-2xl font-bold">${total}회</div></div>
+      <div class="kpi-card"><div class="text-xs text-slate-400">최고점</div><div class="text-2xl font-bold text-amber-400">${best}</div></div>
+      <div class="kpi-card"><div class="text-xs text-slate-400">평균점수</div><div class="text-2xl font-bold">${avg}</div></div>
+      <div class="kpi-card"><div class="text-xs text-slate-400">최근 정답률</div><div class="text-2xl font-bold green">${last.answers.length ? Math.round(last.answers.filter(a=>a.isCorrect).length/last.answers.length*100) : 0}%</div></div>
+    </div>
+    <div class="bg-slate-800 rounded-xl p-4 mb-4">
+      <h3 class="font-bold mb-2">최근 세션 스테이지별 점수</h3>
+      <canvas id="ch-stu" height="100"></canvas>
+    </div>
+    <div class="bg-slate-800 rounded-xl p-4 mb-4">
+      <h3 class="font-bold mb-2">자주 틀린 문항 TOP 5</h3>
+      ${top5.length ? `<ul class="space-y-1">${top5.map(([k,v])=>`<li class="text-sm">• ${k} <span class="text-red-400">(${v}회)</span></li>`).join('')}</ul>` : '<p class="text-slate-400">없음</p>'}
+    </div>
+    <div class="bg-blue-900 rounded-xl p-4">
+      <h3 class="font-bold mb-1">📝 학습 추천</h3>
+      <p class="text-sm">${rec}</p>
+    </div>
+  `;
+  if (curChart) curChart.destroy();
+  curChart = new Chart(document.getElementById('ch-stu'), {
+    type: 'bar',
+    data: {
+      labels: ['Stage 1','Stage 2','Stage 3','Stage 4','Stage 5'],
+      datasets: [{ label:'점수', data: last.stageScores, backgroundColor:'#3B82F6' }]
+    },
+    options: { responsive:true, maintainAspectRatio:false, scales:{y:{beginAtZero:true,ticks:{color:'#cbd5e1'}},x:{ticks:{color:'#cbd5e1'}}}, plugins:{legend:{labels:{color:'#cbd5e1'}}} }
+  });
+}
+
+function renderTab3() {
+  const rows = flatSessions();
+  const body = document.getElementById('dash-body');
+  if (rows.length === 0) { body.innerHTML = noDataHTML(); return; }
+  const qStat = {};
+  rows.forEach(r => r.session.answers.forEach(a => {
+    const id = a.questionId.replace('_F','');
+    if (!qStat[id]) qStat[id] = {c:0,t:0,kw:a.keyword};
+    qStat[id].t++; if (a.isCorrect) qStat[id].c++;
+  }));
+  const arr = Object.entries(qStat).map(([id,v]) => ({id, ...v, acc: v.t? v.c/v.t*100 : 0})).sort((a,b)=>a.acc-b.acc);
+  const top5Low = arr.slice(0,5);
+  body.innerHTML = `
+    <h2 class="text-2xl font-bold mb-4">❓ 문항별 정답률</h2>
+    <div class="bg-red-900 rounded-xl p-4 mb-4">
+      <h3 class="font-bold mb-2">⚠️ 정답률 낮은 TOP 5 (수업 보강 필요)</h3>
+      <ul class="space-y-1">${top5Low.map(q=>`<li class="text-sm">• ${q.id} · ${q.kw} <span class="text-amber-300">(${Math.round(q.acc)}%)</span></li>`).join('')}</ul>
+    </div>
+    <div class="bg-slate-800 rounded-xl p-4 overflow-auto">
+      <table>
+        <thead><tr><th>문항</th><th>키워드</th><th class="text-right">응답수</th><th class="text-right">정답률</th></tr></thead>
+        <tbody>${arr.map(q=>{
+          const cls = q.acc>=90?'green':q.acc>=70?'yellow':'red';
+          return `<tr><td>${q.id}</td><td>${q.kw}</td><td class="text-right">${q.t}</td><td class="text-right ${cls}">${Math.round(q.acc)}%</td></tr>`;
+        }).join('')}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderTab4() {
+  const rows = flatSessions();
+  const body = document.getElementById('dash-body');
+  if (rows.length === 0) { body.innerHTML = noDataHTML(); return; }
+  const avgScore = Math.round(rows.reduce((a,r)=>a+r.session.finalScore,0)/rows.length);
+  const stageCompletion = [0,0,0,0,0];
+  rows.forEach(r => { for (let i=0;i<r.session.maxStage;i++) stageCompletion[i]++; });
+  const compRate = stageCompletion.map(c => Math.round(c/rows.length*100));
+  const kwAcc = {};
+  rows.forEach(r => r.session.answers.forEach(a => {
+    if (!kwAcc[a.keyword]) kwAcc[a.keyword] = {c:0,t:0};
+    kwAcc[a.keyword].t++; if (a.isCorrect) kwAcc[a.keyword].c++;
+  }));
+  // Top 5 학생
+  const stuScore = {};
+  rows.forEach(r => {
+    const k = r.student.id;
+    if (!stuScore[k] || stuScore[k].score < r.session.finalScore) stuScore[k] = { name: r.student.name, score: r.session.finalScore };
+  });
+  const top5 = Object.values(stuScore).sort((a,b)=>b.score-a.score).slice(0,5);
+
+  body.innerHTML = `
+    <h2 class="text-2xl font-bold mb-4">📈 학급 통계</h2>
+    <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="kpi-card"><div class="text-xs text-slate-400">학급 평균</div><div class="text-2xl font-bold text-amber-400">${avgScore}점</div></div>
+      <div class="kpi-card"><div class="text-xs text-slate-400">총 세션</div><div class="text-2xl font-bold">${rows.length}</div></div>
+      <div class="kpi-card"><div class="text-xs text-slate-400">스테이지 5 완료율</div><div class="text-2xl font-bold green">${compRate[4]}%</div></div>
+    </div>
+    <div class="grid grid-cols-2 gap-3 mb-4">
+      <div class="bg-slate-800 rounded-xl p-4"><h3 class="font-bold mb-2">스테이지별 완료율</h3><canvas id="ch-comp" height="120"></canvas></div>
+      <div class="bg-slate-800 rounded-xl p-4">
+        <h3 class="font-bold mb-2">🏆 우수 학생 TOP 5</h3>
+        <ul class="space-y-1">${top5.map((s,i)=>`<li class="text-sm">${i+1}. ${maskName(s.name)} <span class="text-amber-300">${s.score}점</span></li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="bg-slate-800 rounded-xl p-4">
+      <h3 class="font-bold mb-2">키워드 30개 학급 평균 정답률</h3>
+      <table><thead><tr><th>키워드</th><th class="text-right">정답률</th></tr></thead>
+        <tbody>${KEYWORDS.map(k=>{
+          const v = kwAcc[k.name]; const acc = v && v.t ? Math.round(v.c/v.t*100) : 0;
+          const cls = !v ? '' : acc>=90?'green':acc>=70?'yellow':'red';
+          return `<tr><td>${k.name}</td><td class="text-right ${cls}">${v?acc+'%':'—'}</td></tr>`;
+        }).join('')}</tbody>
+      </table>
+    </div>
+  `;
+  if (curChart) curChart.destroy();
+  curChart = new Chart(document.getElementById('ch-comp'), {
+    type:'bar',
+    data:{labels:['S1','S2','S3','S4','S5'],datasets:[{label:'완료율 %',data:compRate,backgroundColor:'#3B82F6'}]},
+    options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,max:100,ticks:{color:'#cbd5e1'}},x:{ticks:{color:'#cbd5e1'}}},plugins:{legend:{labels:{color:'#cbd5e1'}}}}
+  });
+}
+
+function renderTab5() {
+  const body = document.getElementById('dash-body');
+  body.innerHTML = `
+    <h2 class="text-2xl font-bold mb-4">⚙️ 데이터 관리</h2>
+    <div class="grid grid-cols-2 gap-3">
+      <div class="bg-slate-800 rounded-xl p-4">
+        <h3 class="font-bold mb-2">CSV 내보내기</h3>
+        <p class="text-sm text-slate-400 mb-3">학생 학습 기록을 Excel에서 열 수 있는 CSV로 다운로드합니다.</p>
+        <button id="btn-csv" class="btn-primary">CSV 다운로드</button>
+      </div>
+      <div class="bg-slate-800 rounded-xl p-4">
+        <h3 class="font-bold mb-2">JSON 백업</h3>
+        <p class="text-sm text-slate-400 mb-3">전체 데이터를 JSON으로 백업/복원합니다.</p>
+        <button id="btn-json" class="btn-primary mb-2">JSON 백업</button>
+        <input type="file" id="json-in" accept=".json" style="display:none">
+        <button id="btn-restore" class="btn-secondary">JSON 복원</button>
+      </div>
+      <div class="bg-slate-800 rounded-xl p-4">
+        <h3 class="font-bold mb-2">샘플 데이터</h3>
+        <p class="text-sm text-slate-400 mb-3">시연용 가짜 학생 30명 데이터를 생성합니다.</p>
+        <button id="btn-sample" class="btn-primary">샘플 30명 생성</button>
+      </div>
+      <div class="bg-red-900 rounded-xl p-4">
+        <h3 class="font-bold mb-2">⚠️ 전체 초기화</h3>
+        <p class="text-sm text-red-200 mb-3">모든 학생 기록이 삭제됩니다. 되돌릴 수 없습니다.</p>
+        <button id="btn-reset" class="btn-primary" style="background:#dc2626;color:#fff">전체 초기화</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('btn-csv').addEventListener('click', exportCSV);
+  document.getElementById('btn-json').addEventListener('click', exportJSON);
+  document.getElementById('btn-restore').addEventListener('click', () => document.getElementById('json-in').click());
+  document.getElementById('json-in').addEventListener('change', importJSON);
+  document.getElementById('btn-sample').addEventListener('click', genSample);
+  document.getElementById('btn-reset').addEventListener('click', resetAll);
+}
+
+function noDataHTML() {
+  return `<div class="bg-slate-800 rounded-xl p-8 text-center">
+    <div class="text-5xl mb-3">📭</div>
+    <h3 class="text-xl font-bold mb-2">데이터가 없습니다</h3>
+    <p class="text-slate-400">학생이 게임을 플레이하거나, [⚙️ 데이터 관리] 탭에서 "샘플 30명 생성" 버튼을 눌러 보세요.</p>
+  </div>`;
+}
+
+function exportCSV() {
+  const rows = flatSessions();
+  if (rows.length === 0) { alert("데이터가 없어요"); return; }
+  let csv = '\uFEFF학번,이름,학년,반,번호,세션ID,접속일시,플레이시간(초),최종점수,최대스테이지,총응답,정답수,정답률(%)\n';
+  rows.forEach(r => {
+    const t=r.session.answers.length, c=r.session.answers.filter(a=>a.isCorrect).length;
+    csv += `${r.student.id},${r.student.name},${r.student.grade},${r.student.class},${r.student.number},${r.session.sessionId},${r.session.startTime},${r.session.playDuration},${r.session.finalScore},${r.session.maxStage},${t},${c},${t?Math.round(c/t*100):0}\n`;
+  });
+  csv += '\n[문항별 응답]\n학번,이름,세션ID,문항ID,키워드,스테이지,정답여부,소요시간(초)\n';
+  rows.forEach(r => r.session.answers.forEach(a => {
+    csv += `${r.student.id},${r.student.name},${r.session.sessionId},${a.questionId},${a.keyword},${a.stage},${a.isCorrect?'O':'X'},${a.timeSpent}\n`;
+  }));
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `history_records_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportJSON() {
+  const db = loadDB();
+  const blob = new Blob([JSON.stringify(db,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `history_backup_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importJSON(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!data.students) { alert("올바른 백업 파일이 아니에요"); return; }
+      if (confirm("기존 데이터를 덮어씁니다. 계속할까요?")) {
+        saveDB(data); alert("복원 완료"); switchTab(1);
+      }
+    } catch(err) { alert("파일을 읽을 수 없어요"); }
+  };
+  r.readAsText(file);
+}
+
+function genSample() {
+  if (!confirm("샘플 학생 30명을 추가합니다. 계속할까요?")) return;
+  const db = loadDB();
+  const names = ['김수호','이지민','박서준','최예린','정도윤','한소율','윤하늘','강민재','조유나','오시우','신서아','임지호','노예준','홍채린','문선우','배지안','구하린','권태양','류서연','진하준','곽민서','남도현','석유진','전이안','마지윤','우혜림','반시현','연주원','피서윤','계지원'];
+  for (let i=0; i<30; i++) {
+    const stu = { grade:1, class:Math.floor(i/10)+1, number:i%10+1, name:names[i], id:`1-${Math.floor(i/10)+1}-${i%10+1}` };
+    const stages = [0,0,0,0,0].map(()=>Math.floor(Math.random()*30)+20);
+    const finalScore = stages.reduce((a,b)=>a+b,0) + Math.floor(Math.random()*100);
+    const answers = [];
+    QUESTIONS.slice(0,30).forEach(q => {
+      const ok = Math.random() < 0.6 + Math.random()*0.3;
+      answers.push({questionId:q.id, keyword:KEYWORDS.find(k=>k.id===q.kw).name, stage:q.stage, isCorrect:ok, timeSpent:Math.floor(Math.random()*15)+3});
+    });
+    const sess = {
+      sessionId: uuid(),
+      startTime: new Date(Date.now()-Math.random()*7*86400000).toISOString(),
+      endTime: new Date().toISOString(),
+      playDuration: Math.floor(Math.random()*600)+900,
+      finalScore: finalScore,
+      maxStage: 5,
+      stageScores: stages,
+      answers: answers,
+      collectedCards: 30,
+      weakKeywords: []
+    };
+    let s = db.students.find(x => x.id === stu.id);
+    if (!s) { s = {...stu, sessions:[]}; db.students.push(s); }
+    s.sessions.push(sess);
+  }
+  db.meta.totalSessions = (db.meta.totalSessions||0) + 30;
+  saveDB(db);
+  alert("샘플 30명 추가 완료");
+  switchTab(1);
+}
+
+function resetAll() {
+  if (!confirm("모든 데이터를 삭제합니다. 정말 진행할까요?")) return;
+  if (!confirm("다시 한 번 확인합니다. 정말 되돌릴 수 없습니다.")) return;
+  localStorage.removeItem(DB_KEY);
+  alert("초기화 완료");
+  switchTab(1);
+}
+
+// =========================================================
+// 10. 초기화 (DOM 로드 후 모든 이벤트 등록)
+// =========================================================
+document.addEventListener('DOMContentLoaded', () => {
+  setupStudentLogin();
+
+  // 모드 선택 화면 버튼
+  document.getElementById('btn-student').addEventListener('click', () => show('screen-student-login'));
+  document.getElementById('btn-teacher').addEventListener('click', openTeacherLogin);
+  document.getElementById('btn-review').addEventListener('click', startReview);
+
+  // 뒤로 버튼들
+  document.querySelectorAll('.btn-back').forEach(b => b.addEventListener('click', goHome));
+
+  // 학생 로그인
+  document.getElementById('btn-start-game').addEventListener('click', startGame);
+
+  // 교사 로그인
+  document.getElementById('btn-pw-check').addEventListener('click', checkTeacherPw);
+  document.getElementById('in-pw').addEventListener('keydown', e => { if (e.key === 'Enter') checkTeacherPw(); });
+
+  // 게임 상단 버튼
+  document.getElementById('btn-dex').addEventListener('click', openDex);
+  document.getElementById('btn-exit').addEventListener('click', () => { if (confirm("나가면 진행 상황이 저장되지 않아요. 정말 나갈까요?")) goHome(); });
+
+  // 도감
+  document.getElementById('dex-close').addEventListener('click', closeDex);
+  document.getElementById('dex-modal').addEventListener('click', e => { if (e.target.id === 'dex-modal') closeDex(); });
+
+  // 복습
+  document.getElementById('rev-prev').addEventListener('click', () => { if (curRev > 0) { curRev--; renderRev(); } });
+  document.getElementById('rev-next').addEventListener('click', () => { if (curRev < KEYWORDS.length-1) { curRev++; renderRev(); } });
+
+  // 결과
+  document.getElementById('btn-result-home').addEventListener('click', goHome);
+
+  // 대시보드
+  document.getElementById('btn-dash-home').addEventListener('click', goHome);
+  document.querySelectorAll('.tab-btn').forEach(t => t.addEventListener('click', () => switchTab(parseInt(t.dataset.tab))));
+
+  console.log("✅ 역사 탐험대 초기화 완료. 모든 버튼 이벤트 등록됨.");
+});
+</script>
+</body>
+</html>
