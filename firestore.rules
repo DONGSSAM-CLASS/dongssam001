@@ -15,12 +15,13 @@ service cloud.firestore {
     function uid() { return request.auth.uid; }
     function email() { return request.auth.token.email; }
 
-    // 학생 가상 이메일 형식: ABC123-7@student.local 또는 ABC123-7-2@student.local (비밀번호 초기화 세대)
+    // 학생 가상 이메일 형식: abc123-7@student.local 또는 abc123-7-2@student.local (비밀번호 초기화 세대)
+    // Firebase Auth 는 이메일을 소문자로 정규화하므로 접두어 비교는 항상 lower() 로 한다.
     function isStudentEmail() {
       return signedIn() && email() is string
-        && email().matches('^[A-Z0-9]{6}-[0-9]{1,3}(-[0-9]{1,3})?@student[.]local$');
+        && email().matches('^[A-Za-z0-9]{6}-[0-9]{1,3}(-[0-9]{1,3})?@student[.]local$');
     }
-    function emailPrefix() { return email().split('-')[0]; }
+    function emailPrefix() { return email().split('-')[0].lower(); }
     function emailNumber() { return int(email().split('@')[0].split('-')[1]); }
     function emailGeneration() {
       return email().split('@')[0].split('-').size() == 3
@@ -94,7 +95,7 @@ service cloud.firestore {
             && request.resource.data.number is int
             && request.resource.data.number == emailNumber()
             && exists(classPath(request.resource.data.classId))
-            && classData(request.resource.data.classId).authPrefix == emailPrefix()
+            && classData(request.resource.data.classId).authPrefix.lower() == emailPrefix()
             && classData(request.resource.data.classId).archived == false
           )
         );
@@ -142,7 +143,7 @@ service cloud.firestore {
 
     // ───────────────────────── class_codes ─────────────────────────
     // 문서 ID = 학급코드. 학생이 로그인 전에 학급코드로 학급을 찾기 위한 공개 조회 전용 문서.
-    // { classId, teacherId, authPrefix, active }
+    // { classId, teacherId, authPrefix, active, resets: { "<번호>": <세대> } }  ← resets 는 비밀번호 초기화된 번호와 세대만 공개(이름 없음)
     match /class_codes/{code} {
       // 문서 ID를 정확히 알아야만 읽을 수 있음(목록 조회 불가) → 코드 자체가 비밀값 역할
       allow get: if true;
@@ -150,12 +151,12 @@ service cloud.firestore {
 
       allow create: if isTeacher()
         && request.resource.data.teacherId == uid()
-        && request.resource.data.keys().hasOnly(['classId', 'teacherId', 'authPrefix', 'active'])
+        && request.resource.data.keys().hasOnly(['classId', 'teacherId', 'authPrefix', 'active', 'resets'])
         && classDataAfter(request.resource.data.classId).teacherId == uid()
         && classDataAfter(request.resource.data.classId).code == code
         && classDataAfter(request.resource.data.classId).authPrefix == request.resource.data.authPrefix;
       allow update: if isTeacher() && resource.data.teacherId == uid()
-        && onlyChanges(['active']);
+        && onlyChanges(['active', 'resets']);
       allow delete: if isTeacher() && resource.data.teacherId == uid();
     }
 
@@ -184,7 +185,7 @@ service cloud.firestore {
         && emailGeneration() == 0
         && request.resource.data.resetPending == false
         && exists(classPath(request.resource.data.classId))
-        && classData(request.resource.data.classId).authPrefix == emailPrefix()
+        && classData(request.resource.data.classId).authPrefix.lower() == emailPrefix()
         && classData(request.resource.data.classId).archived == false;
 
       // 교사: 비활성화, 이름 정정, 비밀번호 초기화(authGeneration+1, resetPending=true)
@@ -203,7 +204,7 @@ service cloud.firestore {
         && resource.data.classId == myClassIdForCreate()
         && resource.data.number == emailNumber()
         && emailGeneration() == resource.data.authGeneration
-        && classData(resource.data.classId).authPrefix == emailPrefix()
+        && classData(resource.data.classId).authPrefix.lower() == emailPrefix()
         && request.resource.data.uid == uid()
         && request.resource.data.resetPending == false
         && unchanged(['classId', 'number', 'authGeneration', 'active']);
@@ -211,7 +212,7 @@ service cloud.firestore {
       allow update: if isStudentEmail() && resource.data.resetPending == true
         && resource.data.number == emailNumber()
         && emailGeneration() == resource.data.authGeneration
-        && classData(resource.data.classId).authPrefix == emailPrefix()
+        && classData(resource.data.classId).authPrefix.lower() == emailPrefix()
         && request.resource.data.uid == uid()
         && request.resource.data.resetPending == false
         && unchanged(['classId', 'number', 'authGeneration', 'active']);

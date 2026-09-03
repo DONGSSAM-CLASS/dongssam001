@@ -17,7 +17,7 @@
 | --- | --- | --- | --- | --- |
 | `users` | uid | 본인 · 담당 교사(학생 문서) · 관리자 | 본인 생성(역할 검증) · 본인은 이름류만 수정 · 담당 교사는 active/classId/number 수정 | 삭제는 관리자만 |
 | `classes` | 자동 ID | 소유 교사 · 소속 학생 · 관리자 | 소유 교사 (teacherId·authPrefix 불변) | 삭제 금지 → `archived` |
-| `class_codes` | **학급코드** | **누구나 get** (list 불가) | 소유 교사 (배치 안에서 `getAfter` 로 학급과 대조) | 로그인 전 학급 찾기용. 코드 자체가 비밀 |
+| `class_codes` | **학급코드** | **누구나 get** (list 불가) | 소유 교사 (배치 안에서 `getAfter` 로 학급과 대조) | 로그인 전 학급 찾기용. 코드 자체가 비밀. `resets` 맵(번호→세대)으로 비밀번호 초기화 세대를 공개(이름은 노출하지 않음) |
 | `class_members` | `{classId}_{number}` | 소유 교사 · 본인 | 교사 사전 등록(uid 없음) / 학생 자가 등록 / 초기화 후 세대 승계 | 번호 중복 방지, uid 와 무관한 학생 식별자 |
 | `sessions` | 자동 ID | 소유 교사 · 소속 학생(open/closed 만) | 소유 교사 | `follow` 필드가 따라오기 모드 상태 |
 | `student_work` | `{sessionId}_{number}` | 소유 교사 · 본인 | 본인(세션 open 일 때) · 핀 ≤200 · 루트 ≤50 | **학생 1명 = 세션당 문서 1개** |
@@ -27,10 +27,19 @@
 | `admins` | uid | 본인(존재 확인) · 관리자 | 관리자 | 최초 1명은 콘솔에서 |
 | `data_reviews` | `{kind}_{itemId}` | 교사 · 관리자 | 관리자 | 검수 상태 + 수정 이력 |
 
+## 쓰기 순서 제약
+
+규칙의 `ownsClass()`·`isMember()` 는 `get()`/`exists()` 를 쓰므로 **같은 배치 안에서 방금 만든 문서를 보지 못한다**. 따라서
+
+- 학급 + `class_codes` 는 한 배치로 만들 수 있다(`class_codes` 규칙이 `getAfter` 를 쓰므로).
+- **세션·미션은 학급이 이미 존재한 뒤에** 별도 커밋으로 만들어야 한다.
+- 학생 가입(`users` + `class_members`)은 학급이 이미 있으므로 한 배치로 처리한다.
+
 ## 학생 계정 흐름 (서버 없이)
 
-1. 학생이 학급코드 입력 → `class_codes/{code}` 를 비로그인 get → `classId`, `authPrefix`.
-2. 클라이언트가 가상 이메일 `{authPrefix}-{번호}@student.local` 과 비밀번호 `{PIN}#{authPrefix}` 로 `createUserWithEmailAndPassword`.
+1. 학생이 학급코드 입력 → `class_codes/{code}` 를 비로그인 get → `classId`, `authPrefix`, `resets`.
+2. 클라이언트가 가상 이메일 `{authPrefix 소문자}-{번호}@student.local` 과 비밀번호 `{PIN}#{authPrefix}` 로 `createUserWithEmailAndPassword`.
+   - Firebase Auth 가 이메일을 소문자로 정규화하므로 접두어는 소문자로 만들고, 규칙은 `authPrefix.lower()` 와 비교한다.
 3. 배치 쓰기: `users/{uid}` (role student) + `class_members/{classId}_{번호}` (uid 기록). 규칙이 이메일 접두어·번호·학급 일치를 검증하므로 다른 학급·다른 번호로는 가입할 수 없습니다.
 4. 이후 로그인은 학급코드 + 번호 + PIN → 같은 이메일/비밀번호 조합으로 `signInWithEmailAndPassword`.
 

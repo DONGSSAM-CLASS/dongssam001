@@ -61,6 +61,8 @@ export interface ClassCodeDoc {
   teacherId: string;
   authPrefix: string;
   active: boolean;
+  /** 비밀번호 초기화된 번호 → 세대 (학생 로그인 시 가상 이메일 계산용, 이름은 노출하지 않음) */
+  resets?: Record<string, number>;
 }
 
 /** 문서 ID = `${classId}_${number}` */

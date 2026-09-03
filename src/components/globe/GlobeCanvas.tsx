@@ -7,6 +7,8 @@ import { useGlobeStore } from '@/store/globeStore';
 import { PolityOverlay } from './PolityOverlay';
 import { BordersOverlay } from './BordersOverlay';
 import { RoutesOverlay } from './RoutesOverlay';
+import { UserOverlay } from './UserOverlay';
+import { useWorkStore } from '@/store/workStore';
 import { Markers } from './Markers';
 import { pickPolityAt } from './pick';
 import { useVisiblePolities } from '@/lib/useVisibleData';
@@ -42,6 +44,15 @@ function Earth() {
     const d = downPos.current;
     if (d && Math.hypot(e.clientX - d[0], e.clientY - d[1]) > 6) return;
     const [lat, lon] = vec3ToLatLon(e.point.x, e.point.y, e.point.z);
+    const { tool, year, addMeasurePoint } = useGlobeStore.getState();
+    if (tool === 'pin') {
+      useWorkStore.getState().setPendingPin({ lat: Math.round(lat * 100) / 100, lon: Math.round(lon * 100) / 100, year });
+      return;
+    }
+    if (tool === 'measure') {
+      addMeasurePoint([lat, lon]);
+      return;
+    }
     const hit = pickPolityAt([lat, lon], polities);
     select(hit ? { kind: 'polity', id: hit.id } : null);
   };
@@ -147,6 +158,7 @@ export function GlobeCanvas() {
       <PolityOverlay />
       <BordersOverlay />
       <RoutesOverlay />
+      <UserOverlay />
       <Markers />
       <CameraRig />
       <Stars />

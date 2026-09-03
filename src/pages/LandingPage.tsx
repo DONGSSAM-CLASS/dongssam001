@@ -1,7 +1,13 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { normalizeClassCode } from '@/lib/studentAuth';
+import { useAuthStore } from '@/store/authStore';
 import { dataset } from '@/data';
 
 export default function LandingPage() {
+  const navigate = useNavigate();
+  const profile = useAuthStore((s) => s.profile);
+  const [code, setCode] = useState('');
   return (
     <main className="min-h-full flex flex-col items-center justify-center gap-8 p-6">
       <header className="text-center">
@@ -26,20 +32,22 @@ export default function LandingPage() {
         <div className="rounded-2xl bg-slate-800/70 p-6 border border-slate-700">
           <h2 className="text-xl font-semibold">🧑‍🎓 학생</h2>
           <p className="mt-2 text-sm text-slate-300">선생님께 받은 6자리 학급코드와 번호로 들어옵니다.</p>
-          <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
+          <form className="mt-4 flex gap-2" onSubmit={(e) => { e.preventDefault(); navigate(`/join?code=${code}`); }}>
             <label className="sr-only" htmlFor="classCode">학급코드</label>
             <input
               id="classCode"
               className="flex-1 rounded-xl bg-slate-900 px-4 py-3 uppercase tracking-widest border border-slate-600"
               placeholder="학급코드 6자리"
               maxLength={6}
-              disabled
-              title="4단계에서 구현"
+              value={code}
+              onChange={(e) => setCode(normalizeClassCode(e.target.value))}
+              autoComplete="off"
             />
-            <button type="submit" disabled className="rounded-xl bg-sky-500 px-4 py-3 font-bold disabled:opacity-50">
+            <button type="submit" disabled={code.length !== 6} className="rounded-xl bg-sky-500 px-4 py-3 font-bold disabled:opacity-50">
               입장
             </button>
           </form>
+          {profile?.role === 'student' && <p className="mt-2 text-xs"><Link className="underline" to="/student">이미 로그인됨 → 내 학급으로</Link></p>}
         </div>
       </section>
 

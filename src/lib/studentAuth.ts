@@ -19,7 +19,9 @@ export const CLASS_CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // 혼동
 export const CLASS_CODE_LENGTH = 6;
 export const STUDENT_PIN_PATTERN = /^[0-9]{4,6}$/;
 export const CLASS_CODE_PATTERN = /^[A-Z0-9]{6}$/;
-export const STUDENT_EMAIL_PATTERN = /^([A-Z0-9]{6})-([0-9]{1,3})(?:-([0-9]{1,3}))?@student\.local$/;
+// Firebase Auth 는 이메일을 소문자로 정규화하므로 가상 이메일 접두어도 소문자로 만든다.
+// (학급코드 자체는 학생이 보기 쉽도록 대문자로 표시·저장한다)
+export const STUDENT_EMAIL_PATTERN = /^([A-Za-z0-9]{6})-([0-9]{1,3})(?:-([0-9]{1,3}))?@student\.local$/;
 
 export function normalizeClassCode(input: string): string {
   return input.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -61,7 +63,7 @@ export function buildStudentEmail(authPrefix: string, number: number, generation
   if (!isValidStudentNumber(number)) throw new Error('invalid student number');
   if (!Number.isInteger(generation) || generation < 0) throw new Error('invalid generation');
   const gen = generation > 0 ? `-${generation}` : '';
-  return `${authPrefix}-${number}${gen}@${STUDENT_EMAIL_DOMAIN}`;
+  return `${authPrefix.toLowerCase()}-${number}${gen}@${STUDENT_EMAIL_DOMAIN}`;
 }
 
 export function parseStudentEmail(email: string | null | undefined): {
@@ -72,7 +74,8 @@ export function parseStudentEmail(email: string | null | undefined): {
   if (!email) return null;
   const m = STUDENT_EMAIL_PATTERN.exec(email);
   if (!m) return null;
-  return { authPrefix: m[1], number: Number(m[2]), generation: m[3] ? Number(m[3]) : 0 };
+  // 저장된 학급 authPrefix 와 바로 비교할 수 있도록 대문자로 되돌린다
+  return { authPrefix: m[1].toUpperCase(), number: Number(m[2]), generation: m[3] ? Number(m[3]) : 0 };
 }
 
 export function isStudentEmail(email: string | null | undefined): boolean {

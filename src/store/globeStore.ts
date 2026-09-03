@@ -4,6 +4,8 @@ import type { Subject } from '@/types/history';
 import { YEAR_MAX, YEAR_MIN } from '@/data';
 
 export type YearStep = 100 | 10 | 1;
+/** 지구본 클릭 도구: 선택 / 핀 찍기 / 거리 재기 */
+export type GlobeTool = 'select' | 'pin' | 'measure';
 export type SelectionKind = 'polity' | 'figure' | 'place' | 'event';
 export interface Selection {
   kind: SelectionKind;
@@ -38,6 +40,12 @@ interface GlobeState {
   fly: FlyTarget | null;
   /** 프레임레이트 확인용 */
   fps: number;
+  tool: GlobeTool;
+  /** 거리 재기 도구로 찍은 지점(최대 2개) */
+  measurePoints: [number, number][];
+  /** 세션에서 강조하는 국가·인물 id */
+  highlightPolities: string[];
+  highlightFigures: string[];
 
   setYear: (year: number) => void;
   shiftYear: (delta: number) => void;
@@ -51,6 +59,10 @@ interface GlobeState {
   setListMode: (v: boolean) => void;
   flyTo: (lat: number, lon: number, distance?: number) => void;
   setFps: (fps: number) => void;
+  setTool: (tool: GlobeTool) => void;
+  addMeasurePoint: (p: [number, number]) => void;
+  clearMeasure: () => void;
+  setHighlights: (polities: string[], figures: string[]) => void;
 }
 
 export const clampYear = (y: number) => Math.min(YEAR_MAX, Math.max(YEAR_MIN, Math.round(y)));
@@ -66,6 +78,10 @@ export const useGlobeStore = create<GlobeState>((set, get) => ({
   listMode: false,
   fly: null,
   fps: 0,
+  tool: 'select',
+  measurePoints: [],
+  highlightPolities: [],
+  highlightFigures: [],
 
   setYear: (year) => set({ year: clampYear(year) }),
   shiftYear: (delta) => set({ year: clampYear(get().year + delta) }),
@@ -79,4 +95,8 @@ export const useGlobeStore = create<GlobeState>((set, get) => ({
   setListMode: (listMode) => set({ listMode }),
   flyTo: (lat, lon, distance) => set({ fly: { lat, lon, distance, token: Date.now() + Math.random() } }),
   setFps: (fps) => set({ fps }),
+  setTool: (tool) => set({ tool, measurePoints: tool === 'measure' ? get().measurePoints : [] }),
+  addMeasurePoint: (p) => set((s) => ({ measurePoints: s.measurePoints.length >= 2 ? [p] : [...s.measurePoints, p] })),
+  clearMeasure: () => set({ measurePoints: [] }),
+  setHighlights: (highlightPolities, highlightFigures) => set({ highlightPolities, highlightFigures }),
 }));

@@ -12,7 +12,7 @@
 | 1 | 프로젝트 초기화 · Firebase 연결 · Firestore 설계 · Security Rules + 테스트 · 정적 데이터 배치 | ✅ 완료 |
 | 2 | 3D 지구본 + 연대 슬라이더 + 샘플 데이터 20개 | ✅ 완료 (`/globe`) |
 | 3 | 역사 데이터 전체 입력 + 검색·레이어 | ✅ 완료 (왕조 166 · 인물 218 · 장소 110 · 사건 137 · 교역로 11) |
-| 4 | 학생 가입(학급코드) + 마킹·거리·루트 | ⏳ |
+| 4 | 학생 가입(학급코드) + 마킹·거리·루트 | ✅ 완료 |
 | 5 | 교사 가입 + 학급 관리 + 수업 설계 + 성취기준 연동 | ⏳ |
 | 6 | 활동지 생성기 + PDF/HTML 다운로드 | ⏳ |
 | 7 | 실시간 모니터링 + 따라오기 모드 | ⏳ |
@@ -44,17 +44,23 @@
 │   │   └── index.ts         # 타입이 붙은 로더 + id 맵
 │   ├── lib/
 │   │   ├── firebase.ts      # Firebase 초기화(.env → 에뮬레이터 연결 · 영속 캐시)
+│   │   ├── authService.ts   # 교사/학생 가입·로그인, 프로필 로딩
+│   │   ├── workService.ts   # 학생 핀·루트 동기화(디바운스 1.5초, 문서 1개)
 │   │   ├── studentAuth.ts   # 학급코드·학생 가상 이메일·문서 ID 규칙
+│   │   ├── geo.ts           # 위경도↔3D · 폴리곤 판정 · 지오데식 원
 │   │   └── history.ts       # 연대 필터링 · Haversine · 루트 길이 · Douglas-Peucker
 │   ├── components/
 │   │   ├── globe/           # GlobeCanvas(r3f) · PolityOverlay · RoutesOverlay · BordersOverlay · Markers · pick
 │   │   ├── timeline/        # 연대 슬라이더(정밀도·직접 입력·북마크 점프·키보드)
 │   │   └── panels/          # DetailPanel · ComparePanel(동시대 비교) · LayerPanel · SearchBox · ListView(접근성 대체)
-│   ├── pages/               # LandingPage · GlobePage · DevStatusPage (나머지는 단계별 추가)
+│   ├── pages/
+│   │   ├── LandingPage · GlobePage(자유 탐색) · DevStatusPage
+│   │   └── student/         # StudentJoinPage · StudentHomePage · StudentGlobePage · StudentRecordsPage
 │   ├── store/               # Zustand 스토어 (2단계부터)
 │   └── types/               # history.ts(데이터 스키마) · firestore.ts(컬렉션 문서)
 ├── public/textures/         # NASA Blue Marble 지구 텍스처(2048/1024, 퍼블릭 도메인)
 ├── public/geo/              # Natural Earth 110m 국경선(경량 JSON, 퍼블릭 도메인)
+├── scripts/seed-emulator.ts # 에뮬레이터 시드(교사·학급코드 DEMO24·열린 세션·관리자)
 ├── scripts/data-src/        # 역사 데이터 원본(조각 .py) + merge.py → src/data/*.json 생성
 ├── scripts/validate-data.ts # 정적 데이터 스키마·참조·분포 검증
 ├── scripts/build-geo.mjs    # Natural Earth GeoJSON → 경량 JSON 변환
@@ -95,9 +101,14 @@ cp .env.example .env
 # 터미널 1: Auth(9099) · Firestore(8080) · Hosting(5000) · UI(4000)
 npm run emulators
 
+# 터미널 2: 데모 데이터 넣기 (교사 teacher@example.com / password123, 학급코드 DEMO24, 열린 세션 1개)
+npm run seed
+
 # 터미널 2: Vite 개발 서버 (VITE_USE_EMULATORS=true 이면 에뮬레이터에 연결)
 npm run dev
 ```
+
+> 에뮬레이터가 실행 중일 때 `firestore.rules` 를 편집하면 Firebase CLI 가 규칙 재적용에 실패하며 종료될 수 있습니다. 규칙을 고친 뒤에는 에뮬레이터를 다시 시작하세요.
 
 `http://localhost:5173/dev/status` 에서 정적 데이터 로드·Firestore 연결을 확인할 수 있습니다.
 

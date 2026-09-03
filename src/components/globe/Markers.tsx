@@ -33,6 +33,7 @@ export function Markers() {
   const showEnglish = useGlobeStore((s) => s.showEnglish);
   const selection = useGlobeStore((s) => s.selection);
   const select = useGlobeStore((s) => s.select);
+  const tool = useGlobeStore((s) => s.tool);
 
   const items = useMemo<MarkerItem[]>(() => {
     const out: MarkerItem[] = [];
@@ -98,7 +99,7 @@ export function Markers() {
                 e.stopPropagation();
                 select({ kind: it.kind === 'polity_label' ? 'polity' : it.kind, id: it.id });
               }}
-              className={markerClass(it.kind, selected)}
+              className={markerClass(it.kind, selected, tool === 'select')}
               style={it.stack ? { transform: `translateY(${it.stack * 22}px)` } : undefined}
               title={it.label}
             >
@@ -113,8 +114,9 @@ export function Markers() {
   );
 }
 
-function markerClass(kind: MarkerItem['kind'], selected: boolean) {
-  const base = 'pointer-events-auto select-none whitespace-nowrap rounded px-1.5 py-0.5 text-[11px] leading-tight shadow transition-transform hover:scale-110 ';
+function markerClass(kind: MarkerItem['kind'], selected: boolean, clickable: boolean) {
+  // 핀 찍기·거리 재기 중에는 마커가 지구본 클릭을 가로채지 않게 한다
+  const base = `${clickable ? 'pointer-events-auto' : 'pointer-events-none'} select-none whitespace-nowrap rounded px-1.5 py-0.5 text-[11px] leading-tight shadow transition-transform hover:scale-110 `;
   if (kind === 'polity_label') return base + (selected ? 'bg-white text-slate-900 font-bold' : 'bg-slate-900/70 text-white font-semibold border border-white/30');
   if (kind === 'figure') return base + (selected ? 'bg-amber-300 text-slate-900 font-bold' : 'bg-amber-500/90 text-slate-900');
   return base + (selected ? 'bg-sky-200 text-slate-900 font-bold' : 'bg-sky-900/80 text-sky-100 border border-sky-300/40');

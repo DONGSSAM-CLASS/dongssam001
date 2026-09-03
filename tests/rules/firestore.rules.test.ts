@@ -32,11 +32,12 @@ const T2 = { uid: 'teacher2', email: 'lee@school.kr' }; // 다른 교사
 const ADMIN = { uid: 'admin1', email: 'admin@school.kr' };
 const CLASS_ID = 'class1';
 const CODE = 'ABC234'; // authPrefix 이자 최초 학급코드
-const S7 = { uid: 'stu7', email: `${CODE}-7@student.local` }; // 가입된 학생(7번)
-const S8 = { uid: 'stu8', email: `${CODE}-8@student.local` }; // 아직 가입 안 한 학생(8번)
+// Firebase Auth 는 이메일을 소문자로 정규화한다 → 가상 이메일 접두어는 항상 소문자
+const S7 = { uid: 'stu7', email: `${CODE.toLowerCase()}-7@student.local` }; // 가입된 학생(7번)
+const S8 = { uid: 'stu8', email: `${CODE.toLowerCase()}-8@student.local` }; // 아직 가입 안 한 학생(8번)
 const OTHER_CLASS_ID = 'class2';
 const OTHER_CODE = 'XYZ789';
-const S_OTHER = { uid: 'stuX', email: `${OTHER_CODE}-3@student.local` };
+const S_OTHER = { uid: 'stuX', email: `${OTHER_CODE.toLowerCase()}-3@student.local` };
 
 function ctx(user: { uid: string; email: string } | null): RulesTestContext {
   return user ? env.authenticatedContext(user.uid, { email: user.email }) : env.unauthenticatedContext();
@@ -139,6 +140,14 @@ describe('classes & class_codes', () => {
     await assertFails(setDoc(doc(db, 'classes', 'c_bad1'), { teacherId: T2.uid, name: 'x', code: 'QWE456', authPrefix: 'QWE456', schoolLevel: '중학교', subject: '역사①', archived: false, createdAt: now(), codeUpdatedAt: now() }));
     await assertFails(setDoc(doc(db, 'classes', 'c_bad2'), { teacherId: T1.uid, name: 'x', code: 'abc', authPrefix: 'abc', schoolLevel: '중학교', subject: '역사①', archived: false, createdAt: now(), codeUpdatedAt: now() }));
   });
+  it('학급코드 문서의 resets(초기화 세대)는 소유 교사만 갱신하고 누구나 읽는다', async () => {
+    await assertSucceeds(updateDoc(doc(ctx(T1).firestore(), 'class_codes', CODE), { resets: { '7': 1 } }));
+    await assertFails(updateDoc(doc(ctx(T2).firestore(), 'class_codes', CODE), { resets: { '7': 2 } }));
+    await assertFails(updateDoc(doc(ctx(S7).firestore(), 'class_codes', CODE), { resets: { '7': 2 } }));
+    await assertFails(updateDoc(doc(ctx(T1).firestore(), 'class_codes', CODE), { classId: OTHER_CLASS_ID }));
+    const snap = await getDoc(doc(ctx(null).firestore(), 'class_codes', CODE));
+    if (!snap.data()?.resets) throw new Error('resets should be readable');
+  });
   it('학급코드 재발급: code 는 바꿀 수 있지만 authPrefix·teacherId 는 못 바꾼다', async () => {
     const db = ctx(T1).firestore();
     await assertSucceeds(updateDoc(doc(db, 'classes', CLASS_ID), { code: 'NEW999', codeUpdatedAt: now() }));
@@ -177,7 +186,7 @@ describe('student signup', () => {
     await assertFails(setDoc(doc(db, 'class_members', `${CLASS_ID}_9`), { ...member, number: 9 }));
   });
   it('이미 가입된 번호(7번) 자리는 다른 uid 가 덮어쓸 수 없다', async () => {
-    const attacker = { uid: 'stu7b', email: `${CODE}-7@student.local` };
+    const attacker = { uid: 'stu7b', email: `${CODE.toLowerCase()}-7@student.local` };
     const db = ctx(attacker).firestore();
     await assertFails(setDoc(doc(db, 'class_members', `${CLASS_ID}_7`), { ...member, number: 7, uid: attacker.uid }));
   });
@@ -195,14 +204,14 @@ describe('student signup', () => {
     // 교사가 초기화
     await assertSucceeds(updateDoc(doc(ctx(T1).firestore(), 'class_members', `${CLASS_ID}_7`), { authGeneration: 1, resetPending: true }));
     // 새 세대 계정
-    const s7v2 = { uid: 'stu7v2', email: `${CODE}-7-1@student.local` };
+    const s7v2 = { uid: 'stu7v2', email: `${CODE.toLowerCase()}-7-1@student.local` };
     const db = ctx(s7v2).firestore();
     const b = writeBatch(db);
     b.set(doc(db, 'users', s7v2.uid), { ...profile, number: 7, displayName: '학생7' });
     b.update(doc(db, 'class_members', `${CLASS_ID}_7`), { uid: s7v2.uid, resetPending: false, joinedAt: now() });
     await assertSucceeds(b.commit());
     // 세대가 맞지 않는 계정은 거부
-    const wrongGen = { uid: 'stu7v3', email: `${CODE}-7-2@student.local` };
+    const wrongGen = { uid: 'stu7v3', email: `${CODE.toLowerCase()}-7-2@student.local` };
     await assertFails(updateDoc(doc(ctx(wrongGen).firestore(), 'class_members', `${CLASS_ID}_7`), { uid: wrongGen.uid, resetPending: false }));
   });
 });
@@ -219,6 +228,13 @@ describe('sessions', () => {
   });
   it('다른 학급 학생은 세션을 읽을 수 없다', async () => {
     await assertFails(getDoc(doc(ctx(S_OTHER).firestore(), 'sessions', 'sess_open')));
+  });
+  it('학급을 만드는 배치 안에서는 세션을 만들 수 없다 (ownsClass 는 get() 이므로 배치 이전 상태를 본다)', async () => {
+    const db = ctx(T1).firestore();
+    const b = writeBatch(db);
+    b.set(doc(db, 'classes', 'c_batch'), { teacherId: T1.uid, name: '3-1', code: 'BATCH1', authPrefix: 'BATCH1', schoolLevel: '중학교', subject: '역사①', archived: false, settings: { walkKmPerDay: 30, sailKmPerDay: 120, horseKmPerDay: 60 }, createdAt: now(), codeUpdatedAt: now() });
+    b.set(doc(db, 'sessions', 's_batch'), { teacherId: T1.uid, classId: 'c_batch', title: '같은 배치', status: 'draft', yearRange: [0, 100], focusYear: 50, layers: {}, highlightPolities: [], highlightFigures: [], achievementStandards: [], worksheet: [], follow: { enabled: false, year: 50, camera: { lat: 0, lon: 0, zoom: 1 }, updatedAt: now() }, createdAt: now(), updatedAt: now() });
+    await assertFails(b.commit());
   });
   it('소유 교사만 세션을 만들고 수정한다', async () => {
     const base = { teacherId: T1.uid, classId: CLASS_ID, title: '새 세션', status: 'draft', yearRange: [0, 100], focusYear: 50, layers: {}, highlightPolities: [], highlightFigures: [], achievementStandards: [], worksheet: [], follow: { enabled: false, year: 50, camera: { lat: 0, lon: 0, zoom: 1 }, updatedAt: now() }, createdAt: now(), updatedAt: now() };

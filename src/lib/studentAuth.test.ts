@@ -10,18 +10,19 @@ import {
 } from './studentAuth';
 
 describe('studentAuth', () => {
-  it('builds virtual emails in the required format', () => {
-    expect(buildStudentEmail('ABC123', 7)).toBe('ABC123-7@student.local');
-    expect(buildStudentEmail('ABC123', 7, 2)).toBe('ABC123-7-2@student.local');
+  it('builds virtual emails in the required format (Auth 가 소문자로 정규화하므로 소문자)', () => {
+    expect(buildStudentEmail('ABC123', 7)).toBe('abc123-7@student.local');
+    expect(buildStudentEmail('ABC123', 7, 2)).toBe('abc123-7-2@student.local');
     expect(() => buildStudentEmail('abc', 7)).toThrow();
     expect(() => buildStudentEmail('ABC123', 0)).toThrow();
   });
 
   it('parses virtual emails (round trip)', () => {
+    expect(parseStudentEmail('abc123-7@student.local')).toEqual({ authPrefix: 'ABC123', number: 7, generation: 0 });
+    expect(parseStudentEmail('abc123-12-3@student.local')).toEqual({ authPrefix: 'ABC123', number: 12, generation: 3 });
     expect(parseStudentEmail('ABC123-7@student.local')).toEqual({ authPrefix: 'ABC123', number: 7, generation: 0 });
-    expect(parseStudentEmail('ABC123-12-3@student.local')).toEqual({ authPrefix: 'ABC123', number: 12, generation: 3 });
+    expect(parseStudentEmail(buildStudentEmail('ABC123', 7))).toEqual({ authPrefix: 'ABC123', number: 7, generation: 0 });
     expect(parseStudentEmail('teacher@school.kr')).toBeNull();
-    expect(parseStudentEmail('abc123-7@student.local')).toBeNull();
   });
 
   it('derives a >=6 char Auth password from a 4~6 digit PIN', () => {
