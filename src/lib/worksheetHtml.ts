@@ -162,7 +162,8 @@ export function buildStandaloneHtml(items: WorksheetItem[], meta: WorksheetMeta,
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>${esc(meta.title)} — 활동지</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
+<!-- 웹폰트는 화면을 막지 않게 비동기로 불러오고, 실패하면 시스템 한글 글꼴을 쓴다 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" media="print" onload="this.media='all'" />
 <style>${WORKSHEET_CSS}</style>
 </head>
 <body>

@@ -41,7 +41,7 @@ export default function LandingPage() {
               onChange={(e) => setCode(normalizeClassCode(e.target.value))}
               autoComplete="off"
             />
-            <button type="submit" disabled={code.length !== 6} className="rounded-xl bg-sky-500 px-4 py-3 font-bold disabled:opacity-50">
+            <button type="submit" disabled={code.length !== 6} className="rounded-xl bg-sky-500 text-slate-900 px-4 py-3 font-bold disabled:opacity-50">
               입장
             </button>
           </form>
@@ -49,7 +49,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="text-xs text-slate-500 text-center">
+      <footer className="text-xs text-slate-400 text-center">
         <p>
           기본 데이터: 왕조 {dataset.polities.length} · 인물 {dataset.figures.length} · 장소 {dataset.places.length} · 사건{' '}
           {dataset.events.length} · 성취기준 {dataset.achievement_standards.length}

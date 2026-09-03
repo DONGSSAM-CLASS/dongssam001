@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { dataset } from '@/data';
+import { useMergedDataset } from '@/lib/mergedData';
 import { formatYear } from '@/lib/history';
 import { useGlobeStore, type SelectionKind } from '@/store/globeStore';
 
@@ -27,15 +28,16 @@ export function SearchBox() {
   const flyTo = useGlobeStore((s) => s.flyTo);
   const select = useGlobeStore((s) => s.select);
   const year = useGlobeStore((s) => s.year);
+  const { polities, figures, places, polityById } = useMergedDataset();
 
   const index = useMemo<Hit[]>(() => {
     const hits: Hit[] = [];
-    for (const p of dataset.polities) hits.push({ kind: 'polity', id: p.id, label: p.name_ko, sub: `${p.name_en} · ${formatYear(p.start_year)}~${formatYear(p.end_year)}`, year: Math.round((p.start_year + Math.min(p.end_year, 2000)) / 2), lat: p.centroid[0], lon: p.centroid[1] });
-    for (const f of dataset.figures) hits.push({ kind: 'figure', id: f.id, label: f.name_ko, sub: `${f.name_en} · ${formatYear(f.birth_year)}~${formatYear(f.death_year)}`, year: f.activity_years[0], lat: f.activity_location[0], lon: f.activity_location[1] });
+    for (const p of polities) hits.push({ kind: 'polity', id: p.id, label: p.name_ko, sub: `${p.name_en} · ${formatYear(p.start_year)}~${formatYear(p.end_year)}`, year: Math.round((p.start_year + Math.min(p.end_year, 2000)) / 2), lat: p.centroid[0], lon: p.centroid[1] });
+    for (const f of figures) hits.push({ kind: 'figure', id: f.id, label: f.name_ko, sub: `${f.name_en} · ${formatYear(f.birth_year)}~${formatYear(f.death_year)}`, year: f.activity_years[0], lat: f.activity_location[0], lon: f.activity_location[1] });
     for (const e of dataset.events) hits.push({ kind: 'event', id: e.id, label: e.name_ko, sub: `${e.name_en ?? ''} · ${formatYear(e.year)}`, year: e.year, lat: e.coords[0], lon: e.coords[1] });
-    for (const pl of dataset.places) hits.push({ kind: 'place', id: pl.id, label: pl.name_ko, sub: `${pl.name_en ?? ''} · ${pl.era_names.map((x) => x.name_ko).join('/')}`, year: Number.NaN, lat: pl.coords[0], lon: pl.coords[1] });
+    for (const pl of places) hits.push({ kind: 'place', id: pl.id, label: pl.name_ko, sub: `${pl.name_en ?? ''} · ${pl.era_names.map((x) => x.name_ko).join('/')}`, year: Number.NaN, lat: pl.coords[0], lon: pl.coords[1] });
     return hits;
-  }, []);
+  }, [polities, figures, places]);
 
   const results = useMemo(() => {
     const n = norm(q);
@@ -49,7 +51,7 @@ export function SearchBox() {
   const go = (h: Hit) => {
     if (h.kind === 'polity') {
       // 현재 연대가 존속 기간 안이면 유지, 아니면 중간 연대로 이동
-      const p = dataset.polities.find((x) => x.id === h.id)!;
+      const p = polityById.get(h.id)!;
       if (year < p.start_year || year > p.end_year) setYear(h.year);
     } else if (!Number.isNaN(h.year)) setYear(h.year);
     flyTo(h.lat, h.lon, 2.2);
@@ -67,7 +69,7 @@ export function SearchBox() {
         aria-expanded={open && results.length > 0}
         aria-controls="globe-search-list"
         aria-autocomplete="list"
-        className="w-full rounded-xl bg-slate-900/85 backdrop-blur border border-slate-600 px-3 py-2 text-sm placeholder:text-slate-500"
+        className="w-full rounded-xl bg-slate-900/85 backdrop-blur border border-slate-600 px-3 py-2 text-sm placeholder:text-slate-400"
         placeholder="🔍 검색 (예: 고려, 살라딘, 1453)"
         value={q}
         onChange={(e) => { setQ(e.target.value); setOpen(true); }}

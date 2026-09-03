@@ -145,7 +145,7 @@ export default function LessonDesignPage() {
                   <button type="button" aria-expanded={open} onClick={() => setOpenUnit(open ? null : key)} className="w-full text-left px-3 py-2 flex items-center gap-2">
                     <span className="text-slate-400 text-xs">{open ? '▾' : '▸'}</span>
                     <span className="text-sm font-semibold flex-1">{u.unit}</span>
-                    {group.subjects.length > 1 && <span className="text-[10px] text-slate-500">{u.subject} {SUBJECT_SUBLABEL[u.subject]}</span>}
+                    {group.subjects.length > 1 && <span className="text-[10px] text-slate-400">{u.subject} {SUBJECT_SUBLABEL[u.subject]}</span>}
                     {chosen > 0 && <span className="rounded bg-amber-400 text-slate-900 text-[10px] px-1.5 font-bold">{chosen}</span>}
                   </button>
                   {open && (
@@ -155,7 +155,7 @@ export default function LessonDesignPage() {
                           <label className="flex gap-2 items-start text-xs cursor-pointer">
                             <input type="checkbox" checked={selected.includes(s.code)} onChange={() => toggle(s.code)} className="mt-0.5 accent-amber-400" />
                             <span><span className="font-mono text-amber-300">{s.code}</span> {s.text}
-                              {s.suggested_year_range && <span className="text-slate-500"> · {formatYear(s.suggested_year_range[0])}~{formatYear(s.suggested_year_range[1])}</span>}
+                              {s.suggested_year_range && <span className="text-slate-400"> · {formatYear(s.suggested_year_range[0])}~{formatYear(s.suggested_year_range[1])}</span>}
                             </span>
                           </label>
                         </li>
@@ -219,7 +219,7 @@ export default function LessonDesignPage() {
                     </li>
                   );
                 })}
-                {polities.length === 0 && <li className="text-xs text-slate-500">성취기준을 고르면 자동으로 추천됩니다.</li>}
+                {polities.length === 0 && <li className="text-xs text-slate-400">성취기준을 고르면 자동으로 추천됩니다.</li>}
               </ul>
               <select className="mt-1 w-full rounded-lg bg-slate-900 border border-slate-600 px-2 py-1 text-xs" value="" aria-label="강조 국가 추가"
                 onChange={(e) => { if (e.target.value) setPolities((p) => (p.includes(e.target.value) ? p : [...p, e.target.value])); }}>
@@ -238,7 +238,7 @@ export default function LessonDesignPage() {
                     </button>
                   </li>
                 ))}
-                {figures.length === 0 && <li className="text-xs text-slate-500">성취기준을 고르면 자동으로 추천됩니다.</li>}
+                {figures.length === 0 && <li className="text-xs text-slate-400">성취기준을 고르면 자동으로 추천됩니다.</li>}
               </ul>
               <select className="mt-1 w-full rounded-lg bg-slate-900 border border-slate-600 px-2 py-1 text-xs" value="" aria-label="강조 인물 추가"
                 onChange={(e) => { if (e.target.value) setFigures((p) => (p.includes(e.target.value) ? p : [...p, e.target.value])); }}>

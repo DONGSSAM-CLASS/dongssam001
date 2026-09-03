@@ -17,6 +17,8 @@ const ClassDetailPage = lazy(() => import('./pages/teacher/ClassDetailPage'));
 const LessonDesignPage = lazy(() => import('./pages/teacher/LessonDesignPage'));
 const TeacherGlobePage = lazy(() => import('./pages/teacher/TeacherGlobePage'));
 const WorksheetPage = lazy(() => import('./pages/teacher/WorksheetPage'));
+const ContentPage = lazy(() => import('./pages/teacher/ContentPage'));
+const DataReviewPage = lazy(() => import('./pages/admin/DataReviewPage'));
 
 function Loading() {
   return <div className="flex h-full items-center justify-center text-slate-400">불러오는 중…</div>;
@@ -36,7 +38,8 @@ function Loading() {
  *  /teacher/design       수업 설계(성취기준 → 세션)
  *  /teacher/globe/:id    교사용 지구본(수업 모드/따라오기)
  *  /teacher/worksheet/:id 활동지 생성·편집·PDF/HTML 다운로드
- *  /admin/data           데이터 검수 (8단계)
+ *  /teacher/content      우리 학급 자료(교사 수정본)
+ *  /admin/data           데이터 검수/관리
  *  /dev/status           개발 상태
  */
 export default function App() {
@@ -56,6 +59,8 @@ export default function App() {
         <Route path="/teacher/design" element={<RequireRole role="teacher"><LessonDesignPage /></RequireRole>} />
         <Route path="/teacher/globe/:sessionId" element={<RequireRole role="teacher"><TeacherGlobePage /></RequireRole>} />
         <Route path="/teacher/worksheet/:sessionId" element={<RequireRole role="teacher"><WorksheetPage /></RequireRole>} />
+        <Route path="/teacher/content" element={<RequireRole role="teacher"><ContentPage /></RequireRole>} />
+        <Route path="/admin/data" element={<RequireRole role="teacher"><DataReviewPage /></RequireRole>} />
         <Route path="/dev/status" element={<DevStatusPage />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>

@@ -71,7 +71,7 @@ export default function StudentJoinPage() {
           <label className="sr-only" htmlFor="code">학급코드</label>
           <input id="code" value={code} onChange={(e) => { setCode(normalizeClassCode(e.target.value)); setCodeOk(null); }} maxLength={6} placeholder="예: ABC234"
             className="flex-1 rounded-xl bg-slate-900 px-4 py-3 text-lg tracking-[0.3em] uppercase border border-slate-600" autoComplete="off" />
-          <button type="button" onClick={checkCode} disabled={busy || code.length !== 6} className="rounded-xl bg-sky-500 px-4 py-3 font-bold disabled:opacity-50">확인</button>
+          <button type="button" onClick={checkCode} disabled={busy || code.length !== 6} className="rounded-xl bg-sky-500 text-slate-900 px-4 py-3 font-bold disabled:opacity-50">확인</button>
         </div>
         {codeOk && <p className="mt-2 text-sm text-emerald-300">✔ 학급을 찾았습니다.</p>}
 

@@ -16,7 +16,7 @@
 | 5 | 교사 가입 + 학급 관리 + 수업 설계 + 성취기준 연동 | ✅ 완료 |
 | 6 | 활동지 생성기 + PDF/HTML 다운로드 | ✅ 완료 |
 | 7 | 실시간 모니터링 + 따라오기 모드 | ✅ 완료 |
-| 8 | 데이터 검수 화면 + 접근성·성능 점검 + 배포 문서 | ⏳ |
+| 8 | 데이터 검수 화면 + 접근성·성능 점검 + 배포 문서 | ✅ 완료 |
 
 ## 기술 스택
 
@@ -53,17 +53,20 @@
 │   │   ├── worksheetHtml.ts # 인쇄용/오프라인 단일 HTML 렌더러(A4 @page, Noto Sans KR)
 │   │   ├── monitor.ts       # 학생별 색상·진행 요약·CSV 내보내기
 │   │   ├── exportImage.ts   # 지구본 화면 PNG 저장
+│   │   ├── overridesService.ts / mergedData.ts  # 교사 수정본 저장·적용(기본 데이터는 불변)
+│   │   ├── overlayCanvas.ts # 오버레이 해상도(저사양 기기 절반)
 │   │   ├── studentAuth.ts   # 학급코드·학생 가상 이메일·문서 ID 규칙
 │   │   ├── geo.ts           # 위경도↔3D · 폴리곤 판정 · 지오데식 원
 │   │   └── history.ts       # 연대 필터링 · Haversine · 루트 길이 · Douglas-Peucker
 │   ├── components/
-│   │   ├── globe/           # GlobeCanvas(r3f) · PolityOverlay · RoutesOverlay · BordersOverlay · Markers · pick
+│   │   ├── globe/           # GlobeCanvas(r3f) · GlobeOverlays(합친 캔버스 텍스처) · Markers · UserOverlay · ClassOverlay · pick
 │   │   ├── timeline/        # 연대 슬라이더(정밀도·직접 입력·북마크 점프·키보드)
 │   │   └── panels/          # DetailPanel · ComparePanel(동시대 비교) · LayerPanel · SearchBox · ListView(접근성 대체)
 │   ├── pages/
 │   │   ├── LandingPage · GlobePage(자유 탐색) · DevStatusPage
 │   │   ├── student/         # StudentJoinPage · StudentHomePage · StudentGlobePage · StudentRecordsPage
-│   │   └── teacher/         # TeacherAuthPage · TeacherDashboardPage · ClassDetailPage · LessonDesignPage · TeacherGlobePage · WorksheetPage
+│   │   ├── teacher/         # TeacherAuthPage · TeacherDashboardPage · ClassDetailPage · LessonDesignPage · TeacherGlobePage · WorksheetPage · ContentPage
+│   │   └── admin/           # DataReviewPage(데이터 검수)
 │   ├── store/               # Zustand 스토어 (2단계부터)
 │   └── types/               # history.ts(데이터 스키마) · firestore.ts(컬렉션 문서)
 ├── public/textures/         # NASA Blue Marble 지구 텍스처(2048/1024, 퍼블릭 도메인)
@@ -153,6 +156,61 @@ Spark 요금제 Firestore 일일 한도: 읽기 50,000 · 쓰기 20,000 · 삭�
 - 따라오기는 연대가 바뀔 때만 700ms 디바운스로 세션 문서 1개를 갱신하며, 같은 연대는 다시 보내지 않는다.
   - Firestore 영속 로컬 캐시를 켜서 재방문·탭 간 중복 읽기 감소.
   - 대략적 하루 사용량(학급 30명, 50분 수업 1회): 학생 쓰기 ≈ 30명 × 20회 = 600, 교사 모니터링 읽기 ≈ 문서 30개 × 변경 20회 = 600 → 한도의 3~4%.
+
+## 접근성 점검 결과
+
+`axe-core` (WCAG 2.1 A/AA) 자동 점검을 랜딩·학생 입장·교사 로그인·대시보드·수업 설계·지구본·목록형 보기 7개 화면에서 실행했고 **위반 0건**입니다(대비 위반 21건을 색상 조정으로 해결).
+
+- 키보드: 연대 슬라이더에서 `←/→`(정밀도 단위), `Shift+←/→`(10배), `PageUp/PageDown`(100년), `Home/End`(양 끝). 모든 조작 버튼은 탭 이동·엔터로 동작합니다.
+- 지구본 조작이 어려우면 **목록형 보기**로 같은 정보를 표로 볼 수 있습니다(3D 마커에 의존하지 않도록 루트 만들기도 목록의 `+` 버튼으로 가능).
+- 색: 문화권·학생 색상은 색약 대응 팔레트(Okabe–Ito 계열, 황금각 분산)를 쓰고 색만으로 구분하지 않도록 이름·번호·수치를 함께 표시합니다.
+- 본문 텍스트 대비는 4.5:1 이상을 유지합니다.
+
+재현: `node` + Playwright 로 각 화면에 axe-core 를 주입해 실행했습니다(스크립트는 저장소에 포함하지 않고 검증용으로만 사용).
+
+## 성능 측정 결과
+
+측정 환경은 GPU 가 없는 컨테이너(Chromium + SwiftShader **소프트웨어 렌더링**)라 실제 크롬북보다 훨씬 불리합니다. 프로덕션 빌드(`vite preview`) 기준입니다.
+
+| 항목 | 값 |
+| --- | --- |
+| 첫 페인트 / FCP | 44ms / 196ms |
+| 지구본 캔버스 표시 | 약 0.55초 |
+| 전송량(첫 로드) | 705 KB (three 300KB + firebase 183KB + 앱 70KB + 텍스처 106KB) |
+| JS 힙 | 약 16~23 MB |
+| 조작(드래그) 중 FPS | 10 (소프트웨어 렌더링 기준. GPU 가 있는 크롬북에서는 이보다 크게 높습니다) |
+| 연대 변경 반영 | 약 0.9초 |
+| 유휴 시 지구본 렌더링 | 없음(요구 기반 렌더링) |
+
+성능을 위해 한 일:
+
+1. **요구 기반 렌더링**(`frameloop="demand"`) — 조작·데이터 변경이 있을 때만 그립니다. 매 프레임 렌더링하던 때는 같은 페이지의 Firestore 읽기·쓰기가 9초 넘게 지연됐습니다.
+2. **오버레이 합치기** — 왕조 영역·교역로·국경선·학생 핀을 각각 반투명 구로 겹치던 것을 캔버스 한 장·구 하나로 합쳤습니다(드래그 FPS 5→10, 연대 변경 1.5초→0.9초).
+3. **저사양 기기 대응** — 논리 코어 ≤4 또는 메모리 ≤4GB 이면 지구 텍스처 1024px, 오버레이 캔버스 1024×512 를 씁니다. DPR 은 최대 1.5.
+4. **웹폰트 비차단 로딩** — 외부 폰트가 느리거나 막히면 첫 화면이 12초 넘게 지연되던 문제를 해결했습니다(현재 첫 페인트 44ms).
+5. 화면별 코드 분할, 폴리곤 단순화(Douglas–Peucker), 연대 필터링은 모두 클라이언트 메모리에서 처리.
+
+## 배포 체크리스트
+
+```bash
+npm ci
+npm run typecheck && npm run lint && npm test      # 타입·린트·단위 테스트
+npm run data:validate                              # 역사 데이터 스키마·참조·분포
+npm run test:rules                                 # Security Rules (에뮬레이터 자동 기동)
+npm run build                                      # dist/ 생성
+
+npx firebase deploy --only firestore:rules,firestore:indexes   # 규칙·인덱스 먼저
+npx firebase deploy --only hosting                             # 앱 배포
+```
+
+배포 전 확인:
+
+- [ ] `.env` 의 `VITE_FIREBASE_*` 가 배포 대상 프로젝트 값인지 (빌드 시점에 번들에 들어갑니다)
+- [ ] `VITE_USE_EMULATORS=false`
+- [ ] Authentication 에서 이메일/비밀번호·Google 로그인 사용 설정
+- [ ] Firestore 리전 `asia-northeast3(서울)` 권장, 프로덕션 모드
+- [ ] `admins/{교사 uid}` 문서로 최초 관리자 지정(데이터 검수 화면 권한)
+- [ ] 규칙 테스트 통과 확인 — 학생 데이터 보호는 전적으로 규칙에 달려 있습니다
 
 ## 지구본 렌더링 설계 (성능)
 

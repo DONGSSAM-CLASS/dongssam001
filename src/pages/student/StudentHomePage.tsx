@@ -57,7 +57,7 @@ export default function StudentHomePage() {
       <section className="mt-6">
         <h2 className="text-lg font-semibold">자유 탐색</h2>
         <p className="text-sm text-slate-400">수업과 상관없이 지구본을 돌려 볼 수 있어요. 여기서 찍은 핀은 이 기기에만 저장됩니다.</p>
-        <Link to="/globe" className="mt-2 inline-block rounded-xl bg-sky-500 px-4 py-2 text-sm font-bold">자유 탐색 열기</Link>
+        <Link to="/globe" className="mt-2 inline-block rounded-xl bg-sky-500 text-slate-900 px-4 py-2 text-sm font-bold">자유 탐색 열기</Link>
       </section>
     </main>
   );

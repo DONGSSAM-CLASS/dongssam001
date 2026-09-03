@@ -14,6 +14,8 @@ import {
 import { doc, getDoc, serverTimestamp, writeBatch } from 'firebase/firestore';
 import { auth, db } from './firebase';
 import { useAuthStore } from '@/store/authStore';
+import { loadOverrides } from './overridesService';
+import { useOverridesStore } from '@/store/overridesStore';
 import type { ClassCodeDoc, ClassDoc, StudentUserDoc, TeacherUserDoc, UserDoc } from '@/types/firestore';
 import type { Subject } from '@/types/history';
 import {
@@ -196,6 +198,7 @@ export async function teacherGoogleSignIn(): Promise<User> {
 export async function signOutAll() {
   await signOut(auth);
   useAuthStore.getState().reset();
+  useOverridesStore.getState().reset();
 }
 
 /**
@@ -225,6 +228,11 @@ export async function loadProfile(user: User, retries = 3) {
     isAdmin = Boolean(a && a.exists());
   }
   store.set({ status: 'ready', user, profile, classDoc, isAdmin });
+
+  // 교사 수정본(있으면) 적용 — 교사는 자기 것, 학생은 담당 교사 것
+  const overrideOwner = profile.role === 'teacher' ? user.uid : classDoc?.teacherId;
+  if (overrideOwner) void loadOverrides(overrideOwner);
+  else useOverridesStore.getState().reset();
 }
 
 let started = false;

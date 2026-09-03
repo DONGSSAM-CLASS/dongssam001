@@ -1,8 +1,9 @@
-import { dataset, figureById, placeById, polityById, eventById, standardByCode } from '@/data';
+import { eventById, standardByCode } from '@/data';
+import { useMergedDataset } from '@/lib/mergedData';
 import { angularDistance } from '@/lib/geo';
 import { formatYear, polityActiveIn, REGION_COLORS, REGION_LABELS } from '@/lib/history';
 import { useGlobeStore } from '@/store/globeStore';
-import type { Subject } from '@/types/history';
+import type { Figure, Subject } from '@/types/history';
 
 const SUBJECT_STYLE: Record<Subject, string> = {
   '역사①': 'bg-emerald-700/60 text-emerald-100',
@@ -50,6 +51,7 @@ function Approx({ note }: { note: string }) {
 
 /** 클릭한 왕조/인물/장소/사건의 상세 사이드 패널 */
 export function DetailPanel() {
+  const { polities, figures, polityById, figureById, placeById, changedIds } = useMergedDataset();
   const selection = useGlobeStore((s) => s.selection);
   const select = useGlobeStore((s) => s.select);
   const year = useGlobeStore((s) => s.year);
@@ -65,7 +67,7 @@ export function DetailPanel() {
     const p = polityById.get(selection.id);
     if (!p) return null;
     title = showEnglish ? `${p.name_ko} (${p.name_en})` : p.name_ko;
-    const neighbors = dataset.polities
+    const neighbors = polities
       .filter((q) => q.id !== p.id && polityActiveIn(q, year) && angularDistance(p.centroid, q.centroid) * 6371 < 2500)
       .sort((a, b) => angularDistance(p.centroid, a.centroid) - angularDistance(p.centroid, b.centroid))
       .slice(0, 8);
@@ -99,7 +101,7 @@ export function DetailPanel() {
             </ul>
           </div>
         )}
-        <FiguresOf polityId={p.id} />
+        <FiguresOf polityId={p.id} figures={figures} />
       </>
     );
   } else if (selection.kind === 'figure') {
@@ -165,7 +167,10 @@ export function DetailPanel() {
   return (
     <aside aria-label="상세 정보" className="pointer-events-auto w-full max-w-sm rounded-2xl bg-slate-900/90 backdrop-blur border border-slate-700 p-4 shadow-xl max-h-[70vh] overflow-y-auto">
       <div className="flex items-start justify-between gap-2">
-        <h3 className="text-lg font-bold leading-tight">{title}</h3>
+        <h3 className="text-lg font-bold leading-tight">
+          {title}
+          {changedIds.has(selection.id) && <span className="ml-1 rounded bg-sky-800 px-1 py-0.5 text-[10px] align-middle">선생님 수정본</span>}
+        </h3>
         <button type="button" className="btn-icon" aria-label="닫기" onClick={() => select(null)}>✕</button>
       </div>
       <div className="mt-1">{body}</div>
@@ -173,10 +178,10 @@ export function DetailPanel() {
   );
 }
 
-function FiguresOf({ polityId }: { polityId: string }) {
+function FiguresOf({ polityId, figures }: { polityId: string; figures: Figure[] }) {
   const select = useGlobeStore((s) => s.select);
   const setYear = useGlobeStore((s) => s.setYear);
-  const figs = dataset.figures.filter((f) => f.polity_id === polityId);
+  const figs = figures.filter((f) => f.polity_id === polityId);
   if (!figs.length) return null;
   return (
     <div>

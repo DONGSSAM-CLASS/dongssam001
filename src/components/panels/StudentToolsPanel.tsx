@@ -81,7 +81,7 @@ export function StudentToolsPanel({ rates }: { rates: TravelRates }) {
       )}
 
       <section aria-label="내 핀" className="border-t border-slate-700 pt-2">
-        <h3 className="text-xs font-semibold text-slate-300">내 핀 ({loading ? '…' : pins.length}) <span className="font-normal text-slate-500">— + 를 순서대로 누르면 루트가 됩니다</span></h3>
+        <h3 className="text-xs font-semibold text-slate-300">내 핀 ({loading ? '…' : pins.length}) <span className="font-normal text-slate-400">— + 를 순서대로 누르면 루트가 됩니다</span></h3>
         <ul className="mt-1 space-y-0.5 max-h-32 overflow-y-auto">
           {pins.map((p) => (
             <li key={p.id} className="flex items-center gap-1 text-xs">
@@ -95,7 +95,7 @@ export function StudentToolsPanel({ rates }: { rates: TravelRates }) {
                 {draft.includes(p.id) ? draft.indexOf(p.id) + 1 : '+'}
               </button>
               <span className={`truncate flex-1 ${draft.includes(p.id) ? 'text-amber-300' : ''}`}>{formatYear(p.year)} — {p.name}</span>
-              <button type="button" className="text-slate-500 hover:text-red-300" aria-label={`${p.name} 핀 삭제`} onClick={() => removePin(p.id)}>✕</button>
+              <button type="button" className="text-slate-400 hover:text-red-300" aria-label={`${p.name} 핀 삭제`} onClick={() => removePin(p.id)}>✕</button>
             </li>
           ))}
         </ul>
@@ -120,14 +120,14 @@ export function StudentToolsPanel({ rates }: { rates: TravelRates }) {
             {routes.map((r) => (
               <li key={r.id} className="flex items-center gap-1 text-xs">
                 <span className="truncate flex-1">🧭 {r.title} <span className="text-slate-400">{r.totalKm.toLocaleString()} km · {r.pinIds.length}지점</span></span>
-                <button type="button" className="text-slate-500 hover:text-red-300" aria-label={`${r.title} 루트 삭제`} onClick={() => removeRoute(r.id)}>✕</button>
+                <button type="button" className="text-slate-400 hover:text-red-300" aria-label={`${r.title} 루트 삭제`} onClick={() => removeRoute(r.id)}>✕</button>
               </li>
             ))}
           </ul>
         </section>
       )}
 
-      <p className="text-[10px] text-slate-500 border-t border-slate-700 pt-1" aria-live="polite">
+      <p className="text-[10px] text-slate-400 border-t border-slate-700 pt-1" aria-live="polite">
         {error ? `⚠ 저장 오류: ${error}` : loading ? '⏳ 기록 불러오는 중…' : saving ? '저장 중…' : dirty ? '변경됨 (곧 저장)' : sessionId ? '✔ 저장됨 (수업 세션)' : '✔ 이 기기에 저장됨 (자유 탐색)'} · {formatYear(year)}
       </p>
     </div>

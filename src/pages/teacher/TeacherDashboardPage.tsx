@@ -18,7 +18,6 @@ const SUBJECTS: Subject[] = ['역사①', '세계사', '동아시아 역사 기�
 /** 교사 대시보드: 학급 목록 · 최근 세션 · 학급 개설 */
 export default function TeacherDashboardPage() {
   const profile = useAuthStore((s) => s.profile);
-  const isAdmin = useAuthStore((s) => s.isAdmin);
   const [classes, setClasses] = useState<ClassRow[] | null>(null);
   const [sessions, setSessions] = useState<SessionRow[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -90,7 +89,8 @@ export default function TeacherDashboardPage() {
         <div className="ml-auto flex gap-2 text-sm">
           <Link to="/teacher/design" className="rounded-lg bg-amber-400 text-slate-900 px-3 py-1.5 font-bold">✏️ 수업 설계</Link>
           <Link to="/globe" className="btn-icon">🌏 지구본</Link>
-          {isAdmin && <Link to="/admin/data" className="btn-icon">🛠 데이터 검수</Link>}
+          <Link to="/teacher/content" className="btn-icon">🧩 우리 학급 자료</Link>
+          <Link to="/admin/data" className="btn-icon">🛠 데이터 검수</Link>
           <button type="button" className="btn-icon" onClick={() => void signOutAll()}>로그아웃</button>
         </div>
       </header>
@@ -110,7 +110,7 @@ export default function TeacherDashboardPage() {
           <ul className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map((c) => (
               <li key={c.id} className={`rounded-2xl border p-4 ${c.archived ? 'bg-slate-900/60 border-slate-800' : 'bg-slate-800/70 border-slate-700'}`}>
-                <h3 className="font-bold">{c.name} {c.archived && <span className="text-xs text-slate-500">(보관됨)</span>}</h3>
+                <h3 className="font-bold">{c.name} {c.archived && <span className="text-xs text-slate-400">(보관됨)</span>}</h3>
                 <p className="text-xs text-slate-400 mt-1">{c.schoolLevel} · {c.subject}</p>
                 <p className="mt-2 text-sm">학급코드 <span className="font-mono text-lg tracking-widest text-amber-300">{c.code}</span></p>
                 <Link to={`/teacher/classes/${c.id}`} className="mt-3 inline-block rounded-xl bg-slate-700 px-3 py-1.5 text-sm hover:bg-slate-600">학급 관리 →</Link>
@@ -132,7 +132,7 @@ export default function TeacherDashboardPage() {
               {SUBJECTS.map((s) => <option key={s}>{s}</option>)}
             </select>
           </label>
-          <button type="submit" disabled={busy} className="rounded-xl bg-sky-500 px-4 py-2 font-bold disabled:opacity-50">＋ 학급 만들기</button>
+          <button type="submit" disabled={busy} className="rounded-xl bg-sky-500 text-slate-900 px-4 py-2 font-bold disabled:opacity-50">＋ 학급 만들기</button>
         </form>
       </section>
 

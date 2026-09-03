@@ -82,14 +82,14 @@ export function MonitorPanel({ sessionTitle, members, submissions, missions, onE
         <button type="button" className="btn-icon text-xs" onClick={() => download(detailCsv(members, works, sessionTitle), `${sessionTitle}-핀루트.csv`, 'text/csv;charset=utf-8')}>📊 핀·루트 CSV</button>
         <button type="button" className="btn-icon text-xs" onClick={onExportPng}>🖼 지구본 PNG</button>
       </div>
-      <p className="text-[10px] text-slate-500">학생 화면이 저장될 때마다 자동으로 갱신됩니다(수업이 열려 있는 동안만).</p>
+      <p className="text-[10px] text-slate-400">학생 화면이 저장될 때마다 자동으로 갱신됩니다(수업이 열려 있는 동안만).</p>
     </div>
   );
 }
 
 function StatusBadge({ row, hasMission }: { row: MonitorRow; hasMission: boolean }) {
-  if (!row.joined) return <span className="text-[10px] text-slate-500">미가입</span>;
+  if (!row.joined) return <span className="text-[10px] text-slate-400">미가입</span>;
   if (hasMission && row.submitted) return <span className="text-[10px] text-emerald-300">제출</span>;
-  if (row.pins || row.routes) return <span className="text-[10px] text-slate-300 tabular-nums">📍{row.pins} 🧭{row.routes}{row.lastYear !== null && <span className="text-slate-500"> {formatYear(row.lastYear)}</span>}</span>;
-  return <span className="text-[10px] text-slate-500">대기</span>;
+  if (row.pins || row.routes) return <span className="text-[10px] text-slate-300 tabular-nums">📍{row.pins} 🧭{row.routes}{row.lastYear !== null && <span className="text-slate-400"> {formatYear(row.lastYear)}</span>}</span>;
+  return <span className="text-[10px] text-slate-400">대기</span>;
 }

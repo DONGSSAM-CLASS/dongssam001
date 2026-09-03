@@ -61,7 +61,7 @@ export function LayerPanel() {
           목록형 보기 (지구본 대체)
         </label>
       </div>
-      <p className="text-[10px] text-slate-500 border-t border-slate-700 pt-1">
+      <p className="text-[10px] text-slate-400 border-t border-slate-700 pt-1">
         조작 중 FPS {fps || '–'} · 드래그 회전 · 휠 줌 · 더블클릭 포커스 · 장소 마커는 줌인 시 표시
         <span className="block">화면은 조작·변경이 있을 때만 다시 그립니다(저사양 기기 배터리·CPU 절약).</span>
       </p>

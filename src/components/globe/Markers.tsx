@@ -2,11 +2,10 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
-import { dataset } from '@/data';
 import { latLonToVec3 } from '@/lib/geo';
 import { placeNameIn } from '@/lib/history';
 import { useGlobeStore } from '@/store/globeStore';
-import { useVisibleFigures, useVisiblePolities } from '@/lib/useVisibleData';
+import { useVisibleFigures, useVisiblePlaces, useVisiblePolities } from '@/lib/useVisibleData';
 import { EARTH_RADIUS } from './GlobeCanvas';
 
 interface MarkerItem {
@@ -28,6 +27,7 @@ interface MarkerItem {
 export function Markers() {
   const figures = useVisibleFigures();
   const polities = useVisiblePolities();
+  const places = useVisiblePlaces();
   const year = useGlobeStore((s) => s.year);
   const layers = useGlobeStore((s) => s.layers);
   const showEnglish = useGlobeStore((s) => s.showEnglish);
@@ -55,12 +55,12 @@ export function Markers() {
       }
     }
     if (layers.places) {
-      for (const pl of dataset.places) {
+      for (const pl of places) {
         push({ key: `p-${pl.id}`, kind: 'place', id: pl.id, lat: pl.coords[0], lon: pl.coords[1], label: placeNameIn(pl, year), sub: pl.type });
       }
     }
     return out;
-  }, [figures, polities, layers, showEnglish, year]);
+  }, [figures, polities, places, layers, showEnglish, year]);
 
   const group = useRef<THREE.Group>(null);
   const els = useRef<(HTMLElement | null)[]>([]);

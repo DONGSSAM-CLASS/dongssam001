@@ -4,26 +4,19 @@ import { Html, OrbitControls, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import { latLonToVec3, vec3ToLatLon } from '@/lib/geo';
 import { useGlobeStore } from '@/store/globeStore';
-import { PolityOverlay } from './PolityOverlay';
-import { BordersOverlay } from './BordersOverlay';
-import { RoutesOverlay } from './RoutesOverlay';
-import { UserOverlay } from './UserOverlay';
-import { ClassOverlay } from './ClassOverlay';
+import { GlobeOverlays } from './GlobeOverlays';
+import { UserPinMarkers } from './UserOverlay';
+import { ClassPinLabels } from './ClassOverlay';
 import { useMonitorStore } from '@/store/monitorStore';
 import { Markers } from './Markers';
 import { pickPolityAt } from './pick';
 import { useVisiblePolities } from '@/lib/useVisibleData';
 import { useWorkStore } from '@/store/workStore';
+import { isLowEndDevice } from '@/lib/overlayCanvas';
 
 export const EARTH_RADIUS = 1;
 const TEXTURE_URL = '/textures/earth-blue-marble-2048.jpg';
 const TEXTURE_LOW_URL = '/textures/earth-blue-marble-1024.jpg';
-
-/** 저사양 기기 판별: 논리 코어 4 이하 또는 메모리 4GB 이하면 저해상도 텍스처 */
-function isLowEndDevice() {
-  const nav = navigator as Navigator & { deviceMemory?: number };
-  return (nav.hardwareConcurrency ?? 8) <= 4 || (nav.deviceMemory ?? 8) <= 4;
-}
 
 function Earth() {
   const url = useMemo(() => (isLowEndDevice() ? TEXTURE_LOW_URL : TEXTURE_URL), []);
@@ -163,11 +156,9 @@ export function GlobeCanvas() {
       <Suspense fallback={<EarthFallback />}>
         <Earth />
       </Suspense>
-      <PolityOverlay />
-      <BordersOverlay />
-      <RoutesOverlay />
-      <UserOverlay />
-      <ClassOverlay />
+      <GlobeOverlays />
+      <UserPinMarkers />
+      <ClassPinLabels />
       <Markers />
       <CameraRig />
       <SceneInvalidator />
