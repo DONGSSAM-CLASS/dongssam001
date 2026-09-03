@@ -1,0 +1,38 @@
+[
+  {
+    "id": "qin_unification",
+    "year": -221,
+    "name_ko": "진의 중국 통일",
+    "name_en": "Qin unification of China",
+    "coords": [34.3, 108.9],
+    "textbook_appearance": ["역사①", "세계사"],
+    "bookmark": true
+  },
+  {
+    "id": "goryeo_founded",
+    "year": 918,
+    "name_ko": "고려 건국",
+    "name_en": "Founding of Goryeo",
+    "coords": [37.97, 126.55],
+    "textbook_appearance": ["역사②", "동아시아 역사 기행"],
+    "bookmark": true
+  },
+  {
+    "id": "mongol_invasion_japan_1",
+    "year": 1274,
+    "name_ko": "여몽 연합군의 1차 일본 원정",
+    "name_en": "First Mongol invasion of Japan",
+    "coords": [33.59, 130.4],
+    "textbook_appearance": ["역사①", "동아시아 역사 기행"],
+    "bookmark": false
+  },
+  {
+    "id": "fall_of_constantinople",
+    "year": 1453,
+    "name_ko": "콘스탄티노폴리스 함락",
+    "name_en": "Fall of Constantinople",
+    "coords": [41.01, 28.98],
+    "textbook_appearance": ["세계사"],
+    "bookmark": true
+  }
+]

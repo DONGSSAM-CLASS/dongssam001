@@ -1,0 +1,53 @@
+[
+  {
+    "id": "constantinople",
+    "name_ko": "콘스탄티노폴리스",
+    "name_en": "Constantinople",
+    "coords": [41.01, 28.98],
+    "type": "city",
+    "era_names": [
+      { "from": -700, "to": 330, "name_ko": "비잔티움" },
+      { "from": 330, "to": 1930, "name_ko": "콘스탄티노폴리스" },
+      { "from": 1930, "to": 9999, "name_ko": "이스탄불" }
+    ],
+    "textbook_appearance": ["역사①", "세계사"],
+    "note": "비잔티움 건설 연대는 기원전 7세기경으로 추정(전승상 기원전 667)."
+  },
+  {
+    "id": "gaegyeong",
+    "name_ko": "개경",
+    "name_en": "Gaegyeong (Kaesong)",
+    "coords": [37.97, 126.55],
+    "type": "city",
+    "era_names": [
+      { "from": 919, "to": 1392, "name_ko": "개경" },
+      { "from": 1392, "to": 9999, "name_ko": "개성" }
+    ],
+    "textbook_appearance": ["역사②", "동아시아 역사 기행"],
+    "note": ""
+  },
+  {
+    "id": "hakata",
+    "name_ko": "하카타",
+    "name_en": "Hakata",
+    "coords": [33.59, 130.4],
+    "type": "port",
+    "era_names": [
+      { "from": -3000, "to": 9999, "name_ko": "하카타(후쿠오카)" }
+    ],
+    "textbook_appearance": ["역사①", "동아시아 역사 기행"],
+    "note": "1274·1281년 여몽 연합군의 일본 원정 상륙지."
+  },
+  {
+    "id": "karakorum",
+    "name_ko": "카라코룸",
+    "name_en": "Karakorum",
+    "coords": [47.2, 102.85],
+    "type": "city",
+    "era_names": [
+      { "from": 1235, "to": 9999, "name_ko": "카라코룸" }
+    ],
+    "textbook_appearance": ["세계사", "동아시아 역사 기행"],
+    "note": "오고타이 칸 대(1235)에 성곽 도시로 건설된 몽골 제국의 수도."
+  }
+]
