@@ -49,7 +49,9 @@ export default function StudentRecordsPage() {
         const a = document.createElement('a');
         a.href = url;
         a.download = `history-globe-${profile?.displayName ?? 'student'}.png`;
+        document.body.appendChild(a);
         a.click();
+        a.remove();
         URL.revokeObjectURL(url);
       });
     } finally {

@@ -180,6 +180,7 @@ export default function ClassDetailPage() {
                   <td>{s.status === 'open' ? '🟢 진행 중' : s.status === 'draft' ? '📝 초안' : '⚪ 종료'}</td>
                   <td className="text-right whitespace-nowrap">
                     <Link to={`/teacher/globe/${s.id}`} className="btn-icon text-xs mr-1">수업 열기</Link>
+                    <Link to={`/teacher/worksheet/${s.id}`} className="btn-icon text-xs mr-1">활동지</Link>
                     {s.status !== 'open' && <button type="button" className="btn-icon text-xs mr-1" disabled={busy} onClick={() => void act(() => setSessionStatus(s.id, 'open'), '학급에 배포했습니다(학생 화면에 보입니다).')}>배포</button>}
                     {s.status === 'open' && <button type="button" className="btn-icon text-xs mr-1" disabled={busy} onClick={() => void act(() => setSessionStatus(s.id, 'closed'), '세션을 종료했습니다.')}>종료</button>}
                     <button type="button" className="btn-icon text-xs" disabled={busy} onClick={() => { if (confirm(`"${s.title}" 세션을 삭제할까요? 학생 기록은 남지만 화면에서 사라집니다.`)) void act(() => deleteSession(s.id), '세션을 삭제했습니다.'); }}>삭제</button>

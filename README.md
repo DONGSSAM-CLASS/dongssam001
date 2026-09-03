@@ -14,7 +14,7 @@
 | 3 | 역사 데이터 전체 입력 + 검색·레이어 | ✅ 완료 (왕조 166 · 인물 218 · 장소 110 · 사건 137 · 교역로 11) |
 | 4 | 학생 가입(학급코드) + 마킹·거리·루트 | ✅ 완료 |
 | 5 | 교사 가입 + 학급 관리 + 수업 설계 + 성취기준 연동 | ✅ 완료 |
-| 6 | 활동지 생성기 + PDF/HTML 다운로드 | ⏳ |
+| 6 | 활동지 생성기 + PDF/HTML 다운로드 | ✅ 완료 |
 | 7 | 실시간 모니터링 + 따라오기 모드 | ⏳ |
 | 8 | 데이터 검수 화면 + 접근성·성능 점검 + 배포 문서 | ⏳ |
 
@@ -49,6 +49,8 @@
 │   │   ├── classService.ts  # 학급 개설·코드 재발급·학생 관리(초기화/비활성/이동)
 │   │   ├── sessionService.ts# 수업 세션·미션 CRUD, 따라오기, 실시간 리스너
 │   │   ├── standards.ts     # 성취기준 트리 + 연대·왕조·인물 자동 추천
+│   │   ├── worksheet.ts     # 활동지 문항 자동 생성(학습목표·탐색·비교표·거리·루트·서술형·자기평가)
+│   │   ├── worksheetHtml.ts # 인쇄용/오프라인 단일 HTML 렌더러(A4 @page, Noto Sans KR)
 │   │   ├── studentAuth.ts   # 학급코드·학생 가상 이메일·문서 ID 규칙
 │   │   ├── geo.ts           # 위경도↔3D · 폴리곤 판정 · 지오데식 원
 │   │   └── history.ts       # 연대 필터링 · Haversine · 루트 길이 · Douglas-Peucker
@@ -59,7 +61,7 @@
 │   ├── pages/
 │   │   ├── LandingPage · GlobePage(자유 탐색) · DevStatusPage
 │   │   ├── student/         # StudentJoinPage · StudentHomePage · StudentGlobePage · StudentRecordsPage
-│   │   └── teacher/         # TeacherAuthPage · TeacherDashboardPage · ClassDetailPage · LessonDesignPage · TeacherGlobePage
+│   │   └── teacher/         # TeacherAuthPage · TeacherDashboardPage · ClassDetailPage · LessonDesignPage · TeacherGlobePage · WorksheetPage
 │   ├── store/               # Zustand 스토어 (2단계부터)
 │   └── types/               # history.ts(데이터 스키마) · firestore.ts(컬렉션 문서)
 ├── public/textures/         # NASA Blue Marble 지구 텍스처(2048/1024, 퍼블릭 도메인)
@@ -156,6 +158,13 @@ Spark 요금제 Firestore 일일 한도: 읽기 50,000 · 쓰기 20,000 · 삭�
 - 저사양 기기(논리 코어 ≤4 또는 메모리 ≤4GB)는 1024px 텍스처를 사용하고, DPR 은 최대 1.5 로 제한합니다.
 - **필요할 때만 렌더링(`frameloop="demand"`)**: 조작이나 데이터 변경이 있을 때만 한 프레임을 그립니다. 매 프레임 렌더링하면 저사양·소프트웨어 렌더링 환경에서 메인 스레드가 포화되어 Firestore 응답까지 지연되는 것을 실측으로 확인했습니다(쓰기 9초 타임아웃 → 0.5초).
 - 현대 국경선(Natural Earth)은 토글할 때 한 번만 내려받아 별도 캔버스 텍스처로 그립니다.
+
+## 활동지 출력 방식 (서버 없음)
+
+- **인쇄 / PDF로 저장(기본)**: 활동지만 담은 새 창을 열고 `window.print()` 를 호출합니다. `@page { size: A4; margin: 12mm }` 규칙이 적용되고 글자가 벡터로 남아 가장 선명합니다. 크롬의 인쇄 대화상자에서 "대상 → PDF로 저장"을 고르면 됩니다.
+- **PDF 파일(보조)**: `html2pdf.js`(jsPDF + html2canvas)로 A4 PDF를 바로 내려받습니다. 화면을 이미지로 굽기 때문에 용량이 크고 글자 선택이 안 되지만, 인쇄 대화상자를 쓰기 어려운 환경에서 유용합니다.
+- **HTML 다운로드**: 단일 파일이며 인터넷 없이 열립니다. 학생이 브라우저에서 직접 입력할 수 있고, 입력 내용은 그 브라우저(localStorage)에 저장됩니다. 한글 폰트는 Noto Sans KR 웹폰트를 불러오되 실패하면 시스템 한글 글꼴로 대체됩니다.
+- 미리보기는 iframe 으로 띄워 앱의 스타일이 섞이지 않으므로 내려받은 결과와 똑같이 보입니다.
 
 ## 라이선스 · 데이터 출처
 

@@ -23,6 +23,7 @@
     "@react-three/fiber": "^9.7.0",
     "firebase": "^12.18.0",
     "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.12.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.3",

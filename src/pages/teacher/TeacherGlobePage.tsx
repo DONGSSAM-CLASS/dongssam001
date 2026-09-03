@@ -77,6 +77,7 @@ export default function TeacherGlobePage() {
               >
                 {following ? '👣 따라오기 켜짐' : '👣 따라오기'}
               </button>
+              <Link to={`/teacher/worksheet/${sessionId}`} className="btn-icon">📄 활동지</Link>
               {session.status !== 'open' ? (
                 <button type="button" className="btn-icon" onClick={() => void setSessionStatus(sessionId, 'open')}>배포</button>
               ) : (
