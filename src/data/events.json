@@ -4,8 +4,14 @@
     "year": -221,
     "name_ko": "진의 중국 통일",
     "name_en": "Qin unification of China",
-    "coords": [34.3, 108.9],
-    "textbook_appearance": ["역사①", "세계사"],
+    "coords": [
+      34.3,
+      108.9
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
     "bookmark": true
   },
   {
@@ -13,8 +19,14 @@
     "year": 918,
     "name_ko": "고려 건국",
     "name_en": "Founding of Goryeo",
-    "coords": [37.97, 126.55],
-    "textbook_appearance": ["역사②", "동아시아 역사 기행"],
+    "coords": [
+      37.97,
+      126.55
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
     "bookmark": true
   },
   {
@@ -22,8 +34,14 @@
     "year": 1274,
     "name_ko": "여몽 연합군의 1차 일본 원정",
     "name_en": "First Mongol invasion of Japan",
-    "coords": [33.59, 130.4],
-    "textbook_appearance": ["역사①", "동아시아 역사 기행"],
+    "coords": [
+      33.59,
+      130.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
     "bookmark": false
   },
   {
@@ -31,8 +49,102 @@
     "year": 1453,
     "name_ko": "콘스탄티노폴리스 함락",
     "name_en": "Fall of Constantinople",
-    "coords": [41.01, 28.98],
-    "textbook_appearance": ["세계사"],
+    "coords": [
+      41.01,
+      28.98
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
     "bookmark": true
+  },
+  {
+    "id": "hegira",
+    "year": 622,
+    "name_ko": "헤지라(무함마드의 메디나 이주)",
+    "name_en": "Hijra",
+    "coords": [
+      24.47,
+      39.61
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "silla_unification",
+    "year": 676,
+    "name_ko": "신라의 삼국 통일 완성",
+    "name_en": "Silla unification of the Three Kingdoms",
+    "coords": [
+      35.84,
+      129.21
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "mongol_empire_founded",
+    "year": 1206,
+    "name_ko": "칭기즈 칸 즉위, 몽골 제국 성립",
+    "name_en": "Founding of the Mongol Empire",
+    "coords": [
+      47.92,
+      106.92
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "imjin_war",
+    "year": 1592,
+    "name_ko": "임진왜란 발발",
+    "name_en": "Imjin War begins",
+    "coords": [
+      35.1,
+      129.04
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "columbus_1492",
+    "year": 1492,
+    "name_ko": "콜럼버스의 아메리카 도착",
+    "name_en": "Columbus reaches the Americas",
+    "coords": [
+      24.0,
+      -74.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "fall_of_baghdad",
+    "year": 1258,
+    "name_ko": "몽골의 바그다드 함락(아바스 왕조 멸망)",
+    "name_en": "Siege of Baghdad",
+    "coords": [
+      33.34,
+      44.4
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "bookmark": false
   }
 ]

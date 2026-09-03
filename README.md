@@ -10,7 +10,7 @@
 | 단계 | 내용 | 상태 |
 | --- | --- | --- |
 | 1 | 프로젝트 초기화 · Firebase 연결 · Firestore 설계 · Security Rules + 테스트 · 정적 데이터 배치 | ✅ 완료 |
-| 2 | 3D 지구본 + 연대 슬라이더 + 샘플 데이터 20개 | ⏳ |
+| 2 | 3D 지구본 + 연대 슬라이더 + 샘플 데이터 20개 | ✅ 완료 (`/globe`) |
 | 3 | 역사 데이터 전체 입력 + 검색·레이어 | ⏳ |
 | 4 | 학생 가입(학급코드) + 마킹·거리·루트 | ⏳ |
 | 5 | 교사 가입 + 학급 관리 + 수업 설계 + 성취기준 연동 | ⏳ |
@@ -46,10 +46,17 @@
 │   │   ├── firebase.ts      # Firebase 초기화(.env → 에뮬레이터 연결 · 영속 캐시)
 │   │   ├── studentAuth.ts   # 학급코드·학생 가상 이메일·문서 ID 규칙
 │   │   └── history.ts       # 연대 필터링 · Haversine · 루트 길이 · Douglas-Peucker
-│   ├── pages/               # 화면 (8장 화면 목록 순으로 추가 예정)
+│   ├── components/
+│   │   ├── globe/           # GlobeCanvas(r3f) · PolityOverlay(캔버스 텍스처) · BordersOverlay · Markers · pick
+│   │   ├── timeline/        # 연대 슬라이더(정밀도·직접 입력·북마크 점프·키보드)
+│   │   └── panels/          # DetailPanel · ComparePanel(동시대 비교) · LayerPanel · ListView(접근성 대체)
+│   ├── pages/               # LandingPage · GlobePage · DevStatusPage (나머지는 단계별 추가)
 │   ├── store/               # Zustand 스토어 (2단계부터)
 │   └── types/               # history.ts(데이터 스키마) · firestore.ts(컬렉션 문서)
+├── public/textures/         # NASA Blue Marble 지구 텍스처(2048/1024, 퍼블릭 도메인)
+├── public/geo/              # Natural Earth 110m 국경선(경량 JSON, 퍼블릭 도메인)
 ├── scripts/validate-data.ts # 정적 데이터 스키마·참조 검증
+├── scripts/build-geo.mjs    # Natural Earth GeoJSON → 경량 JSON 변환
 ├── tests/rules/             # Security Rules 테스트
 ├── docs/
 │   ├── FIRESTORE_SCHEMA.md  # 컬렉션 설계와 할당량 절약 전략
@@ -126,6 +133,13 @@ Spark 요금제 Firestore 일일 한도: 읽기 50,000 · 쓰기 20,000 · 삭�
   - Firestore 영속 로컬 캐시를 켜서 재방문·탭 간 중복 읽기 감소.
   - 대략적 하루 사용량(학급 30명, 50분 수업 1회): 학생 쓰기 ≈ 30명 × 20회 = 600, 교사 모니터링 읽기 ≈ 문서 30개 × 변경 20회 = 600 → 한도의 3~4%.
 
+## 지구본 렌더링 설계 (성능)
+
+- 왕조 영역은 정치체마다 메시를 만들지 않고, 활성 정치체를 **등장방형 캔버스 한 장(2048×1024)** 에 그려 반투명 텍스처로 입힙니다. 연대가 바뀌면 캔버스만 다시 그리므로 드로우콜이 늘지 않습니다.
+- 인물·장소 마커와 이름표는 DOM 오버레이(drei `Html`)이며, 지구 뒷면 판정은 레이캐스트 대신 법선·카메라 내적으로 처리합니다.
+- 저사양 기기(논리 코어 ≤4 또는 메모리 ≤4GB)는 1024px 텍스처를 사용하고, DPR 은 최대 1.5 로 제한합니다.
+- 현대 국경선(Natural Earth)은 토글할 때 한 번만 내려받아 별도 캔버스 텍스처로 그립니다.
+
 ## 라이선스 · 데이터 출처
 
-역사 데이터의 출처와 불확실한 항목은 `DATA_NOTES.md` 에 정리합니다. 지구 텍스처는 NASA Blue Marble(퍼블릭 도메인), 현대 국경선은 Natural Earth(퍼블릭 도메인)를 사용할 예정입니다.
+역사 데이터의 출처와 불확실한 항목은 `DATA_NOTES.md` 에 정리합니다. 지구 텍스처는 NASA Blue Marble(퍼블릭 도메인, three-globe 저장소 배포본 2048px 축소), 현대 국경선은 Natural Earth 1:110m(퍼블릭 도메인)을 사용합니다.

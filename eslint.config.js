@@ -13,6 +13,9 @@ export default tseslint.config(
     plugins: { 'react-hooks': reactHooks, 'react-refresh': reactRefresh },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      // Three.js 객체(텍스처·머티리얼)는 useEffect/useFrame 안에서 직접 변경해야 하므로 React Compiler 불변성 규칙은 끈다
+      'react-hooks/immutability': 'off',
+      'react-hooks/refs': 'off',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },

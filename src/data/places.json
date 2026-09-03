@@ -3,51 +3,245 @@
     "id": "constantinople",
     "name_ko": "콘스탄티노폴리스",
     "name_en": "Constantinople",
-    "coords": [41.01, 28.98],
+    "coords": [
+      41.01,
+      28.98
+    ],
     "type": "city",
     "era_names": [
-      { "from": -700, "to": 330, "name_ko": "비잔티움" },
-      { "from": 330, "to": 1930, "name_ko": "콘스탄티노폴리스" },
-      { "from": 1930, "to": 9999, "name_ko": "이스탄불" }
+      {
+        "from": -700,
+        "to": 330,
+        "name_ko": "비잔티움"
+      },
+      {
+        "from": 330,
+        "to": 1930,
+        "name_ko": "콘스탄티노폴리스"
+      },
+      {
+        "from": 1930,
+        "to": 9999,
+        "name_ko": "이스탄불"
+      }
     ],
-    "textbook_appearance": ["역사①", "세계사"],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
     "note": "비잔티움 건설 연대는 기원전 7세기경으로 추정(전승상 기원전 667)."
   },
   {
     "id": "gaegyeong",
     "name_ko": "개경",
     "name_en": "Gaegyeong (Kaesong)",
-    "coords": [37.97, 126.55],
+    "coords": [
+      37.97,
+      126.55
+    ],
     "type": "city",
     "era_names": [
-      { "from": 919, "to": 1392, "name_ko": "개경" },
-      { "from": 1392, "to": 9999, "name_ko": "개성" }
+      {
+        "from": 919,
+        "to": 1392,
+        "name_ko": "개경"
+      },
+      {
+        "from": 1392,
+        "to": 9999,
+        "name_ko": "개성"
+      }
     ],
-    "textbook_appearance": ["역사②", "동아시아 역사 기행"],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
     "note": ""
   },
   {
     "id": "hakata",
     "name_ko": "하카타",
     "name_en": "Hakata",
-    "coords": [33.59, 130.4],
+    "coords": [
+      33.59,
+      130.4
+    ],
     "type": "port",
     "era_names": [
-      { "from": -3000, "to": 9999, "name_ko": "하카타(후쿠오카)" }
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "하카타(후쿠오카)"
+      }
     ],
-    "textbook_appearance": ["역사①", "동아시아 역사 기행"],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
     "note": "1274·1281년 여몽 연합군의 일본 원정 상륙지."
   },
   {
     "id": "karakorum",
     "name_ko": "카라코룸",
     "name_en": "Karakorum",
-    "coords": [47.2, 102.85],
+    "coords": [
+      47.2,
+      102.85
+    ],
     "type": "city",
     "era_names": [
-      { "from": 1235, "to": 9999, "name_ko": "카라코룸" }
+      {
+        "from": 1235,
+        "to": 9999,
+        "name_ko": "카라코룸"
+      }
     ],
-    "textbook_appearance": ["세계사", "동아시아 역사 기행"],
+    "textbook_appearance": [
+      "세계사",
+      "동아시아 역사 기행"
+    ],
     "note": "오고타이 칸 대(1235)에 성곽 도시로 건설된 몽골 제국의 수도."
+  },
+  {
+    "id": "changan",
+    "name_ko": "장안",
+    "name_en": "Chang'an (Xi'an)",
+    "coords": [
+      34.27,
+      108.95
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1369,
+        "name_ko": "장안"
+      },
+      {
+        "from": 1369,
+        "to": 9999,
+        "name_ko": "시안"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "note": "한·당의 수도, 비단길의 동쪽 기점. 1369년 서안부(西安府)로 개칭."
+  },
+  {
+    "id": "baghdad",
+    "name_ko": "바그다드",
+    "name_en": "Baghdad",
+    "coords": [
+      33.34,
+      44.4
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 762,
+        "to": 9999,
+        "name_ko": "바그다드"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "762년 아바스 왕조 만수르가 건설."
+  },
+  {
+    "id": "gyeongju",
+    "name_ko": "경주",
+    "name_en": "Gyeongju",
+    "coords": [
+      35.84,
+      129.21
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -57,
+        "to": 935,
+        "name_ko": "금성(서라벌)"
+      },
+      {
+        "from": 935,
+        "to": 9999,
+        "name_ko": "경주"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "신라 천년의 수도. 935년 고려가 경주로 개칭."
+  },
+  {
+    "id": "cusco",
+    "name_ko": "쿠스코",
+    "name_en": "Cusco",
+    "coords": [
+      -13.52,
+      -71.97
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1200,
+        "to": 9999,
+        "name_ko": "쿠스코"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "잉카 제국의 수도. 도시 성립 연대는 12세기경 추정."
+  },
+  {
+    "id": "mecca",
+    "name_ko": "메카",
+    "name_en": "Mecca",
+    "coords": [
+      21.42,
+      39.83
+    ],
+    "type": "religious",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "메카"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "이슬람교 최고 성지."
+  },
+  {
+    "id": "venice",
+    "name_ko": "베네치아",
+    "name_en": "Venice",
+    "coords": [
+      45.44,
+      12.33
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": 421,
+        "to": 9999,
+        "name_ko": "베네치아"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "전승상 421년 건설. 지중해 무역의 중심 도시."
   }
 ]

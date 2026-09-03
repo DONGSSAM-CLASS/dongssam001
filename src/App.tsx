@@ -1,6 +1,14 @@
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import DevStatusPage from './pages/DevStatusPage';
+
+// 화면별 코드 분할: 지구본(Three.js)과 Firebase 를 쓰는 화면은 필요할 때만 내려받는다
+const GlobePage = lazy(() => import('./pages/GlobePage'));
+const DevStatusPage = lazy(() => import('./pages/DevStatusPage'));
+
+function Loading() {
+  return <div className="flex h-full items-center justify-center text-slate-400">불러오는 중…</div>;
+}
 
 /**
  * 화면 라우팅 (8장 화면 목록)
@@ -16,10 +24,13 @@ import DevStatusPage from './pages/DevStatusPage';
  */
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/dev/status" element={<DevStatusPage />} />
-      <Route path="*" element={<LandingPage />} />
-    </Routes>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/globe" element={<GlobePage />} />
+        <Route path="/dev/status" element={<DevStatusPage />} />
+        <Route path="*" element={<LandingPage />} />
+      </Routes>
+    </Suspense>
   );
 }

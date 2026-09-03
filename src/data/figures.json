@@ -7,12 +7,28 @@
     "death_year": 1227,
     "is_approximate": true,
     "polity_id": "mongol_empire",
-    "activity_location": [47.92, 106.92],
-    "activity_years": [1206, 1227],
+    "activity_location": [
+      47.92,
+      106.92
+    ],
+    "activity_years": [
+      1206,
+      1227
+    ],
     "one_liner_ko": "몽골 부족을 통일하고 몽골 제국을 세움",
-    "textbook_appearance": ["역사①", "세계사", "동아시아 역사 기행"],
-    "achievement_standards": ["[9역04-01]", "[12세사02-01]", "[12동역02-03]"],
-    "sources": ["교육부 편수자료(세계사)"],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
     "note": "출생 연도는 1155·1162·1167 설이 있음"
   },
   {
@@ -23,12 +39,24 @@
     "death_year": 1450,
     "is_approximate": false,
     "polity_id": "joseon",
-    "activity_location": [37.58, 126.98],
-    "activity_years": [1418, 1450],
+    "activity_location": [
+      37.58,
+      126.98
+    ],
+    "activity_years": [
+      1418,
+      1450
+    ],
     "one_liner_ko": "훈민정음을 창제하고 과학·문화를 크게 발전시킨 조선의 4대 왕",
-    "textbook_appearance": ["역사②"],
-    "achievement_standards": ["[9역11-01]"],
-    "sources": ["국사편찬위원회 『한국사』"],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역11-01]"
+    ],
+    "sources": [
+      "국사편찬위원회 『한국사』"
+    ],
     "note": ""
   },
   {
@@ -39,12 +67,25 @@
     "death_year": 1193,
     "is_approximate": true,
     "polity_id": null,
-    "activity_location": [30.04, 31.24],
-    "activity_years": [1169, 1193],
+    "activity_location": [
+      30.04,
+      31.24
+    ],
+    "activity_years": [
+      1169,
+      1193
+    ],
     "one_liner_ko": "아이유브 왕조를 세우고 1187년 예루살렘을 되찾아 십자군에 맞섬",
-    "textbook_appearance": ["역사①", "세계사"],
-    "achievement_standards": ["[9역03-03]"],
-    "sources": ["교육부 편수자료(세계사)"],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
     "note": "출생 연도는 1137 또는 1138. polity_id는 아이유브 왕조 항목 입력 후 연결 예정(TODO)."
   },
   {
@@ -55,13 +96,28 @@
     "death_year": 1324,
     "is_approximate": true,
     "polity_id": null,
-    "activity_location": [45.44, 12.33],
-    "activity_years": [1271, 1295],
+    "activity_location": [
+      45.44,
+      12.33
+    ],
+    "activity_years": [
+      1271,
+      1295
+    ],
     "one_liner_ko": "베네치아 상인으로 원을 여행하고 『동방견문록』을 남김",
-    "textbook_appearance": ["역사①", "세계사", "동아시아 역사 기행"],
-    "achievement_standards": ["[9역04-01]", "[12세사02-01]"],
-    "sources": ["교육부 편수자료(세계사)"],
-    "note": "출생 연도는 1254년경으로 추정. 활동 연대는 동방 여행 기간(1271~1295)."
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "출생 연도는 1254년경으로 추정. 활동 연대는 동방 여행 기간(1271~1295). 베네치아 공화국은 3단계에서 입력 후 연결 예정(TODO)."
   },
   {
     "id": "zheng_he",
@@ -71,12 +127,234 @@
     "death_year": 1433,
     "is_approximate": true,
     "polity_id": null,
-    "activity_location": [32.06, 118.8],
-    "activity_years": [1405, 1433],
+    "activity_location": [
+      32.06,
+      118.8
+    ],
+    "activity_years": [
+      1405,
+      1433
+    ],
     "one_liner_ko": "명 영락제의 명으로 7차례 대규모 남해 원정을 이끌어 동남아시아·인도양·아프리카 동해안까지 항해함",
-    "textbook_appearance": ["역사①", "세계사", "동아시아 역사 기행"],
-    "achievement_standards": ["[9역04-02]", "[12동역02-04]"],
-    "sources": ["교육부 편수자료(세계사)"],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
     "note": "사망 연도는 1433 또는 1435 설이 있음. polity_id는 명 항목 입력 후 연결 예정(TODO)."
+  },
+  {
+    "id": "muhammad",
+    "name_ko": "무함마드",
+    "name_en": "Muhammad",
+    "birth_year": 570,
+    "death_year": 632,
+    "is_approximate": true,
+    "polity_id": null,
+    "activity_location": [
+      24.47,
+      39.61
+    ],
+    "activity_years": [
+      610,
+      632
+    ],
+    "one_liner_ko": "이슬람교를 창시하고 아라비아반도를 통합함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "출생 연도는 570년경으로 추정. 활동 연대는 계시(610)~사망."
+  },
+  {
+    "id": "yi_sunsin",
+    "name_ko": "이순신",
+    "name_en": "Yi Sun-sin",
+    "birth_year": 1545,
+    "death_year": 1598,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      34.84,
+      128.42
+    ],
+    "activity_years": [
+      1591,
+      1598
+    ],
+    "one_liner_ko": "임진왜란에서 조선 수군을 이끌고 한산도·명량 등에서 승리함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-03]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "국사편찬위원회 『한국사』"
+    ],
+    "note": ""
+  },
+  {
+    "id": "wang_geon",
+    "name_ko": "왕건",
+    "name_en": "Wang Geon (Taejo of Goryeo)",
+    "birth_year": 877,
+    "death_year": 943,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      37.97,
+      126.55
+    ],
+    "activity_years": [
+      918,
+      943
+    ],
+    "one_liner_ko": "고려를 세우고 후삼국을 통일함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-01]"
+    ],
+    "sources": [
+      "국사편찬위원회 『한국사』"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kublai_khan",
+    "name_ko": "쿠빌라이 칸",
+    "name_en": "Kublai Khan",
+    "birth_year": 1215,
+    "death_year": 1294,
+    "is_approximate": false,
+    "polity_id": "mongol_empire",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1260,
+      1294
+    ],
+    "one_liner_ko": "원을 세우고 남송을 멸망시켜 중국 전역을 지배함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "활동 연대는 대칸 즉위(1260)~사망."
+  },
+  {
+    "id": "ashoka",
+    "name_ko": "아소카왕",
+    "name_en": "Ashoka",
+    "birth_year": -304,
+    "death_year": -232,
+    "is_approximate": true,
+    "polity_id": "maurya",
+    "activity_location": [
+      25.6,
+      85.1
+    ],
+    "activity_years": [
+      -268,
+      -232
+    ],
+    "one_liner_ko": "마우리아 왕조의 전성기를 이끌고 불교를 널리 전파함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "생몰년·즉위년은 모두 추정(즉위 기원전 268년경)."
+  },
+  {
+    "id": "justinian",
+    "name_ko": "유스티니아누스",
+    "name_en": "Justinian I",
+    "birth_year": 482,
+    "death_year": 565,
+    "is_approximate": true,
+    "polity_id": "byzantine",
+    "activity_location": [
+      41.01,
+      28.98
+    ],
+    "activity_years": [
+      527,
+      565
+    ],
+    "one_liner_ko": "『로마법 대전』을 편찬하고 성 소피아 성당을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "출생 연도는 482년경으로 추정."
+  },
+  {
+    "id": "mansa_musa",
+    "name_ko": "만사 무사",
+    "name_en": "Mansa Musa",
+    "birth_year": 1280,
+    "death_year": 1337,
+    "is_approximate": true,
+    "polity_id": "mali",
+    "activity_location": [
+      12.4,
+      -8.0
+    ],
+    "activity_years": [
+      1312,
+      1337
+    ],
+    "one_liner_ko": "말리 제국의 전성기를 이끌고 메카 순례로 서아프리카의 부를 알림",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "생몰년 모두 추정(사망 1332~1337 설)."
   }
 ]

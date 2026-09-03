@@ -49,7 +49,7 @@ export default function LandingPage() {
           {dataset.events.length} · 성취기준 {dataset.achievement_standards.length}
         </p>
         <p className="mt-1">
-          <Link className="underline" to="/dev/status">개발 상태 보기</Link>
+          <Link className="underline" to="/globe">지구본 바로 탐색하기</Link> · <Link className="underline" to="/dev/status">개발 상태 보기</Link>
         </p>
       </footer>
     </main>

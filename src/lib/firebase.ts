@@ -34,13 +34,18 @@ let db: Firestore;
 
 function init() {
   if (getApps().length) return;
+  // .env 가 없거나 에뮬레이터 전용 실행이면 데모 값을 채운다.
+  // (지구본 자유 탐색은 Firebase 없이도 동작해야 하므로 초기화 단계에서 예외를 던지지 않는다)
   app = initializeApp({
     ...firebaseConfig,
-    // 에뮬레이터 전용 실행 시 실제 키가 없어도 동작하도록 데모 값을 채운다
-    apiKey: firebaseConfig.apiKey || (useEmulators ? 'demo-api-key' : ''),
-    projectId: firebaseConfig.projectId || (useEmulators ? 'demo-history-globe' : ''),
-    appId: firebaseConfig.appId || (useEmulators ? '1:demo:web:demo' : ''),
+    apiKey: firebaseConfig.apiKey || 'demo-api-key',
+    authDomain: firebaseConfig.authDomain || 'demo-history-globe.firebaseapp.com',
+    projectId: firebaseConfig.projectId || 'demo-history-globe',
+    appId: firebaseConfig.appId || '1:demo:web:demo',
   });
+  if (!isFirebaseConfigured && !useEmulators) {
+    console.warn('[History Globe] .env 에 Firebase 설정이 없습니다. 로그인·저장 기능은 동작하지 않습니다.');
+  }
 
   auth = getAuth(app);
   db = initializeFirestore(app, {
