@@ -71,13 +71,15 @@ export function Markers() {
     if (!g) return;
     camDir.copy(camera.position).normalize();
     const dist = camera.position.length();
-    // 멀리서 볼 때는 장소 마커를 숨겨 혼잡도를 줄인다
-    const hidePlaces = dist > 3.2;
+    // 멀리서 볼 때는 장소 마커를 숨기고(줌인 시 표시), 더 멀면 인물 마커도 숨겨 혼잡도를 줄인다
+    const hidePlaces = dist > 2.0;
+    const hideFigures = dist > 3.4;
     items.forEach((_, i) => {
       const el = els.current[i];
       const front = normals[i].dot(camDir) > 0.12;
       const it = items[i];
-      const hidden = !front || (hidePlaces && it.kind === 'place');
+      const isSelected = selection?.id === it.id && (selection.kind === it.kind || (selection.kind === 'polity' && it.kind === 'polity_label'));
+      const hidden = !front || (!isSelected && ((hidePlaces && it.kind === 'place') || (hideFigures && it.kind === 'figure')));
       if (el) el.style.visibility = hidden ? 'hidden' : 'visible';
     });
   });

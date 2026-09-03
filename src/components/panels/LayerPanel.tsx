@@ -40,7 +40,6 @@ export function LayerPanel() {
           <label key={k} className="flex items-center gap-2 py-0.5 text-xs">
             <input type="checkbox" checked={layers[k]} onChange={() => toggleLayer(k)} className="accent-amber-400" />
             {LAYER_LABELS[k]}
-            {k === 'routes' && <span className="text-[10px] text-slate-500">(3단계)</span>}
           </label>
         ))}
       </fieldset>
@@ -62,7 +61,7 @@ export function LayerPanel() {
           목록형 보기 (지구본 대체)
         </label>
       </div>
-      <p className="text-[10px] text-slate-500 border-t border-slate-700 pt-1">FPS {fps || '–'} · 드래그 회전 · 휠 줌 · 더블클릭 포커스</p>
+      <p className="text-[10px] text-slate-500 border-t border-slate-700 pt-1">FPS {fps || '–'} · 드래그 회전 · 휠 줌 · 더블클릭 포커스 · 장소 마커는 줌인 시 표시</p>
     </div>
   );
 }

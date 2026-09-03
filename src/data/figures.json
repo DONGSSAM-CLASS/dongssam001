@@ -1,154 +1,987 @@
 [
   {
-    "id": "genghis_khan",
-    "name_ko": "칭기즈 칸",
-    "name_en": "Genghis Khan",
-    "birth_year": 1162,
-    "death_year": 1227,
+    "id": "hammurabi",
+    "name_ko": "함무라비",
+    "name_en": "Hammurabi",
+    "birth_year": -1810,
+    "death_year": -1750,
     "is_approximate": true,
-    "polity_id": "mongol_empire",
+    "polity_id": "old_babylon",
     "activity_location": [
-      47.92,
-      106.92
+      32.5,
+      44.4
     ],
     "activity_years": [
-      1206,
-      1227
+      -1792,
+      -1750
     ],
-    "one_liner_ko": "몽골 부족을 통일하고 몽골 제국을 세움",
-    "textbook_appearance": [
-      "역사①",
-      "세계사",
-      "동아시아 역사 기행"
-    ],
-    "achievement_standards": [
-      "[9역04-01]",
-      "[12세사02-01]",
-      "[12동역02-03]"
-    ],
-    "sources": [
-      "교육부 편수자료(세계사)"
-    ],
-    "note": "출생 연도는 1155·1162·1167 설이 있음"
-  },
-  {
-    "id": "sejong",
-    "name_ko": "세종",
-    "name_en": "Sejong the Great",
-    "birth_year": 1397,
-    "death_year": 1450,
-    "is_approximate": false,
-    "polity_id": "joseon",
-    "activity_location": [
-      37.58,
-      126.98
-    ],
-    "activity_years": [
-      1418,
-      1450
-    ],
-    "one_liner_ko": "훈민정음을 창제하고 과학·문화를 크게 발전시킨 조선의 4대 왕",
-    "textbook_appearance": [
-      "역사②"
-    ],
-    "achievement_standards": [
-      "[9역11-01]"
-    ],
-    "sources": [
-      "국사편찬위원회 『한국사』"
-    ],
-    "note": ""
-  },
-  {
-    "id": "saladin",
-    "name_ko": "살라딘",
-    "name_en": "Saladin",
-    "birth_year": 1137,
-    "death_year": 1193,
-    "is_approximate": true,
-    "polity_id": null,
-    "activity_location": [
-      30.04,
-      31.24
-    ],
-    "activity_years": [
-      1169,
-      1193
-    ],
-    "one_liner_ko": "아이유브 왕조를 세우고 1187년 예루살렘을 되찾아 십자군에 맞섬",
+    "one_liner_ko": "메소포타미아를 통일하고 함무라비 법전을 반포함",
     "textbook_appearance": [
       "역사①",
       "세계사"
     ],
     "achievement_standards": [
-      "[9역03-03]"
+      "[9역02-01]",
+      "[12세사01-01]"
     ],
     "sources": [
-      "교육부 편수자료(세계사)"
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
     ],
-    "note": "출생 연도는 1137 또는 1138. polity_id는 아이유브 왕조 항목 입력 후 연결 예정(TODO)."
+    "note": "생몰년·재위 연도는 중기 연대기 추정치."
   },
   {
-    "id": "marco_polo",
-    "name_ko": "마르코 폴로",
-    "name_en": "Marco Polo",
-    "birth_year": 1254,
-    "death_year": 1324,
+    "id": "ramesses2",
+    "name_ko": "람세스 2세",
+    "name_en": "Ramesses II",
+    "birth_year": -1303,
+    "death_year": -1213,
+    "is_approximate": true,
+    "polity_id": "ancient_egypt",
+    "activity_location": [
+      25.7,
+      32.6
+    ],
+    "activity_years": [
+      -1279,
+      -1213
+    ],
+    "one_liner_ko": "카데시 전투와 아부심벨 신전으로 유명한 파라오",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "생몰년·재위 연도는 추정치."
+  },
+  {
+    "id": "cyrus",
+    "name_ko": "키루스 2세",
+    "name_en": "Cyrus the Great",
+    "birth_year": -600,
+    "death_year": -530,
+    "is_approximate": true,
+    "polity_id": "achaemenid",
+    "activity_location": [
+      30.0,
+      53.0
+    ],
+    "activity_years": [
+      -559,
+      -530
+    ],
+    "one_liner_ko": "아케메네스 왕조 페르시아를 세우고 관용 정책을 폄",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 기원전 600년경 추정."
+  },
+  {
+    "id": "buddha",
+    "name_ko": "석가모니(고타마 싯다르타)",
+    "name_en": "Gautama Buddha",
+    "birth_year": -563,
+    "death_year": -483,
     "is_approximate": true,
     "polity_id": null,
     "activity_location": [
-      45.44,
-      12.33
+      25.0,
+      85.0
     ],
     "activity_years": [
-      1271,
-      1295
+      -528,
+      -483
     ],
-    "one_liner_ko": "베네치아 상인으로 원을 여행하고 『동방견문록』을 남김",
+    "one_liner_ko": "불교를 창시함",
     "textbook_appearance": [
       "역사①",
       "세계사",
       "동아시아 역사 기행"
     ],
     "achievement_standards": [
-      "[9역04-01]",
-      "[12세사02-01]"
+      "[9역02-03]",
+      "[12세사01-02]",
+      "[12동역02-02]"
     ],
     "sources": [
-      "교육부 편수자료(세계사)"
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
     ],
-    "note": "출생 연도는 1254년경으로 추정. 활동 연대는 동방 여행 기간(1271~1295). 베네치아 공화국은 3단계에서 입력 후 연결 예정(TODO)."
+    "note": "생몰년은 기원전 563~483 설과 기원전 480~400 설이 있음. 당시 정치체(마가다 등)는 미입력."
   },
   {
-    "id": "zheng_he",
-    "name_ko": "정화",
-    "name_en": "Zheng He",
-    "birth_year": 1371,
-    "death_year": 1433,
-    "is_approximate": true,
-    "polity_id": null,
+    "id": "confucius",
+    "name_ko": "공자",
+    "name_en": "Confucius",
+    "birth_year": -551,
+    "death_year": -479,
+    "is_approximate": false,
+    "polity_id": "spring_autumn_warring",
     "activity_location": [
-      32.06,
-      118.8
+      35.6,
+      117.0
     ],
     "activity_years": [
-      1405,
-      1433
+      -500,
+      -479
     ],
-    "one_liner_ko": "명 영락제의 명으로 7차례 대규모 남해 원정을 이끌어 동남아시아·인도양·아프리카 동해안까지 항해함",
+    "one_liner_ko": "유학을 창시해 동아시아 사상의 뿌리를 놓음",
     "textbook_appearance": [
       "역사①",
       "세계사",
       "동아시아 역사 기행"
     ],
     "achievement_standards": [
-      "[9역04-02]",
-      "[12동역02-04]"
+      "[9역02-03]",
+      "[12세사01-02]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "darius1",
+    "name_ko": "다리우스 1세",
+    "name_en": "Darius I",
+    "birth_year": -550,
+    "death_year": -486,
+    "is_approximate": false,
+    "polity_id": "achaemenid",
+    "activity_location": [
+      29.93,
+      52.89
+    ],
+    "activity_years": [
+      -522,
+      -486
+    ],
+    "one_liner_ko": "총독제·왕의 길·화폐로 대제국을 정비함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "pericles",
+    "name_ko": "페리클레스",
+    "name_en": "Pericles",
+    "birth_year": -495,
+    "death_year": -429,
+    "is_approximate": true,
+    "polity_id": "athens",
+    "activity_location": [
+      37.98,
+      23.73
+    ],
+    "activity_years": [
+      -461,
+      -429
+    ],
+    "one_liner_ko": "아테네 민주 정치의 전성기를 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 기원전 495년경."
+  },
+  {
+    "id": "socrates",
+    "name_ko": "소크라테스",
+    "name_en": "Socrates",
+    "birth_year": -470,
+    "death_year": -399,
+    "is_approximate": true,
+    "polity_id": "athens",
+    "activity_location": [
+      37.98,
+      23.73
+    ],
+    "activity_years": [
+      -430,
+      -399
+    ],
+    "one_liner_ko": "문답법으로 진리를 탐구한 철학자",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 기원전 470/469."
+  },
+  {
+    "id": "plato",
+    "name_ko": "플라톤",
+    "name_en": "Plato",
+    "birth_year": -428,
+    "death_year": -348,
+    "is_approximate": true,
+    "polity_id": "athens",
+    "activity_location": [
+      37.98,
+      23.73
+    ],
+    "activity_years": [
+      -387,
+      -348
+    ],
+    "one_liner_ko": "아카데미아를 세우고 이상 국가론을 펼침",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "생몰년은 기원전 428/427~348/347."
+  },
+  {
+    "id": "aristotle",
+    "name_ko": "아리스토텔레스",
+    "name_en": "Aristotle",
+    "birth_year": -384,
+    "death_year": -322,
+    "is_approximate": false,
+    "polity_id": "athens",
+    "activity_location": [
+      37.98,
+      23.73
+    ],
+    "activity_years": [
+      -347,
+      -322
+    ],
+    "one_liner_ko": "논리학·자연학 등 학문 체계를 세우고 알렉산드로스를 가르침",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mencius",
+    "name_ko": "맹자",
+    "name_en": "Mencius",
+    "birth_year": -372,
+    "death_year": -289,
+    "is_approximate": true,
+    "polity_id": "spring_autumn_warring",
+    "activity_location": [
+      35.4,
+      116.97
+    ],
+    "activity_years": [
+      -320,
+      -289
+    ],
+    "one_liner_ko": "성선설과 왕도 정치를 주장한 유학자",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "생몰년은 통설 추정치."
+  },
+  {
+    "id": "alexander",
+    "name_ko": "알렉산드로스",
+    "name_en": "Alexander the Great",
+    "birth_year": -356,
+    "death_year": -323,
+    "is_approximate": false,
+    "polity_id": "macedon_alexander",
+    "activity_location": [
+      36.0,
+      40.0
+    ],
+    "activity_years": [
+      -336,
+      -323
+    ],
+    "one_liner_ko": "페르시아를 정복해 대제국을 세우고 헬레니즘 문화를 퍼뜨림",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "chandragupta_maurya",
+    "name_ko": "찬드라굽타 마우리아",
+    "name_en": "Chandragupta Maurya",
+    "birth_year": -340,
+    "death_year": -297,
+    "is_approximate": true,
+    "polity_id": "maurya",
+    "activity_location": [
+      25.6,
+      85.1
+    ],
+    "activity_years": [
+      -322,
+      -297
+    ],
+    "one_liner_ko": "마우리아 왕조를 세워 북인도를 통일함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도 미상(기원전 340년경 추정), 퇴위·사망 연도도 추정."
+  },
+  {
+    "id": "ashoka",
+    "name_ko": "아소카왕",
+    "name_en": "Ashoka",
+    "birth_year": -304,
+    "death_year": -232,
+    "is_approximate": true,
+    "polity_id": "maurya",
+    "activity_location": [
+      25.6,
+      85.1
+    ],
+    "activity_years": [
+      -268,
+      -232
+    ],
+    "one_liner_ko": "마우리아 왕조의 전성기를 이끌고 불교를 널리 전파함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
     ],
     "sources": [
       "교육부 편수자료(세계사)"
     ],
-    "note": "사망 연도는 1433 또는 1435 설이 있음. polity_id는 명 항목 입력 후 연결 예정(TODO)."
+    "note": "생몰년·즉위년은 모두 추정(즉위 기원전 268년경)."
+  },
+  {
+    "id": "qin_shihuang",
+    "name_ko": "진시황제",
+    "name_en": "Qin Shi Huang",
+    "birth_year": -259,
+    "death_year": -210,
+    "is_approximate": false,
+    "polity_id": "qin",
+    "activity_location": [
+      34.3,
+      108.7
+    ],
+    "activity_years": [
+      -246,
+      -210
+    ],
+    "one_liner_ko": "중국을 최초로 통일하고 군현제·문자 통일·만리장성을 추진함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "liu_bang",
+    "name_ko": "한 고조(유방)",
+    "name_en": "Emperor Gaozu of Han (Liu Bang)",
+    "birth_year": -256,
+    "death_year": -195,
+    "is_approximate": true,
+    "polity_id": "han",
+    "activity_location": [
+      34.3,
+      108.9
+    ],
+    "activity_years": [
+      -209,
+      -195
+    ],
+    "one_liner_ko": "항우를 물리치고 한을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 기원전 256 또는 247 설."
+  },
+  {
+    "id": "hannibal",
+    "name_ko": "한니발",
+    "name_en": "Hannibal",
+    "birth_year": -247,
+    "death_year": -183,
+    "is_approximate": true,
+    "polity_id": "carthage",
+    "activity_location": [
+      36.85,
+      10.32
+    ],
+    "activity_years": [
+      -218,
+      -183
+    ],
+    "one_liner_ko": "알프스를 넘어 로마를 위협한 카르타고의 장군",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "사망 연도는 기원전 183/181."
+  },
+  {
+    "id": "zhang_qian",
+    "name_ko": "장건",
+    "name_en": "Zhang Qian",
+    "birth_year": -195,
+    "death_year": -114,
+    "is_approximate": true,
+    "polity_id": "han",
+    "activity_location": [
+      34.3,
+      108.9
+    ],
+    "activity_years": [
+      -139,
+      -114
+    ],
+    "one_liner_ko": "서역에 다녀와 비단길 개척의 계기를 만듦",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12동역02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도 미상(기원전 195년경 추정)."
+  },
+  {
+    "id": "han_wudi",
+    "name_ko": "한 무제",
+    "name_en": "Emperor Wu of Han",
+    "birth_year": -156,
+    "death_year": -87,
+    "is_approximate": false,
+    "polity_id": "han",
+    "activity_location": [
+      34.3,
+      108.9
+    ],
+    "activity_years": [
+      -141,
+      -87
+    ],
+    "one_liner_ko": "유교를 통치 이념으로 삼고 장건을 파견해 비단길을 염",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]",
+      "[12동역02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "sima_qian",
+    "name_ko": "사마천",
+    "name_en": "Sima Qian",
+    "birth_year": -145,
+    "death_year": -86,
+    "is_approximate": true,
+    "polity_id": "han",
+    "activity_location": [
+      34.3,
+      108.9
+    ],
+    "activity_years": [
+      -108,
+      -86
+    ],
+    "one_liner_ko": "『사기』를 지어 기전체 역사 서술의 전형을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "사망 연도는 기원전 86년경 추정."
+  },
+  {
+    "id": "caesar",
+    "name_ko": "카이사르",
+    "name_en": "Julius Caesar",
+    "birth_year": -100,
+    "death_year": -44,
+    "is_approximate": false,
+    "polity_id": "roman_republic",
+    "activity_location": [
+      41.9,
+      12.5
+    ],
+    "activity_years": [
+      -60,
+      -44
+    ],
+    "one_liner_ko": "갈리아를 정복하고 독재관이 되어 제정의 길을 엶",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "cleopatra",
+    "name_ko": "클레오파트라 7세",
+    "name_en": "Cleopatra VII",
+    "birth_year": -69,
+    "death_year": -30,
+    "is_approximate": false,
+    "polity_id": "ptolemaic",
+    "activity_location": [
+      31.2,
+      29.92
+    ],
+    "activity_years": [
+      -51,
+      -30
+    ],
+    "one_liner_ko": "프톨레마이오스 왕조의 마지막 여왕",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "augustus",
+    "name_ko": "아우구스투스(옥타비아누스)",
+    "name_en": "Augustus",
+    "birth_year": -63,
+    "death_year": 14,
+    "is_approximate": false,
+    "polity_id": "roman_empire",
+    "activity_location": [
+      41.9,
+      12.5
+    ],
+    "activity_years": [
+      -27,
+      14
+    ],
+    "one_liner_ko": "로마 제정을 수립해 '로마의 평화'를 엶",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jesus",
+    "name_ko": "예수",
+    "name_en": "Jesus of Nazareth",
+    "birth_year": -4,
+    "death_year": 30,
+    "is_approximate": true,
+    "polity_id": "roman_empire",
+    "activity_location": [
+      31.78,
+      35.23
+    ],
+    "activity_years": [
+      27,
+      30
+    ],
+    "one_liner_ko": "크리스트교의 창시자",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "생몰년은 기원전 4년경~서기 30년경으로 추정."
+  },
+  {
+    "id": "kanishka",
+    "name_ko": "카니슈카왕",
+    "name_en": "Kanishka",
+    "birth_year": 100,
+    "death_year": 150,
+    "is_approximate": true,
+    "polity_id": "kushan",
+    "activity_location": [
+      34.0,
+      71.5
+    ],
+    "activity_years": [
+      127,
+      150
+    ],
+    "one_liner_ko": "쿠샨 왕조의 전성기를 이끌고 대승 불교를 후원함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "생몰년 미상. 재위는 127년경부터 약 23년으로 추정하며 표시 연대는 추정치."
+  },
+  {
+    "id": "cao_cao",
+    "name_ko": "조조",
+    "name_en": "Cao Cao",
+    "birth_year": 155,
+    "death_year": 220,
+    "is_approximate": false,
+    "polity_id": "three_kingdoms_china",
+    "activity_location": [
+      34.6,
+      112.5
+    ],
+    "activity_years": [
+      190,
+      220
+    ],
+    "one_liner_ko": "후한 말 화북을 장악해 위의 기초를 놓음",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "constantine",
+    "name_ko": "콘스탄티누스 1세",
+    "name_en": "Constantine the Great",
+    "birth_year": 272,
+    "death_year": 337,
+    "is_approximate": true,
+    "polity_id": "roman_empire",
+    "activity_location": [
+      41.01,
+      28.98
+    ],
+    "activity_years": [
+      306,
+      337
+    ],
+    "one_liner_ko": "밀라노 칙령으로 크리스트교를 공인하고 콘스탄티노폴리스를 건설함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 272년경."
+  },
+  {
+    "id": "gwanggaeto",
+    "name_ko": "광개토 대왕",
+    "name_en": "Gwanggaeto the Great",
+    "birth_year": 374,
+    "death_year": 412,
+    "is_approximate": false,
+    "polity_id": "goguryeo",
+    "activity_location": [
+      41.15,
+      126.2
+    ],
+    "activity_years": [
+      391,
+      412
+    ],
+    "one_liner_ko": "고구려의 영토를 크게 넓히고 신라를 도와 왜를 물리침",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역08-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jangsu",
+    "name_ko": "장수왕",
+    "name_en": "Jangsu of Goguryeo",
+    "birth_year": 394,
+    "death_year": 491,
+    "is_approximate": false,
+    "polity_id": "goguryeo",
+    "activity_location": [
+      39.03,
+      125.75
+    ],
+    "activity_years": [
+      413,
+      491
+    ],
+    "one_liner_ko": "평양으로 천도하고 남진 정책으로 한강 유역을 차지함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역08-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "justinian",
+    "name_ko": "유스티니아누스",
+    "name_en": "Justinian I",
+    "birth_year": 482,
+    "death_year": 565,
+    "is_approximate": true,
+    "polity_id": "byzantine",
+    "activity_location": [
+      41.01,
+      28.98
+    ],
+    "activity_years": [
+      527,
+      565
+    ],
+    "one_liner_ko": "『로마법 대전』을 편찬하고 성 소피아 성당을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "출생 연도는 482년경으로 추정."
+  },
+  {
+    "id": "sui_wendi",
+    "name_ko": "수 문제",
+    "name_en": "Emperor Wen of Sui",
+    "birth_year": 541,
+    "death_year": 604,
+    "is_approximate": false,
+    "polity_id": "sui",
+    "activity_location": [
+      34.3,
+      109.0
+    ],
+    "activity_years": [
+      581,
+      604
+    ],
+    "one_liner_ko": "남북조를 통일하고 과거제를 시작함",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "sui_yangdi",
+    "name_ko": "수 양제",
+    "name_en": "Emperor Yang of Sui",
+    "birth_year": 569,
+    "death_year": 618,
+    "is_approximate": false,
+    "polity_id": "sui",
+    "activity_location": [
+      34.3,
+      109.0
+    ],
+    "activity_years": [
+      604,
+      618
+    ],
+    "one_liner_ko": "대운하를 완성하고 고구려를 침공했으나 실패함",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
   },
   {
     "id": "muhammad",
@@ -181,32 +1014,549 @@
     "note": "출생 연도는 570년경으로 추정. 활동 연대는 계시(610)~사망."
   },
   {
-    "id": "yi_sunsin",
-    "name_ko": "이순신",
-    "name_en": "Yi Sun-sin",
-    "birth_year": 1545,
-    "death_year": 1598,
-    "is_approximate": false,
-    "polity_id": "joseon",
+    "id": "abu_bakr",
+    "name_ko": "아부 바크르",
+    "name_en": "Abu Bakr",
+    "birth_year": 573,
+    "death_year": 634,
+    "is_approximate": true,
+    "polity_id": "rashidun",
     "activity_location": [
-      34.84,
-      128.42
+      24.47,
+      39.61
     ],
     "activity_years": [
-      1591,
-      1598
+      632,
+      634
     ],
-    "one_liner_ko": "임진왜란에서 조선 수군을 이끌고 한산도·명량 등에서 승리함",
+    "one_liner_ko": "무함마드를 이은 초대 정통 칼리파",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 573년경."
+  },
+  {
+    "id": "shotoku",
+    "name_ko": "쇼토쿠 태자",
+    "name_en": "Prince Shōtoku",
+    "birth_year": 574,
+    "death_year": 622,
+    "is_approximate": false,
+    "polity_id": "yamato",
+    "activity_location": [
+      34.6,
+      135.7
+    ],
+    "activity_years": [
+      593,
+      622
+    ],
+    "one_liner_ko": "17조 헌법을 정하고 견수사를 보내 불교·율령을 받아들임",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kim_yusin",
+    "name_ko": "김유신",
+    "name_en": "Kim Yu-sin",
+    "birth_year": 595,
+    "death_year": 673,
+    "is_approximate": false,
+    "polity_id": "silla",
+    "activity_location": [
+      35.84,
+      129.21
+    ],
+    "activity_years": [
+      629,
+      673
+    ],
+    "one_liner_ko": "신라의 장군으로 삼국 통일 전쟁을 이끎",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역09-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "tang_taizong",
+    "name_ko": "당 태종",
+    "name_en": "Emperor Taizong of Tang",
+    "birth_year": 598,
+    "death_year": 649,
+    "is_approximate": false,
+    "polity_id": "tang",
+    "activity_location": [
+      34.27,
+      108.95
+    ],
+    "activity_years": [
+      626,
+      649
+    ],
+    "one_liner_ko": "'정관의 치'로 당의 기틀을 다지고 고구려를 침공함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ali",
+    "name_ko": "알리",
+    "name_en": "Ali ibn Abi Talib",
+    "birth_year": 601,
+    "death_year": 661,
+    "is_approximate": true,
+    "polity_id": "rashidun",
+    "activity_location": [
+      32.03,
+      44.4
+    ],
+    "activity_years": [
+      656,
+      661
+    ],
+    "one_liner_ko": "제4대 칼리파. 시아파는 그를 정통 후계자로 여김",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 600/601년경."
+  },
+  {
+    "id": "xuanzang",
+    "name_ko": "현장",
+    "name_en": "Xuanzang",
+    "birth_year": 602,
+    "death_year": 664,
+    "is_approximate": true,
+    "polity_id": "tang",
+    "activity_location": [
+      34.27,
+      108.95
+    ],
+    "activity_years": [
+      629,
+      664
+    ],
+    "one_liner_ko": "인도에서 불경을 가져와 번역하고 『대당서역기』를 남김",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 602 또는 600 설."
+  },
+  {
+    "id": "wonhyo",
+    "name_ko": "원효",
+    "name_en": "Wonhyo",
+    "birth_year": 617,
+    "death_year": 686,
+    "is_approximate": false,
+    "polity_id": "silla",
+    "activity_location": [
+      35.84,
+      129.21
+    ],
+    "activity_years": [
+      650,
+      686
+    ],
+    "one_liner_ko": "불교를 대중화하고 화쟁 사상을 펼침",
     "textbook_appearance": [
       "역사②",
       "동아시아 역사 기행"
     ],
     "achievement_standards": [
-      "[9역11-03]",
-      "[12동역02-03]"
+      "[9역09-03]",
+      "[12동역02-02]"
     ],
     "sources": [
-      "국사편찬위원회 『한국사』"
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "wu_zetian",
+    "name_ko": "측천무후",
+    "name_en": "Wu Zetian",
+    "birth_year": 624,
+    "death_year": 705,
+    "is_approximate": false,
+    "polity_id": "tang",
+    "activity_location": [
+      34.27,
+      108.95
+    ],
+    "activity_years": [
+      690,
+      705
+    ],
+    "one_liner_ko": "중국 역사상 유일한 여성 황제",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "uisang",
+    "name_ko": "의상",
+    "name_en": "Uisang",
+    "birth_year": 625,
+    "death_year": 702,
+    "is_approximate": false,
+    "polity_id": "silla",
+    "activity_location": [
+      35.84,
+      129.21
+    ],
+    "activity_years": [
+      661,
+      702
+    ],
+    "one_liner_ko": "당에서 화엄종을 배워 와 부석사를 세움",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역09-03]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "munmu",
+    "name_ko": "문무왕",
+    "name_en": "Munmu of Silla",
+    "birth_year": 626,
+    "death_year": 681,
+    "is_approximate": false,
+    "polity_id": "silla",
+    "activity_location": [
+      35.84,
+      129.21
+    ],
+    "activity_years": [
+      661,
+      681
+    ],
+    "one_liner_ko": "당의 세력을 몰아내고 삼국 통일을 완성함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역09-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "dae_joyeong",
+    "name_ko": "대조영",
+    "name_en": "Dae Jo-yeong",
+    "birth_year": 645,
+    "death_year": 719,
+    "is_approximate": true,
+    "polity_id": "balhae",
+    "activity_location": [
+      43.0,
+      129.0
+    ],
+    "activity_years": [
+      698,
+      719
+    ],
+    "one_liner_ko": "고구려 유민을 이끌고 발해를 세움",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역09-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도 미상(추정치). 활동 연대는 건국(698)~사망."
+  },
+  {
+    "id": "tang_xuanzong",
+    "name_ko": "당 현종",
+    "name_en": "Emperor Xuanzong of Tang",
+    "birth_year": 685,
+    "death_year": 762,
+    "is_approximate": false,
+    "polity_id": "tang",
+    "activity_location": [
+      34.27,
+      108.95
+    ],
+    "activity_years": [
+      712,
+      756
+    ],
+    "one_liner_ko": "'개원의 치' 전성기를 이루었으나 안사의 난으로 쇠퇴를 초래함",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "li_bai",
+    "name_ko": "이백",
+    "name_en": "Li Bai",
+    "birth_year": 701,
+    "death_year": 762,
+    "is_approximate": false,
+    "polity_id": "tang",
+    "activity_location": [
+      34.27,
+      108.95
+    ],
+    "activity_years": [
+      725,
+      762
+    ],
+    "one_liner_ko": "당의 시선(詩仙)이라 불린 시인",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "du_fu",
+    "name_ko": "두보",
+    "name_en": "Du Fu",
+    "birth_year": 712,
+    "death_year": 770,
+    "is_approximate": false,
+    "polity_id": "tang",
+    "activity_location": [
+      34.27,
+      108.95
+    ],
+    "activity_years": [
+      735,
+      770
+    ],
+    "one_liner_ko": "당의 시성(詩聖)이라 불린 시인",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "charlemagne",
+    "name_ko": "카롤루스 대제(샤를마뉴)",
+    "name_en": "Charlemagne",
+    "birth_year": 748,
+    "death_year": 814,
+    "is_approximate": true,
+    "polity_id": "frankish",
+    "activity_location": [
+      50.78,
+      6.08
+    ],
+    "activity_years": [
+      768,
+      814
+    ],
+    "one_liner_ko": "서유럽을 통합하고 800년 서로마 황제의 관을 받음",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 742/747/748 설."
+  },
+  {
+    "id": "harun_alrashid",
+    "name_ko": "하룬 알라시드",
+    "name_en": "Harun al-Rashid",
+    "birth_year": 763,
+    "death_year": 809,
+    "is_approximate": true,
+    "polity_id": "abbasid",
+    "activity_location": [
+      33.34,
+      44.4
+    ],
+    "activity_years": [
+      786,
+      809
+    ],
+    "one_liner_ko": "아바스 왕조의 전성기를 이끌고 학문·문화를 후원함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 763 또는 766 설."
+  },
+  {
+    "id": "jang_bogo",
+    "name_ko": "장보고",
+    "name_en": "Jang Bogo",
+    "birth_year": 790,
+    "death_year": 846,
+    "is_approximate": true,
+    "polity_id": "silla_unified",
+    "activity_location": [
+      34.32,
+      126.75
+    ],
+    "activity_years": [
+      828,
+      846
+    ],
+    "one_liner_ko": "청해진을 설치해 동아시아 해상 무역을 장악함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역09-02]",
+      "[12동역02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도 미상(790년경 추정). 사망 연도는 841 또는 846 설."
+  },
+  {
+    "id": "gyeon_hwon",
+    "name_ko": "견훤",
+    "name_en": "Gyeon Hwon",
+    "birth_year": 867,
+    "death_year": 936,
+    "is_approximate": false,
+    "polity_id": "later_baekje",
+    "activity_location": [
+      35.82,
+      127.15
+    ],
+    "activity_years": [
+      892,
+      936
+    ],
+    "one_liner_ko": "후백제를 세워 후삼국 시대를 열었음",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
     ],
     "note": ""
   },
@@ -237,6 +1587,573 @@
       "국사편찬위원회 『한국사』"
     ],
     "note": ""
+  },
+  {
+    "id": "gwangjong",
+    "name_ko": "광종",
+    "name_en": "Gwangjong of Goryeo",
+    "birth_year": 925,
+    "death_year": 975,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      37.97,
+      126.55
+    ],
+    "activity_years": [
+      949,
+      975
+    ],
+    "one_liner_ko": "노비안검법과 과거제로 왕권을 강화함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "zhao_kuangyin",
+    "name_ko": "송 태조(조광윤)",
+    "name_en": "Emperor Taizu of Song",
+    "birth_year": 927,
+    "death_year": 976,
+    "is_approximate": false,
+    "polity_id": "northern_song",
+    "activity_location": [
+      34.8,
+      114.3
+    ],
+    "activity_years": [
+      960,
+      976
+    ],
+    "one_liner_ko": "송을 세우고 문치주의를 확립함",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "seo_hui",
+    "name_ko": "서희",
+    "name_en": "Seo Hui",
+    "birth_year": 942,
+    "death_year": 998,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      39.6,
+      125.3
+    ],
+    "activity_years": [
+      993,
+      998
+    ],
+    "one_liner_ko": "거란과의 외교 담판으로 강동 6주를 확보함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gang_gamchan",
+    "name_ko": "강감찬",
+    "name_en": "Gang Gam-chan",
+    "birth_year": 948,
+    "death_year": 1031,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      39.5,
+      125.2
+    ],
+    "activity_years": [
+      1010,
+      1031
+    ],
+    "one_liner_ko": "귀주 대첩에서 거란군을 크게 무찌름",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ibn_sina",
+    "name_ko": "이븐 시나",
+    "name_en": "Ibn Sina (Avicenna)",
+    "birth_year": 980,
+    "death_year": 1037,
+    "is_approximate": false,
+    "polity_id": "abbasid",
+    "activity_location": [
+      39.77,
+      64.42
+    ],
+    "activity_years": [
+      1000,
+      1037
+    ],
+    "one_liner_ko": "『의학 전범』을 지어 유럽 의학에 큰 영향을 줌",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "wang_anshi",
+    "name_ko": "왕안석",
+    "name_en": "Wang Anshi",
+    "birth_year": 1021,
+    "death_year": 1086,
+    "is_approximate": false,
+    "polity_id": "northern_song",
+    "activity_location": [
+      34.8,
+      114.3
+    ],
+    "activity_years": [
+      1069,
+      1086
+    ],
+    "one_liner_ko": "신법으로 재정·군사 개혁을 추진함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "urban2",
+    "name_ko": "우르바누스 2세",
+    "name_en": "Pope Urban II",
+    "birth_year": 1035,
+    "death_year": 1099,
+    "is_approximate": true,
+    "polity_id": "papal_states",
+    "activity_location": [
+      41.9,
+      12.5
+    ],
+    "activity_years": [
+      1088,
+      1099
+    ],
+    "one_liner_ko": "클레르몽 공의회에서 십자군 원정을 제창함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1035년경."
+  },
+  {
+    "id": "kim_busik",
+    "name_ko": "김부식",
+    "name_en": "Kim Bu-sik",
+    "birth_year": 1075,
+    "death_year": 1151,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      37.97,
+      126.55
+    ],
+    "activity_years": [
+      1135,
+      1151
+    ],
+    "one_liner_ko": "묘청의 난을 진압하고 『삼국사기』를 편찬함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yue_fei",
+    "name_ko": "악비",
+    "name_en": "Yue Fei",
+    "birth_year": 1103,
+    "death_year": 1142,
+    "is_approximate": false,
+    "polity_id": "southern_song",
+    "activity_location": [
+      30.25,
+      120.17
+    ],
+    "activity_years": [
+      1127,
+      1142
+    ],
+    "one_liner_ko": "금에 맞서 싸운 남송의 장군",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jayavarman7",
+    "name_ko": "자야바르만 7세",
+    "name_en": "Jayavarman VII",
+    "birth_year": 1122,
+    "death_year": 1218,
+    "is_approximate": true,
+    "polity_id": "khmer_empire",
+    "activity_location": [
+      13.43,
+      103.87
+    ],
+    "activity_years": [
+      1181,
+      1218
+    ],
+    "one_liner_ko": "앙코르 톰과 바이욘 사원을 세운 크메르 제국의 왕",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "생몰년은 추정치(1122/1125~1218년경)."
+  },
+  {
+    "id": "zhu_xi",
+    "name_ko": "주희",
+    "name_en": "Zhu Xi",
+    "birth_year": 1130,
+    "death_year": 1200,
+    "is_approximate": false,
+    "polity_id": "southern_song",
+    "activity_location": [
+      27.0,
+      118.0
+    ],
+    "activity_years": [
+      1160,
+      1200
+    ],
+    "one_liner_ko": "성리학을 집대성해 동아시아 사상에 큰 영향을 줌",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "saladin",
+    "name_ko": "살라딘",
+    "name_en": "Saladin",
+    "birth_year": 1137,
+    "death_year": 1193,
+    "is_approximate": true,
+    "polity_id": "ayyubid",
+    "activity_location": [
+      30.04,
+      31.24
+    ],
+    "activity_years": [
+      1169,
+      1193
+    ],
+    "one_liner_ko": "아이유브 왕조를 세우고 1187년 예루살렘을 되찾아 십자군에 맞섬",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "출생 연도는 1137 또는 1138."
+  },
+  {
+    "id": "minamoto_yoritomo",
+    "name_ko": "미나모토노 요리토모",
+    "name_en": "Minamoto no Yoritomo",
+    "birth_year": 1147,
+    "death_year": 1199,
+    "is_approximate": false,
+    "polity_id": "kamakura",
+    "activity_location": [
+      35.32,
+      139.55
+    ],
+    "activity_years": [
+      1185,
+      1199
+    ],
+    "one_liner_ko": "가마쿠라 막부를 세워 무사 정권 시대를 엶",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "choe_chungheon",
+    "name_ko": "최충헌",
+    "name_en": "Choe Chung-heon",
+    "birth_year": 1149,
+    "death_year": 1219,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      37.97,
+      126.55
+    ],
+    "activity_years": [
+      1196,
+      1219
+    ],
+    "one_liner_ko": "무신 정권의 최고 권력자로 최씨 정권을 세움",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "innocent3",
+    "name_ko": "인노켄티우스 3세",
+    "name_en": "Pope Innocent III",
+    "birth_year": 1160,
+    "death_year": 1216,
+    "is_approximate": true,
+    "polity_id": "papal_states",
+    "activity_location": [
+      41.9,
+      12.5
+    ],
+    "activity_years": [
+      1198,
+      1216
+    ],
+    "one_liner_ko": "교황권의 절정을 이룸",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1160/1161."
+  },
+  {
+    "id": "genghis_khan",
+    "name_ko": "칭기즈 칸",
+    "name_en": "Genghis Khan",
+    "birth_year": 1162,
+    "death_year": 1227,
+    "is_approximate": true,
+    "polity_id": "mongol_empire",
+    "activity_location": [
+      47.92,
+      106.92
+    ],
+    "activity_years": [
+      1206,
+      1227
+    ],
+    "one_liner_ko": "몽골 부족을 통일하고 몽골 제국을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "출생 연도는 1155·1162·1167 설이 있음"
+  },
+  {
+    "id": "ogedei",
+    "name_ko": "오고타이 칸",
+    "name_en": "Ögedei Khan",
+    "birth_year": 1186,
+    "death_year": 1241,
+    "is_approximate": false,
+    "polity_id": "mongol_empire",
+    "activity_location": [
+      47.2,
+      102.85
+    ],
+    "activity_years": [
+      1229,
+      1241
+    ],
+    "one_liner_ko": "카라코룸을 건설하고 금을 멸망시켰으며 고려·유럽 원정을 지휘함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "iryeon",
+    "name_ko": "일연",
+    "name_en": "Iryeon",
+    "birth_year": 1206,
+    "death_year": 1289,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      35.9,
+      128.7
+    ],
+    "activity_years": [
+      1281,
+      1289
+    ],
+    "one_liner_ko": "『삼국유사』를 지어 단군 신화 등을 전함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "batu",
+    "name_ko": "바투",
+    "name_en": "Batu Khan",
+    "birth_year": 1207,
+    "death_year": 1255,
+    "is_approximate": true,
+    "polity_id": "golden_horde",
+    "activity_location": [
+      47.5,
+      46.5
+    ],
+    "activity_years": [
+      1236,
+      1255
+    ],
+    "one_liner_ko": "러시아·동유럽을 원정하고 킵차크 칸국을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1207년경 추정."
   },
   {
     "id": "kublai_khan",
@@ -270,64 +2187,124 @@
     "note": "활동 연대는 대칸 즉위(1260)~사망."
   },
   {
-    "id": "ashoka",
-    "name_ko": "아소카왕",
-    "name_en": "Ashoka",
-    "birth_year": -304,
-    "death_year": -232,
+    "id": "sundiata",
+    "name_ko": "순디아타",
+    "name_en": "Sundiata Keita",
+    "birth_year": 1217,
+    "death_year": 1255,
     "is_approximate": true,
-    "polity_id": "maurya",
+    "polity_id": "mali",
     "activity_location": [
-      25.6,
-      85.1
+      12.4,
+      -8.0
     ],
     "activity_years": [
-      -268,
-      -232
+      1235,
+      1255
     ],
-    "one_liner_ko": "마우리아 왕조의 전성기를 이끌고 불교를 널리 전파함",
+    "one_liner_ko": "말리 제국을 세움",
     "textbook_appearance": [
-      "역사①",
       "세계사"
     ],
     "achievement_standards": [
-      "[9역02-03]",
-      "[12세사01-02]"
+      "[12세사02-01]"
     ],
     "sources": [
-      "교육부 편수자료(세계사)"
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
     ],
-    "note": "생몰년·즉위년은 모두 추정(즉위 기원전 268년경)."
+    "note": "생몰년은 추정치."
   },
   {
-    "id": "justinian",
-    "name_ko": "유스티니아누스",
-    "name_en": "Justinian I",
-    "birth_year": 482,
-    "death_year": 565,
-    "is_approximate": true,
-    "polity_id": "byzantine",
+    "id": "hulagu",
+    "name_ko": "훌라구",
+    "name_en": "Hulagu Khan",
+    "birth_year": 1218,
+    "death_year": 1265,
+    "is_approximate": false,
+    "polity_id": "ilkhanate",
     "activity_location": [
-      41.01,
-      28.98
+      38.08,
+      46.3
     ],
     "activity_years": [
-      527,
-      565
+      1256,
+      1265
     ],
-    "one_liner_ko": "『로마법 대전』을 편찬하고 성 소피아 성당을 세움",
+    "one_liner_ko": "바그다드를 함락해 아바스 왕조를 멸망시키고 일 칸국을 세움",
     "textbook_appearance": [
       "역사①",
       "세계사"
     ],
     "achievement_standards": [
-      "[9역03-03]",
-      "[12세사01-03]"
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "tran_hung_dao",
+    "name_ko": "쩐흥다오",
+    "name_en": "Trần Hưng Đạo",
+    "birth_year": 1228,
+    "death_year": 1300,
+    "is_approximate": true,
+    "polity_id": "tran_dynasty",
+    "activity_location": [
+      21.03,
+      105.85
+    ],
+    "activity_years": [
+      1258,
+      1300
+    ],
+    "one_liner_ko": "몽골(원)의 침입을 세 차례 물리친 베트남의 장군",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1228 또는 1231 설."
+  },
+  {
+    "id": "marco_polo",
+    "name_ko": "마르코 폴로",
+    "name_en": "Marco Polo",
+    "birth_year": 1254,
+    "death_year": 1324,
+    "is_approximate": true,
+    "polity_id": "venice",
+    "activity_location": [
+      45.44,
+      12.33
+    ],
+    "activity_years": [
+      1271,
+      1295
+    ],
+    "one_liner_ko": "베네치아 상인으로 원을 여행하고 『동방견문록』을 남김",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
     ],
     "sources": [
       "교육부 편수자료(세계사)"
     ],
-    "note": "출생 연도는 482년경으로 추정."
+    "note": "출생 연도는 1254년경으로 추정. 활동 연대는 동방 여행 기간(1271~1295)."
   },
   {
     "id": "mansa_musa",
@@ -356,5 +2333,4322 @@
       "교육부 편수자료(세계사)"
     ],
     "note": "생몰년 모두 추정(사망 1332~1337 설)."
+  },
+  {
+    "id": "ibn_battuta",
+    "name_ko": "이븐 바투타",
+    "name_en": "Ibn Battuta",
+    "birth_year": 1304,
+    "death_year": 1369,
+    "is_approximate": true,
+    "polity_id": null,
+    "activity_location": [
+      35.78,
+      -5.81
+    ],
+    "activity_years": [
+      1325,
+      1354
+    ],
+    "one_liner_ko": "아시아·아프리카를 두루 여행하고 『여행기』를 남김",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "사망 연도는 1368/1369 설. 출신지 모로코 마린 왕조는 미입력."
+  },
+  {
+    "id": "choe_yeong",
+    "name_ko": "최영",
+    "name_en": "Choe Yeong",
+    "birth_year": 1316,
+    "death_year": 1388,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      37.97,
+      126.55
+    ],
+    "activity_years": [
+      1352,
+      1388
+    ],
+    "one_liner_ko": "왜구를 격퇴하고 요동 정벌을 추진함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "hongwu",
+    "name_ko": "홍무제(주원장)",
+    "name_en": "Hongwu Emperor (Zhu Yuanzhang)",
+    "birth_year": 1328,
+    "death_year": 1398,
+    "is_approximate": false,
+    "polity_id": "ming",
+    "activity_location": [
+      32.06,
+      118.8
+    ],
+    "activity_years": [
+      1368,
+      1398
+    ],
+    "one_liner_ko": "원을 몰아내고 명을 세워 황제 독재 체제를 강화함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gongmin",
+    "name_ko": "공민왕",
+    "name_en": "Gongmin of Goryeo",
+    "birth_year": 1330,
+    "death_year": 1374,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      37.97,
+      126.55
+    ],
+    "activity_years": [
+      1351,
+      1374
+    ],
+    "one_liner_ko": "반원 개혁을 추진해 쌍성총관부를 되찾음",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역10-03]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yi_seonggye",
+    "name_ko": "이성계(태조)",
+    "name_en": "Yi Seong-gye (Taejo of Joseon)",
+    "birth_year": 1335,
+    "death_year": 1408,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1388,
+      1408
+    ],
+    "one_liner_ko": "위화도 회군 후 조선을 건국함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "timur",
+    "name_ko": "티무르",
+    "name_en": "Timur",
+    "birth_year": 1336,
+    "death_year": 1405,
+    "is_approximate": false,
+    "polity_id": "timurid",
+    "activity_location": [
+      39.65,
+      66.97
+    ],
+    "activity_years": [
+      1370,
+      1405
+    ],
+    "one_liner_ko": "중앙아시아에서 서아시아까지 정복해 티무르 제국을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jeong_mongju",
+    "name_ko": "정몽주",
+    "name_en": "Jeong Mong-ju",
+    "birth_year": 1337,
+    "death_year": 1392,
+    "is_approximate": false,
+    "polity_id": "goryeo",
+    "activity_location": [
+      37.97,
+      126.55
+    ],
+    "activity_years": [
+      1360,
+      1392
+    ],
+    "one_liner_ko": "고려에 충절을 지킨 성리학자",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역11-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jeong_dojeon",
+    "name_ko": "정도전",
+    "name_en": "Jeong Do-jeon",
+    "birth_year": 1342,
+    "death_year": 1398,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1383,
+      1398
+    ],
+    "one_liner_ko": "조선 건국을 설계하고 재상 중심 정치를 주장함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역11-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ashikaga_yoshimitsu",
+    "name_ko": "아시카가 요시미쓰",
+    "name_en": "Ashikaga Yoshimitsu",
+    "birth_year": 1358,
+    "death_year": 1408,
+    "is_approximate": false,
+    "polity_id": "muromachi",
+    "activity_location": [
+      35.01,
+      135.77
+    ],
+    "activity_years": [
+      1368,
+      1408
+    ],
+    "one_liner_ko": "남북조를 통합하고 명과 감합 무역을 시작함",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yongle",
+    "name_ko": "영락제",
+    "name_en": "Yongle Emperor",
+    "birth_year": 1360,
+    "death_year": 1424,
+    "is_approximate": false,
+    "polity_id": "ming",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1402,
+      1424
+    ],
+    "one_liner_ko": "베이징으로 천도하고 정화의 남해 원정을 추진함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "zheng_he",
+    "name_ko": "정화",
+    "name_en": "Zheng He",
+    "birth_year": 1371,
+    "death_year": 1433,
+    "is_approximate": true,
+    "polity_id": "ming",
+    "activity_location": [
+      32.06,
+      118.8
+    ],
+    "activity_years": [
+      1405,
+      1433
+    ],
+    "one_liner_ko": "명 영락제의 명으로 7차례 대규모 남해 원정을 이끌어 동남아시아·인도양·아프리카 동해안까지 항해함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "사망 연도는 1433 또는 1435 설이 있음."
+  },
+  {
+    "id": "le_loi",
+    "name_ko": "레러이",
+    "name_en": "Lê Lợi",
+    "birth_year": 1385,
+    "death_year": 1433,
+    "is_approximate": true,
+    "polity_id": "le_dynasty",
+    "activity_location": [
+      21.03,
+      105.85
+    ],
+    "activity_years": [
+      1418,
+      1433
+    ],
+    "one_liner_ko": "명의 지배에 맞서 싸워 다이비엣을 되찾고 레 왕조를 엶",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1385년경."
+  },
+  {
+    "id": "sejong",
+    "name_ko": "세종",
+    "name_en": "Sejong the Great",
+    "birth_year": 1397,
+    "death_year": 1450,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.58,
+      126.98
+    ],
+    "activity_years": [
+      1418,
+      1450
+    ],
+    "one_liner_ko": "훈민정음을 창제하고 과학·문화를 크게 발전시킨 조선의 4대 왕",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역11-01]"
+    ],
+    "sources": [
+      "국사편찬위원회 『한국사』"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gutenberg",
+    "name_ko": "구텐베르크",
+    "name_en": "Johannes Gutenberg",
+    "birth_year": 1400,
+    "death_year": 1468,
+    "is_approximate": true,
+    "polity_id": "hre",
+    "activity_location": [
+      49.99,
+      8.27
+    ],
+    "activity_years": [
+      1440,
+      1468
+    ],
+    "one_liner_ko": "금속 활판 인쇄술을 실용화함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1400년경."
+  },
+  {
+    "id": "joan_of_arc",
+    "name_ko": "잔 다르크",
+    "name_en": "Joan of Arc",
+    "birth_year": 1412,
+    "death_year": 1431,
+    "is_approximate": true,
+    "polity_id": "france_kingdom",
+    "activity_location": [
+      47.9,
+      1.9
+    ],
+    "activity_years": [
+      1429,
+      1431
+    ],
+    "one_liner_ko": "백년 전쟁에서 오를레앙을 구하고 프랑스를 승리로 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1412년경."
+  },
+  {
+    "id": "mehmed2",
+    "name_ko": "메흐메트 2세",
+    "name_en": "Mehmed II",
+    "birth_year": 1432,
+    "death_year": 1481,
+    "is_approximate": false,
+    "polity_id": "ottoman_empire",
+    "activity_location": [
+      41.01,
+      28.98
+    ],
+    "activity_years": [
+      1451,
+      1481
+    ],
+    "one_liner_ko": "1453년 콘스탄티노폴리스를 함락함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "columbus",
+    "name_ko": "콜럼버스",
+    "name_en": "Christopher Columbus",
+    "birth_year": 1451,
+    "death_year": 1506,
+    "is_approximate": true,
+    "polity_id": "spain",
+    "activity_location": [
+      24.0,
+      -74.5
+    ],
+    "activity_years": [
+      1492,
+      1506
+    ],
+    "one_liner_ko": "에스파냐의 후원으로 대서양을 건너 아메리카에 도착함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1451년경."
+  },
+  {
+    "id": "leonardo",
+    "name_ko": "레오나르도 다빈치",
+    "name_en": "Leonardo da Vinci",
+    "birth_year": 1452,
+    "death_year": 1519,
+    "is_approximate": false,
+    "polity_id": null,
+    "activity_location": [
+      43.77,
+      11.25
+    ],
+    "activity_years": [
+      1472,
+      1519
+    ],
+    "one_liner_ko": "르네상스를 대표하는 예술가이자 과학자",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "피렌체 공화국 항목 미입력으로 polity 미연결(TODO)."
+  },
+  {
+    "id": "moctezuma2",
+    "name_ko": "몬테수마 2세",
+    "name_en": "Moctezuma II",
+    "birth_year": 1466,
+    "death_year": 1520,
+    "is_approximate": true,
+    "polity_id": "aztec",
+    "activity_location": [
+      19.43,
+      -99.13
+    ],
+    "activity_years": [
+      1502,
+      1520
+    ],
+    "one_liner_ko": "에스파냐 정복 당시 아스테카의 황제",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1466년경."
+  },
+  {
+    "id": "vasco_da_gama",
+    "name_ko": "바스쿠 다 가마",
+    "name_en": "Vasco da Gama",
+    "birth_year": 1469,
+    "death_year": 1524,
+    "is_approximate": true,
+    "polity_id": "portugal",
+    "activity_location": [
+      11.25,
+      75.78
+    ],
+    "activity_years": [
+      1497,
+      1524
+    ],
+    "one_liner_ko": "희망봉을 돌아 인도 항로를 개척함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1460/1469 설."
+  },
+  {
+    "id": "copernicus",
+    "name_ko": "코페르니쿠스",
+    "name_en": "Nicolaus Copernicus",
+    "birth_year": 1473,
+    "death_year": 1543,
+    "is_approximate": false,
+    "polity_id": "poland_lithuania",
+    "activity_location": [
+      54.35,
+      19.68
+    ],
+    "activity_years": [
+      1510,
+      1543
+    ],
+    "one_liner_ko": "지동설을 주장함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "폴란드-리투아니아 연합 성립(1569) 이전 폴란드 왕국 소속이나 편의상 연결."
+  },
+  {
+    "id": "michelangelo",
+    "name_ko": "미켈란젤로",
+    "name_en": "Michelangelo",
+    "birth_year": 1475,
+    "death_year": 1564,
+    "is_approximate": false,
+    "polity_id": "papal_states",
+    "activity_location": [
+      41.9,
+      12.5
+    ],
+    "activity_years": [
+      1496,
+      1564
+    ],
+    "one_liner_ko": "다비드상·시스티나 성당 천장화를 남김",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "pizarro",
+    "name_ko": "피사로",
+    "name_en": "Francisco Pizarro",
+    "birth_year": 1478,
+    "death_year": 1541,
+    "is_approximate": true,
+    "polity_id": "peru_viceroyalty",
+    "activity_location": [
+      -13.52,
+      -71.97
+    ],
+    "activity_years": [
+      1532,
+      1541
+    ],
+    "one_liner_ko": "잉카 제국을 정복함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1471/1478 설."
+  },
+  {
+    "id": "magellan",
+    "name_ko": "마젤란",
+    "name_en": "Ferdinand Magellan",
+    "birth_year": 1480,
+    "death_year": 1521,
+    "is_approximate": true,
+    "polity_id": "spain",
+    "activity_location": [
+      13.7,
+      123.0
+    ],
+    "activity_years": [
+      1519,
+      1521
+    ],
+    "one_liner_ko": "세계 일주 항해를 시작해 태평양을 횡단함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1480년경."
+  },
+  {
+    "id": "jo_gwangjo",
+    "name_ko": "조광조",
+    "name_en": "Jo Gwang-jo",
+    "birth_year": 1482,
+    "death_year": 1519,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1515,
+      1519
+    ],
+    "one_liner_ko": "사림의 개혁 정치를 이끌다 기묘사화로 희생됨",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역11-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "babur",
+    "name_ko": "바부르",
+    "name_en": "Babur",
+    "birth_year": 1483,
+    "death_year": 1530,
+    "is_approximate": false,
+    "polity_id": "mughal",
+    "activity_location": [
+      28.65,
+      77.2
+    ],
+    "activity_years": [
+      1526,
+      1530
+    ],
+    "one_liner_ko": "티무르의 후손으로 인도에 무굴 제국을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "luther",
+    "name_ko": "마르틴 루터",
+    "name_en": "Martin Luther",
+    "birth_year": 1483,
+    "death_year": 1546,
+    "is_approximate": false,
+    "polity_id": "hre",
+    "activity_location": [
+      51.87,
+      12.65
+    ],
+    "activity_years": [
+      1517,
+      1546
+    ],
+    "one_liner_ko": "95개조 반박문으로 종교 개혁을 시작함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "cortes",
+    "name_ko": "코르테스",
+    "name_en": "Hernán Cortés",
+    "birth_year": 1485,
+    "death_year": 1547,
+    "is_approximate": false,
+    "polity_id": "new_spain",
+    "activity_location": [
+      19.43,
+      -99.13
+    ],
+    "activity_years": [
+      1519,
+      1547
+    ],
+    "one_liner_ko": "아스테카 제국을 정복함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ismail1",
+    "name_ko": "이스마일 1세",
+    "name_en": "Ismail I",
+    "birth_year": 1487,
+    "death_year": 1524,
+    "is_approximate": false,
+    "polity_id": "safavid",
+    "activity_location": [
+      38.08,
+      46.3
+    ],
+    "activity_years": [
+      1501,
+      1524
+    ],
+    "one_liner_ko": "사파비 왕조를 세우고 시아파를 국교로 삼음",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "henry8",
+    "name_ko": "헨리 8세",
+    "name_en": "Henry VIII",
+    "birth_year": 1491,
+    "death_year": 1547,
+    "is_approximate": false,
+    "polity_id": "england_kingdom",
+    "activity_location": [
+      51.5,
+      -0.12
+    ],
+    "activity_years": [
+      1509,
+      1547
+    ],
+    "one_liner_ko": "수장령으로 영국 국교회를 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "suleiman",
+    "name_ko": "술레이만 1세",
+    "name_en": "Suleiman the Magnificent",
+    "birth_year": 1494,
+    "death_year": 1566,
+    "is_approximate": false,
+    "polity_id": "ottoman_empire",
+    "activity_location": [
+      41.01,
+      28.98
+    ],
+    "activity_years": [
+      1520,
+      1566
+    ],
+    "one_liner_ko": "오스만 제국의 전성기를 이끌고 빈을 포위함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yi_hwang",
+    "name_ko": "이황(퇴계)",
+    "name_en": "Yi Hwang (Toegye)",
+    "birth_year": 1501,
+    "death_year": 1570,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      36.58,
+      128.85
+    ],
+    "activity_years": [
+      1534,
+      1570
+    ],
+    "one_liner_ko": "성리학을 깊이 연구해 영남 사림의 스승이 됨",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-02]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "atahualpa",
+    "name_ko": "아타우알파",
+    "name_en": "Atahualpa",
+    "birth_year": 1502,
+    "death_year": 1533,
+    "is_approximate": true,
+    "polity_id": "inca",
+    "activity_location": [
+      -13.52,
+      -71.97
+    ],
+    "activity_years": [
+      1532,
+      1533
+    ],
+    "one_liner_ko": "피사로에게 붙잡혀 처형된 잉카 최후의 황제",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1502년경."
+  },
+  {
+    "id": "calvin",
+    "name_ko": "칼뱅",
+    "name_en": "John Calvin",
+    "birth_year": 1509,
+    "death_year": 1564,
+    "is_approximate": false,
+    "polity_id": null,
+    "activity_location": [
+      46.2,
+      6.15
+    ],
+    "activity_years": [
+      1536,
+      1564
+    ],
+    "one_liner_ko": "예정설을 주장하며 제네바에서 종교 개혁을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "제네바 공화국 항목 미입력으로 polity 미연결(TODO)."
+  },
+  {
+    "id": "philip2",
+    "name_ko": "펠리페 2세",
+    "name_en": "Philip II of Spain",
+    "birth_year": 1527,
+    "death_year": 1598,
+    "is_approximate": false,
+    "polity_id": "spain",
+    "activity_location": [
+      40.4,
+      -3.7
+    ],
+    "activity_years": [
+      1556,
+      1598
+    ],
+    "one_liner_ko": "에스파냐의 전성기를 이끌었으나 무적함대가 패배함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "elizabeth1",
+    "name_ko": "엘리자베스 1세",
+    "name_en": "Elizabeth I",
+    "birth_year": 1533,
+    "death_year": 1603,
+    "is_approximate": false,
+    "polity_id": "england_kingdom",
+    "activity_location": [
+      51.5,
+      -0.12
+    ],
+    "activity_years": [
+      1558,
+      1603
+    ],
+    "one_liner_ko": "무적함대를 물리치고 영국 절대 왕정의 전성기를 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "oda_nobunaga",
+    "name_ko": "오다 노부나가",
+    "name_en": "Oda Nobunaga",
+    "birth_year": 1534,
+    "death_year": 1582,
+    "is_approximate": false,
+    "polity_id": "muromachi",
+    "activity_location": [
+      35.18,
+      136.9
+    ],
+    "activity_years": [
+      1560,
+      1582
+    ],
+    "one_liner_ko": "전국 시대 통일의 기초를 놓음",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yi_i",
+    "name_ko": "이이(율곡)",
+    "name_en": "Yi I (Yulgok)",
+    "birth_year": 1536,
+    "death_year": 1584,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1564,
+      1584
+    ],
+    "one_liner_ko": "현실 개혁을 강조한 성리학자로 기호 사림의 스승",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역11-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gwon_yul",
+    "name_ko": "권율",
+    "name_en": "Gwon Yul",
+    "birth_year": 1537,
+    "death_year": 1599,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.6,
+      126.9
+    ],
+    "activity_years": [
+      1592,
+      1599
+    ],
+    "one_liner_ko": "행주 대첩에서 왜군을 물리침",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역11-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "toyotomi_hideyoshi",
+    "name_ko": "도요토미 히데요시",
+    "name_en": "Toyotomi Hideyoshi",
+    "birth_year": 1537,
+    "death_year": 1598,
+    "is_approximate": false,
+    "polity_id": "muromachi",
+    "activity_location": [
+      34.69,
+      135.5
+    ],
+    "activity_years": [
+      1582,
+      1598
+    ],
+    "one_liner_ko": "일본을 통일하고 임진왜란을 일으킴",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-03]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "활동 기반은 오사카성. 소속은 편의상 무로마치 막부 항목에 연결(실제로는 막부 멸망 후의 통일 정권)."
+  },
+  {
+    "id": "akbar",
+    "name_ko": "아크바르",
+    "name_en": "Akbar",
+    "birth_year": 1542,
+    "death_year": 1605,
+    "is_approximate": false,
+    "polity_id": "mughal",
+    "activity_location": [
+      27.18,
+      78.02
+    ],
+    "activity_years": [
+      1556,
+      1605
+    ],
+    "one_liner_ko": "관용 정책과 지즈야 폐지로 무굴 제국의 전성기를 엶",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "tokugawa_ieyasu",
+    "name_ko": "도쿠가와 이에야스",
+    "name_en": "Tokugawa Ieyasu",
+    "birth_year": 1543,
+    "death_year": 1616,
+    "is_approximate": false,
+    "polity_id": "edo",
+    "activity_location": [
+      35.68,
+      139.75
+    ],
+    "activity_years": [
+      1600,
+      1616
+    ],
+    "one_liner_ko": "세키가하라 전투에서 승리해 에도 막부를 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yi_sunsin",
+    "name_ko": "이순신",
+    "name_en": "Yi Sun-sin",
+    "birth_year": 1545,
+    "death_year": 1598,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      34.84,
+      128.42
+    ],
+    "activity_years": [
+      1591,
+      1598
+    ],
+    "one_liner_ko": "임진왜란에서 조선 수군을 이끌고 한산도·명량 등에서 승리함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-03]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "국사편찬위원회 『한국사』"
+    ],
+    "note": ""
+  },
+  {
+    "id": "nurhaci",
+    "name_ko": "누르하치",
+    "name_en": "Nurhaci",
+    "birth_year": 1559,
+    "death_year": 1626,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      41.8,
+      123.4
+    ],
+    "activity_years": [
+      1616,
+      1626
+    ],
+    "one_liner_ko": "여진을 통일해 후금을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[9역11-03]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "galileo",
+    "name_ko": "갈릴레이",
+    "name_en": "Galileo Galilei",
+    "birth_year": 1564,
+    "death_year": 1642,
+    "is_approximate": false,
+    "polity_id": null,
+    "activity_location": [
+      43.77,
+      11.25
+    ],
+    "activity_years": [
+      1609,
+      1642
+    ],
+    "one_liner_ko": "망원경 관측으로 지동설을 뒷받침함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "토스카나 대공국 항목 미입력으로 polity 미연결(TODO)."
+  },
+  {
+    "id": "abbas1",
+    "name_ko": "아바스 1세",
+    "name_en": "Abbas the Great",
+    "birth_year": 1571,
+    "death_year": 1629,
+    "is_approximate": false,
+    "polity_id": "safavid",
+    "activity_location": [
+      32.65,
+      51.67
+    ],
+    "activity_years": [
+      1588,
+      1629
+    ],
+    "one_liner_ko": "이스파한으로 천도해 사파비 왕조의 전성기를 엶",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gwanghaegun",
+    "name_ko": "광해군",
+    "name_en": "Gwanghaegun",
+    "birth_year": 1575,
+    "death_year": 1641,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1608,
+      1623
+    ],
+    "one_liner_ko": "명·후금 사이에서 중립 외교를 펼침",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-03]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "hong_taiji",
+    "name_ko": "홍타이지(태종)",
+    "name_en": "Hong Taiji",
+    "birth_year": 1592,
+    "death_year": 1643,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      41.8,
+      123.4
+    ],
+    "activity_years": [
+      1626,
+      1643
+    ],
+    "one_liner_ko": "국호를 청으로 바꾸고 병자호란을 일으킴",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-03]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "shah_jahan",
+    "name_ko": "샤자한",
+    "name_en": "Shah Jahan",
+    "birth_year": 1592,
+    "death_year": 1666,
+    "is_approximate": false,
+    "polity_id": "mughal",
+    "activity_location": [
+      27.18,
+      78.02
+    ],
+    "activity_years": [
+      1628,
+      1658
+    ],
+    "one_liner_ko": "타지마할을 건설함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "injo",
+    "name_ko": "인조",
+    "name_en": "Injo of Joseon",
+    "birth_year": 1595,
+    "death_year": 1649,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1623,
+      1649
+    ],
+    "one_liner_ko": "병자호란 때 삼전도에서 청에 항복함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-03]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "cromwell",
+    "name_ko": "크롬웰",
+    "name_en": "Oliver Cromwell",
+    "birth_year": 1599,
+    "death_year": 1658,
+    "is_approximate": false,
+    "polity_id": "england_kingdom",
+    "activity_location": [
+      51.5,
+      -0.12
+    ],
+    "activity_years": [
+      1642,
+      1658
+    ],
+    "one_liner_ko": "청교도 혁명을 이끌고 공화정을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[9역05-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "aurangzeb",
+    "name_ko": "아우랑제브",
+    "name_en": "Aurangzeb",
+    "birth_year": 1618,
+    "death_year": 1707,
+    "is_approximate": false,
+    "polity_id": "mughal",
+    "activity_location": [
+      28.65,
+      77.2
+    ],
+    "activity_years": [
+      1658,
+      1707
+    ],
+    "one_liner_ko": "영토를 최대로 넓혔으나 이슬람 중심 정책으로 반발을 삼",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "hyojong",
+    "name_ko": "효종",
+    "name_en": "Hyojong of Joseon",
+    "birth_year": 1619,
+    "death_year": 1659,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1649,
+      1659
+    ],
+    "one_liner_ko": "북벌을 추진하며 군사력을 키움",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역12-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "louis14",
+    "name_ko": "루이 14세",
+    "name_en": "Louis XIV",
+    "birth_year": 1638,
+    "death_year": 1715,
+    "is_approximate": false,
+    "polity_id": "france_kingdom",
+    "activity_location": [
+      48.8,
+      2.12
+    ],
+    "activity_years": [
+      1661,
+      1715
+    ],
+    "one_liner_ko": "베르사유 궁전을 짓고 절대 왕정의 전형을 이룸",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "newton",
+    "name_ko": "뉴턴",
+    "name_en": "Isaac Newton",
+    "birth_year": 1643,
+    "death_year": 1727,
+    "is_approximate": false,
+    "polity_id": "england_kingdom",
+    "activity_location": [
+      52.2,
+      0.12
+    ],
+    "activity_years": [
+      1665,
+      1727
+    ],
+    "one_liner_ko": "만유인력의 법칙을 발견함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "율리우스력 기준 출생은 1642년 12월 25일(그레고리력 1643년 1월 4일)."
+  },
+  {
+    "id": "kangxi",
+    "name_ko": "강희제",
+    "name_en": "Kangxi Emperor",
+    "birth_year": 1654,
+    "death_year": 1722,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1661,
+      1722
+    ],
+    "one_liner_ko": "삼번의 난을 진압하고 타이완을 편입해 청의 전성기를 열었으며 러시아와 네르친스크 조약을 맺음",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "peter1",
+    "name_ko": "표트르 대제",
+    "name_en": "Peter the Great",
+    "birth_year": 1672,
+    "death_year": 1725,
+    "is_approximate": false,
+    "polity_id": "russian_empire",
+    "activity_location": [
+      59.93,
+      30.3
+    ],
+    "activity_years": [
+      1682,
+      1725
+    ],
+    "one_liner_ko": "서구화 개혁을 추진하고 상트페테르부르크를 건설함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yongzheng",
+    "name_ko": "옹정제",
+    "name_en": "Yongzheng Emperor",
+    "birth_year": 1678,
+    "death_year": 1735,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1722,
+      1735
+    ],
+    "one_liner_ko": "군기처를 설치해 황제권을 강화함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "montesquieu",
+    "name_ko": "몽테스키외",
+    "name_en": "Montesquieu",
+    "birth_year": 1689,
+    "death_year": 1755,
+    "is_approximate": false,
+    "polity_id": "france_kingdom",
+    "activity_location": [
+      44.84,
+      -0.58
+    ],
+    "activity_years": [
+      1721,
+      1755
+    ],
+    "one_liner_ko": "『법의 정신』에서 삼권 분립을 주장함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "voltaire",
+    "name_ko": "볼테르",
+    "name_en": "Voltaire",
+    "birth_year": 1694,
+    "death_year": 1778,
+    "is_approximate": false,
+    "polity_id": "france_kingdom",
+    "activity_location": [
+      48.86,
+      2.35
+    ],
+    "activity_years": [
+      1726,
+      1778
+    ],
+    "one_liner_ko": "관용과 이성을 강조한 계몽사상가",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yeongjo",
+    "name_ko": "영조",
+    "name_en": "Yeongjo of Joseon",
+    "birth_year": 1694,
+    "death_year": 1776,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1724,
+      1776
+    ],
+    "one_liner_ko": "탕평책과 균역법으로 정치·민생을 안정시킴",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역12-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "qianlong",
+    "name_ko": "건륭제",
+    "name_en": "Qianlong Emperor",
+    "birth_year": 1711,
+    "death_year": 1799,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1735,
+      1796
+    ],
+    "one_liner_ko": "청의 최대 영토를 이루고 『사고전서』를 편찬함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "rousseau",
+    "name_ko": "루소",
+    "name_en": "Jean-Jacques Rousseau",
+    "birth_year": 1712,
+    "death_year": 1778,
+    "is_approximate": false,
+    "polity_id": "france_kingdom",
+    "activity_location": [
+      48.86,
+      2.35
+    ],
+    "activity_years": [
+      1750,
+      1778
+    ],
+    "one_liner_ko": "『사회 계약론』으로 인민 주권을 주장함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "adam_smith",
+    "name_ko": "애덤 스미스",
+    "name_en": "Adam Smith",
+    "birth_year": 1723,
+    "death_year": 1790,
+    "is_approximate": false,
+    "polity_id": "uk",
+    "activity_location": [
+      55.95,
+      -3.19
+    ],
+    "activity_years": [
+      1759,
+      1790
+    ],
+    "one_liner_ko": "『국부론』으로 자유방임 경제학을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-02]",
+      "[12세사03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "catherine2",
+    "name_ko": "예카테리나 2세",
+    "name_en": "Catherine the Great",
+    "birth_year": 1729,
+    "death_year": 1796,
+    "is_approximate": false,
+    "polity_id": "russian_empire",
+    "activity_location": [
+      59.93,
+      30.3
+    ],
+    "activity_years": [
+      1762,
+      1796
+    ],
+    "one_liner_ko": "계몽 전제 군주로 러시아 영토를 넓힘",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "washington",
+    "name_ko": "조지 워싱턴",
+    "name_en": "George Washington",
+    "birth_year": 1732,
+    "death_year": 1799,
+    "is_approximate": false,
+    "polity_id": "usa",
+    "activity_location": [
+      38.9,
+      -77.04
+    ],
+    "activity_years": [
+      1775,
+      1799
+    ],
+    "one_liner_ko": "독립 전쟁을 지휘하고 미국 초대 대통령이 됨",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "james_watt",
+    "name_ko": "제임스 와트",
+    "name_en": "James Watt",
+    "birth_year": 1736,
+    "death_year": 1819,
+    "is_approximate": false,
+    "polity_id": "uk",
+    "activity_location": [
+      55.86,
+      -4.25
+    ],
+    "activity_years": [
+      1769,
+      1819
+    ],
+    "one_liner_ko": "증기 기관을 개량해 산업 혁명을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-02]",
+      "[12세사03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "park_jiwon",
+    "name_ko": "박지원",
+    "name_en": "Park Ji-won",
+    "birth_year": 1737,
+    "death_year": 1805,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1780,
+      1805
+    ],
+    "one_liner_ko": "『열하일기』로 청 문물의 수용을 주장함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역12-02]",
+      "[12동역02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jefferson",
+    "name_ko": "토머스 제퍼슨",
+    "name_en": "Thomas Jefferson",
+    "birth_year": 1743,
+    "death_year": 1826,
+    "is_approximate": false,
+    "polity_id": "usa",
+    "activity_location": [
+      38.9,
+      -77.04
+    ],
+    "activity_years": [
+      1776,
+      1826
+    ],
+    "one_liner_ko": "독립 선언서를 기초함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "toussaint",
+    "name_ko": "투생 루베르튀르",
+    "name_en": "Toussaint Louverture",
+    "birth_year": 1743,
+    "death_year": 1803,
+    "is_approximate": true,
+    "polity_id": "haiti",
+    "activity_location": [
+      19.0,
+      -72.5
+    ],
+    "activity_years": [
+      1791,
+      1803
+    ],
+    "one_liner_ko": "아이티 혁명을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "출생 연도는 1743년경."
+  },
+  {
+    "id": "jeongjo",
+    "name_ko": "정조",
+    "name_en": "Jeongjo of Joseon",
+    "birth_year": 1752,
+    "death_year": 1800,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.29,
+      127.01
+    ],
+    "activity_years": [
+      1776,
+      1800
+    ],
+    "one_liner_ko": "규장각을 설치하고 수원 화성을 건설함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역12-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "robespierre",
+    "name_ko": "로베스피에르",
+    "name_en": "Maximilien Robespierre",
+    "birth_year": 1758,
+    "death_year": 1794,
+    "is_approximate": false,
+    "polity_id": "france_revolution",
+    "activity_location": [
+      48.86,
+      2.35
+    ],
+    "activity_years": [
+      1789,
+      1794
+    ],
+    "one_liner_ko": "프랑스 혁명 급진파를 이끌고 공포 정치를 폄",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gia_long",
+    "name_ko": "자롱제(응우옌 아인)",
+    "name_en": "Gia Long",
+    "birth_year": 1762,
+    "death_year": 1820,
+    "is_approximate": false,
+    "polity_id": "nguyen_dynasty",
+    "activity_location": [
+      16.47,
+      107.58
+    ],
+    "activity_years": [
+      1802,
+      1820
+    ],
+    "one_liner_ko": "베트남을 통일하고 응우옌 왕조를 세움",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jeong_yakyong",
+    "name_ko": "정약용",
+    "name_en": "Jeong Yak-yong",
+    "birth_year": 1762,
+    "death_year": 1836,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      34.74,
+      126.75
+    ],
+    "activity_years": [
+      1789,
+      1836
+    ],
+    "one_liner_ko": "실학을 집대성하고 『목민심서』를 지음",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역12-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "napoleon",
+    "name_ko": "나폴레옹",
+    "name_en": "Napoleon Bonaparte",
+    "birth_year": 1769,
+    "death_year": 1821,
+    "is_approximate": false,
+    "polity_id": "france_revolution",
+    "activity_location": [
+      48.86,
+      2.35
+    ],
+    "activity_years": [
+      1799,
+      1815
+    ],
+    "one_liner_ko": "프랑스 황제가 되어 유럽을 정복하고 『나폴레옹 법전』을 만듦",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "hong_gyeongnae",
+    "name_ko": "홍경래",
+    "name_en": "Hong Gyeong-nae",
+    "birth_year": 1771,
+    "death_year": 1812,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      39.7,
+      125.3
+    ],
+    "activity_years": [
+      1811,
+      1812
+    ],
+    "one_liner_ko": "평안도에서 지역 차별과 세도 정치에 맞서 봉기함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역12-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "metternich",
+    "name_ko": "메테르니히",
+    "name_en": "Klemens von Metternich",
+    "birth_year": 1773,
+    "death_year": 1859,
+    "is_approximate": false,
+    "polity_id": "austria_habsburg",
+    "activity_location": [
+      48.2,
+      16.37
+    ],
+    "activity_years": [
+      1815,
+      1848
+    ],
+    "one_liner_ko": "빈 체제를 주도해 보수 질서를 지키려 함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "bolivar",
+    "name_ko": "시몬 볼리바르",
+    "name_en": "Simón Bolívar",
+    "birth_year": 1783,
+    "death_year": 1830,
+    "is_approximate": false,
+    "polity_id": "gran_colombia",
+    "activity_location": [
+      4.7,
+      -74.07
+    ],
+    "activity_years": [
+      1810,
+      1830
+    ],
+    "one_liner_ko": "라틴 아메리카 독립 전쟁을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "lin_zexu",
+    "name_ko": "임칙서",
+    "name_en": "Lin Zexu",
+    "birth_year": 1785,
+    "death_year": 1850,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      23.13,
+      113.26
+    ],
+    "activity_years": [
+      1839,
+      1850
+    ],
+    "one_liner_ko": "광저우에서 아편을 몰수해 아편 전쟁의 계기가 됨",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "garibaldi",
+    "name_ko": "가리발디",
+    "name_en": "Giuseppe Garibaldi",
+    "birth_year": 1807,
+    "death_year": 1882,
+    "is_approximate": false,
+    "polity_id": "italy_kingdom",
+    "activity_location": [
+      38.12,
+      13.36
+    ],
+    "activity_years": [
+      1848,
+      1882
+    ],
+    "one_liner_ko": "붉은 셔츠단으로 이탈리아 통일에 기여함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "darwin",
+    "name_ko": "찰스 다윈",
+    "name_en": "Charles Darwin",
+    "birth_year": 1809,
+    "death_year": 1882,
+    "is_approximate": false,
+    "polity_id": "uk",
+    "activity_location": [
+      51.5,
+      -0.12
+    ],
+    "activity_years": [
+      1859,
+      1882
+    ],
+    "one_liner_ko": "『종의 기원』에서 진화론을 주장함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "lincoln",
+    "name_ko": "링컨",
+    "name_en": "Abraham Lincoln",
+    "birth_year": 1809,
+    "death_year": 1865,
+    "is_approximate": false,
+    "polity_id": "usa",
+    "activity_location": [
+      38.9,
+      -77.04
+    ],
+    "activity_years": [
+      1861,
+      1865
+    ],
+    "one_liner_ko": "남북 전쟁을 이끌고 노예 해방을 선언함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "hong_xiuquan",
+    "name_ko": "홍수전",
+    "name_en": "Hong Xiuquan",
+    "birth_year": 1814,
+    "death_year": 1864,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      32.06,
+      118.8
+    ],
+    "activity_years": [
+      1851,
+      1864
+    ],
+    "one_liner_ko": "태평천국 운동을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "bismarck",
+    "name_ko": "비스마르크",
+    "name_en": "Otto von Bismarck",
+    "birth_year": 1815,
+    "death_year": 1898,
+    "is_approximate": false,
+    "polity_id": "german_empire",
+    "activity_location": [
+      52.52,
+      13.4
+    ],
+    "activity_years": [
+      1862,
+      1890
+    ],
+    "one_liner_ko": "철혈 정책으로 독일 통일을 이룸",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "marx",
+    "name_ko": "카를 마르크스",
+    "name_en": "Karl Marx",
+    "birth_year": 1818,
+    "death_year": 1883,
+    "is_approximate": false,
+    "polity_id": "uk",
+    "activity_location": [
+      51.5,
+      -0.12
+    ],
+    "activity_years": [
+      1848,
+      1883
+    ],
+    "one_liner_ko": "『공산당 선언』·『자본론』으로 사회주의 사상을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-02]",
+      "[12세사03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "victoria",
+    "name_ko": "빅토리아 여왕",
+    "name_en": "Queen Victoria",
+    "birth_year": 1819,
+    "death_year": 1901,
+    "is_approximate": false,
+    "polity_id": "uk",
+    "activity_location": [
+      51.5,
+      -0.12
+    ],
+    "activity_years": [
+      1837,
+      1901
+    ],
+    "one_liner_ko": "영국 제국주의 전성기의 여왕",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "heungseon",
+    "name_ko": "흥선 대원군",
+    "name_en": "Heungseon Daewongun",
+    "birth_year": 1820,
+    "death_year": 1898,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1863,
+      1873
+    ],
+    "one_liner_ko": "세도 정치를 억누르고 통상 수교 거부 정책을 폄",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역12-03]",
+      "[9역13-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "li_hongzhang",
+    "name_ko": "이홍장",
+    "name_en": "Li Hongzhang",
+    "birth_year": 1823,
+    "death_year": 1901,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1862,
+      1901
+    ],
+    "one_liner_ko": "양무운동을 주도하고 청일 전쟁 후 시모노세키 조약을 맺음",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "choe_jeu",
+    "name_ko": "최제우",
+    "name_en": "Choe Je-u",
+    "birth_year": 1824,
+    "death_year": 1864,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      35.84,
+      129.21
+    ],
+    "activity_years": [
+      1860,
+      1864
+    ],
+    "one_liner_ko": "동학을 창시함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역12-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "saigo_takamori",
+    "name_ko": "사이고 다카모리",
+    "name_en": "Saigō Takamori",
+    "birth_year": 1828,
+    "death_year": 1877,
+    "is_approximate": false,
+    "polity_id": "japan_modern",
+    "activity_location": [
+      31.6,
+      130.56
+    ],
+    "activity_years": [
+      1868,
+      1877
+    ],
+    "one_liner_ko": "메이지 유신의 주역이었으나 정한론 좌절 후 세이난 전쟁을 일으킴",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "fukuzawa",
+    "name_ko": "후쿠자와 유키치",
+    "name_en": "Fukuzawa Yukichi",
+    "birth_year": 1835,
+    "death_year": 1901,
+    "is_approximate": false,
+    "polity_id": "japan_modern",
+    "activity_location": [
+      35.68,
+      139.75
+    ],
+    "activity_years": [
+      1860,
+      1901
+    ],
+    "one_liner_ko": "서양 문명을 소개하고 탈아론을 주장함",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ito_hirobumi",
+    "name_ko": "이토 히로부미",
+    "name_en": "Itō Hirobumi",
+    "birth_year": 1841,
+    "death_year": 1909,
+    "is_approximate": false,
+    "polity_id": "japan_modern",
+    "activity_location": [
+      35.68,
+      139.75
+    ],
+    "activity_years": [
+      1868,
+      1909
+    ],
+    "one_liner_ko": "메이지 헌법을 만들고 한국 통감이 되어 국권 침탈을 주도함",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[9역13-01]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kim_okgyun",
+    "name_ko": "김옥균",
+    "name_en": "Kim Ok-gyun",
+    "birth_year": 1851,
+    "death_year": 1894,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1884,
+      1894
+    ],
+    "one_liner_ko": "갑신정변을 일으켜 근대 개혁을 시도함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gojong",
+    "name_ko": "고종",
+    "name_en": "Gojong of Korea",
+    "birth_year": 1852,
+    "death_year": 1919,
+    "is_approximate": false,
+    "polity_id": "korean_empire",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1873,
+      1907
+    ],
+    "one_liner_ko": "대한제국을 선포하고 광무개혁을 추진함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-01]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "meiji",
+    "name_ko": "메이지 천황",
+    "name_en": "Emperor Meiji",
+    "birth_year": 1852,
+    "death_year": 1912,
+    "is_approximate": false,
+    "polity_id": "japan_modern",
+    "activity_location": [
+      35.68,
+      139.75
+    ],
+    "activity_years": [
+      1867,
+      1912
+    ],
+    "one_liner_ko": "메이지 유신을 통해 근대 국가 체제를 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jeon_bongjun",
+    "name_ko": "전봉준",
+    "name_en": "Jeon Bong-jun",
+    "birth_year": 1855,
+    "death_year": 1895,
+    "is_approximate": false,
+    "polity_id": "joseon",
+    "activity_location": [
+      35.6,
+      126.85
+    ],
+    "activity_years": [
+      1894,
+      1895
+    ],
+    "one_liner_ko": "동학 농민 운동을 이끎",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-01]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "wilson",
+    "name_ko": "윌슨",
+    "name_en": "Woodrow Wilson",
+    "birth_year": 1856,
+    "death_year": 1924,
+    "is_approximate": false,
+    "polity_id": "usa",
+    "activity_location": [
+      38.9,
+      -77.04
+    ],
+    "activity_years": [
+      1913,
+      1921
+    ],
+    "one_liner_ko": "민족 자결주의를 제창하고 국제 연맹 창설을 주도함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[9역13-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kang_youwei",
+    "name_ko": "캉유웨이",
+    "name_en": "Kang Youwei",
+    "birth_year": 1858,
+    "death_year": 1927,
+    "is_approximate": false,
+    "polity_id": "qing",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1895,
+      1927
+    ],
+    "one_liner_ko": "변법자강 운동(무술변법)을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yuan_shikai",
+    "name_ko": "위안스카이",
+    "name_en": "Yuan Shikai",
+    "birth_year": 1859,
+    "death_year": 1916,
+    "is_approximate": false,
+    "polity_id": "roc",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1882,
+      1916
+    ],
+    "one_liner_ko": "신해혁명 후 대총통이 되었으나 황제 즉위를 시도함",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "seo_jaepil",
+    "name_ko": "서재필",
+    "name_en": "Seo Jae-pil (Philip Jaisohn)",
+    "birth_year": 1864,
+    "death_year": 1951,
+    "is_approximate": false,
+    "polity_id": "korean_empire",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1896,
+      1898
+    ],
+    "one_liner_ko": "독립 협회를 세우고 『독립신문』을 창간함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역13-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "sun_yatsen",
+    "name_ko": "쑨원",
+    "name_en": "Sun Yat-sen",
+    "birth_year": 1866,
+    "death_year": 1925,
+    "is_approximate": false,
+    "polity_id": "roc",
+    "activity_location": [
+      32.06,
+      118.8
+    ],
+    "activity_years": [
+      1894,
+      1925
+    ],
+    "one_liner_ko": "삼민주의를 내세워 신해혁명을 이끌고 중화민국을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12세사03-04]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "hong_beomdo",
+    "name_ko": "홍범도",
+    "name_en": "Hong Beom-do",
+    "birth_year": 1868,
+    "death_year": 1943,
+    "is_approximate": false,
+    "polity_id": "kpg",
+    "activity_location": [
+      42.9,
+      129.5
+    ],
+    "activity_years": [
+      1920,
+      1943
+    ],
+    "one_liner_ko": "봉오동·청산리 전투에서 독립군을 이끎",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-02]",
+      "[12동역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gandhi",
+    "name_ko": "간디",
+    "name_en": "Mahatma Gandhi",
+    "birth_year": 1869,
+    "death_year": 1948,
+    "is_approximate": false,
+    "polity_id": "british_india",
+    "activity_location": [
+      23.0,
+      72.6
+    ],
+    "activity_years": [
+      1915,
+      1948
+    ],
+    "one_liner_ko": "비폭력·불복종 운동으로 인도 독립을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-03]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "lenin",
+    "name_ko": "레닌",
+    "name_en": "Vladimir Lenin",
+    "birth_year": 1870,
+    "death_year": 1924,
+    "is_approximate": false,
+    "polity_id": "ussr",
+    "activity_location": [
+      55.75,
+      37.62
+    ],
+    "activity_years": [
+      1917,
+      1924
+    ],
+    "one_liner_ko": "러시아 혁명을 이끌고 소비에트 정권을 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[12세사04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "churchill",
+    "name_ko": "처칠",
+    "name_en": "Winston Churchill",
+    "birth_year": 1874,
+    "death_year": 1965,
+    "is_approximate": false,
+    "polity_id": "uk",
+    "activity_location": [
+      51.5,
+      -0.12
+    ],
+    "activity_years": [
+      1940,
+      1955
+    ],
+    "one_liner_ko": "제2차 세계 대전에서 영국을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[12세사04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "syngman_rhee",
+    "name_ko": "이승만",
+    "name_en": "Syngman Rhee",
+    "birth_year": 1875,
+    "death_year": 1965,
+    "is_approximate": false,
+    "polity_id": "rok",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1948,
+      1960
+    ],
+    "one_liner_ko": "대한민국 초대 대통령, 4·19 혁명으로 물러남",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-03]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jinnah",
+    "name_ko": "진나",
+    "name_en": "Muhammad Ali Jinnah",
+    "birth_year": 1876,
+    "death_year": 1948,
+    "is_approximate": false,
+    "polity_id": "pakistan",
+    "activity_location": [
+      24.86,
+      67.0
+    ],
+    "activity_years": [
+      1940,
+      1948
+    ],
+    "one_liner_ko": "파키스탄 건국을 이끎",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kim_gu",
+    "name_ko": "김구",
+    "name_en": "Kim Gu",
+    "birth_year": 1876,
+    "death_year": 1949,
+    "is_approximate": false,
+    "polity_id": "kpg",
+    "activity_location": [
+      31.23,
+      121.47
+    ],
+    "activity_years": [
+      1919,
+      1949
+    ],
+    "one_liner_ko": "대한민국 임시 정부를 이끌고 한인 애국단을 조직함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-02]",
+      "[12동역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "an_changho",
+    "name_ko": "안창호",
+    "name_en": "An Chang-ho",
+    "birth_year": 1878,
+    "death_year": 1938,
+    "is_approximate": false,
+    "polity_id": "kpg",
+    "activity_location": [
+      31.23,
+      121.47
+    ],
+    "activity_years": [
+      1907,
+      1938
+    ],
+    "one_liner_ko": "신민회·흥사단을 세워 실력 양성 운동을 펼침",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역13-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "stalin",
+    "name_ko": "스탈린",
+    "name_en": "Joseph Stalin",
+    "birth_year": 1878,
+    "death_year": 1953,
+    "is_approximate": false,
+    "polity_id": "ussr",
+    "activity_location": [
+      55.75,
+      37.62
+    ],
+    "activity_years": [
+      1924,
+      1953
+    ],
+    "one_liner_ko": "소련의 독재자로 계획 경제와 대숙청을 추진함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[9역07-01]",
+      "[12세사04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "an_junggeun",
+    "name_ko": "안중근",
+    "name_en": "An Jung-geun",
+    "birth_year": 1879,
+    "death_year": 1910,
+    "is_approximate": false,
+    "polity_id": "korean_empire",
+    "activity_location": [
+      45.75,
+      126.63
+    ],
+    "activity_years": [
+      1909,
+      1910
+    ],
+    "one_liner_ko": "하얼빈에서 이토 히로부미를 처단함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-02]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "sin_chaeho",
+    "name_ko": "신채호",
+    "name_en": "Sin Chae-ho",
+    "birth_year": 1880,
+    "death_year": 1936,
+    "is_approximate": false,
+    "polity_id": "kpg",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1905,
+      1936
+    ],
+    "one_liner_ko": "민족주의 사학을 세우고 「조선 혁명 선언」을 씀",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역13-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ataturk",
+    "name_ko": "무스타파 케말(아타튀르크)",
+    "name_en": "Mustafa Kemal Atatürk",
+    "birth_year": 1881,
+    "death_year": 1938,
+    "is_approximate": false,
+    "polity_id": "turkey",
+    "activity_location": [
+      39.93,
+      32.85
+    ],
+    "activity_years": [
+      1919,
+      1938
+    ],
+    "one_liner_ko": "튀르키예 공화국을 세우고 근대화 개혁을 추진함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-03]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "lu_xun",
+    "name_ko": "루쉰",
+    "name_en": "Lu Xun",
+    "birth_year": 1881,
+    "death_year": 1936,
+    "is_approximate": false,
+    "polity_id": "roc",
+    "activity_location": [
+      31.23,
+      121.47
+    ],
+    "activity_years": [
+      1918,
+      1936
+    ],
+    "one_liner_ko": "『아Q정전』 등으로 신문화 운동을 이끈 작가",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역06-03]",
+      "[12동역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "fdr",
+    "name_ko": "프랭클린 루스벨트",
+    "name_en": "Franklin D. Roosevelt",
+    "birth_year": 1882,
+    "death_year": 1945,
+    "is_approximate": false,
+    "polity_id": "usa",
+    "activity_location": [
+      38.9,
+      -77.04
+    ],
+    "activity_years": [
+      1933,
+      1945
+    ],
+    "one_liner_ko": "뉴딜 정책으로 대공황에 대응하고 제2차 세계 대전을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[12세사04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mussolini",
+    "name_ko": "무솔리니",
+    "name_en": "Benito Mussolini",
+    "birth_year": 1883,
+    "death_year": 1945,
+    "is_approximate": false,
+    "polity_id": "italy_kingdom",
+    "activity_location": [
+      41.9,
+      12.5
+    ],
+    "activity_years": [
+      1922,
+      1945
+    ],
+    "one_liner_ko": "파시스트당을 이끌고 이탈리아 독재 체제를 세움",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[12세사04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "tojo_hideki",
+    "name_ko": "도조 히데키",
+    "name_en": "Tōjō Hideki",
+    "birth_year": 1884,
+    "death_year": 1948,
+    "is_approximate": false,
+    "polity_id": "japan_modern",
+    "activity_location": [
+      35.68,
+      139.75
+    ],
+    "activity_years": [
+      1941,
+      1945
+    ],
+    "one_liner_ko": "태평양 전쟁을 일으킨 일본 총리",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[12동역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "truman",
+    "name_ko": "트루먼",
+    "name_en": "Harry S. Truman",
+    "birth_year": 1884,
+    "death_year": 1972,
+    "is_approximate": false,
+    "polity_id": "usa",
+    "activity_location": [
+      38.9,
+      -77.04
+    ],
+    "activity_years": [
+      1945,
+      1953
+    ],
+    "one_liner_ko": "트루먼 독트린으로 냉전을 시작하고 6·25 전쟁에 참전함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "chiang_kaishek",
+    "name_ko": "장제스",
+    "name_en": "Chiang Kai-shek",
+    "birth_year": 1887,
+    "death_year": 1975,
+    "is_approximate": false,
+    "polity_id": "roc",
+    "activity_location": [
+      32.06,
+      118.8
+    ],
+    "activity_years": [
+      1926,
+      1975
+    ],
+    "one_liner_ko": "국민당을 이끌고 북벌·항일 전쟁을 지휘했으며 타이완으로 옮김",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역06-03]",
+      "[12동역03-02]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "hitler",
+    "name_ko": "히틀러",
+    "name_en": "Adolf Hitler",
+    "birth_year": 1889,
+    "death_year": 1945,
+    "is_approximate": false,
+    "polity_id": "germany_weimar_nazi",
+    "activity_location": [
+      52.52,
+      13.4
+    ],
+    "activity_years": [
+      1933,
+      1945
+    ],
+    "one_liner_ko": "나치 독일의 독재자로 제2차 세계 대전과 홀로코스트를 일으킴",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[9역06-02]",
+      "[12세사04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kim_jwajin",
+    "name_ko": "김좌진",
+    "name_en": "Kim Jwa-jin",
+    "birth_year": 1889,
+    "death_year": 1930,
+    "is_approximate": false,
+    "polity_id": "kpg",
+    "activity_location": [
+      42.9,
+      129.5
+    ],
+    "activity_years": [
+      1920,
+      1930
+    ],
+    "one_liner_ko": "청산리 대첩에서 북로 군정서를 지휘함",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역13-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "nehru",
+    "name_ko": "네루",
+    "name_en": "Jawaharlal Nehru",
+    "birth_year": 1889,
+    "death_year": 1964,
+    "is_approximate": false,
+    "polity_id": "india",
+    "activity_location": [
+      28.6,
+      77.2
+    ],
+    "activity_years": [
+      1947,
+      1964
+    ],
+    "one_liner_ko": "인도 초대 총리로 비동맹 외교를 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ho_chi_minh",
+    "name_ko": "호찌민",
+    "name_en": "Hồ Chí Minh",
+    "birth_year": 1890,
+    "death_year": 1969,
+    "is_approximate": false,
+    "polity_id": "vietnam_drv",
+    "activity_location": [
+      21.03,
+      105.85
+    ],
+    "activity_years": [
+      1941,
+      1969
+    ],
+    "one_liner_ko": "베트남의 독립을 선언하고 프랑스·미국과의 전쟁을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "haile_selassie",
+    "name_ko": "하일레 셀라시에",
+    "name_en": "Haile Selassie",
+    "birth_year": 1892,
+    "death_year": 1975,
+    "is_approximate": false,
+    "polity_id": "ethiopia_empire",
+    "activity_location": [
+      9.02,
+      38.75
+    ],
+    "activity_years": [
+      1930,
+      1974
+    ],
+    "one_liner_ko": "이탈리아 침략에 맞서 국제 연맹에 호소함",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mao_zedong",
+    "name_ko": "마오쩌둥",
+    "name_en": "Mao Zedong",
+    "birth_year": 1893,
+    "death_year": 1976,
+    "is_approximate": false,
+    "polity_id": "prc",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1935,
+      1976
+    ],
+    "one_liner_ko": "중국 공산당을 이끌어 중화 인민 공화국을 세우고 문화 대혁명을 일으킴",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "zhou_enlai",
+    "name_ko": "저우언라이",
+    "name_en": "Zhou Enlai",
+    "birth_year": 1898,
+    "death_year": 1976,
+    "is_approximate": false,
+    "polity_id": "prc",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1949,
+      1976
+    ],
+    "one_liner_ko": "중국의 총리로 반둥 회의 등 외교를 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "sukarno",
+    "name_ko": "수카르노",
+    "name_en": "Sukarno",
+    "birth_year": 1901,
+    "death_year": 1970,
+    "is_approximate": false,
+    "polity_id": "indonesia",
+    "activity_location": [
+      -6.2,
+      106.85
+    ],
+    "activity_years": [
+      1945,
+      1967
+    ],
+    "one_liner_ko": "인도네시아 독립을 선언하고 반둥 회의를 주최함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "khomeini",
+    "name_ko": "호메이니",
+    "name_en": "Ruhollah Khomeini",
+    "birth_year": 1902,
+    "death_year": 1989,
+    "is_approximate": false,
+    "polity_id": "iran_modern",
+    "activity_location": [
+      35.7,
+      51.4
+    ],
+    "activity_years": [
+      1979,
+      1989
+    ],
+    "one_liner_ko": "이란 이슬람 혁명을 이끎",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yu_gwansun",
+    "name_ko": "유관순",
+    "name_en": "Yu Gwan-sun",
+    "birth_year": 1902,
+    "death_year": 1920,
+    "is_approximate": false,
+    "polity_id": "kpg",
+    "activity_location": [
+      36.8,
+      127.2
+    ],
+    "activity_years": [
+      1919,
+      1920
+    ],
+    "one_liner_ko": "3·1 운동에 참여해 옥중에서 순국함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-02]",
+      "[12동역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "deng_xiaoping",
+    "name_ko": "덩샤오핑",
+    "name_en": "Deng Xiaoping",
+    "birth_year": 1904,
+    "death_year": 1997,
+    "is_approximate": false,
+    "polity_id": "prc",
+    "activity_location": [
+      39.9,
+      116.4
+    ],
+    "activity_years": [
+      1978,
+      1997
+    ],
+    "one_liner_ko": "개혁·개방 정책으로 중국 경제를 성장시킴",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12동역04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yun_bonggil",
+    "name_ko": "윤봉길",
+    "name_en": "Yun Bong-gil",
+    "birth_year": 1908,
+    "death_year": 1932,
+    "is_approximate": false,
+    "polity_id": "kpg",
+    "activity_location": [
+      31.23,
+      121.47
+    ],
+    "activity_years": [
+      1932,
+      1932
+    ],
+    "one_liner_ko": "상하이 훙커우 공원 의거를 일으킴",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-02]",
+      "[12동역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "nkrumah",
+    "name_ko": "은크루마",
+    "name_en": "Kwame Nkrumah",
+    "birth_year": 1909,
+    "death_year": 1972,
+    "is_approximate": false,
+    "polity_id": "ghana_modern",
+    "activity_location": [
+      5.6,
+      -0.19
+    ],
+    "activity_years": [
+      1947,
+      1966
+    ],
+    "one_liner_ko": "가나 독립을 이끌고 범아프리카주의를 주창함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kim_ilsung",
+    "name_ko": "김일성",
+    "name_en": "Kim Il-sung",
+    "birth_year": 1912,
+    "death_year": 1994,
+    "is_approximate": false,
+    "polity_id": "dprk",
+    "activity_location": [
+      39.03,
+      125.75
+    ],
+    "activity_years": [
+      1948,
+      1994
+    ],
+    "one_liner_ko": "북한 정권을 수립하고 6·25 전쟁을 일으킴",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-03]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "aung_san",
+    "name_ko": "아웅 산",
+    "name_en": "Aung San",
+    "birth_year": 1915,
+    "death_year": 1947,
+    "is_approximate": false,
+    "polity_id": null,
+    "activity_location": [
+      16.87,
+      96.2
+    ],
+    "activity_years": [
+      1940,
+      1947
+    ],
+    "one_liner_ko": "미얀마 독립운동의 지도자",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "미얀마(버마) 항목 미입력으로 polity 미연결(TODO)."
+  },
+  {
+    "id": "kennedy",
+    "name_ko": "케네디",
+    "name_en": "John F. Kennedy",
+    "birth_year": 1917,
+    "death_year": 1963,
+    "is_approximate": false,
+    "polity_id": "usa",
+    "activity_location": [
+      38.9,
+      -77.04
+    ],
+    "activity_years": [
+      1961,
+      1963
+    ],
+    "one_liner_ko": "쿠바 미사일 위기를 해결함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "park_chunghee",
+    "name_ko": "박정희",
+    "name_en": "Park Chung-hee",
+    "birth_year": 1917,
+    "death_year": 1979,
+    "is_approximate": false,
+    "polity_id": "rok",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1961,
+      1979
+    ],
+    "one_liner_ko": "5·16 군사 정변으로 집권해 경제 개발과 유신 체제를 추진함",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-03]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mandela",
+    "name_ko": "넬슨 만델라",
+    "name_en": "Nelson Mandela",
+    "birth_year": 1918,
+    "death_year": 2013,
+    "is_approximate": false,
+    "polity_id": "south_africa",
+    "activity_location": [
+      -33.92,
+      18.42
+    ],
+    "activity_years": [
+      1944,
+      1999
+    ],
+    "one_liner_ko": "아파르트헤이트에 맞서 싸우고 남아프리카 공화국 대통령이 됨",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-02]",
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "nasser",
+    "name_ko": "나세르",
+    "name_en": "Gamal Abdel Nasser",
+    "birth_year": 1918,
+    "death_year": 1970,
+    "is_approximate": false,
+    "polity_id": "egypt_modern",
+    "activity_location": [
+      30.04,
+      31.24
+    ],
+    "activity_years": [
+      1952,
+      1970
+    ],
+    "one_liner_ko": "수에즈 운하를 국유화하고 아랍 민족주의를 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kim_daejung",
+    "name_ko": "김대중",
+    "name_en": "Kim Dae-jung",
+    "birth_year": 1924,
+    "death_year": 2009,
+    "is_approximate": false,
+    "polity_id": "rok",
+    "activity_location": [
+      37.57,
+      126.98
+    ],
+    "activity_years": [
+      1971,
+      2003
+    ],
+    "one_liner_ko": "민주화 운동을 이끌고 남북 정상 회담을 열어 노벨 평화상을 받음",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-03]",
+      "[12동역04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mlk",
+    "name_ko": "마틴 루서 킹",
+    "name_en": "Martin Luther King Jr.",
+    "birth_year": 1929,
+    "death_year": 1968,
+    "is_approximate": false,
+    "polity_id": "usa",
+    "activity_location": [
+      33.75,
+      -84.39
+    ],
+    "activity_years": [
+      1955,
+      1968
+    ],
+    "one_liner_ko": "비폭력 흑인 민권 운동을 이끎",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-02]",
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gorbachev",
+    "name_ko": "고르바초프",
+    "name_en": "Mikhail Gorbachev",
+    "birth_year": 1931,
+    "death_year": 2022,
+    "is_approximate": false,
+    "polity_id": "ussr",
+    "activity_location": [
+      55.75,
+      37.62
+    ],
+    "activity_years": [
+      1985,
+      1991
+    ],
+    "one_liner_ko": "페레스트로이카·글라스노스트로 냉전 종식에 기여함",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
   }
 ]

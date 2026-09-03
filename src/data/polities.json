@@ -1,307 +1,1017 @@
 [
   {
-    "id": "goryeo",
-    "name_ko": "고려",
-    "name_en": "Goryeo",
-    "region": "east_asia",
-    "start_year": 918,
-    "end_year": 1392,
-    "capital": "개경",
+    "id": "ancient_egypt",
+    "name_ko": "고대 이집트",
+    "name_en": "Ancient Egypt",
+    "region": "africa",
+    "start_year": -3100,
+    "end_year": -30,
+    "capital": "멤피스 · 테베",
     "centroid": [
-      37.97,
-      126.55
-    ],
-    "area_polygon": [
-      [
-        43.0,
-        130.6
-      ],
-      [
-        42.6,
-        129.9
-      ],
-      [
-        41.6,
-        128.9
-      ],
-      [
-        40.9,
-        126.9
-      ],
-      [
-        39.9,
-        124.7
-      ],
-      [
-        38.7,
-        124.9
-      ],
-      [
-        37.6,
-        126.0
-      ],
-      [
-        35.1,
-        126.0
-      ],
-      [
-        34.3,
-        126.5
-      ],
-      [
-        34.5,
-        128.6
-      ],
-      [
-        35.7,
-        129.5
-      ],
-      [
-        37.3,
-        129.4
-      ],
-      [
-        38.6,
-        128.4
-      ],
-      [
-        40.1,
-        128.9
-      ],
-      [
-        41.2,
-        130.0
-      ],
-      [
-        42.3,
-        130.7
-      ]
-    ],
-    "is_approximate": true,
-    "summary_ko": "왕건이 후삼국을 통일하여 세운 왕조. 거란·여진·몽골의 침입을 겪었고, 원 간섭기 이후 개혁을 거쳐 조선으로 교체됨.",
-    "textbook_appearance": [
-      "역사②",
-      "동아시아 역사 기행"
-    ],
-    "achievement_standards": [
-      "[9역10-01]",
-      "[9역10-02]",
-      "[9역10-03]",
-      "[9역10-04]"
-    ],
-    "sources": [
-      "국사편찬위원회 『한국사』",
-      "교육부 편수자료(역사)"
-    ],
-    "note": "북방 경계는 시기별로 변동(강동 6주 확보, 동북 9성, 공민왕 대 쌍성총관부 수복 등)이 커서 개략적 범위로 표시."
-  },
-  {
-    "id": "joseon",
-    "name_ko": "조선",
-    "name_en": "Joseon",
-    "region": "east_asia",
-    "start_year": 1392,
-    "end_year": 1897,
-    "capital": "한양",
-    "centroid": [
-      37.57,
-      126.98
-    ],
-    "area_polygon": [
-      [
-        43.0,
-        130.6
-      ],
-      [
-        42.2,
-        129.3
-      ],
-      [
-        41.9,
-        128.1
-      ],
-      [
-        41.5,
-        126.9
-      ],
-      [
-        40.1,
-        124.4
-      ],
-      [
-        39.0,
-        125.2
-      ],
-      [
-        37.7,
-        126.1
-      ],
-      [
-        35.0,
-        126.2
-      ],
-      [
-        34.3,
-        126.6
-      ],
-      [
-        34.6,
-        128.7
-      ],
-      [
-        35.8,
-        129.6
-      ],
-      [
-        37.4,
-        129.5
-      ],
-      [
-        38.7,
-        128.4
-      ],
-      [
-        40.3,
-        129.2
-      ],
-      [
-        41.5,
-        130.0
-      ],
-      [
-        42.4,
-        130.7
-      ]
-    ],
-    "is_approximate": false,
-    "summary_ko": "이성계가 건국한 유교 국가. 세종 대 훈민정음 창제 등 문화가 융성했고, 왜란·호란을 거쳐 1897년 대한제국으로 국호를 바꿈.",
-    "textbook_appearance": [
-      "역사②",
-      "동아시아 역사 기행"
-    ],
-    "achievement_standards": [
-      "[9역11-01]",
-      "[9역11-02]",
-      "[9역11-03]",
-      "[9역12-01]",
-      "[9역12-02]",
-      "[9역12-03]"
-    ],
-    "sources": [
-      "국사편찬위원회 『한국사』",
-      "교육부 편수자료(역사)"
-    ],
-    "note": "종료 연도는 대한제국 선포(1897)를 기준으로 함. 4군 6진 개척(15세기) 이전에는 북방 경계가 더 남쪽이었음."
-  },
-  {
-    "id": "mongol_empire",
-    "name_ko": "몽골 제국",
-    "name_en": "Mongol Empire",
-    "region": "central_asia",
-    "start_year": 1206,
-    "end_year": 1368,
-    "capital": "카라코룸",
-    "centroid": [
-      47.2,
-      102.85
+      26.5,
+      31.5
     ],
     "area_polygon": [],
-    "radius_km": 2500,
+    "radius_km": 500,
     "is_approximate": true,
-    "summary_ko": "칭기즈 칸이 몽골 부족을 통일해 세운 제국. 유라시아 대부분을 정복해 동서 교류를 크게 확대함. 원·일 칸국·차가타이 칸국·킵차크 칸국으로 분열.",
+    "summary_ko": "나일강의 선물이라 불린 문명. 파라오의 신권 정치와 피라미드·상형 문자를 남겼으며 프톨레마이오스 왕조 후 로마에 병합됨.",
     "textbook_appearance": [
       "역사①",
-      "세계사",
-      "동아시아 역사 기행"
+      "세계사"
     ],
     "achievement_standards": [
-      "[9역04-01]",
-      "[12세사02-01]",
-      "[12동역02-03]"
+      "[9역02-01]",
+      "[12세사01-01]"
     ],
     "sources": [
-      "교육부 편수자료(세계사)",
-      "『세계사』 교과서 공통 서술"
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
     ],
-    "note": "종료 연도는 원의 대도 함락(1368)을 기준으로 함. 1260년대 이후 사실상 4개 칸국으로 분열되어 있었으며, 영역은 시기별 차이가 매우 커 반경 표시로 대체."
+    "note": "통일 왕조 성립 연대(기원전 3100년경)는 추정치. 고왕국~신왕국·후기 왕조를 한 항목으로 표시."
   },
   {
-    "id": "southern_song",
-    "name_ko": "남송",
-    "name_en": "Southern Song",
-    "region": "east_asia",
-    "start_year": 1127,
-    "end_year": 1279,
-    "capital": "임안(항저우)",
+    "id": "sumer",
+    "name_ko": "수메르 도시 국가",
+    "name_en": "Sumerian city-states",
+    "region": "west_asia",
+    "start_year": -3000,
+    "end_year": -2334,
+    "capital": "우르 · 우루크 · 라가시",
     "centroid": [
-      30.25,
-      120.17
+      31.0,
+      46.0
     ],
-    "area_polygon": [
-      [
-        33.5,
-        104.0
-      ],
-      [
-        33.0,
-        110.0
-      ],
-      [
-        33.3,
-        116.0
-      ],
-      [
-        32.8,
-        120.5
-      ],
-      [
-        30.0,
-        122.0
-      ],
-      [
-        27.0,
-        120.6
-      ],
-      [
-        24.0,
-        118.5
-      ],
-      [
-        21.5,
-        112.0
-      ],
-      [
-        21.0,
-        108.0
-      ],
-      [
-        24.5,
-        104.0
-      ],
-      [
-        28.5,
-        102.5
-      ],
-      [
-        31.5,
-        103.0
-      ]
-    ],
+    "area_polygon": [],
+    "radius_km": 250,
     "is_approximate": true,
-    "summary_ko": "금에 밀려 강남으로 옮긴 송. 해상 무역과 도시 경제가 발달했고, 주희가 성리학을 집대성함. 몽골(원)에 멸망.",
+    "summary_ko": "티그리스·유프라테스강 하류에 세워진 최초의 도시 문명. 쐐기 문자와 지구라트를 남김.",
     "textbook_appearance": [
       "역사①",
-      "세계사",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-01]",
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "도시 국가들의 총칭. 연대는 고고학 추정치."
+  },
+  {
+    "id": "indus_civ",
+    "name_ko": "인더스 문명",
+    "name_en": "Indus Valley Civilisation",
+    "region": "south_asia",
+    "start_year": -2600,
+    "end_year": -1900,
+    "capital": "모헨조다로 · 하라파",
+    "centroid": [
+      27.3,
+      68.1
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": true,
+    "summary_ko": "계획도시와 배수 시설, 인장 문자를 남긴 청동기 문명. 원인 미상으로 쇠퇴함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-01]",
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성숙기 연대(기원전 2600~1900)는 고고학 추정치. 국가가 아닌 문명이지만 지도 표시를 위해 수록."
+  },
+  {
+    "id": "akkad",
+    "name_ko": "아카드 제국",
+    "name_en": "Akkadian Empire",
+    "region": "west_asia",
+    "start_year": -2334,
+    "end_year": -2154,
+    "capital": "아카드",
+    "centroid": [
+      33.0,
+      44.4
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": true,
+    "summary_ko": "사르곤이 메소포타미아를 최초로 통일해 세운 제국.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 중기 연대기 기준 추정치."
+  },
+  {
+    "id": "gojoseon",
+    "name_ko": "고조선",
+    "name_en": "Gojoseon",
+    "region": "east_asia",
+    "start_year": -2333,
+    "end_year": -108,
+    "capital": "왕검성(평양 일대 추정)",
+    "centroid": [
+      39.0,
+      125.8
+    ],
+    "area_polygon": [],
+    "radius_km": 350,
+    "is_approximate": true,
+    "summary_ko": "청동기 문화를 바탕으로 세워진 우리 역사상 최초의 국가. 8조법이 전하며, 위만 집권 후 한과 대립하다 기원전 108년 멸망함.",
+    "textbook_appearance": [
+      "역사②",
       "동아시아 역사 기행"
     ],
     "achievement_standards": [
-      "[9역04-01]",
-      "[12세사02-01]"
+      "[9역08-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "시작 연도 −2333 은 『삼국유사』 전승 연대. 실제 국가 성립은 청동기 시대(기원전 10세기 이후)로 추정하며 왕검성 위치도 논쟁이 있음."
+  },
+  {
+    "id": "minoan",
+    "name_ko": "미노스 문명(크레타)",
+    "name_en": "Minoan civilization",
+    "region": "europe",
+    "start_year": -2000,
+    "end_year": -1450,
+    "capital": "크노소스",
+    "centroid": [
+      35.3,
+      25.16
+    ],
+    "area_polygon": [],
+    "radius_km": 150,
+    "is_approximate": true,
+    "summary_ko": "크레타섬의 해상 문명. 크노소스 궁전과 화려한 벽화를 남겼으며 화산 폭발·미케네의 침입으로 쇠퇴함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 고고학 추정치. 국가가 아닌 문명."
+  },
+  {
+    "id": "old_babylon",
+    "name_ko": "바빌로니아(고바빌로니아)",
+    "name_en": "Old Babylonian Empire",
+    "region": "west_asia",
+    "start_year": -1894,
+    "end_year": -1595,
+    "capital": "바빌론",
+    "centroid": [
+      32.5,
+      44.4
+    ],
+    "area_polygon": [],
+    "radius_km": 450,
+    "is_approximate": true,
+    "summary_ko": "함무라비왕이 메소포타미아를 통일하고 법전을 반포한 왕국.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-01]",
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 중기 연대기 기준 추정치."
+  },
+  {
+    "id": "hittite",
+    "name_ko": "히타이트",
+    "name_en": "Hittite Empire",
+    "region": "west_asia",
+    "start_year": -1650,
+    "end_year": -1180,
+    "capital": "하투샤",
+    "centroid": [
+      40.0,
+      34.6
+    ],
+    "area_polygon": [],
+    "radius_km": 550,
+    "is_approximate": true,
+    "summary_ko": "아나톨리아의 왕국. 철제 무기와 전차로 강성했으며 이집트와 카데시 전투를 벌임.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 추정치."
+  },
+  {
+    "id": "mycenae",
+    "name_ko": "미케네 문명",
+    "name_en": "Mycenaean Greece",
+    "region": "europe",
+    "start_year": -1600,
+    "end_year": -1100,
+    "capital": "미케네",
+    "centroid": [
+      37.73,
+      22.76
+    ],
+    "area_polygon": [],
+    "radius_km": 250,
+    "is_approximate": true,
+    "summary_ko": "그리스 본토의 청동기 문명. 성채와 선문자 B 를 남겼고 트로이 전쟁 전설의 배경이 됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 고고학 추정치."
+  },
+  {
+    "id": "shang",
+    "name_ko": "상(은)",
+    "name_en": "Shang",
+    "region": "east_asia",
+    "start_year": -1600,
+    "end_year": -1046,
+    "capital": "은허(안양)",
+    "centroid": [
+      36.1,
+      114.3
+    ],
+    "area_polygon": [],
+    "radius_km": 350,
+    "is_approximate": true,
+    "summary_ko": "황허 유역의 청동기 왕조. 갑골문으로 점을 쳐 나라를 다스렸으며, 주에 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-01]",
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "건국·멸망 연도는 하상주단대공정 추정치(기원전 1600 / 기원전 1046)."
+  },
+  {
+    "id": "olmec",
+    "name_ko": "올메카 문명",
+    "name_en": "Olmec civilization",
+    "region": "americas",
+    "start_year": -1200,
+    "end_year": -400,
+    "capital": "산로렌소 · 라벤타",
+    "centroid": [
+      18.0,
+      -94.5
+    ],
+    "area_polygon": [],
+    "radius_km": 250,
+    "is_approximate": true,
+    "summary_ko": "메소아메리카 최초의 문명. 거대 두상 조각과 달력·문자의 기초를 남김.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 고고학 추정치. 국가가 아닌 문명."
+  },
+  {
+    "id": "phoenicia",
+    "name_ko": "페니키아",
+    "name_en": "Phoenicia",
+    "region": "west_asia",
+    "start_year": -1200,
+    "end_year": -539,
+    "capital": "티레 · 시돈",
+    "centroid": [
+      33.6,
+      35.3
+    ],
+    "area_polygon": [],
+    "radius_km": 150,
+    "is_approximate": true,
+    "summary_ko": "지중해 동안의 해상 교역 도시들. 알파벳의 기원이 된 문자를 전하고 카르타고 등 식민 도시를 세움.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "도시 국가들의 총칭. 연대는 개략적."
+  },
+  {
+    "id": "kush",
+    "name_ko": "쿠시 왕국",
+    "name_en": "Kingdom of Kush",
+    "region": "africa",
+    "start_year": -1070,
+    "end_year": 350,
+    "capital": "나파타 → 메로에",
+    "centroid": [
+      17.0,
+      33.5
+    ],
+    "area_polygon": [],
+    "radius_km": 450,
+    "is_approximate": true,
+    "summary_ko": "나일강 상류 누비아의 왕국. 한때 이집트를 지배했고(제25왕조) 메로에에서 철 생산으로 번영함.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 개략적."
+  },
+  {
+    "id": "western_zhou",
+    "name_ko": "주(서주)",
+    "name_en": "Western Zhou",
+    "region": "east_asia",
+    "start_year": -1046,
+    "end_year": -771,
+    "capital": "호경(시안 부근)",
+    "centroid": [
+      34.2,
+      108.9
+    ],
+    "area_polygon": [],
+    "radius_km": 450,
+    "is_approximate": true,
+    "summary_ko": "상을 멸망시키고 봉건제와 종법제로 다스린 왕조. 견융의 침입으로 기원전 771년 수도를 낙읍으로 옮기며 동주가 시작됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연도는 통설 추정치."
+  },
+  {
+    "id": "israel_kingdom",
+    "name_ko": "히브리 왕국(이스라엘·유다)",
+    "name_en": "Kingdom of Israel and Judah",
+    "region": "west_asia",
+    "start_year": -1020,
+    "end_year": -586,
+    "capital": "예루살렘",
+    "centroid": [
+      31.78,
+      35.23
+    ],
+    "area_polygon": [],
+    "radius_km": 150,
+    "is_approximate": true,
+    "summary_ko": "다윗·솔로몬 때 번영한 뒤 남북으로 분열. 아시리아·신바빌로니아에 멸망했으며 유대교가 형성됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "통일 왕국 성립(기원전 1020년경)과 유다 멸망(기원전 586) 모두 개략적."
+  },
+  {
+    "id": "neo_assyria",
+    "name_ko": "아시리아(신아시리아)",
+    "name_en": "Neo-Assyrian Empire",
+    "region": "west_asia",
+    "start_year": -911,
+    "end_year": -609,
+    "capital": "니네베",
+    "centroid": [
+      36.36,
+      43.15
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": true,
+    "summary_ko": "철제 무기와 기병으로 서아시아를 최초로 통일한 제국. 가혹한 통치로 반발을 사 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "통일 제국 시기(기원전 7세기)를 기준으로 개략 표시."
+  },
+  {
+    "id": "sparta",
+    "name_ko": "스파르타",
+    "name_en": "Sparta",
+    "region": "europe",
+    "start_year": -900,
+    "end_year": -192,
+    "capital": "스파르타",
+    "centroid": [
+      37.07,
+      22.43
+    ],
+    "area_polygon": [],
+    "radius_km": 80,
+    "is_approximate": true,
+    "summary_ko": "군국주의 체제의 그리스 폴리스. 펠로폰네소스 동맹을 이끌었고 펠로폰네소스 전쟁에서 아테네를 꺾음.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대 개략적."
+  },
+  {
+    "id": "carthage",
+    "name_ko": "카르타고",
+    "name_en": "Carthage",
+    "region": "africa",
+    "start_year": -814,
+    "end_year": -146,
+    "capital": "카르타고",
+    "centroid": [
+      36.85,
+      10.32
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": true,
+    "summary_ko": "페니키아인이 세운 서지중해의 해상 강국. 로마와의 포에니 전쟁에서 패해 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "건국 연도는 전승(기원전 814)."
+  },
+  {
+    "id": "athens",
+    "name_ko": "아테네",
+    "name_en": "Athens",
+    "region": "europe",
+    "start_year": -800,
+    "end_year": -338,
+    "capital": "아테네",
+    "centroid": [
+      37.98,
+      23.73
+    ],
+    "area_polygon": [],
+    "radius_km": 80,
+    "is_approximate": true,
+    "summary_ko": "민주 정치를 발전시킨 그리스의 대표 폴리스. 페르시아 전쟁에서 승리한 뒤 델로스 동맹을 이끌었으나 펠로폰네소스 전쟁으로 쇠퇴함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "폴리스 형성기(기원전 8세기)부터 카이로네이아 전투(기원전 338)까지로 개략 표시."
+  },
+  {
+    "id": "spring_autumn_warring",
+    "name_ko": "춘추 전국 시대(동주)",
+    "name_en": "Eastern Zhou (Spring and Autumn · Warring States)",
+    "region": "east_asia",
+    "start_year": -770,
+    "end_year": -221,
+    "capital": "낙읍(뤄양)",
+    "centroid": [
+      34.6,
+      112.5
+    ],
+    "area_polygon": [],
+    "radius_km": 650,
+    "is_approximate": true,
+    "summary_ko": "주 왕실의 권위가 약해지고 제후국들이 다투던 시대. 철기 보급·제자백가 등장 등 큰 변화 끝에 진이 통일함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "여러 제후국이 병존한 시기이므로 하나의 정치체가 아닌 '시대'로 표시."
+  },
+  {
+    "id": "neo_babylon",
+    "name_ko": "신바빌로니아",
+    "name_en": "Neo-Babylonian Empire",
+    "region": "west_asia",
+    "start_year": -626,
+    "end_year": -539,
+    "capital": "바빌론",
+    "centroid": [
+      32.5,
+      44.4
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "아시리아를 무너뜨린 왕국. 네부카드네자르 2세 때 공중 정원을 짓고 유다 왕국을 멸망시킴(바빌론 유수).",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "achaemenid",
+    "name_ko": "아케메네스 왕조 페르시아",
+    "name_en": "Achaemenid Empire",
+    "region": "west_asia",
+    "start_year": -550,
+    "end_year": -330,
+    "capital": "페르세폴리스 · 수사",
+    "centroid": [
+      30.0,
+      52.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1800,
+    "is_approximate": false,
+    "summary_ko": "키루스 2세가 세운 최초의 세계 제국. 다리우스 1세 때 도로망과 총독제로 넓은 영토를 다스렸으며 알렉산드로스에게 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "roman_republic",
+    "name_ko": "로마 공화정",
+    "name_en": "Roman Republic",
+    "region": "europe",
+    "start_year": -509,
+    "end_year": -27,
+    "capital": "로마",
+    "centroid": [
+      41.9,
+      12.5
+    ],
+    "area_polygon": [],
+    "radius_km": 1000,
+    "is_approximate": true,
+    "summary_ko": "왕을 몰아내고 세운 공화정. 포에니 전쟁으로 지중해를 장악했으나 빈부 격차와 내전 끝에 제정으로 바뀜.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "시작 연도는 전승(기원전 509). 영역은 시기별 확대가 커 반경 표시."
+  },
+  {
+    "id": "macedon_alexander",
+    "name_ko": "마케도니아(알렉산드로스 제국)",
+    "name_en": "Macedon (Empire of Alexander)",
+    "region": "europe",
+    "start_year": -359,
+    "end_year": -323,
+    "capital": "펠라 → 바빌론",
+    "centroid": [
+      36.0,
+      40.0
+    ],
+    "area_polygon": [],
+    "radius_km": 2200,
+    "is_approximate": false,
+    "summary_ko": "필리포스 2세가 그리스를 통합하고 알렉산드로스가 페르시아를 정복해 세운 대제국. 헬레니즘 문화의 출발점.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "필리포스 2세 즉위(기원전 359)~알렉산드로스 사망(기원전 323)."
+  },
+  {
+    "id": "maurya",
+    "name_ko": "마우리아 왕조",
+    "name_en": "Maurya Empire",
+    "region": "south_asia",
+    "start_year": -322,
+    "end_year": -185,
+    "capital": "파탈리푸트라",
+    "centroid": [
+      25.6,
+      85.1
+    ],
+    "area_polygon": [],
+    "radius_km": 1200,
+    "is_approximate": true,
+    "summary_ko": "찬드라굽타가 세운 인도 최초의 통일 왕조. 아소카왕 때 최대 영역을 이루고 불교를 장려함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
     ],
     "sources": [
       "교육부 편수자료(세계사)"
     ],
-    "note": "회수(화이허)를 경계로 금과 대치. 경계선은 개략적."
+    "note": "건국·멸망 연도는 학설에 따라 수년 차이가 있음(기원전 321/322, 기원전 185/187)."
+  },
+  {
+    "id": "seleucid",
+    "name_ko": "셀레우코스 왕조",
+    "name_en": "Seleucid Empire",
+    "region": "west_asia",
+    "start_year": -312,
+    "end_year": -63,
+    "capital": "안티오키아",
+    "centroid": [
+      36.2,
+      36.16
+    ],
+    "area_polygon": [],
+    "radius_km": 1200,
+    "is_approximate": true,
+    "summary_ko": "알렉산드로스 사후 시리아·메소포타미아·이란을 지배한 헬레니즘 왕조. 파르티아·로마에 밀려 축소됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "영역이 급격히 축소되어 반경 표시."
+  },
+  {
+    "id": "ptolemaic",
+    "name_ko": "프톨레마이오스 왕조",
+    "name_en": "Ptolemaic Kingdom",
+    "region": "africa",
+    "start_year": -305,
+    "end_year": -30,
+    "capital": "알렉산드리아",
+    "centroid": [
+      31.2,
+      29.92
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "알렉산드로스 사후 이집트에 세워진 헬레니즘 왕조. 알렉산드리아 도서관으로 학문의 중심이 되었고 클레오파트라 때 로마에 병합됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "parthia",
+    "name_ko": "파르티아",
+    "name_en": "Parthian Empire",
+    "region": "west_asia",
+    "start_year": -247,
+    "end_year": 224,
+    "capital": "크테시폰",
+    "centroid": [
+      33.1,
+      44.6
+    ],
+    "area_polygon": [],
+    "radius_km": 1100,
+    "is_approximate": true,
+    "summary_ko": "이란계 유목민이 세운 왕국. 로마와 한 사이에서 비단길 중계 무역으로 번영함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "건국 연도는 개략적."
+  },
+  {
+    "id": "qin",
+    "name_ko": "진",
+    "name_en": "Qin",
+    "region": "east_asia",
+    "start_year": -221,
+    "end_year": -206,
+    "capital": "함양(셴양)",
+    "centroid": [
+      34.3,
+      108.7
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "시황제가 중국을 최초로 통일한 왕조. 군현제·문자와 도량형 통일·만리장성 축조를 추진했으나 15년 만에 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "xiongnu",
+    "name_ko": "흉노",
+    "name_en": "Xiongnu",
+    "region": "central_asia",
+    "start_year": -209,
+    "end_year": 48,
+    "capital": "(유목 국가)",
+    "centroid": [
+      46.0,
+      105.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1300,
+    "is_approximate": true,
+    "summary_ko": "묵특 선우가 통합한 몽골 초원의 유목 제국. 한과 대립하며 비단길 교역권을 다투었고, 남북으로 분열 후 쇠퇴함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]",
+      "[12동역01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "시작 연도는 묵특 즉위(기원전 209). 남흉노 귀부(48)를 종료 시점으로 잡았으며 실제 소멸은 더 늦음."
+  },
+  {
+    "id": "han",
+    "name_ko": "한",
+    "name_en": "Han",
+    "region": "east_asia",
+    "start_year": -202,
+    "end_year": 220,
+    "capital": "장안(전한) → 낙양(후한)",
+    "centroid": [
+      34.5,
+      110.0
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "유방이 세운 왕조. 무제 때 유교를 통치 이념으로 삼고 비단길을 열었으며, 신(8~23)을 사이에 두고 전한과 후한으로 나뉨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역02-03]",
+      "[12세사01-02]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "기원전 202(유방의 황제 즉위)~220. 왕망의 신(8~23)은 별도 표시하지 않음."
+  },
+  {
+    "id": "buyeo",
+    "name_ko": "부여",
+    "name_en": "Buyeo",
+    "region": "east_asia",
+    "start_year": -200,
+    "end_year": 494,
+    "capital": "부여성(지린 일대 추정)",
+    "centroid": [
+      44.0,
+      126.0
+    ],
+    "area_polygon": [],
+    "radius_km": 350,
+    "is_approximate": true,
+    "summary_ko": "쑹화강 유역 평야 지대에서 성장한 나라. 5부족 연맹체이며 영고라는 제천 행사가 있었고, 고구려·백제 건국 세력의 뿌리가 됨.",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역08-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립 시기는 기원전 2세기경으로 추정(문헌 초출 기원전 1세기). 494년 고구려에 흡수."
+  },
+  {
+    "id": "silla",
+    "name_ko": "신라",
+    "name_en": "Silla",
+    "region": "east_asia",
+    "start_year": -57,
+    "end_year": 676,
+    "capital": "금성(경주)",
+    "centroid": [
+      35.84,
+      129.21
+    ],
+    "area_polygon": [],
+    "radius_km": 220,
+    "is_approximate": true,
+    "summary_ko": "경주 지역 사로국에서 출발해 6세기 진흥왕 때 한강 유역을 차지하며 성장. 당과 연합해 백제·고구려를 멸망시키고 676년 삼국 통일을 완성함.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역08-02]",
+      "[9역08-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "건국 연도 −57 은 『삼국사기』 기록. 676년 이후는 '통일신라' 항목으로 이어짐."
+  },
+  {
+    "id": "goguryeo",
+    "name_ko": "고구려",
+    "name_en": "Goguryeo",
+    "region": "east_asia",
+    "start_year": -37,
+    "end_year": 668,
+    "capital": "국내성 → 평양(427)",
+    "centroid": [
+      40.0,
+      126.0
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": true,
+    "summary_ko": "압록강 중류에서 일어나 만주와 한반도 북부를 아우른 강국. 광개토대왕·장수왕 때 전성기를 이루었고 수·당의 침입을 막아냈으나 668년 나·당 연합군에 멸망함.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역08-02]",
+      "[9역08-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "건국 연도 −37 은 『삼국사기』 기록. 최대 영역(5세기)은 요동~한강 유역까지로 시기별 변동이 큼."
   },
   {
     "id": "roman_empire",
@@ -333,33 +1043,533 @@
     "note": "시작은 제정 수립(기원전 27), 종료는 서로마 멸망(476)을 기준으로 함. 동로마(비잔티움) 제국은 별도 항목으로 처리 예정."
   },
   {
-    "id": "ottoman_empire",
-    "name_ko": "오스만 제국",
-    "name_en": "Ottoman Empire",
-    "region": "west_asia",
-    "start_year": 1299,
-    "end_year": 1922,
-    "capital": "이스탄불(콘스탄티노폴리스)",
+    "id": "baekje",
+    "name_ko": "백제",
+    "name_en": "Baekje",
+    "region": "east_asia",
+    "start_year": -18,
+    "end_year": 660,
+    "capital": "위례성 → 웅진(475) → 사비(538)",
     "centroid": [
-      41.01,
-      28.98
+      36.6,
+      127.0
     ],
     "area_polygon": [],
-    "radius_km": 1500,
+    "radius_km": 250,
     "is_approximate": true,
-    "summary_ko": "오스만 1세가 아나톨리아에서 세운 이슬람 제국. 1453년 콘스탄티노폴리스를 함락하고 3대륙에 걸친 대제국으로 성장. 제1차 세계 대전 후 해체.",
+    "summary_ko": "한강 유역에서 성장해 근초고왕 때 전성기를 맞은 나라. 중국 남조·왜와 활발히 교류하며 불교와 문화를 전파했고 660년 멸망함.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역08-02]",
+      "[9역08-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "건국 연도 −18 은 『삼국사기』 기록."
+  },
+  {
+    "id": "kushan",
+    "name_ko": "쿠샨 왕조",
+    "name_en": "Kushan Empire",
+    "region": "south_asia",
+    "start_year": 30,
+    "end_year": 375,
+    "capital": "푸루샤푸라(페샤와르)",
+    "centroid": [
+      34.0,
+      71.5
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": true,
+    "summary_ko": "인도 서북부에서 중앙아시아에 걸친 왕조. 카니슈카왕 때 대승 불교와 간다라 미술이 발달해 동아시아로 전파됨.",
     "textbook_appearance": [
       "역사①",
       "세계사"
     ],
     "achievement_standards": [
-      "[9역04-03]",
-      "[12세사03-01]"
+      "[9역02-03]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립·소멸 연도 모두 개략적."
+  },
+  {
+    "id": "gaya",
+    "name_ko": "가야",
+    "name_en": "Gaya",
+    "region": "east_asia",
+    "start_year": 42,
+    "end_year": 562,
+    "capital": "김해(금관가야) · 고령(대가야)",
+    "centroid": [
+      35.4,
+      128.5
+    ],
+    "area_polygon": [],
+    "radius_km": 120,
+    "is_approximate": true,
+    "summary_ko": "낙동강 하류의 소국 연맹. 질 좋은 철을 생산해 낙랑·왜와 교역했으며, 532년 금관가야·562년 대가야가 신라에 병합됨.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역08-02]",
+      "[9역08-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "건국 연도 42 는 『삼국유사』 가락국기 전승."
+  },
+  {
+    "id": "aksum",
+    "name_ko": "악숨 왕국",
+    "name_en": "Kingdom of Aksum",
+    "region": "africa",
+    "start_year": 100,
+    "end_year": 940,
+    "capital": "악숨",
+    "centroid": [
+      14.13,
+      38.72
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": true,
+    "summary_ko": "에티오피아 고원의 교역 왕국. 홍해 무역으로 번영했고 4세기에 크리스트교를 받아들임.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 개략적."
+  },
+  {
+    "id": "teotihuacan",
+    "name_ko": "테오티우아칸",
+    "name_en": "Teotihuacan",
+    "region": "americas",
+    "start_year": 100,
+    "end_year": 650,
+    "capital": "테오티우아칸",
+    "centroid": [
+      19.69,
+      -98.84
+    ],
+    "area_polygon": [],
+    "radius_km": 250,
+    "is_approximate": true,
+    "summary_ko": "멕시코 고원의 계획도시. 태양의 피라미드로 유명하며 인구 10만 이상의 대도시였음.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 고고학 추정치."
+  },
+  {
+    "id": "champa",
+    "name_ko": "참파",
+    "name_en": "Champa",
+    "region": "southeast_asia",
+    "start_year": 192,
+    "end_year": 1832,
+    "capital": "인드라푸라 → 비자야",
+    "centroid": [
+      14.0,
+      108.8
+    ],
+    "area_polygon": [],
+    "radius_km": 300,
+    "is_approximate": true,
+    "summary_ko": "베트남 중부 해안의 힌두·불교 왕국. 해상 교역으로 번영했으며 다이비엣과 오랫동안 다투다 흡수됨.",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립(192, 임읍)과 소멸 시기 모두 개략적."
+  },
+  {
+    "id": "three_kingdoms_china",
+    "name_ko": "삼국 시대(위·촉·오)",
+    "name_en": "Three Kingdoms (Wei · Shu · Wu)",
+    "region": "east_asia",
+    "start_year": 220,
+    "end_year": 280,
+    "capital": "낙양 · 성도 · 건업",
+    "centroid": [
+      32.0,
+      112.0
+    ],
+    "area_polygon": [],
+    "radius_km": 800,
+    "is_approximate": true,
+    "summary_ko": "후한 멸망 후 위·촉·오 세 나라가 대립한 시대. 280년 진(晉)이 통일함.",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "세 나라를 한 항목으로 묶어 표시."
+  },
+  {
+    "id": "sasanian",
+    "name_ko": "사산 왕조 페르시아",
+    "name_en": "Sasanian Empire",
+    "region": "west_asia",
+    "start_year": 224,
+    "end_year": 651,
+    "capital": "크테시폰",
+    "centroid": [
+      33.1,
+      44.6
+    ],
+    "area_polygon": [],
+    "radius_km": 1300,
+    "is_approximate": false,
+    "summary_ko": "조로아스터교를 국교로 삼고 비잔티움과 경쟁한 페르시아 왕조. 이슬람 세력에 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "maya",
+    "name_ko": "마야 문명(고전기)",
+    "name_en": "Classic Maya",
+    "region": "americas",
+    "start_year": 250,
+    "end_year": 900,
+    "capital": "티칼 · 팔렝케 등",
+    "centroid": [
+      17.0,
+      -90.0
+    ],
+    "area_polygon": [],
+    "radius_km": 400,
+    "is_approximate": true,
+    "summary_ko": "유카탄반도 일대의 도시 국가들. 정교한 달력과 문자, 0의 개념을 사용했으며 9세기에 남부 도시들이 쇠퇴함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역02-01]",
+      "[12세사01-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "고전기(250~900)만 표시. 북부 마야는 16세기까지 지속."
+  },
+  {
+    "id": "jin_dynasty",
+    "name_ko": "진(서진·동진)",
+    "name_en": "Jin (Western and Eastern)",
+    "region": "east_asia",
+    "start_year": 265,
+    "end_year": 420,
+    "capital": "낙양 → 건강(난징)",
+    "centroid": [
+      32.5,
+      116.0
+    ],
+    "area_polygon": [],
+    "radius_km": 650,
+    "is_approximate": true,
+    "summary_ko": "삼국을 통일한 사마씨의 왕조. 북방 민족의 남하로 317년 강남으로 옮겨 동진이 되었고, 이후 남북조 시대가 이어짐.",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "서진(265~316)·동진(317~420)을 한 항목으로 표시."
+  },
+  {
+    "id": "yamato",
+    "name_ko": "야마토 정권",
+    "name_en": "Yamato",
+    "region": "east_asia",
+    "start_year": 300,
+    "end_year": 710,
+    "capital": "아스카 일대",
+    "centroid": [
+      34.5,
+      135.8
+    ],
+    "area_polygon": [],
+    "radius_km": 350,
+    "is_approximate": true,
+    "summary_ko": "긴키 지방 호족 연합에서 성장한 일본 최초의 통일 정권. 백제로부터 불교와 학문을 받아들였고 다이카 개신으로 율령 국가로 나아감.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립 시기는 고훈 시대(4세기경)로 추정."
+  },
+  {
+    "id": "gupta",
+    "name_ko": "굽타 왕조",
+    "name_en": "Gupta Empire",
+    "region": "south_asia",
+    "start_year": 320,
+    "end_year": 550,
+    "capital": "파탈리푸트라",
+    "centroid": [
+      25.6,
+      85.1
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": true,
+    "summary_ko": "북인도를 통일한 왕조. 힌두교가 확립되고 산스크리트 문학·수학(0의 개념)·아잔타 미술이 꽃핌.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "소멸 시기는 개략적(6세기 중엽)."
+  },
+  {
+    "id": "northern_wei",
+    "name_ko": "북위",
+    "name_en": "Northern Wei",
+    "region": "east_asia",
+    "start_year": 386,
+    "end_year": 534,
+    "capital": "평성 → 낙양(494)",
+    "centroid": [
+      38.5,
+      113.0
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "선비족 탁발씨가 화북을 통일한 왕조. 효문제의 한화 정책과 균전제, 윈강·룽먼 석굴로 유명함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "byzantine",
+    "name_ko": "비잔티움 제국",
+    "name_en": "Byzantine Empire",
+    "region": "europe",
+    "start_year": 395,
+    "end_year": 1453,
+    "capital": "콘스탄티노폴리스",
+    "centroid": [
+      41.01,
+      28.98
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": true,
+    "summary_ko": "동서 분열 후의 동로마 제국. 유스티니아누스 대 옛 로마 영토를 일부 회복했고 그리스 정교 문화를 발전시켰으며 1453년 오스만에 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[12세사01-03]"
     ],
     "sources": [
       "교육부 편수자료(세계사)"
     ],
-    "note": "건국 연도 1299는 전통적 통설이며 정확한 연도는 불확실. 1453년 이전 수도는 부르사·에디르네였음."
+    "note": "시작 연도는 로마 제국 동서 분열(395)을 기준으로 함. 영역이 시기별로 크게 변동하여 반경 표시."
+  },
+  {
+    "id": "southern_dynasties",
+    "name_ko": "남조(송·제·양·진)",
+    "name_en": "Southern Dynasties",
+    "region": "east_asia",
+    "start_year": 420,
+    "end_year": 589,
+    "capital": "건강(난징)",
+    "centroid": [
+      30.0,
+      117.0
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": true,
+    "summary_ko": "동진 이후 강남에서 교체된 네 왕조. 귀족 문화와 불교가 발달했으며 589년 수에 통합됨.",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "네 왕조를 한 항목으로 표시."
+  },
+  {
+    "id": "frankish",
+    "name_ko": "프랑크 왕국",
+    "name_en": "Frankish Kingdom",
+    "region": "europe",
+    "start_year": 481,
+    "end_year": 843,
+    "capital": "파리 → 아헨",
+    "centroid": [
+      49.5,
+      5.0
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "클로비스가 세운 게르만 왕국. 카롤루스 대제 때 서유럽 대부분을 통합하고 로마 교황과 결합해 서유럽 문화의 기틀을 마련함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gokturk",
+    "name_ko": "돌궐",
+    "name_en": "Göktürk Khaganate",
+    "region": "central_asia",
+    "start_year": 552,
+    "end_year": 744,
+    "capital": "외튀켄",
+    "centroid": [
+      47.0,
+      103.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1500,
+    "is_approximate": true,
+    "summary_ko": "6세기 몽골 초원을 통일한 튀르크계 유목 제국. 동서로 분열했다가 재건되었으며, 최초의 튀르크 문자 비문을 남김.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12동역01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "제1(552~630)·제2(682~744) 돌궐을 한 항목으로 표시."
+  },
+  {
+    "id": "sui",
+    "name_ko": "수",
+    "name_en": "Sui",
+    "region": "east_asia",
+    "start_year": 581,
+    "end_year": 618,
+    "capital": "대흥(장안)",
+    "centroid": [
+      34.3,
+      109.0
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "남북조를 통일한 왕조. 대운하를 건설하고 과거제를 시작했으나 고구려 원정 실패와 대규모 토목 공사로 단명함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
   },
   {
     "id": "tang",
@@ -461,21 +1671,79 @@
     "note": "서역 도호부·안남 등 변경 지배 범위는 시기별로 크게 달라 중국 본토 위주의 개략 범위만 표시."
   },
   {
-    "id": "abbasid",
-    "name_ko": "아바스 왕조",
-    "name_en": "Abbasid Caliphate",
-    "region": "west_asia",
-    "start_year": 750,
-    "end_year": 1258,
-    "capital": "바그다드",
+    "id": "tibetan_empire",
+    "name_ko": "토번",
+    "name_en": "Tibetan Empire",
+    "region": "central_asia",
+    "start_year": 618,
+    "end_year": 842,
+    "capital": "라싸",
     "centroid": [
-      33.34,
-      44.4
+      29.65,
+      91.1
     ],
     "area_polygon": [],
-    "radius_km": 1300,
+    "radius_km": 900,
     "is_approximate": true,
-    "summary_ko": "우마이야 왕조를 무너뜨리고 성립한 이슬람 왕조. 바그다드를 중심으로 이슬람 문화의 황금기를 이루었고, 1258년 몽골에 멸망함.",
+    "summary_ko": "송첸감포가 티베트 고원을 통일해 세운 나라. 당과 화친·전쟁을 거듭했고 티베트 불교의 기초를 놓음.",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립 연도는 송첸감포 즉위 무렵(618년경)으로 추정."
+  },
+  {
+    "id": "rashidun",
+    "name_ko": "정통 칼리파 시대",
+    "name_en": "Rashidun Caliphate",
+    "region": "west_asia",
+    "start_year": 632,
+    "end_year": 661,
+    "capital": "메디나 → 쿠파",
+    "centroid": [
+      24.47,
+      39.61
+    ],
+    "area_polygon": [],
+    "radius_km": 1400,
+    "is_approximate": false,
+    "summary_ko": "무함마드 사후 네 명의 칼리파가 다스린 시기. 사산 왕조를 멸망시키고 시리아·이집트를 정복함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사01-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "srivijaya",
+    "name_ko": "스리위자야",
+    "name_en": "Srivijaya",
+    "region": "southeast_asia",
+    "start_year": 650,
+    "end_year": 1275,
+    "capital": "팔렘방",
+    "centroid": [
+      -2.98,
+      104.75
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": true,
+    "summary_ko": "수마트라 팔렘방을 중심으로 믈라카 해협의 해상 교역을 장악한 불교 왕국. 인도·중국 사이 중계 무역으로 번영함.",
     "textbook_appearance": [
       "역사①",
       "세계사"
@@ -485,150 +1753,40 @@
       "[12세사02-01]"
     ],
     "sources": [
-      "교육부 편수자료(세계사)"
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
     ],
-    "note": "9세기 이후 지방 왕조 독립으로 실제 지배 영역은 크게 줄었으므로 반경 표시."
+    "note": "성립·소멸 연도 모두 개략적(7세기~13세기)."
   },
   {
-    "id": "byzantine",
-    "name_ko": "비잔티움 제국",
-    "name_en": "Byzantine Empire",
-    "region": "europe",
-    "start_year": 395,
-    "end_year": 1453,
-    "capital": "콘스탄티노폴리스",
+    "id": "umayyad",
+    "name_ko": "우마이야 왕조",
+    "name_en": "Umayyad Caliphate",
+    "region": "west_asia",
+    "start_year": 661,
+    "end_year": 750,
+    "capital": "다마스쿠스",
     "centroid": [
-      41.01,
-      28.98
+      33.51,
+      36.29
     ],
     "area_polygon": [],
-    "radius_km": 900,
-    "is_approximate": true,
-    "summary_ko": "동서 분열 후의 동로마 제국. 유스티니아누스 대 옛 로마 영토를 일부 회복했고 그리스 정교 문화를 발전시켰으며 1453년 오스만에 멸망함.",
+    "radius_km": 2000,
+    "is_approximate": false,
+    "summary_ko": "칼리파를 세습한 첫 이슬람 왕조. 이베리아반도에서 인더스강까지 영토를 넓혔으나 아랍인 우대 정책으로 반발을 삼.",
     "textbook_appearance": [
       "역사①",
       "세계사"
     ],
     "achievement_standards": [
-      "[9역03-03]",
+      "[9역03-02]",
       "[12세사01-03]"
     ],
     "sources": [
-      "교육부 편수자료(세계사)"
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
     ],
-    "note": "시작 연도는 로마 제국 동서 분열(395)을 기준으로 함. 영역이 시기별로 크게 변동하여 반경 표시."
-  },
-  {
-    "id": "maurya",
-    "name_ko": "마우리아 왕조",
-    "name_en": "Maurya Empire",
-    "region": "south_asia",
-    "start_year": -322,
-    "end_year": -185,
-    "capital": "파탈리푸트라",
-    "centroid": [
-      25.6,
-      85.1
-    ],
-    "area_polygon": [],
-    "radius_km": 1200,
-    "is_approximate": true,
-    "summary_ko": "찬드라굽타가 세운 인도 최초의 통일 왕조. 아소카왕 때 최대 영역을 이루고 불교를 장려함.",
-    "textbook_appearance": [
-      "역사①",
-      "세계사"
-    ],
-    "achievement_standards": [
-      "[9역02-03]",
-      "[12세사01-02]"
-    ],
-    "sources": [
-      "교육부 편수자료(세계사)"
-    ],
-    "note": "건국·멸망 연도는 학설에 따라 수년 차이가 있음(기원전 321/322, 기원전 185/187)."
-  },
-  {
-    "id": "inca",
-    "name_ko": "잉카 제국",
-    "name_en": "Inca Empire",
-    "region": "americas",
-    "start_year": 1438,
-    "end_year": 1533,
-    "capital": "쿠스코",
-    "centroid": [
-      -13.52,
-      -71.97
-    ],
-    "area_polygon": [],
-    "radius_km": 1200,
-    "is_approximate": true,
-    "summary_ko": "안데스 산맥을 따라 발전한 제국. 도로망과 계단식 농업이 발달했으며, 1533년 에스파냐의 피사로에게 정복됨.",
-    "textbook_appearance": [
-      "역사①",
-      "세계사"
-    ],
-    "achievement_standards": [
-      "[12세사02-02]"
-    ],
-    "sources": [
-      "교육부 편수자료(세계사)"
-    ],
-    "note": "시작 연도는 파차쿠티 즉위(1438)를 기준으로 한 통설."
-  },
-  {
-    "id": "aztec",
-    "name_ko": "아스테카 제국",
-    "name_en": "Aztec Empire",
-    "region": "americas",
-    "start_year": 1428,
-    "end_year": 1521,
-    "capital": "테노치티틀란",
-    "centroid": [
-      19.43,
-      -99.13
-    ],
-    "area_polygon": [],
-    "radius_km": 350,
-    "is_approximate": true,
-    "summary_ko": "멕시코 고원의 삼국 동맹을 기반으로 한 제국. 호수 위 도시 테노치티틀란을 건설했으며, 1521년 코르테스에게 정복됨.",
-    "textbook_appearance": [
-      "역사①",
-      "세계사"
-    ],
-    "achievement_standards": [
-      "[12세사02-02]"
-    ],
-    "sources": [
-      "교육부 편수자료(세계사)"
-    ],
-    "note": "시작 연도는 삼국 동맹 결성(1428)을 기준으로 함."
-  },
-  {
-    "id": "mali",
-    "name_ko": "말리 제국",
-    "name_en": "Mali Empire",
-    "region": "africa",
-    "start_year": 1235,
-    "end_year": 1670,
-    "capital": "니아니",
-    "centroid": [
-      12.4,
-      -8.0
-    ],
-    "area_polygon": [],
-    "radius_km": 900,
-    "is_approximate": true,
-    "summary_ko": "서아프리카 니제르강 유역의 이슬람 제국. 금과 소금 무역으로 번영했고, 만사 무사의 메카 순례로 널리 알려짐.",
-    "textbook_appearance": [
-      "세계사"
-    ],
-    "achievement_standards": [
-      "[12세사02-01]"
-    ],
-    "sources": [
-      "교육부 편수자료(세계사)"
-    ],
-    "note": "건국(1235, 순디아타의 키리나 전투)과 소멸 연도(17세기 후반) 모두 개략치. 수도 위치도 논쟁이 있음."
+    "note": ""
   },
   {
     "id": "silla_unified",
@@ -705,6 +1863,36 @@
     "note": "북방 경계(대동강~원산만)는 개략적."
   },
   {
+    "id": "venice",
+    "name_ko": "베네치아 공화국",
+    "name_en": "Republic of Venice",
+    "region": "europe",
+    "start_year": 697,
+    "end_year": 1797,
+    "capital": "베네치아",
+    "centroid": [
+      45.44,
+      12.33
+    ],
+    "area_polygon": [],
+    "radius_km": 150,
+    "is_approximate": true,
+    "summary_ko": "지중해 동방 무역을 주도한 해상 공화국. 마르코 폴로의 고향이며 나폴레옹에게 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립 연도는 전승(697)."
+  },
+  {
     "id": "balhae",
     "name_ko": "발해",
     "name_en": "Balhae",
@@ -735,6 +1923,854 @@
     "note": "영역 경계가 불확실하여 반경 표시. 수도는 여러 차례 옮겨졌음(중경·상경·동경)."
   },
   {
+    "id": "ghana_empire",
+    "name_ko": "가나 왕국",
+    "name_en": "Ghana Empire",
+    "region": "africa",
+    "start_year": 700,
+    "end_year": 1240,
+    "capital": "쿰비 살레",
+    "centroid": [
+      15.7,
+      -8.0
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": true,
+    "summary_ko": "서아프리카 최초의 대왕국. 사하라 횡단 교역(금·소금)으로 번영했으며 말리에 흡수됨.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 개략적(성립 시기 논쟁)."
+  },
+  {
+    "id": "nara",
+    "name_ko": "나라 시대",
+    "name_en": "Nara period",
+    "region": "east_asia",
+    "start_year": 710,
+    "end_year": 794,
+    "capital": "헤이조쿄(나라)",
+    "centroid": [
+      34.69,
+      135.8
+    ],
+    "area_polygon": [],
+    "radius_km": 400,
+    "is_approximate": false,
+    "summary_ko": "헤이조쿄로 천도한 뒤 당의 율령제를 본받아 중앙 집권 국가를 완성한 시기. 도다이지 대불과 견당사로 대표됨.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역03-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "uyghur_khaganate",
+    "name_ko": "위구르",
+    "name_en": "Uyghur Khaganate",
+    "region": "central_asia",
+    "start_year": 744,
+    "end_year": 840,
+    "capital": "오르두발리크",
+    "centroid": [
+      47.4,
+      102.7
+    ],
+    "area_polygon": [],
+    "radius_km": 1200,
+    "is_approximate": false,
+    "summary_ko": "돌궐을 무너뜨린 튀르크계 유목 제국. 안사의 난 진압을 도와 당과 교역했으며 마니교를 받아들임.",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "abbasid",
+    "name_ko": "아바스 왕조",
+    "name_en": "Abbasid Caliphate",
+    "region": "west_asia",
+    "start_year": 750,
+    "end_year": 1258,
+    "capital": "바그다드",
+    "centroid": [
+      33.34,
+      44.4
+    ],
+    "area_polygon": [],
+    "radius_km": 1300,
+    "is_approximate": true,
+    "summary_ko": "우마이야 왕조를 무너뜨리고 성립한 이슬람 왕조. 바그다드를 중심으로 이슬람 문화의 황금기를 이루었고, 1258년 몽골에 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "9세기 이후 지방 왕조 독립으로 실제 지배 영역은 크게 줄었으므로 반경 표시."
+  },
+  {
+    "id": "papal_states",
+    "name_ko": "교황령",
+    "name_en": "Papal States",
+    "region": "europe",
+    "start_year": 754,
+    "end_year": 1870,
+    "capital": "로마",
+    "centroid": [
+      42.5,
+      12.5
+    ],
+    "area_polygon": [],
+    "radius_km": 150,
+    "is_approximate": false,
+    "summary_ko": "프랑크 왕국의 기증으로 성립한 교황의 세속 영토. 이탈리아 통일로 소멸함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "heian",
+    "name_ko": "헤이안 시대",
+    "name_en": "Heian period",
+    "region": "east_asia",
+    "start_year": 794,
+    "end_year": 1185,
+    "capital": "헤이안쿄(교토)",
+    "centroid": [
+      35.01,
+      135.77
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": false,
+    "summary_ko": "교토로 천도한 뒤 후지와라 가문의 섭관 정치와 국풍 문화가 발달한 시기. 후반에 무사 세력이 성장함.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "khmer_empire",
+    "name_ko": "앙코르 왕조(크메르 제국)",
+    "name_en": "Khmer Empire",
+    "region": "southeast_asia",
+    "start_year": 802,
+    "end_year": 1431,
+    "capital": "앙코르",
+    "centroid": [
+      13.43,
+      103.87
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": false,
+    "summary_ko": "자야바르만 2세가 세운 캄보디아의 제국. 앙코르 와트·앙코르 톰을 건설했으며 아유타야의 침입으로 쇠퇴함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kievan_rus",
+    "name_ko": "키예프 공국",
+    "name_en": "Kievan Rus'",
+    "region": "europe",
+    "start_year": 882,
+    "end_year": 1240,
+    "capital": "키예프(키이우)",
+    "centroid": [
+      50.45,
+      30.52
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": true,
+    "summary_ko": "동슬라브인이 세운 나라. 그리스 정교를 받아들여 러시아 문화의 기초를 놓았고 몽골 침입으로 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립 연도는 전승(882)."
+  },
+  {
+    "id": "later_baekje",
+    "name_ko": "후백제",
+    "name_en": "Later Baekje",
+    "region": "east_asia",
+    "start_year": 900,
+    "end_year": 936,
+    "capital": "완산주(전주)",
+    "centroid": [
+      35.82,
+      127.15
+    ],
+    "area_polygon": [],
+    "radius_km": 150,
+    "is_approximate": false,
+    "summary_ko": "견훤이 세운 후삼국의 하나. 신라 금성을 공격해 위세를 떨쳤으나 내분 끝에 936년 고려에 멸망함.",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "taebong",
+    "name_ko": "후고구려(태봉)",
+    "name_en": "Later Goguryeo (Taebong)",
+    "region": "east_asia",
+    "start_year": 901,
+    "end_year": 918,
+    "capital": "송악 → 철원",
+    "centroid": [
+      38.15,
+      127.3
+    ],
+    "area_polygon": [],
+    "radius_km": 200,
+    "is_approximate": false,
+    "summary_ko": "궁예가 세운 나라. 국호를 마진·태봉으로 바꾸며 세력을 넓혔으나 궁예의 실정으로 918년 왕건이 고려를 세움.",
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "achievement_standards": [
+      "[9역10-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "five_dynasties",
+    "name_ko": "오대십국",
+    "name_en": "Five Dynasties and Ten Kingdoms",
+    "region": "east_asia",
+    "start_year": 907,
+    "end_year": 960,
+    "capital": "개봉 등",
+    "centroid": [
+      33.0,
+      113.0
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": true,
+    "summary_ko": "당 멸망 후 화북의 다섯 왕조와 지방 열 나라가 명멸한 분열기. 송이 통일함.",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "여러 나라를 한 항목으로 표시."
+  },
+  {
+    "id": "liao",
+    "name_ko": "요(거란)",
+    "name_en": "Liao (Khitan)",
+    "region": "east_asia",
+    "start_year": 916,
+    "end_year": 1125,
+    "capital": "상경 임황부",
+    "centroid": [
+      43.5,
+      118.0
+    ],
+    "area_polygon": [],
+    "radius_km": 800,
+    "is_approximate": false,
+    "summary_ko": "거란족 야율아보기가 세운 왕조. 발해를 멸망시키고 연운 16주를 차지했으며, 고려를 세 차례 침입함.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[9역10-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "goryeo",
+    "name_ko": "고려",
+    "name_en": "Goryeo",
+    "region": "east_asia",
+    "start_year": 918,
+    "end_year": 1392,
+    "capital": "개경",
+    "centroid": [
+      37.97,
+      126.55
+    ],
+    "area_polygon": [
+      [
+        43.0,
+        130.6
+      ],
+      [
+        42.6,
+        129.9
+      ],
+      [
+        41.6,
+        128.9
+      ],
+      [
+        40.9,
+        126.9
+      ],
+      [
+        39.9,
+        124.7
+      ],
+      [
+        38.7,
+        124.9
+      ],
+      [
+        37.6,
+        126.0
+      ],
+      [
+        35.1,
+        126.0
+      ],
+      [
+        34.3,
+        126.5
+      ],
+      [
+        34.5,
+        128.6
+      ],
+      [
+        35.7,
+        129.5
+      ],
+      [
+        37.3,
+        129.4
+      ],
+      [
+        38.6,
+        128.4
+      ],
+      [
+        40.1,
+        128.9
+      ],
+      [
+        41.2,
+        130.0
+      ],
+      [
+        42.3,
+        130.7
+      ]
+    ],
+    "is_approximate": true,
+    "summary_ko": "왕건이 후삼국을 통일하여 세운 왕조. 거란·여진·몽골의 침입을 겪었고, 원 간섭기 이후 개혁을 거쳐 조선으로 교체됨.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역10-01]",
+      "[9역10-02]",
+      "[9역10-03]",
+      "[9역10-04]"
+    ],
+    "sources": [
+      "국사편찬위원회 『한국사』",
+      "교육부 편수자료(역사)"
+    ],
+    "note": "북방 경계는 시기별로 변동(강동 6주 확보, 동북 9성, 공민왕 대 쌍성총관부 수복 등)이 커서 개략적 범위로 표시."
+  },
+  {
+    "id": "england_kingdom",
+    "name_ko": "잉글랜드 왕국",
+    "name_en": "Kingdom of England",
+    "region": "europe",
+    "start_year": 927,
+    "end_year": 1707,
+    "capital": "런던",
+    "centroid": [
+      52.5,
+      -1.5
+    ],
+    "area_polygon": [],
+    "radius_km": 350,
+    "is_approximate": false,
+    "summary_ko": "노르만 정복 이후 왕권이 강화되었고 마그나 카르타·의회 발달·청교도 혁명·명예혁명을 거쳐 입헌 군주제를 세움.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "northern_song",
+    "name_ko": "송(북송)",
+    "name_en": "Northern Song",
+    "region": "east_asia",
+    "start_year": 960,
+    "end_year": 1127,
+    "capital": "개봉(카이펑)",
+    "centroid": [
+      33.5,
+      113.0
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "조광윤이 세운 문치주의 왕조. 과거 관료제·상업과 도시 발달·화약과 나침반 활용이 두드러졌으며, 금에 밀려 1127년 강남으로 옮김.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]",
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "hre",
+    "name_ko": "신성 로마 제국",
+    "name_en": "Holy Roman Empire",
+    "region": "europe",
+    "start_year": 962,
+    "end_year": 1806,
+    "capital": "(고정 수도 없음) 빈 등",
+    "centroid": [
+      50.0,
+      11.0
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "오토 1세의 대관으로 시작된 독일 중심의 제국. 교황과의 서임권 투쟁을 겪었고 30년 전쟁 이후 이름뿐인 제국이 되어 나폴레옹 때 해체됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[9역04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "france_kingdom",
+    "name_ko": "프랑스 왕국",
+    "name_en": "Kingdom of France",
+    "region": "europe",
+    "start_year": 987,
+    "end_year": 1792,
+    "capital": "파리",
+    "centroid": [
+      47.0,
+      2.5
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": false,
+    "summary_ko": "카페 왕조로 시작해 백년 전쟁을 거치며 왕권을 강화한 나라. 루이 14세 때 절대 왕정의 전형을 이루었고 혁명으로 왕정이 폐지됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ly_dynasty",
+    "name_ko": "리 왕조(다이비엣)",
+    "name_en": "Lý dynasty (Đại Việt)",
+    "region": "southeast_asia",
+    "start_year": 1009,
+    "end_year": 1225,
+    "capital": "탕롱(하노이)",
+    "centroid": [
+      21.03,
+      105.85
+    ],
+    "area_polygon": [],
+    "radius_km": 300,
+    "is_approximate": false,
+    "summary_ko": "중국 지배에서 벗어난 뒤 안정된 왕조 체제를 세운 베트남 왕조. 국호를 다이비엣으로 정하고 문묘를 세워 유학을 장려함.",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "seljuk",
+    "name_ko": "셀주크 튀르크",
+    "name_en": "Seljuk Empire",
+    "region": "west_asia",
+    "start_year": 1037,
+    "end_year": 1194,
+    "capital": "이스파한",
+    "centroid": [
+      32.65,
+      51.67
+    ],
+    "area_polygon": [],
+    "radius_km": 1300,
+    "is_approximate": false,
+    "summary_ko": "튀르크계 이슬람 왕조. 바그다드에 들어가 술탄 칭호를 받았으며 비잔티움을 위협해 십자군의 계기가 됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "western_xia",
+    "name_ko": "서하",
+    "name_en": "Western Xia",
+    "region": "east_asia",
+    "start_year": 1038,
+    "end_year": 1227,
+    "capital": "흥경(인촨)",
+    "centroid": [
+      38.5,
+      106.0
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": false,
+    "summary_ko": "탕구트족이 세운 나라. 송·요·금 사이에서 비단길 교역을 장악했으며 칭기즈 칸에게 멸망함.",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "pagan",
+    "name_ko": "바간(파간) 왕조",
+    "name_en": "Pagan Kingdom",
+    "region": "southeast_asia",
+    "start_year": 1044,
+    "end_year": 1287,
+    "capital": "바간",
+    "centroid": [
+      21.17,
+      94.86
+    ],
+    "area_polygon": [],
+    "radius_km": 400,
+    "is_approximate": false,
+    "summary_ko": "미얀마 최초의 통일 왕조. 상좌부 불교를 국교로 삼고 수천 개의 불탑을 세웠으며 몽골 침입으로 쇠퇴함.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사01-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "jin_jurchen",
+    "name_ko": "금(여진)",
+    "name_en": "Jin (Jurchen)",
+    "region": "east_asia",
+    "start_year": 1115,
+    "end_year": 1234,
+    "capital": "회령 → 중도(베이징)",
+    "centroid": [
+      42.0,
+      122.0
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "여진족 아구다가 세운 왕조. 요와 북송을 멸망시켜 화북을 지배했으며 몽골에 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[9역10-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "southern_song",
+    "name_ko": "남송",
+    "name_en": "Southern Song",
+    "region": "east_asia",
+    "start_year": 1127,
+    "end_year": 1279,
+    "capital": "임안(항저우)",
+    "centroid": [
+      30.25,
+      120.17
+    ],
+    "area_polygon": [
+      [
+        33.5,
+        104.0
+      ],
+      [
+        33.0,
+        110.0
+      ],
+      [
+        33.3,
+        116.0
+      ],
+      [
+        32.8,
+        120.5
+      ],
+      [
+        30.0,
+        122.0
+      ],
+      [
+        27.0,
+        120.6
+      ],
+      [
+        24.0,
+        118.5
+      ],
+      [
+        21.5,
+        112.0
+      ],
+      [
+        21.0,
+        108.0
+      ],
+      [
+        24.5,
+        104.0
+      ],
+      [
+        28.5,
+        102.5
+      ],
+      [
+        31.5,
+        103.0
+      ]
+    ],
+    "is_approximate": true,
+    "summary_ko": "금에 밀려 강남으로 옮긴 송. 해상 무역과 도시 경제가 발달했고, 주희가 성리학을 집대성함. 몽골(원)에 멸망.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "회수(화이허)를 경계로 금과 대치. 경계선은 개략적."
+  },
+  {
+    "id": "portugal",
+    "name_ko": "포르투갈 왕국",
+    "name_en": "Kingdom of Portugal",
+    "region": "europe",
+    "start_year": 1139,
+    "end_year": 1910,
+    "capital": "리스본",
+    "centroid": [
+      39.5,
+      -8.0
+    ],
+    "area_polygon": [],
+    "radius_km": 250,
+    "is_approximate": false,
+    "summary_ko": "신항로 개척을 선도한 나라. 아프리카 항로와 인도 항로를 열고 브라질·믈라카·마카오 등에 거점을 세움.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ayyubid",
+    "name_ko": "아이유브 왕조",
+    "name_en": "Ayyubid dynasty",
+    "region": "west_asia",
+    "start_year": 1171,
+    "end_year": 1250,
+    "capital": "카이로",
+    "centroid": [
+      30.04,
+      31.24
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "살라딘이 이집트에 세운 왕조. 1187년 예루살렘을 탈환해 십자군과 맞섬.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
     "id": "kamakura",
     "name_ko": "가마쿠라 막부",
     "name_en": "Kamakura Shogunate",
@@ -761,5 +2797,2576 @@
       "교육부 편수자료(세계사)"
     ],
     "note": "시작 연도는 1185(단노우라 전투) 또는 1192(정이대장군 임명) 설이 있음."
+  },
+  {
+    "id": "delhi_sultanate",
+    "name_ko": "델리 술탄국",
+    "name_en": "Delhi Sultanate",
+    "region": "south_asia",
+    "start_year": 1206,
+    "end_year": 1526,
+    "capital": "델리",
+    "centroid": [
+      28.65,
+      77.2
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "북인도에 세워진 이슬람 왕조들의 총칭. 다섯 왕조가 교체되며 인도에 이슬람 문화를 뿌리내림.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역03-02]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mongol_empire",
+    "name_ko": "몽골 제국",
+    "name_en": "Mongol Empire",
+    "region": "central_asia",
+    "start_year": 1206,
+    "end_year": 1368,
+    "capital": "카라코룸",
+    "centroid": [
+      47.2,
+      102.85
+    ],
+    "area_polygon": [],
+    "radius_km": 2500,
+    "is_approximate": true,
+    "summary_ko": "칭기즈 칸이 몽골 부족을 통일해 세운 제국. 유라시아 대부분을 정복해 동서 교류를 크게 확대함. 원·일 칸국·차가타이 칸국·킵차크 칸국으로 분열.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)",
+      "『세계사』 교과서 공통 서술"
+    ],
+    "note": "종료 연도는 원의 대도 함락(1368)을 기준으로 함. 1260년대 이후 사실상 4개 칸국으로 분열되어 있었으며, 영역은 시기별 차이가 매우 커 반경 표시로 대체."
+  },
+  {
+    "id": "great_zimbabwe",
+    "name_ko": "짐바브웨 왕국(그레이트 짐바브웨)",
+    "name_en": "Kingdom of Zimbabwe",
+    "region": "africa",
+    "start_year": 1220,
+    "end_year": 1450,
+    "capital": "그레이트 짐바브웨",
+    "centroid": [
+      -20.27,
+      30.93
+    ],
+    "area_polygon": [],
+    "radius_km": 400,
+    "is_approximate": true,
+    "summary_ko": "남부 아프리카의 석조 도시 문명. 인도양 교역으로 금·상아를 수출함.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "연대는 고고학 추정치."
+  },
+  {
+    "id": "chagatai",
+    "name_ko": "차가타이 칸국",
+    "name_en": "Chagatai Khanate",
+    "region": "central_asia",
+    "start_year": 1225,
+    "end_year": 1347,
+    "capital": "알말리크",
+    "centroid": [
+      44.0,
+      80.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1000,
+    "is_approximate": true,
+    "summary_ko": "차가타이가 중앙아시아에 세운 몽골 정권. 14세기 중엽 동서로 분열했고 서부에서 티무르가 일어남.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "종료 연도는 동서 분열(1347년경)을 기준으로 한 개략치."
+  },
+  {
+    "id": "tran_dynasty",
+    "name_ko": "쩐 왕조(다이비엣)",
+    "name_en": "Trần dynasty",
+    "region": "southeast_asia",
+    "start_year": 1225,
+    "end_year": 1400,
+    "capital": "탕롱(하노이)",
+    "centroid": [
+      21.03,
+      105.85
+    ],
+    "area_polygon": [],
+    "radius_km": 300,
+    "is_approximate": false,
+    "summary_ko": "몽골(원)의 세 차례 침입을 물리친 베트남 왕조. 쯔놈 문자가 발달함.",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mali",
+    "name_ko": "말리 제국",
+    "name_en": "Mali Empire",
+    "region": "africa",
+    "start_year": 1235,
+    "end_year": 1670,
+    "capital": "니아니",
+    "centroid": [
+      12.4,
+      -8.0
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": true,
+    "summary_ko": "서아프리카 니제르강 유역의 이슬람 제국. 금과 소금 무역으로 번영했고, 만사 무사의 메카 순례로 널리 알려짐.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "건국(1235, 순디아타의 키리나 전투)과 소멸 연도(17세기 후반) 모두 개략치. 수도 위치도 논쟁이 있음."
+  },
+  {
+    "id": "golden_horde",
+    "name_ko": "킵차크 칸국(금장 한국)",
+    "name_en": "Golden Horde",
+    "region": "europe",
+    "start_year": 1242,
+    "end_year": 1502,
+    "capital": "사라이",
+    "centroid": [
+      47.5,
+      46.5
+    ],
+    "area_polygon": [],
+    "radius_km": 1300,
+    "is_approximate": true,
+    "summary_ko": "바투가 러시아·중앙아시아 초원에 세운 몽골 정권. 러시아 공국들을 200여 년 지배함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "소멸 시기는 대(大)한국 붕괴(1502)를 기준으로 함."
+  },
+  {
+    "id": "mamluk",
+    "name_ko": "맘루크 왕조",
+    "name_en": "Mamluk Sultanate",
+    "region": "west_asia",
+    "start_year": 1250,
+    "end_year": 1517,
+    "capital": "카이로",
+    "centroid": [
+      30.04,
+      31.24
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "노예 병사 출신이 세운 이집트·시리아의 왕조. 몽골군을 아인 잘루트에서 막고 홍해 교역으로 번영했으며 오스만에 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ilkhanate",
+    "name_ko": "일 칸국",
+    "name_en": "Ilkhanate",
+    "region": "west_asia",
+    "start_year": 1256,
+    "end_year": 1335,
+    "capital": "타브리즈",
+    "centroid": [
+      38.08,
+      46.3
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "훌라구가 이란·이라크 지역에 세운 몽골 정권. 바그다드를 함락했으며 이후 이슬람으로 개종함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ethiopia_empire",
+    "name_ko": "에티오피아 제국",
+    "name_en": "Ethiopian Empire",
+    "region": "africa",
+    "start_year": 1270,
+    "end_year": 1974,
+    "capital": "곤다르 → 아디스아바바",
+    "centroid": [
+      9.0,
+      39.0
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "솔로몬 왕조의 크리스트교 왕국. 1896년 아도와 전투에서 이탈리아를 물리쳐 독립을 지킴.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-02]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "yuan",
+    "name_ko": "원",
+    "name_en": "Yuan",
+    "region": "east_asia",
+    "start_year": 1271,
+    "end_year": 1368,
+    "capital": "대도(베이징)",
+    "centroid": [
+      39.9,
+      116.4
+    ],
+    "area_polygon": [],
+    "radius_km": 1400,
+    "is_approximate": false,
+    "summary_ko": "쿠빌라이 칸이 중국식 국호로 세운 몽골 왕조. 남송을 멸망시켜 중국을 통일했고, 역참제로 동서 교류를 촉진함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[9역10-03]",
+      "[12세사02-01]",
+      "[12동역02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "majapahit",
+    "name_ko": "마자파힛",
+    "name_en": "Majapahit",
+    "region": "southeast_asia",
+    "start_year": 1293,
+    "end_year": 1527,
+    "capital": "트로울란",
+    "centroid": [
+      -7.5,
+      112.4
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": true,
+    "summary_ko": "자바 동부의 힌두·불교 왕국. 14세기 가자 마다 재상 때 도서부 동남아시아 대부분에 영향력을 미침.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "소멸 시기는 16세기 초로 개략적."
+  },
+  {
+    "id": "ottoman_empire",
+    "name_ko": "오스만 제국",
+    "name_en": "Ottoman Empire",
+    "region": "west_asia",
+    "start_year": 1299,
+    "end_year": 1922,
+    "capital": "이스탄불(콘스탄티노폴리스)",
+    "centroid": [
+      41.01,
+      28.98
+    ],
+    "area_polygon": [],
+    "radius_km": 1500,
+    "is_approximate": true,
+    "summary_ko": "오스만 1세가 아나톨리아에서 세운 이슬람 제국. 1453년 콘스탄티노폴리스를 함락하고 3대륙에 걸친 대제국으로 성장. 제1차 세계 대전 후 해체.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "건국 연도 1299는 전통적 통설이며 정확한 연도는 불확실. 1453년 이전 수도는 부르사·에디르네였음."
+  },
+  {
+    "id": "muromachi",
+    "name_ko": "무로마치 막부",
+    "name_en": "Muromachi Shogunate",
+    "region": "east_asia",
+    "start_year": 1336,
+    "end_year": 1573,
+    "capital": "교토",
+    "centroid": [
+      35.01,
+      135.77
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "아시카가 다카우지가 세운 막부. 명과 감합 무역을 했으며 오닌의 난 이후 전국 시대의 혼란이 이어짐.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ayutthaya",
+    "name_ko": "아유타야",
+    "name_en": "Ayutthaya Kingdom",
+    "region": "southeast_asia",
+    "start_year": 1351,
+    "end_year": 1767,
+    "capital": "아유타야",
+    "centroid": [
+      14.35,
+      100.57
+    ],
+    "area_polygon": [],
+    "radius_km": 450,
+    "is_approximate": false,
+    "summary_ko": "타이족의 왕국. 국제 무역항으로 번영했으며 1767년 버마(미얀마)의 침입으로 멸망함.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ming",
+    "name_ko": "명",
+    "name_en": "Ming",
+    "region": "east_asia",
+    "start_year": 1368,
+    "end_year": 1644,
+    "capital": "남경 → 북경(1421)",
+    "centroid": [
+      35.0,
+      113.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1100,
+    "is_approximate": false,
+    "summary_ko": "주원장이 원을 몰아내고 세운 한족 왕조. 정화의 원정, 만리장성 재축조, 임진왜란 파병 등을 거쳐 1644년 이자성의 난으로 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[9역11-03]",
+      "[12동역02-03]",
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "timurid",
+    "name_ko": "티무르 제국",
+    "name_en": "Timurid Empire",
+    "region": "central_asia",
+    "start_year": 1370,
+    "end_year": 1507,
+    "capital": "사마르칸트",
+    "centroid": [
+      39.65,
+      66.97
+    ],
+    "area_polygon": [],
+    "radius_km": 1100,
+    "is_approximate": false,
+    "summary_ko": "티무르가 중앙아시아에 세운 제국. 사마르칸트를 중심으로 이슬람 학문과 예술이 발달함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kongo",
+    "name_ko": "콩고 왕국",
+    "name_en": "Kingdom of Kongo",
+    "region": "africa",
+    "start_year": 1390,
+    "end_year": 1914,
+    "capital": "음반자 콩고",
+    "centroid": [
+      -6.27,
+      14.85
+    ],
+    "area_polygon": [],
+    "radius_km": 400,
+    "is_approximate": true,
+    "summary_ko": "중부 아프리카의 왕국. 포르투갈과 교류하며 크리스트교를 받아들였으나 노예 무역으로 쇠퇴함.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립 연도는 개략적."
+  },
+  {
+    "id": "joseon",
+    "name_ko": "조선",
+    "name_en": "Joseon",
+    "region": "east_asia",
+    "start_year": 1392,
+    "end_year": 1897,
+    "capital": "한양",
+    "centroid": [
+      37.57,
+      126.98
+    ],
+    "area_polygon": [
+      [
+        43.0,
+        130.6
+      ],
+      [
+        42.2,
+        129.3
+      ],
+      [
+        41.9,
+        128.1
+      ],
+      [
+        41.5,
+        126.9
+      ],
+      [
+        40.1,
+        124.4
+      ],
+      [
+        39.0,
+        125.2
+      ],
+      [
+        37.7,
+        126.1
+      ],
+      [
+        35.0,
+        126.2
+      ],
+      [
+        34.3,
+        126.6
+      ],
+      [
+        34.6,
+        128.7
+      ],
+      [
+        35.8,
+        129.6
+      ],
+      [
+        37.4,
+        129.5
+      ],
+      [
+        38.7,
+        128.4
+      ],
+      [
+        40.3,
+        129.2
+      ],
+      [
+        41.5,
+        130.0
+      ],
+      [
+        42.4,
+        130.7
+      ]
+    ],
+    "is_approximate": false,
+    "summary_ko": "이성계가 건국한 유교 국가. 세종 대 훈민정음 창제 등 문화가 융성했고, 왜란·호란을 거쳐 1897년 대한제국으로 국호를 바꿈.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역11-01]",
+      "[9역11-02]",
+      "[9역11-03]",
+      "[9역12-01]",
+      "[9역12-02]",
+      "[9역12-03]"
+    ],
+    "sources": [
+      "국사편찬위원회 『한국사』",
+      "교육부 편수자료(역사)"
+    ],
+    "note": "종료 연도는 대한제국 선포(1897)를 기준으로 함. 4군 6진 개척(15세기) 이전에는 북방 경계가 더 남쪽이었음."
+  },
+  {
+    "id": "malacca",
+    "name_ko": "믈라카 왕국",
+    "name_en": "Malacca Sultanate",
+    "region": "southeast_asia",
+    "start_year": 1400,
+    "end_year": 1511,
+    "capital": "믈라카",
+    "centroid": [
+      2.19,
+      102.25
+    ],
+    "area_polygon": [],
+    "radius_km": 250,
+    "is_approximate": true,
+    "summary_ko": "믈라카 해협의 이슬람 항구 왕국. 정화 원정의 거점이자 동서 교역의 중심이었으며 1511년 포르투갈에 점령됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-01]",
+      "[12세사02-02]",
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립 연도 1400 은 개략치(1400년경)."
+  },
+  {
+    "id": "aztec",
+    "name_ko": "아스테카 제국",
+    "name_en": "Aztec Empire",
+    "region": "americas",
+    "start_year": 1428,
+    "end_year": 1521,
+    "capital": "테노치티틀란",
+    "centroid": [
+      19.43,
+      -99.13
+    ],
+    "area_polygon": [],
+    "radius_km": 350,
+    "is_approximate": true,
+    "summary_ko": "멕시코 고원의 삼국 동맹을 기반으로 한 제국. 호수 위 도시 테노치티틀란을 건설했으며, 1521년 코르테스에게 정복됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "시작 연도는 삼국 동맹 결성(1428)을 기준으로 함."
+  },
+  {
+    "id": "le_dynasty",
+    "name_ko": "레 왕조(다이비엣)",
+    "name_en": "Lê dynasty",
+    "region": "southeast_asia",
+    "start_year": 1428,
+    "end_year": 1789,
+    "capital": "탕롱(하노이)",
+    "centroid": [
+      21.03,
+      105.85
+    ],
+    "area_polygon": [],
+    "radius_km": 350,
+    "is_approximate": false,
+    "summary_ko": "레러이가 명의 지배를 물리치고 세운 왕조. 유교 통치 체제를 정비하고 남쪽으로 영토를 넓힘.",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역02-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "후기(16세기 이후)는 찐·응우옌 가문의 실권 시기."
+  },
+  {
+    "id": "inca",
+    "name_ko": "잉카 제국",
+    "name_en": "Inca Empire",
+    "region": "americas",
+    "start_year": 1438,
+    "end_year": 1533,
+    "capital": "쿠스코",
+    "centroid": [
+      -13.52,
+      -71.97
+    ],
+    "area_polygon": [],
+    "radius_km": 1200,
+    "is_approximate": true,
+    "summary_ko": "안데스 산맥을 따라 발전한 제국. 도로망과 계단식 농업이 발달했으며, 1533년 에스파냐의 피사로에게 정복됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(세계사)"
+    ],
+    "note": "시작 연도는 파차쿠티 즉위(1438)를 기준으로 한 통설."
+  },
+  {
+    "id": "songhai",
+    "name_ko": "송가이 제국",
+    "name_en": "Songhai Empire",
+    "region": "africa",
+    "start_year": 1464,
+    "end_year": 1591,
+    "capital": "가오",
+    "centroid": [
+      16.27,
+      -0.05
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "말리를 이어 서아프리카를 지배한 이슬람 제국. 팀북투가 학문의 중심이었으며 모로코군에 멸망함.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "spain",
+    "name_ko": "에스파냐",
+    "name_en": "Spain",
+    "region": "europe",
+    "start_year": 1479,
+    "end_year": 9999,
+    "capital": "마드리드",
+    "centroid": [
+      40.0,
+      -3.7
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": true,
+    "summary_ko": "카스티야·아라곤 통합으로 성립. 레콘키스타 완성 후 아메리카를 정복해 '해가 지지 않는 나라'가 되었으나 17세기 이후 쇠퇴함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "성립 연도는 페르난도·이사벨 공동 통치(1479)를 기준으로 함."
+  },
+  {
+    "id": "safavid",
+    "name_ko": "사파비 왕조",
+    "name_en": "Safavid Iran",
+    "region": "west_asia",
+    "start_year": 1501,
+    "end_year": 1736,
+    "capital": "이스파한",
+    "centroid": [
+      32.65,
+      51.67
+    ],
+    "area_polygon": [],
+    "radius_km": 1100,
+    "is_approximate": false,
+    "summary_ko": "시아파를 국교로 삼은 이란의 왕조. 아바스 1세 때 이스파한을 중심으로 번영함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "austria_habsburg",
+    "name_ko": "오스트리아(합스부르크 제국)",
+    "name_en": "Habsburg Austria",
+    "region": "europe",
+    "start_year": 1526,
+    "end_year": 1918,
+    "capital": "빈",
+    "centroid": [
+      47.5,
+      15.0
+    ],
+    "area_polygon": [],
+    "radius_km": 650,
+    "is_approximate": false,
+    "summary_ko": "합스부르크가의 다민족 제국. 빈 회의를 주도했으나 민족주의 고조 속에 1867년 오스트리아-헝가리 제국이 되었고 제1차 세계 대전 후 해체됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[9역05-01]",
+      "[9역06-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "보헤미아·헝가리 왕위 획득(1526)부터 표시."
+  },
+  {
+    "id": "mughal",
+    "name_ko": "무굴 제국",
+    "name_en": "Mughal Empire",
+    "region": "south_asia",
+    "start_year": 1526,
+    "end_year": 1857,
+    "capital": "아그라 → 델리",
+    "centroid": [
+      27.2,
+      78.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1300,
+    "is_approximate": false,
+    "summary_ko": "바부르가 세운 이슬람 제국. 아크바르의 관용 정책으로 전성기를 이루었으나 아우랑제브 이후 쇠퇴하고 영국에 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12세사03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "new_spain",
+    "name_ko": "누에바에스파냐 부왕령",
+    "name_en": "Viceroyalty of New Spain",
+    "region": "americas",
+    "start_year": 1535,
+    "end_year": 1821,
+    "capital": "멕시코시티",
+    "centroid": [
+      23.0,
+      -102.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1300,
+    "is_approximate": false,
+    "summary_ko": "아스테카 정복 후 세워진 에스파냐의 식민 통치 기구. 은 생산과 태평양 갈레온 무역으로 세계 교역망을 연결함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]",
+      "[12세사02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "peru_viceroyalty",
+    "name_ko": "페루 부왕령",
+    "name_en": "Viceroyalty of Peru",
+    "region": "americas",
+    "start_year": 1542,
+    "end_year": 1824,
+    "capital": "리마",
+    "centroid": [
+      -12.05,
+      -77.04
+    ],
+    "area_polygon": [],
+    "radius_km": 1300,
+    "is_approximate": false,
+    "summary_ko": "잉카 정복 후 남아메리카를 다스린 에스파냐 식민 통치 기구. 포토시 은광으로 유명함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]",
+      "[12세사02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "poland_lithuania",
+    "name_ko": "폴란드-리투아니아 연합 왕국",
+    "name_en": "Polish–Lithuanian Commonwealth",
+    "region": "europe",
+    "start_year": 1569,
+    "end_year": 1795,
+    "capital": "크라쿠프 → 바르샤바",
+    "centroid": [
+      52.0,
+      21.0
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "선거 왕정의 대국. 18세기 러시아·프로이센·오스트리아의 세 차례 분할로 소멸함.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사02-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "dutch_republic",
+    "name_ko": "네덜란드 공화국",
+    "name_en": "Dutch Republic",
+    "region": "europe",
+    "start_year": 1581,
+    "end_year": 1795,
+    "capital": "암스테르담",
+    "centroid": [
+      52.3,
+      5.5
+    ],
+    "area_polygon": [],
+    "radius_km": 150,
+    "is_approximate": false,
+    "summary_ko": "에스파냐에서 독립한 상업 국가. 동인도 회사를 세워 17세기 해상 무역과 금융을 주도함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[12세사02-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "edo",
+    "name_ko": "에도 막부",
+    "name_en": "Edo (Tokugawa) Shogunate",
+    "region": "east_asia",
+    "start_year": 1603,
+    "end_year": 1868,
+    "capital": "에도(도쿄)",
+    "centroid": [
+      35.68,
+      139.75
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "도쿠가와 이에야스가 세운 막부. 산킨코타이와 쇄국으로 안정을 유지했으며, 통신사를 통해 조선과 교류함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[12동역02-04]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "qing",
+    "name_ko": "청",
+    "name_en": "Qing",
+    "region": "east_asia",
+    "start_year": 1636,
+    "end_year": 1912,
+    "capital": "심양 → 북경(1644)",
+    "centroid": [
+      38.0,
+      110.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1600,
+    "is_approximate": false,
+    "summary_ko": "만주족이 세운 마지막 왕조. 강희·옹정·건륭 3대의 전성기를 거쳐 아편 전쟁 이후 열강의 침탈과 신해혁명으로 멸망함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역04-02]",
+      "[9역05-03]",
+      "[12세사03-01]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "1616년 후금 건국, 1636년 국호를 청으로 고침(이 해를 시작으로 함)."
+  },
+  {
+    "id": "prussia",
+    "name_ko": "프로이센",
+    "name_en": "Prussia",
+    "region": "europe",
+    "start_year": 1701,
+    "end_year": 1918,
+    "capital": "베를린",
+    "centroid": [
+      52.5,
+      13.4
+    ],
+    "area_polygon": [],
+    "radius_km": 450,
+    "is_approximate": false,
+    "summary_ko": "호엔촐레른가의 왕국. 프리드리히 2세의 계몽 절대주의를 거쳐 비스마르크 아래 독일 통일을 주도함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[9역05-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "uk",
+    "name_ko": "영국(그레이트브리튼 연합 왕국)",
+    "name_en": "United Kingdom",
+    "region": "europe",
+    "start_year": 1707,
+    "end_year": 9999,
+    "capital": "런던",
+    "centroid": [
+      54.5,
+      -3.0
+    ],
+    "area_polygon": [],
+    "radius_km": 450,
+    "is_approximate": false,
+    "summary_ko": "잉글랜드와 스코틀랜드가 합쳐진 나라. 산업 혁명을 가장 먼저 이루고 세계 최대의 식민 제국을 건설함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[9역05-02]",
+      "[12세사03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "russian_empire",
+    "name_ko": "러시아 제국",
+    "name_en": "Russian Empire",
+    "region": "europe",
+    "start_year": 1721,
+    "end_year": 1917,
+    "capital": "상트페테르부르크",
+    "centroid": [
+      58.0,
+      60.0
+    ],
+    "area_polygon": [],
+    "radius_km": 2500,
+    "is_approximate": false,
+    "summary_ko": "표트르 대제가 서구화 개혁 끝에 선포한 제국. 시베리아·중앙아시아로 팽창했으며 1917년 혁명으로 무너짐.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역04-03]",
+      "[9역05-02]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "usa",
+    "name_ko": "미국",
+    "name_en": "United States of America",
+    "region": "americas",
+    "start_year": 1776,
+    "end_year": 9999,
+    "capital": "워싱턴 D.C.",
+    "centroid": [
+      39.0,
+      -98.0
+    ],
+    "area_polygon": [],
+    "radius_km": 2000,
+    "is_approximate": false,
+    "summary_ko": "13개 식민지가 영국에서 독립해 세운 연방 공화국. 남북 전쟁 후 산업 대국이 되었고 두 차례 세계 대전과 냉전을 거쳐 초강대국이 됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[9역07-01]",
+      "[12세사03-02]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "siam_rattanakosin",
+    "name_ko": "시암(짜끄리 왕조)",
+    "name_en": "Siam (Rattanakosin Kingdom)",
+    "region": "southeast_asia",
+    "start_year": 1782,
+    "end_year": 9999,
+    "capital": "방콕",
+    "centroid": [
+      15.0,
+      101.0
+    ],
+    "area_polygon": [],
+    "radius_km": 450,
+    "is_approximate": false,
+    "summary_ko": "짜끄리 왕조가 세운 타이의 왕국. 영국·프랑스 사이에서 근대화 개혁으로 독립을 유지함(1939년 국호 타이).",
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "achievement_standards": [
+      "[9역05-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "qajar",
+    "name_ko": "카자르 왕조",
+    "name_en": "Qajar Iran",
+    "region": "west_asia",
+    "start_year": 1789,
+    "end_year": 1925,
+    "capital": "테헤란",
+    "centroid": [
+      32.0,
+      54.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1000,
+    "is_approximate": false,
+    "summary_ko": "19세기 영국·러시아의 압력 속에서 담배 불매 운동과 입헌 혁명(1906)이 일어난 이란의 왕조.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "france_revolution",
+    "name_ko": "프랑스 혁명 정부·나폴레옹 제국",
+    "name_en": "Revolutionary France and Napoleonic Empire",
+    "region": "europe",
+    "start_year": 1792,
+    "end_year": 1815,
+    "capital": "파리",
+    "centroid": [
+      47.0,
+      2.5
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "왕정 폐지 후의 공화정과 나폴레옹의 제정. 유럽 대부분을 정복하며 혁명 이념을 확산시켰으나 1815년 몰락함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "nguyen_dynasty",
+    "name_ko": "응우옌 왕조",
+    "name_en": "Nguyễn dynasty",
+    "region": "southeast_asia",
+    "start_year": 1802,
+    "end_year": 1945,
+    "capital": "후에",
+    "centroid": [
+      16.47,
+      107.58
+    ],
+    "area_polygon": [],
+    "radius_km": 450,
+    "is_approximate": false,
+    "summary_ko": "자롱제가 베트남을 통일해 세운 마지막 왕조. 국호를 '베트남'으로 정했으며 19세기 후반 프랑스의 식민 지배를 받음.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "haiti",
+    "name_ko": "아이티",
+    "name_en": "Haiti",
+    "region": "americas",
+    "start_year": 1804,
+    "end_year": 9999,
+    "capital": "포르토프랭스",
+    "centroid": [
+      19.0,
+      -72.5
+    ],
+    "area_polygon": [],
+    "radius_km": 120,
+    "is_approximate": false,
+    "summary_ko": "노예 반란으로 세워진 세계 최초의 흑인 공화국.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "france_modern",
+    "name_ko": "프랑스(근현대)",
+    "name_en": "France (modern)",
+    "region": "europe",
+    "start_year": 1815,
+    "end_year": 9999,
+    "capital": "파리",
+    "centroid": [
+      47.0,
+      2.5
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": false,
+    "summary_ko": "왕정복고·2월 혁명·제2제정·제3공화정을 거치며 국민 국가로 발전. 두 차례 세계 대전 후 유럽 통합을 주도함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[9역05-02]",
+      "[12세사03-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "gran_colombia",
+    "name_ko": "그란콜롬비아",
+    "name_en": "Gran Colombia",
+    "region": "americas",
+    "start_year": 1819,
+    "end_year": 1831,
+    "capital": "보고타",
+    "centroid": [
+      5.0,
+      -74.0
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "볼리바르가 에스파냐로부터 독립시켜 세운 연합 국가. 곧 콜롬비아·베네수엘라·에콰도르로 분리됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mexico",
+    "name_ko": "멕시코",
+    "name_en": "Mexico",
+    "region": "americas",
+    "start_year": 1821,
+    "end_year": 9999,
+    "capital": "멕시코시티",
+    "centroid": [
+      23.5,
+      -102.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1000,
+    "is_approximate": false,
+    "summary_ko": "에스파냐로부터 독립. 1910년 멕시코 혁명을 거쳐 근대 국가로 발전함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "brazil_empire",
+    "name_ko": "브라질 제국 → 브라질",
+    "name_en": "Empire of Brazil → Brazil",
+    "region": "americas",
+    "start_year": 1822,
+    "end_year": 9999,
+    "capital": "리우데자네이루 → 브라질리아",
+    "centroid": [
+      -10.0,
+      -53.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1800,
+    "is_approximate": false,
+    "summary_ko": "포르투갈 왕자가 독립을 선포해 제국이 되었고 1889년 공화국으로 바뀜.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "british_india",
+    "name_ko": "영국령 인도",
+    "name_en": "British Raj",
+    "region": "south_asia",
+    "start_year": 1858,
+    "end_year": 1947,
+    "capital": "캘커타 → 델리(1911)",
+    "centroid": [
+      22.0,
+      79.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1500,
+    "is_approximate": false,
+    "summary_ko": "세포이 항쟁 이후 영국 정부가 직접 통치한 식민지 인도. 간디의 비폭력 운동 끝에 1947년 독립함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[9역06-03]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "italy_kingdom",
+    "name_ko": "이탈리아 왕국 → 이탈리아 공화국",
+    "name_en": "Kingdom of Italy → Italian Republic",
+    "region": "europe",
+    "start_year": 1861,
+    "end_year": 9999,
+    "capital": "로마",
+    "centroid": [
+      42.5,
+      12.5
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": false,
+    "summary_ko": "사르데냐 왕국이 주도해 통일한 국민 국가. 무솔리니의 파시즘을 거쳐 1946년 공화국이 됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[9역06-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "canada",
+    "name_ko": "캐나다",
+    "name_en": "Canada",
+    "region": "americas",
+    "start_year": 1867,
+    "end_year": 9999,
+    "capital": "오타와",
+    "centroid": [
+      56.0,
+      -100.0
+    ],
+    "area_polygon": [],
+    "radius_km": 2000,
+    "is_approximate": false,
+    "summary_ko": "영국 식민지들이 연합한 자치령으로 출발해 독립 국가가 됨.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "japan_modern",
+    "name_ko": "일본(메이지 이후)",
+    "name_en": "Japan (since Meiji)",
+    "region": "east_asia",
+    "start_year": 1868,
+    "end_year": 9999,
+    "capital": "도쿄",
+    "centroid": [
+      36.5,
+      138.0
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "메이지 유신으로 근대 국가가 된 일본. 제국주의 침략과 패전을 거쳐 1947년 평화 헌법 아래 재건됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12동역03-01]",
+      "[12동역03-02]",
+      "[12동역04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "german_empire",
+    "name_ko": "독일 제국",
+    "name_en": "German Empire",
+    "region": "europe",
+    "start_year": 1871,
+    "end_year": 1918,
+    "capital": "베를린",
+    "centroid": [
+      51.0,
+      10.5
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "프로이센 중심으로 통일된 국민 국가. 급속한 산업화와 제국주의 정책으로 제1차 세계 대전을 일으켰다가 패배함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역05-01]",
+      "[9역05-02]",
+      "[9역06-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "korean_empire",
+    "name_ko": "대한제국",
+    "name_en": "Korean Empire",
+    "region": "east_asia",
+    "start_year": 1897,
+    "end_year": 1910,
+    "capital": "한성",
+    "centroid": [
+      37.57,
+      126.98
+    ],
+    "area_polygon": [
+      [
+        43.0,
+        130.6
+      ],
+      [
+        42.2,
+        129.3
+      ],
+      [
+        41.9,
+        128.1
+      ],
+      [
+        41.5,
+        126.9
+      ],
+      [
+        40.1,
+        124.4
+      ],
+      [
+        39.0,
+        125.2
+      ],
+      [
+        37.7,
+        126.1
+      ],
+      [
+        35.0,
+        126.2
+      ],
+      [
+        34.3,
+        126.6
+      ],
+      [
+        34.6,
+        128.7
+      ],
+      [
+        35.8,
+        129.6
+      ],
+      [
+        37.4,
+        129.5
+      ],
+      [
+        38.7,
+        128.4
+      ],
+      [
+        40.3,
+        129.2
+      ],
+      [
+        41.5,
+        130.0
+      ],
+      [
+        42.4,
+        130.7
+      ]
+    ],
+    "is_approximate": false,
+    "summary_ko": "고종이 황제로 즉위하며 선포한 자주 국가. 광무개혁을 추진했으나 러일 전쟁 후 일제의 침탈로 1910년 국권을 빼앗김.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-01]",
+      "[12동역03-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "australia",
+    "name_ko": "오스트레일리아",
+    "name_en": "Australia",
+    "region": "oceania",
+    "start_year": 1901,
+    "end_year": 9999,
+    "capital": "캔버라",
+    "centroid": [
+      -25.0,
+      134.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1800,
+    "is_approximate": false,
+    "summary_ko": "영국 식민지들이 연방을 이루어 성립. 20세기 후반 백호주의를 폐지하고 다문화 국가가 됨.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-04]",
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "cuba",
+    "name_ko": "쿠바",
+    "name_en": "Cuba",
+    "region": "americas",
+    "start_year": 1902,
+    "end_year": 9999,
+    "capital": "아바나",
+    "centroid": [
+      22.0,
+      -79.5
+    ],
+    "area_polygon": [],
+    "radius_km": 300,
+    "is_approximate": false,
+    "summary_ko": "에스파냐·미국의 지배를 거쳐 독립. 1959년 카스트로의 혁명 후 사회주의 국가가 되었고 1962년 미사일 위기의 무대가 됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "new_zealand",
+    "name_ko": "뉴질랜드",
+    "name_en": "New Zealand",
+    "region": "oceania",
+    "start_year": 1907,
+    "end_year": 9999,
+    "capital": "웰링턴",
+    "centroid": [
+      -41.0,
+      173.0
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "1893년 세계 최초로 여성 참정권을 인정했고 1907년 자치령이 됨.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "south_africa",
+    "name_ko": "남아프리카 공화국",
+    "name_en": "South Africa",
+    "region": "africa",
+    "start_year": 1910,
+    "end_year": 9999,
+    "capital": "프리토리아 등",
+    "centroid": [
+      -29.0,
+      25.0
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "영국 자치령으로 출발해 아파르트헤이트(인종 분리) 체제를 유지하다가 1994년 만델라 집권으로 민주화됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-02]",
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "mongolia_modern",
+    "name_ko": "몽골(근현대)",
+    "name_en": "Mongolia (modern)",
+    "region": "central_asia",
+    "start_year": 1911,
+    "end_year": 9999,
+    "capital": "울란바토르",
+    "centroid": [
+      46.9,
+      103.8
+    ],
+    "area_polygon": [],
+    "radius_km": 800,
+    "is_approximate": false,
+    "summary_ko": "1911년 청으로부터 독립을 선언하고 1924년 인민 공화국이 됨. 1990년 민주화.",
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "roc",
+    "name_ko": "중화민국",
+    "name_en": "Republic of China",
+    "region": "east_asia",
+    "start_year": 1912,
+    "end_year": 9999,
+    "capital": "난징 → 타이베이(1949)",
+    "centroid": [
+      25.0,
+      121.0
+    ],
+    "area_polygon": [],
+    "radius_km": 250,
+    "is_approximate": false,
+    "summary_ko": "신해혁명으로 세워진 아시아 최초의 공화국. 국공 내전에서 패한 뒤 1949년 타이완으로 옮김.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역05-03]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "1949년 이후 실효 지배 지역(타이완)을 중심으로 표시."
+  },
+  {
+    "id": "germany_weimar_nazi",
+    "name_ko": "독일(바이마르 공화국·나치 독일)",
+    "name_en": "Germany (Weimar Republic · Nazi Germany)",
+    "region": "europe",
+    "start_year": 1918,
+    "end_year": 1945,
+    "capital": "베를린",
+    "centroid": [
+      51.0,
+      10.5
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "제1차 세계 대전 후의 공화국. 대공황 속에 히틀러가 집권해 전체주의 체제로 제2차 세계 대전과 홀로코스트를 일으킴.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[9역06-02]",
+      "[12세사04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "kpg",
+    "name_ko": "대한민국 임시 정부",
+    "name_en": "Provisional Government of the Republic of Korea",
+    "region": "east_asia",
+    "start_year": 1919,
+    "end_year": 1945,
+    "capital": "상하이 → 충칭(1940)",
+    "centroid": [
+      31.23,
+      121.47
+    ],
+    "area_polygon": [],
+    "radius_km": 150,
+    "is_approximate": false,
+    "summary_ko": "3·1 운동 직후 상하이에서 수립된 민주 공화제 임시 정부. 한인 애국단·한국광복군을 조직해 독립운동을 이끔.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-02]",
+      "[12동역03-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "망명 정부이므로 영토가 아닌 활동 거점(상하이)을 중심으로 표시."
+  },
+  {
+    "id": "egypt_modern",
+    "name_ko": "이집트(근현대)",
+    "name_en": "Egypt (modern)",
+    "region": "africa",
+    "start_year": 1922,
+    "end_year": 9999,
+    "capital": "카이로",
+    "centroid": [
+      27.0,
+      30.0
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "영국 보호령에서 독립한 왕국. 1952년 혁명 후 나세르가 수에즈 운하를 국유화하고 아랍 민족주의를 이끔.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-03]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ussr",
+    "name_ko": "소련(소비에트 사회주의 공화국 연방)",
+    "name_en": "Soviet Union",
+    "region": "europe",
+    "start_year": 1922,
+    "end_year": 1991,
+    "capital": "모스크바",
+    "centroid": [
+      60.0,
+      80.0
+    ],
+    "area_polygon": [],
+    "radius_km": 3000,
+    "is_approximate": false,
+    "summary_ko": "러시아 혁명으로 세워진 세계 최초의 사회주의 국가. 냉전에서 미국과 대립했고 1991년 해체됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-01]",
+      "[9역07-01]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "turkey",
+    "name_ko": "튀르키예 공화국",
+    "name_en": "Republic of Turkey",
+    "region": "west_asia",
+    "start_year": 1923,
+    "end_year": 9999,
+    "capital": "앙카라",
+    "centroid": [
+      39.0,
+      35.0
+    ],
+    "area_polygon": [],
+    "radius_km": 700,
+    "is_approximate": false,
+    "summary_ko": "무스타파 케말이 오스만 제국을 대신해 세운 공화국. 정교 분리와 문자 개혁 등 근대화를 추진함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역06-03]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "iran_modern",
+    "name_ko": "이란(팔레비 왕조 → 이슬람 공화국)",
+    "name_en": "Iran (Pahlavi → Islamic Republic)",
+    "region": "west_asia",
+    "start_year": 1925,
+    "end_year": 9999,
+    "capital": "테헤란",
+    "centroid": [
+      32.0,
+      54.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1000,
+    "is_approximate": false,
+    "summary_ko": "팔레비 왕조의 근대화 정책 뒤 1979년 이슬람 혁명으로 이슬람 공화국이 됨.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "1979년 정체 변경을 한 항목으로 이어 표시."
+  },
+  {
+    "id": "saudi",
+    "name_ko": "사우디아라비아",
+    "name_en": "Saudi Arabia",
+    "region": "west_asia",
+    "start_year": 1932,
+    "end_year": 9999,
+    "capital": "리야드",
+    "centroid": [
+      24.0,
+      45.0
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "아라비아반도를 통일해 세워진 이슬람 왕국. 석유 자원으로 국제적 영향력을 가짐.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "indonesia",
+    "name_ko": "인도네시아",
+    "name_en": "Indonesia",
+    "region": "southeast_asia",
+    "start_year": 1945,
+    "end_year": 9999,
+    "capital": "자카르타",
+    "centroid": [
+      -2.5,
+      118.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1500,
+    "is_approximate": false,
+    "summary_ko": "1945년 수카르노가 네덜란드로부터 독립을 선언. 1955년 반둥 회의를 주최해 제3 세계의 중심이 됨.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "vietnam_drv",
+    "name_ko": "베트남 민주 공화국 → 베트남 사회주의 공화국",
+    "name_en": "Democratic Republic of Vietnam → Socialist Republic of Vietnam",
+    "region": "southeast_asia",
+    "start_year": 1945,
+    "end_year": 9999,
+    "capital": "하노이",
+    "centroid": [
+      16.0,
+      107.0
+    ],
+    "area_polygon": [],
+    "radius_km": 500,
+    "is_approximate": false,
+    "summary_ko": "호찌민이 독립을 선언하며 수립. 프랑스·미국과의 전쟁 끝에 1976년 통일되어 사회주의 공화국이 됨.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "1976년 통일 이후 국호 변경을 한 항목으로 이어 표시."
+  },
+  {
+    "id": "india",
+    "name_ko": "인도",
+    "name_en": "India",
+    "region": "south_asia",
+    "start_year": 1947,
+    "end_year": 9999,
+    "capital": "뉴델리",
+    "centroid": [
+      22.0,
+      79.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1500,
+    "is_approximate": false,
+    "summary_ko": "1947년 독립한 공화국. 네루 아래 비동맹 외교를 이끌었으며 세계 최대의 민주주의 국가로 성장함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "pakistan",
+    "name_ko": "파키스탄",
+    "name_en": "Pakistan",
+    "region": "south_asia",
+    "start_year": 1947,
+    "end_year": 9999,
+    "capital": "카라치 → 이슬라마바드",
+    "centroid": [
+      30.0,
+      69.0
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "인도 분할로 이슬람 국가로 독립. 1971년 동파키스탄이 방글라데시로 분리됨.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "dprk",
+    "name_ko": "조선 민주주의 인민 공화국",
+    "name_en": "Democratic People's Republic of Korea",
+    "region": "east_asia",
+    "start_year": 1948,
+    "end_year": 9999,
+    "capital": "평양",
+    "centroid": [
+      40.0,
+      127.0
+    ],
+    "area_polygon": [
+      [
+        43.0,
+        130.6
+      ],
+      [
+        42.2,
+        129.3
+      ],
+      [
+        41.9,
+        128.1
+      ],
+      [
+        41.5,
+        126.9
+      ],
+      [
+        40.1,
+        124.4
+      ],
+      [
+        39.0,
+        125.2
+      ],
+      [
+        38.0,
+        126.7
+      ],
+      [
+        38.3,
+        127.0
+      ],
+      [
+        38.6,
+        128.4
+      ],
+      [
+        40.3,
+        129.2
+      ],
+      [
+        41.5,
+        130.0
+      ],
+      [
+        42.4,
+        130.7
+      ]
+    ],
+    "is_approximate": false,
+    "summary_ko": "1948년 9월 9일 북한 지역에 수립된 사회주의 국가. 분단과 6·25 전쟁 이후 남북 대립과 대화가 반복됨.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-03]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "israel",
+    "name_ko": "이스라엘",
+    "name_en": "Israel",
+    "region": "west_asia",
+    "start_year": 1948,
+    "end_year": 9999,
+    "capital": "예루살렘(국제적 논쟁)",
+    "centroid": [
+      31.5,
+      35.0
+    ],
+    "area_polygon": [],
+    "radius_km": 120,
+    "is_approximate": false,
+    "summary_ko": "1948년 건국된 유대인 국가. 이후 아랍 국가들과 여러 차례 전쟁을 벌였으며 팔레스타인 문제가 이어짐.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "rok",
+    "name_ko": "대한민국",
+    "name_en": "Republic of Korea",
+    "region": "east_asia",
+    "start_year": 1948,
+    "end_year": 9999,
+    "capital": "서울",
+    "centroid": [
+      36.5,
+      127.8
+    ],
+    "area_polygon": [
+      [
+        38.3,
+        127.0
+      ],
+      [
+        38.6,
+        128.4
+      ],
+      [
+        37.4,
+        129.5
+      ],
+      [
+        35.8,
+        129.6
+      ],
+      [
+        34.6,
+        128.7
+      ],
+      [
+        34.3,
+        126.6
+      ],
+      [
+        35.0,
+        126.2
+      ],
+      [
+        37.7,
+        126.1
+      ],
+      [
+        38.0,
+        126.7
+      ]
+    ],
+    "is_approximate": false,
+    "summary_ko": "1948년 8월 15일 수립된 민주 공화국. 6·25 전쟁과 산업화·민주화를 거쳐 오늘에 이름.",
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역13-03]",
+      "[12동역04-01]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "germany_frg",
+    "name_ko": "독일 연방 공화국",
+    "name_en": "Federal Republic of Germany",
+    "region": "europe",
+    "start_year": 1949,
+    "end_year": 9999,
+    "capital": "본 → 베를린(1990)",
+    "centroid": [
+      51.0,
+      10.5
+    ],
+    "area_polygon": [],
+    "radius_km": 600,
+    "is_approximate": false,
+    "summary_ko": "냉전 속 분단된 서독으로 출발해 1990년 동독과 통일. 유럽 연합의 중심 국가.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "prc",
+    "name_ko": "중화 인민 공화국",
+    "name_en": "People's Republic of China",
+    "region": "east_asia",
+    "start_year": 1949,
+    "end_year": 9999,
+    "capital": "베이징",
+    "centroid": [
+      35.0,
+      105.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1900,
+    "is_approximate": false,
+    "summary_ko": "1949년 마오쩌둥이 수립한 사회주의 국가. 문화 대혁명을 거쳐 1978년 개혁·개방으로 경제 대국이 됨.",
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12동역04-01]",
+      "[12동역04-02]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "ghana_modern",
+    "name_ko": "가나",
+    "name_en": "Ghana",
+    "region": "africa",
+    "start_year": 1957,
+    "end_year": 9999,
+    "capital": "아크라",
+    "centroid": [
+      8.0,
+      -1.5
+    ],
+    "area_polygon": [],
+    "radius_km": 250,
+    "is_approximate": false,
+    "summary_ko": "은크루마가 이끈 사하라 이남 아프리카 최초의 독립국. 아프리카 독립 운동의 상징.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "algeria",
+    "name_ko": "알제리",
+    "name_en": "Algeria",
+    "region": "africa",
+    "start_year": 1962,
+    "end_year": 9999,
+    "capital": "알제",
+    "centroid": [
+      28.0,
+      3.0
+    ],
+    "area_polygon": [],
+    "radius_km": 900,
+    "is_approximate": false,
+    "summary_ko": "8년의 독립 전쟁 끝에 프랑스로부터 독립함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-01]",
+      "[12세사03-04]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "russia_federation",
+    "name_ko": "러시아 연방",
+    "name_en": "Russian Federation",
+    "region": "europe",
+    "start_year": 1991,
+    "end_year": 9999,
+    "capital": "모스크바",
+    "centroid": [
+      60.0,
+      90.0
+    ],
+    "area_polygon": [],
+    "radius_km": 3000,
+    "is_approximate": false,
+    "summary_ko": "소련 해체 후 계승 국가. 시장 경제로 전환함.",
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": ""
+  },
+  {
+    "id": "eu",
+    "name_ko": "유럽 연합",
+    "name_en": "European Union",
+    "region": "europe",
+    "start_year": 1993,
+    "end_year": 9999,
+    "capital": "브뤼셀",
+    "centroid": [
+      50.0,
+      9.0
+    ],
+    "area_polygon": [],
+    "radius_km": 1200,
+    "is_approximate": false,
+    "summary_ko": "마스트리흐트 조약으로 출범한 유럽 통합 기구. 단일 시장과 공동 통화(유로)를 운영함.",
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "achievement_standards": [
+      "[9역07-03]",
+      "[12세사04-03]"
+    ],
+    "sources": [
+      "교육부 편수자료(역사·세계사)",
+      "2022 개정 교육과정 검정 교과서 공통 서술"
+    ],
+    "note": "국가가 아닌 국제 기구이지만 현대 세계 이해를 위해 수록."
   }
 ]

@@ -25,9 +25,22 @@
     "school_level": "중학교",
     "unit": "(2) 문명의 발생과 고대 세계의 형성",
     "text": "선사 문화 및 문명의 형성을 이해하고, 각 문명의 특징을 비교한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -3000,
+      -500
+    ],
+    "related_polities": [
+      "sumer",
+      "ancient_egypt",
+      "indus_civ",
+      "shang",
+      "olmec",
+      "maya"
+    ],
+    "related_figures": [
+      "hammurabi",
+      "ramesses2"
+    ]
   },
   {
     "code": "[9역02-02]",
@@ -35,9 +48,41 @@
     "school_level": "중학교",
     "unit": "(2) 문명의 발생과 고대 세계의 형성",
     "text": "서아시아⋅지중해 세계에서 등장한 여러 정치체를 비교하고 종교 및 문화를 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -1000,
+      500
+    ],
+    "related_polities": [
+      "achaemenid",
+      "athens",
+      "sparta",
+      "macedon_alexander",
+      "roman_republic",
+      "roman_empire",
+      "hittite",
+      "phoenicia",
+      "israel_kingdom",
+      "neo_assyria",
+      "neo_babylon",
+      "ptolemaic",
+      "seleucid",
+      "carthage"
+    ],
+    "related_figures": [
+      "cyrus",
+      "darius1",
+      "pericles",
+      "socrates",
+      "plato",
+      "aristotle",
+      "alexander",
+      "caesar",
+      "augustus",
+      "jesus",
+      "constantine",
+      "hannibal",
+      "cleopatra"
+    ]
   },
   {
     "code": "[9역02-03]",
@@ -45,9 +90,32 @@
     "school_level": "중학교",
     "unit": "(2) 문명의 발생과 고대 세계의 형성",
     "text": "중국과 인도의 정치적 변화와 종교⋅사상 성립의 관계를 이해하고, 유라시아의 상호 교류를 탐색한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -800,
+      300
+    ],
+    "related_polities": [
+      "spring_autumn_warring",
+      "qin",
+      "han",
+      "maurya",
+      "kushan",
+      "xiongnu",
+      "parthia"
+    ],
+    "related_figures": [
+      "confucius",
+      "mencius",
+      "qin_shihuang",
+      "liu_bang",
+      "han_wudi",
+      "sima_qian",
+      "zhang_qian",
+      "buddha",
+      "chandragupta_maurya",
+      "ashoka",
+      "kanishka"
+    ]
   },
   {
     "code": "[9역03-01]",
@@ -55,9 +123,38 @@
     "school_level": "중학교",
     "unit": "(3) 세계 종교의 확산과 지역 문화의 발전",
     "text": "수⋅당 시기 동아시아 국제 질서의 특징을 이해하고, 동아시아 문화를 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      580,
+      910
+    ],
+    "related_polities": [
+      "sui",
+      "tang",
+      "gokturk",
+      "uyghur_khaganate",
+      "tibetan_empire",
+      "yamato",
+      "nara",
+      "heian",
+      "silla_unified",
+      "balhae",
+      "northern_wei",
+      "three_kingdoms_china",
+      "jin_dynasty",
+      "southern_dynasties"
+    ],
+    "related_figures": [
+      "sui_wendi",
+      "sui_yangdi",
+      "tang_taizong",
+      "wu_zetian",
+      "xuanzang",
+      "tang_xuanzong",
+      "li_bai",
+      "du_fu",
+      "shotoku",
+      "cao_cao"
+    ]
   },
   {
     "code": "[9역03-02]",
@@ -65,9 +162,27 @@
     "school_level": "중학교",
     "unit": "(3) 세계 종교의 확산과 지역 문화의 발전",
     "text": "인도, 서아시아, 지중해에서 진행된 정치적 변동 과정과 각 종교의 특징 및 영향을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      300,
+      1300
+    ],
+    "related_polities": [
+      "gupta",
+      "sasanian",
+      "rashidun",
+      "umayyad",
+      "abbasid",
+      "delhi_sultanate",
+      "srivijaya",
+      "khmer_empire"
+    ],
+    "related_figures": [
+      "muhammad",
+      "abu_bakr",
+      "ali",
+      "harun_alrashid",
+      "ibn_sina"
+    ]
   },
   {
     "code": "[9역03-03]",
@@ -75,9 +190,28 @@
     "school_level": "중학교",
     "unit": "(3) 세계 종교의 확산과 지역 문화의 발전",
     "text": "크리스트교 세계의 정치와 종교의 상관성을 이해하고, 이슬람 세계와 크리스트교 세계의 충돌 및 교류의 결과를 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      480,
+      1300
+    ],
+    "related_polities": [
+      "frankish",
+      "hre",
+      "papal_states",
+      "byzantine",
+      "kievan_rus",
+      "france_kingdom",
+      "england_kingdom",
+      "seljuk",
+      "ayyubid"
+    ],
+    "related_figures": [
+      "charlemagne",
+      "justinian",
+      "urban2",
+      "innocent3",
+      "saladin"
+    ]
   },
   {
     "code": "[9역04-01]",
@@ -85,9 +219,43 @@
     "school_level": "중학교",
     "unit": "(4) 지역 세계의 교류와 변화",
     "text": "송과 몽골 제국 시기 유라시아⋅인도양 교역권의 성장을 경제⋅문화 자료를 통해 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      960,
+      1400
+    ],
+    "related_polities": [
+      "northern_song",
+      "southern_song",
+      "liao",
+      "jin_jurchen",
+      "western_xia",
+      "mongol_empire",
+      "yuan",
+      "ilkhanate",
+      "golden_horde",
+      "chagatai",
+      "timurid",
+      "mamluk",
+      "venice",
+      "heian",
+      "kamakura",
+      "five_dynasties"
+    ],
+    "related_figures": [
+      "zhao_kuangyin",
+      "wang_anshi",
+      "zhu_xi",
+      "yue_fei",
+      "genghis_khan",
+      "ogedei",
+      "batu",
+      "hulagu",
+      "kublai_khan",
+      "marco_polo",
+      "ibn_battuta",
+      "minamoto_yoritomo",
+      "timur"
+    ]
   },
   {
     "code": "[9역04-02]",
@@ -95,9 +263,32 @@
     "school_level": "중학교",
     "unit": "(4) 지역 세계의 교류와 변화",
     "text": "명⋅청, 에도 막부, 무굴 제국의 정치⋅사회 변화를 비교한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1368,
+      1868
+    ],
+    "related_polities": [
+      "ming",
+      "qing",
+      "edo",
+      "muromachi",
+      "mughal"
+    ],
+    "related_figures": [
+      "hongwu",
+      "yongle",
+      "zheng_he",
+      "nurhaci",
+      "kangxi",
+      "yongzheng",
+      "qianlong",
+      "tokugawa_ieyasu",
+      "ashikaga_yoshimitsu",
+      "babur",
+      "akbar",
+      "shah_jahan",
+      "aurangzeb"
+    ]
   },
   {
     "code": "[9역04-03]",
@@ -105,9 +296,47 @@
     "school_level": "중학교",
     "unit": "(4) 지역 세계의 교류와 변화",
     "text": "오스만 제국의 성장과 유럽 사회의 근대적 변화를 조사한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1300,
+      1800
+    ],
+    "related_polities": [
+      "ottoman_empire",
+      "safavid",
+      "spain",
+      "portugal",
+      "dutch_republic",
+      "england_kingdom",
+      "france_kingdom",
+      "hre",
+      "russian_empire",
+      "prussia",
+      "austria_habsburg",
+      "venice"
+    ],
+    "related_figures": [
+      "mehmed2",
+      "suleiman",
+      "joan_of_arc",
+      "gutenberg",
+      "leonardo",
+      "michelangelo",
+      "columbus",
+      "vasco_da_gama",
+      "magellan",
+      "luther",
+      "calvin",
+      "henry8",
+      "elizabeth1",
+      "philip2",
+      "copernicus",
+      "galileo",
+      "newton",
+      "louis14",
+      "cromwell",
+      "peter1",
+      "catherine2"
+    ]
   },
   {
     "code": "[9역05-01]",
@@ -115,9 +344,39 @@
     "school_level": "중학교",
     "unit": "(5) 제국주의와 국민 국가 건설 운동",
     "text": "시민 혁명을 국민 국가 형성과 연결하여 파악하고, 역사적 의의와 한계를 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1640,
+      1871
+    ],
+    "related_polities": [
+      "uk",
+      "usa",
+      "france_revolution",
+      "france_modern",
+      "haiti",
+      "mexico",
+      "gran_colombia",
+      "german_empire",
+      "italy_kingdom",
+      "austria_habsburg",
+      "prussia"
+    ],
+    "related_figures": [
+      "cromwell",
+      "montesquieu",
+      "voltaire",
+      "rousseau",
+      "washington",
+      "jefferson",
+      "robespierre",
+      "napoleon",
+      "metternich",
+      "bolivar",
+      "toussaint",
+      "garibaldi",
+      "bismarck",
+      "lincoln"
+    ]
   },
   {
     "code": "[9역05-02]",
@@ -125,9 +384,24 @@
     "school_level": "중학교",
     "unit": "(5) 제국주의와 국민 국가 건설 운동",
     "text": "서양의 산업화와 제국주의 정책을 이해하고, 사회와 생태환경에 미친 영향을 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1760,
+      1914
+    ],
+    "related_polities": [
+      "uk",
+      "france_modern",
+      "german_empire",
+      "russian_empire",
+      "ethiopia_empire"
+    ],
+    "related_figures": [
+      "adam_smith",
+      "james_watt",
+      "marx",
+      "darwin",
+      "victoria"
+    ]
   },
   {
     "code": "[9역05-03]",
@@ -135,9 +409,31 @@
     "school_level": "중학교",
     "unit": "(5) 제국주의와 국민 국가 건설 운동",
     "text": "제국주의 열강의 침략에 대한 아시아의 대응 및 국민 국가 건설 노력을 이해하고, 그 성과와 한계를 평가한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1840,
+      1920
+    ],
+    "related_polities": [
+      "qing",
+      "roc",
+      "japan_modern",
+      "british_india",
+      "nguyen_dynasty",
+      "siam_rattanakosin",
+      "qajar",
+      "korean_empire"
+    ],
+    "related_figures": [
+      "lin_zexu",
+      "hong_xiuquan",
+      "li_hongzhang",
+      "kang_youwei",
+      "sun_yatsen",
+      "yuan_shikai",
+      "meiji",
+      "fukuzawa",
+      "ito_hirobumi"
+    ]
   },
   {
     "code": "[9역06-01]",
@@ -145,9 +441,30 @@
     "school_level": "중학교",
     "unit": "(6) 세계 대전과 사회 변동",
     "text": "20세기 전반 세계 질서의 변화를 두 차례의 세계 대전을 중심으로 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1914,
+      1945
+    ],
+    "related_polities": [
+      "german_empire",
+      "germany_weimar_nazi",
+      "ussr",
+      "usa",
+      "uk",
+      "italy_kingdom",
+      "japan_modern",
+      "austria_habsburg"
+    ],
+    "related_figures": [
+      "lenin",
+      "wilson",
+      "stalin",
+      "mussolini",
+      "hitler",
+      "churchill",
+      "fdr",
+      "tojo_hideki"
+    ]
   },
   {
     "code": "[9역06-02]",
@@ -155,9 +472,18 @@
     "school_level": "중학교",
     "unit": "(6) 세계 대전과 사회 변동",
     "text": "세계 대전 중의 전쟁 범죄를 탐구하고, 인권 회복과 평화 실현을 위한 노력을 조사한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1914,
+      1948
+    ],
+    "related_polities": [
+      "germany_weimar_nazi",
+      "japan_modern"
+    ],
+    "related_figures": [
+      "hitler",
+      "tojo_hideki"
+    ]
   },
   {
     "code": "[9역06-03]",
@@ -165,9 +491,23 @@
     "school_level": "중학교",
     "unit": "(6) 세계 대전과 사회 변동",
     "text": "아시아⋅아프리카 지역의 민족 운동을 이해하고, 그 특징을 비교한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1919,
+      1949
+    ],
+    "related_polities": [
+      "british_india",
+      "turkey",
+      "egypt_modern",
+      "roc"
+    ],
+    "related_figures": [
+      "gandhi",
+      "ataturk",
+      "sun_yatsen",
+      "chiang_kaishek",
+      "lu_xun"
+    ]
   },
   {
     "code": "[9역07-01]",
@@ -175,9 +515,38 @@
     "school_level": "중학교",
     "unit": "(7) 현대 세계의 전개와 과제",
     "text": "냉전의 전개와 제3 세계 등장의 상관관계를 이해하고, 냉전 이후 국제 질서의 변화를 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1945,
+      2000
+    ],
+    "related_polities": [
+      "usa",
+      "ussr",
+      "prc",
+      "india",
+      "indonesia",
+      "cuba",
+      "vietnam_drv",
+      "germany_frg",
+      "ghana_modern",
+      "algeria",
+      "egypt_modern",
+      "israel"
+    ],
+    "related_figures": [
+      "truman",
+      "stalin",
+      "mao_zedong",
+      "zhou_enlai",
+      "nehru",
+      "sukarno",
+      "ho_chi_minh",
+      "nasser",
+      "kennedy",
+      "nkrumah",
+      "gorbachev",
+      "deng_xiaoping"
+    ]
   },
   {
     "code": "[9역07-02]",
@@ -185,9 +554,18 @@
     "school_level": "중학교",
     "unit": "(7) 현대 세계의 전개와 과제",
     "text": "20세기 후반 민주주의와 인권의 신장을 위한 노력에 관심을 갖는다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1945,
+      2000
+    ],
+    "related_polities": [
+      "usa",
+      "south_africa"
+    ],
+    "related_figures": [
+      "mlk",
+      "mandela"
+    ]
   },
   {
     "code": "[9역07-03]",
@@ -195,8 +573,13 @@
     "school_level": "중학교",
     "unit": "(7) 현대 세계의 전개와 과제",
     "text": "오늘날 세계화의 양상을 조사하고, 성과와 과제를 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
+    "suggested_year_range": [
+      1990,
+      2000
+    ],
+    "related_polities": [
+      "eu"
+    ],
     "related_figures": []
   },
   {
@@ -205,8 +588,14 @@
     "school_level": "중학교",
     "unit": "(8) 국가의 형성과 발전",
     "text": "고조선과 여러 나라의 형성 과정 및 사회 모습을 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
+    "suggested_year_range": [
+      -2333,
+      300
+    ],
+    "related_polities": [
+      "gojoseon",
+      "buyeo"
+    ],
     "related_figures": []
   },
   {
@@ -215,9 +604,20 @@
     "school_level": "중학교",
     "unit": "(8) 국가의 형성과 발전",
     "text": "삼국과 가야의 성장 과정을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -57,
+      676
+    ],
+    "related_polities": [
+      "goguryeo",
+      "baekje",
+      "silla",
+      "gaya"
+    ],
+    "related_figures": [
+      "gwanggaeto",
+      "jangsu"
+    ]
   },
   {
     "code": "[9역08-03]",
@@ -225,8 +625,16 @@
     "school_level": "중학교",
     "unit": "(8) 국가의 형성과 발전",
     "text": "삼국과 가야가 남긴 문화의 특징을 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
+    "suggested_year_range": [
+      -57,
+      676
+    ],
+    "related_polities": [
+      "goguryeo",
+      "baekje",
+      "silla",
+      "gaya"
+    ],
     "related_figures": []
   },
   {
@@ -235,9 +643,23 @@
     "school_level": "중학교",
     "unit": "(9) 통일신라와 발해",
     "text": "삼국 통일의 과정을 동아시아 국제 정세의 맥락에서 이해하고, 통일신라와 발해 성립의 역사적 의의를 추론한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      600,
+      700
+    ],
+    "related_polities": [
+      "silla",
+      "silla_unified",
+      "balhae",
+      "tang",
+      "goguryeo",
+      "baekje"
+    ],
+    "related_figures": [
+      "kim_yusin",
+      "munmu",
+      "dae_joyeong"
+    ]
   },
   {
     "code": "[9역09-02]",
@@ -245,9 +667,17 @@
     "school_level": "중학교",
     "unit": "(9) 통일신라와 발해",
     "text": "통일신라와 발해의 국가 체제 정비와 변동을 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      676,
+      935
+    ],
+    "related_polities": [
+      "silla_unified",
+      "balhae"
+    ],
+    "related_figures": [
+      "jang_bogo"
+    ]
   },
   {
     "code": "[9역09-03]",
@@ -255,9 +685,18 @@
     "school_level": "중학교",
     "unit": "(9) 통일신라와 발해",
     "text": "통일신라와 발해 문화의 특징을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      676,
+      935
+    ],
+    "related_polities": [
+      "silla_unified",
+      "balhae"
+    ],
+    "related_figures": [
+      "wonhyo",
+      "uisang"
+    ]
   },
   {
     "code": "[9역10-01]",
@@ -265,9 +704,21 @@
     "school_level": "중학교",
     "unit": "(10) 고려의 성립과 변천",
     "text": "후삼국 통일과 체제 정비 과정을 통해 고려 성립의 역사적 의미를 탐색한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      892,
+      1000
+    ],
+    "related_polities": [
+      "goryeo",
+      "later_baekje",
+      "taebong",
+      "silla_unified"
+    ],
+    "related_figures": [
+      "wang_geon",
+      "gyeon_hwon",
+      "gwangjong"
+    ]
   },
   {
     "code": "[9역10-02]",
@@ -275,9 +726,22 @@
     "school_level": "중학교",
     "unit": "(10) 고려의 성립과 변천",
     "text": "고려의 정치적 변동을 파악하고 주변국과의 관계를 이해한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      918,
+      1270
+    ],
+    "related_polities": [
+      "goryeo",
+      "liao",
+      "jin_jurchen",
+      "northern_song"
+    ],
+    "related_figures": [
+      "seo_hui",
+      "gang_gamchan",
+      "choe_chungheon",
+      "kim_busik"
+    ]
   },
   {
     "code": "[9역10-03]",
@@ -285,9 +749,18 @@
     "school_level": "중학교",
     "unit": "(10) 고려의 성립과 변천",
     "text": "원 간섭기 고려 사회에 나타난 변화를 파악하고 개혁의 영향을 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1270,
+      1392
+    ],
+    "related_polities": [
+      "goryeo",
+      "yuan"
+    ],
+    "related_figures": [
+      "gongmin",
+      "choe_yeong"
+    ]
   },
   {
     "code": "[9역10-04]",
@@ -295,9 +768,19 @@
     "school_level": "중학교",
     "unit": "(10) 고려의 성립과 변천",
     "text": "고려의 문화유산과 대외 교류의 사례를 조사하여 그 특징을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      918,
+      1392
+    ],
+    "related_polities": [
+      "goryeo",
+      "northern_song",
+      "southern_song"
+    ],
+    "related_figures": [
+      "kim_busik",
+      "iryeon"
+    ]
   },
   {
     "code": "[9역11-01]",
@@ -305,9 +788,19 @@
     "school_level": "중학교",
     "unit": "(11) 조선의 성립과 발전",
     "text": "조선 성립의 의의를 통치 체제의 특징을 통해 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1392,
+      1500
+    ],
+    "related_polities": [
+      "joseon"
+    ],
+    "related_figures": [
+      "yi_seonggye",
+      "jeong_dojeon",
+      "jeong_mongju",
+      "sejong"
+    ]
   },
   {
     "code": "[9역11-02]",
@@ -315,9 +808,18 @@
     "school_level": "중학교",
     "unit": "(11) 조선의 성립과 발전",
     "text": "사림 세력의 성장이 성리학적 질서 확산에 끼친 영향을 추론한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1450,
+      1600
+    ],
+    "related_polities": [
+      "joseon"
+    ],
+    "related_figures": [
+      "jo_gwangjo",
+      "yi_hwang",
+      "yi_i"
+    ]
   },
   {
     "code": "[9역11-03]",
@@ -325,9 +827,25 @@
     "school_level": "중학교",
     "unit": "(11) 조선의 성립과 발전",
     "text": "왜란과 호란의 성격을 동아시아 국제 정세 속에서 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1590,
+      1640
+    ],
+    "related_polities": [
+      "joseon",
+      "ming",
+      "qing",
+      "edo"
+    ],
+    "related_figures": [
+      "yi_sunsin",
+      "gwon_yul",
+      "gwanghaegun",
+      "injo",
+      "toyotomi_hideyoshi",
+      "nurhaci",
+      "hong_taiji"
+    ]
   },
   {
     "code": "[9역12-01]",
@@ -335,9 +853,19 @@
     "school_level": "중학교",
     "unit": "(12) 조선 사회의 변동",
     "text": "왜란과 호란 이후 체제 재정비의 노력과 정치 변동의 모습을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1640,
+      1800
+    ],
+    "related_polities": [
+      "joseon",
+      "qing"
+    ],
+    "related_figures": [
+      "hyojong",
+      "yeongjo",
+      "jeongjo"
+    ]
   },
   {
     "code": "[9역12-02]",
@@ -345,9 +873,17 @@
     "school_level": "중학교",
     "unit": "(12) 조선 사회의 변동",
     "text": "조선 후기 문화에서 나타난 변화를 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1650,
+      1860
+    ],
+    "related_polities": [
+      "joseon"
+    ],
+    "related_figures": [
+      "jeong_yakyong",
+      "park_jiwon"
+    ]
   },
   {
     "code": "[9역12-03]",
@@ -355,9 +891,18 @@
     "school_level": "중학교",
     "unit": "(12) 조선 사회의 변동",
     "text": "조선 후기 사회적 모순에 대한 여러 세력의 대응을 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1800,
+      1870
+    ],
+    "related_polities": [
+      "joseon"
+    ],
+    "related_figures": [
+      "hong_gyeongnae",
+      "choe_jeu",
+      "heungseon"
+    ]
   },
   {
     "code": "[9역13-01]",
@@ -365,9 +910,24 @@
     "school_level": "중학교",
     "unit": "(13) 근⋅현대 사회로의 전환",
     "text": "개항 이후 근대 국가를 건설하기 위한 노력을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1863,
+      1910
+    ],
+    "related_polities": [
+      "joseon",
+      "korean_empire",
+      "qing",
+      "japan_modern"
+    ],
+    "related_figures": [
+      "heungseon",
+      "kim_okgyun",
+      "jeon_bongjun",
+      "gojong",
+      "seo_jaepil",
+      "ito_hirobumi"
+    ]
   },
   {
     "code": "[9역13-02]",
@@ -375,9 +935,25 @@
     "school_level": "중학교",
     "unit": "(13) 근⋅현대 사회로의 전환",
     "text": "국권 피탈 이후 전개된 민족 운동을 세계사적 관점에서 이해한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1910,
+      1945
+    ],
+    "related_polities": [
+      "kpg",
+      "japan_modern"
+    ],
+    "related_figures": [
+      "an_junggeun",
+      "kim_gu",
+      "an_changho",
+      "yu_gwansun",
+      "sin_chaeho",
+      "hong_beomdo",
+      "kim_jwajin",
+      "yun_bonggil",
+      "wilson"
+    ]
   },
   {
     "code": "[9역13-03]",
@@ -385,9 +961,20 @@
     "school_level": "중학교",
     "unit": "(13) 근⋅현대 사회로의 전환",
     "text": "한국의 민주화 과정에서 나타난 성과와 과제를 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1945,
+      2000
+    ],
+    "related_polities": [
+      "rok",
+      "dprk"
+    ],
+    "related_figures": [
+      "syngman_rhee",
+      "kim_ilsung",
+      "park_chunghee",
+      "kim_daejung"
+    ]
   },
   {
     "code": "[9역13-04]",
@@ -405,9 +992,26 @@
     "school_level": "고등학교",
     "unit": "(1) 지역 세계의 형성",
     "text": "현생 인류의 삶과 문명의 형성을 생태환경과의 관계 속에서 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -3000,
+      -500
+    ],
+    "related_polities": [
+      "sumer",
+      "akkad",
+      "old_babylon",
+      "ancient_egypt",
+      "kush",
+      "indus_civ",
+      "shang",
+      "olmec",
+      "teotihuacan",
+      "maya"
+    ],
+    "related_figures": [
+      "hammurabi",
+      "ramesses2"
+    ]
   },
   {
     "code": "[12세사01-02]",
@@ -415,9 +1019,36 @@
     "school_level": "고등학교",
     "unit": "(1) 지역 세계의 형성",
     "text": "동아시아, 인도 세계의 형성을 문화의 상호 작용과 관련지어 이해한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -800,
+      600
+    ],
+    "related_polities": [
+      "western_zhou",
+      "spring_autumn_warring",
+      "qin",
+      "han",
+      "sui",
+      "tang",
+      "maurya",
+      "kushan",
+      "gupta",
+      "xiongnu",
+      "khmer_empire",
+      "pagan"
+    ],
+    "related_figures": [
+      "confucius",
+      "qin_shihuang",
+      "han_wudi",
+      "sima_qian",
+      "tang_taizong",
+      "buddha",
+      "chandragupta_maurya",
+      "ashoka",
+      "kanishka",
+      "jayavarman7"
+    ]
   },
   {
     "code": "[12세사01-03]",
@@ -425,9 +1056,46 @@
     "school_level": "고등학교",
     "unit": "(1) 지역 세계의 형성",
     "text": "서아시아, 지중해, 유럽 세계의 형성과 문화적 특징을 종교의 확산과 관련지어 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -1000,
+      900
+    ],
+    "related_polities": [
+      "achaemenid",
+      "athens",
+      "macedon_alexander",
+      "roman_republic",
+      "roman_empire",
+      "byzantine",
+      "frankish",
+      "sasanian",
+      "rashidun",
+      "umayyad",
+      "hittite",
+      "phoenicia",
+      "israel_kingdom",
+      "neo_assyria",
+      "neo_babylon",
+      "ptolemaic",
+      "seleucid",
+      "carthage",
+      "aksum"
+    ],
+    "related_figures": [
+      "cyrus",
+      "darius1",
+      "pericles",
+      "aristotle",
+      "alexander",
+      "caesar",
+      "augustus",
+      "jesus",
+      "constantine",
+      "justinian",
+      "charlemagne",
+      "muhammad",
+      "ali"
+    ]
   },
   {
     "code": "[12세사02-01]",
@@ -435,9 +1103,41 @@
     "school_level": "고등학교",
     "unit": "(2) 교역망의 확대",
     "text": "이슬람 세계와 몽골 제국의 팽창에 따른 교류 양상을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      750,
+      1450
+    ],
+    "related_polities": [
+      "abbasid",
+      "seljuk",
+      "mamluk",
+      "mongol_empire",
+      "yuan",
+      "ilkhanate",
+      "golden_horde",
+      "timurid",
+      "southern_song",
+      "delhi_sultanate",
+      "mali",
+      "ghana_empire",
+      "songhai",
+      "great_zimbabwe",
+      "srivijaya",
+      "majapahit",
+      "venice"
+    ],
+    "related_figures": [
+      "harun_alrashid",
+      "ibn_sina",
+      "ibn_battuta",
+      "genghis_khan",
+      "hulagu",
+      "kublai_khan",
+      "marco_polo",
+      "timur",
+      "mansa_musa",
+      "sundiata"
+    ]
   },
   {
     "code": "[12세사02-02]",
@@ -445,9 +1145,37 @@
     "school_level": "고등학교",
     "unit": "(2) 교역망의 확대",
     "text": "유럽의 신항로 개척과 재정⋅군사 국가의 성립이 가져온 변화를 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1450,
+      1700
+    ],
+    "related_polities": [
+      "spain",
+      "portugal",
+      "dutch_republic",
+      "england_kingdom",
+      "france_kingdom",
+      "new_spain",
+      "peru_viceroyalty",
+      "aztec",
+      "inca",
+      "malacca",
+      "poland_lithuania"
+    ],
+    "related_figures": [
+      "columbus",
+      "vasco_da_gama",
+      "magellan",
+      "cortes",
+      "pizarro",
+      "luther",
+      "elizabeth1",
+      "philip2",
+      "louis14",
+      "moctezuma2",
+      "atahualpa",
+      "gutenberg"
+    ]
   },
   {
     "code": "[12세사02-03]",
@@ -455,8 +1183,18 @@
     "school_level": "고등학교",
     "unit": "(2) 교역망의 확대",
     "text": "세계적 상품 교역이 가져온 사회적⋅경제적 변화를 이해한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
+    "suggested_year_range": [
+      1500,
+      1800
+    ],
+    "related_polities": [
+      "new_spain",
+      "peru_viceroyalty",
+      "dutch_republic",
+      "uk",
+      "kongo",
+      "ayutthaya"
+    ],
     "related_figures": []
   },
   {
@@ -465,9 +1203,29 @@
     "school_level": "고등학교",
     "unit": "(3) 국민 국가의 형성",
     "text": "청, 무굴 제국, 오스만 제국의 통치 정책과 사회, 문화의 변화를 이해한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1500,
+      1900
+    ],
+    "related_polities": [
+      "qing",
+      "mughal",
+      "ottoman_empire",
+      "safavid"
+    ],
+    "related_figures": [
+      "kangxi",
+      "yongzheng",
+      "qianlong",
+      "babur",
+      "akbar",
+      "shah_jahan",
+      "aurangzeb",
+      "mehmed2",
+      "suleiman",
+      "ismail1",
+      "abbas1"
+    ]
   },
   {
     "code": "[12세사03-02]",
@@ -475,9 +1233,23 @@
     "school_level": "고등학교",
     "unit": "(3) 국민 국가의 형성",
     "text": "미국 혁명, 프랑스 혁명을 시민 사회 형성과 관련지어 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1760,
+      1815
+    ],
+    "related_polities": [
+      "usa",
+      "france_revolution"
+    ],
+    "related_figures": [
+      "washington",
+      "jefferson",
+      "montesquieu",
+      "rousseau",
+      "robespierre",
+      "napoleon",
+      "lincoln"
+    ]
   },
   {
     "code": "[12세사03-03]",
@@ -485,9 +1257,21 @@
     "school_level": "고등학교",
     "unit": "(3) 국민 국가의 형성",
     "text": "제1⋅2차 산업 혁명이 가져온 사회, 경제, 생태환경의 변화를 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1760,
+      1914
+    ],
+    "related_polities": [
+      "uk",
+      "usa",
+      "german_empire",
+      "france_modern"
+    ],
+    "related_figures": [
+      "adam_smith",
+      "james_watt",
+      "marx"
+    ]
   },
   {
     "code": "[12세사03-04]",
@@ -495,9 +1279,41 @@
     "school_level": "고등학교",
     "unit": "(3) 국민 국가의 형성",
     "text": "아시아와 아프리카 지역에서 전개된 국민 국가 건설 운동의 양상과 성격을 비교한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1800,
+      1960
+    ],
+    "related_polities": [
+      "british_india",
+      "india",
+      "pakistan",
+      "turkey",
+      "egypt_modern",
+      "ethiopia_empire",
+      "ghana_modern",
+      "algeria",
+      "roc",
+      "mexico",
+      "gran_colombia",
+      "brazil_empire",
+      "canada",
+      "australia",
+      "qajar",
+      "russian_empire"
+    ],
+    "related_figures": [
+      "bolivar",
+      "gandhi",
+      "jinnah",
+      "ataturk",
+      "sun_yatsen",
+      "hong_xiuquan",
+      "kang_youwei",
+      "nkrumah",
+      "sukarno",
+      "aung_san",
+      "haile_selassie"
+    ]
   },
   {
     "code": "[12세사04-01]",
@@ -505,9 +1321,26 @@
     "school_level": "고등학교",
     "unit": "(4) 현대 세계의 과제",
     "text": "제1⋅2차 세계 대전을 인권, 과학 기술 문제와 관련지어 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1914,
+      1945
+    ],
+    "related_polities": [
+      "germany_weimar_nazi",
+      "ussr",
+      "usa",
+      "uk",
+      "italy_kingdom",
+      "japan_modern"
+    ],
+    "related_figures": [
+      "lenin",
+      "stalin",
+      "hitler",
+      "mussolini",
+      "churchill",
+      "fdr"
+    ]
   },
   {
     "code": "[12세사04-02]",
@@ -515,9 +1348,28 @@
     "school_level": "고등학교",
     "unit": "(4) 현대 세계의 과제",
     "text": "냉전의 전개 양상에 따라 나타난 사회, 문화의 변화를 분석한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1945,
+      1991
+    ],
+    "related_polities": [
+      "usa",
+      "ussr",
+      "prc",
+      "cuba",
+      "germany_frg",
+      "india",
+      "vietnam_drv"
+    ],
+    "related_figures": [
+      "truman",
+      "kennedy",
+      "mao_zedong",
+      "nehru",
+      "nasser",
+      "ho_chi_minh",
+      "gorbachev"
+    ]
   },
   {
     "code": "[12세사04-03]",
@@ -525,9 +1377,25 @@
     "school_level": "고등학교",
     "unit": "(4) 현대 세계의 과제",
     "text": "현대 세계의 과제를 해결하기 위해 인류가 기울여온 노력을 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1945,
+      2000
+    ],
+    "related_polities": [
+      "eu",
+      "south_africa",
+      "israel",
+      "iran_modern",
+      "russia_federation",
+      "australia",
+      "new_zealand",
+      "saudi"
+    ],
+    "related_figures": [
+      "mlk",
+      "mandela",
+      "khomeini"
+    ]
   },
   {
     "code": "[12동역01-01]",
@@ -545,8 +1413,19 @@
     "school_level": "고등학교",
     "unit": "(1) 동아시아로 떠나는 역사 기행",
     "text": "생태환경을 바탕으로 형성된 유목 세계, 농경 세계, 해양 세계의 삶을 이해한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
+    "suggested_year_range": [
+      -500,
+      1500
+    ],
+    "related_polities": [
+      "xiongnu",
+      "gokturk",
+      "mongol_empire",
+      "han",
+      "tang",
+      "champa",
+      "srivijaya"
+    ],
     "related_figures": []
   },
   {
@@ -555,9 +1434,26 @@
     "school_level": "고등학교",
     "unit": "(2) 교류와 갈등의 현장에서 만난 역사",
     "text": "동아시아의 지역 간 교류를 보여주는 문화유산을 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -200,
+      1400
+    ],
+    "related_polities": [
+      "han",
+      "tang",
+      "silla_unified",
+      "goryeo",
+      "northern_song",
+      "southern_song",
+      "yuan",
+      "heian"
+    ],
+    "related_figures": [
+      "zhang_qian",
+      "han_wudi",
+      "jang_bogo",
+      "park_jiwon"
+    ]
   },
   {
     "code": "[12동역02-02]",
@@ -565,9 +1461,35 @@
     "school_level": "고등학교",
     "unit": "(2) 교류와 갈등의 현장에서 만난 역사",
     "text": "종교와 사상을 중심으로 동아시아 각 지역 간 교류 양상을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      -500,
+      1300
+    ],
+    "related_polities": [
+      "han",
+      "northern_wei",
+      "tang",
+      "silla_unified",
+      "balhae",
+      "goryeo",
+      "yamato",
+      "nara",
+      "heian",
+      "ly_dynasty",
+      "southern_song"
+    ],
+    "related_figures": [
+      "confucius",
+      "xuanzang",
+      "wonhyo",
+      "uisang",
+      "shotoku",
+      "zhu_xi",
+      "yi_hwang",
+      "li_bai",
+      "du_fu",
+      "buddha"
+    ]
   },
   {
     "code": "[12동역02-03]",
@@ -575,9 +1497,35 @@
     "school_level": "고등학교",
     "unit": "(2) 교류와 갈등의 현장에서 만난 역사",
     "text": "몽골의 팽창 및 17세기 전후 동아시아 전쟁이 초래한 변화를 이해한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1200,
+      1650
+    ],
+    "related_polities": [
+      "mongol_empire",
+      "yuan",
+      "goryeo",
+      "kamakura",
+      "tran_dynasty",
+      "joseon",
+      "ming",
+      "qing",
+      "edo"
+    ],
+    "related_figures": [
+      "genghis_khan",
+      "kublai_khan",
+      "ogedei",
+      "gongmin",
+      "tran_hung_dao",
+      "toyotomi_hideyoshi",
+      "yi_sunsin",
+      "tokugawa_ieyasu",
+      "nurhaci",
+      "hong_taiji",
+      "gwanghaegun",
+      "injo"
+    ]
   },
   {
     "code": "[12동역02-04]",
@@ -585,9 +1533,26 @@
     "school_level": "고등학교",
     "unit": "(2) 교류와 갈등의 현장에서 만난 역사",
     "text": "이슬람과 유럽 세력의 참여를 통해 확대된 동아시아 교류의 모습을 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1400,
+      1800
+    ],
+    "related_polities": [
+      "ming",
+      "edo",
+      "muromachi",
+      "malacca",
+      "le_dynasty",
+      "nguyen_dynasty"
+    ],
+    "related_figures": [
+      "zheng_he",
+      "yongle",
+      "ashikaga_yoshimitsu",
+      "le_loi",
+      "gia_long",
+      "oda_nobunaga"
+    ]
   },
   {
     "code": "[12동역03-01]",
@@ -595,9 +1560,29 @@
     "school_level": "고등학교",
     "unit": "(3) 침략과 저항의 현장에서 만난 역사",
     "text": "동아시아 지역에서 전개된 제국주의 열강의 침략 전쟁을 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1840,
+      1912
+    ],
+    "related_polities": [
+      "qing",
+      "japan_modern",
+      "korean_empire",
+      "nguyen_dynasty",
+      "joseon"
+    ],
+    "related_figures": [
+      "lin_zexu",
+      "li_hongzhang",
+      "meiji",
+      "ito_hirobumi",
+      "fukuzawa",
+      "saigo_takamori",
+      "gojong",
+      "jeon_bongjun",
+      "an_junggeun",
+      "sun_yatsen"
+    ]
   },
   {
     "code": "[12동역03-02]",
@@ -605,9 +1590,24 @@
     "school_level": "고등학교",
     "unit": "(3) 침략과 저항의 현장에서 만난 역사",
     "text": "아시아⋅태평양 전쟁과 이에 대한 저항과 연대의 움직임을 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1931,
+      1945
+    ],
+    "related_polities": [
+      "japan_modern",
+      "roc",
+      "kpg"
+    ],
+    "related_figures": [
+      "kim_gu",
+      "yu_gwansun",
+      "hong_beomdo",
+      "yun_bonggil",
+      "chiang_kaishek",
+      "lu_xun",
+      "tojo_hideki"
+    ]
   },
   {
     "code": "[12동역03-03]",
@@ -615,8 +1615,16 @@
     "school_level": "고등학교",
     "unit": "(3) 침략과 저항의 현장에서 만난 역사",
     "text": "제국주의 열강의 침략과 전쟁이 지역 생활과 생태환경에 끼친 영향을 탐구한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
+    "suggested_year_range": [
+      1840,
+      1945
+    ],
+    "related_polities": [
+      "japan_modern",
+      "qing",
+      "roc",
+      "kpg"
+    ],
     "related_figures": []
   },
   {
@@ -625,9 +1633,29 @@
     "school_level": "고등학교",
     "unit": "(4) 평화와 공존의 현장에서 만난 역사",
     "text": "냉전 시기 동아시아 지역에서 전개된 전쟁을 탐구하고, 각국의 정치⋅사회적 변화를 파악한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1945,
+      1980
+    ],
+    "related_polities": [
+      "rok",
+      "dprk",
+      "prc",
+      "roc",
+      "vietnam_drv",
+      "japan_modern",
+      "mongolia_modern"
+    ],
+    "related_figures": [
+      "syngman_rhee",
+      "kim_ilsung",
+      "park_chunghee",
+      "mao_zedong",
+      "zhou_enlai",
+      "chiang_kaishek",
+      "ho_chi_minh",
+      "truman"
+    ]
   },
   {
     "code": "[12동역04-02]",
@@ -635,9 +1663,20 @@
     "school_level": "고등학교",
     "unit": "(4) 평화와 공존의 현장에서 만난 역사",
     "text": "경제 및 대중문화 교류가 확대되는 모습을 이해하고, 다문화 사회의 현실을 파악하여 공존을 위한 노력을 모색한다.",
-    "suggested_year_range": null,
-    "related_polities": [],
-    "related_figures": []
+    "suggested_year_range": [
+      1980,
+      2000
+    ],
+    "related_polities": [
+      "rok",
+      "prc",
+      "japan_modern",
+      "vietnam_drv"
+    ],
+    "related_figures": [
+      "deng_xiaoping",
+      "kim_daejung"
+    ]
   },
   {
     "code": "[12동역04-03]",

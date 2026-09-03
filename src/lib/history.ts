@@ -29,7 +29,10 @@ export const REGION_COLORS: Record<Region, string> = {
 };
 
 /** 연도 표기: -221 → "기원전 221년", 1453 → "1453년" */
+export const PRESENT_YEAR = 9999;
+
 export function formatYear(year: number): string {
+  if (year >= PRESENT_YEAR) return '현재';
   if (year < 0) return `기원전 ${Math.abs(year)}년`;
   if (year === 0) return '기원전 1년'; // 천문학적 0년은 사용하지 않음 — 0 입력은 기원전 1년으로 처리
   return `${year}년`;

@@ -243,5 +243,2335 @@
       "세계사"
     ],
     "note": "전승상 421년 건설. 지중해 무역의 중심 도시."
+  },
+  {
+    "id": "seoul",
+    "name_ko": "한양(서울)",
+    "name_en": "Hanyang (Seoul)",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1394,
+        "to": 1910,
+        "name_ko": "한양(한성)"
+      },
+      {
+        "from": 1910,
+        "to": 1946,
+        "name_ko": "경성"
+      },
+      {
+        "from": 1946,
+        "to": 9999,
+        "name_ko": "서울"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "1394년 조선의 천도 이후 수도."
+  },
+  {
+    "id": "pyongyang",
+    "name_ko": "평양",
+    "name_en": "Pyongyang",
+    "coords": [
+      39.03,
+      125.75
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 427,
+        "name_ko": "평양(왕검성 추정)"
+      },
+      {
+        "from": 427,
+        "to": 9999,
+        "name_ko": "평양"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "427년 고구려 장수왕 천도."
+  },
+  {
+    "id": "buyeo_sabi",
+    "name_ko": "부여(사비)",
+    "name_en": "Buyeo (Sabi)",
+    "coords": [
+      36.28,
+      126.91
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 538,
+        "to": 660,
+        "name_ko": "사비"
+      },
+      {
+        "from": 660,
+        "to": 9999,
+        "name_ko": "부여"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "note": "538년 백제 성왕 천도."
+  },
+  {
+    "id": "gongju",
+    "name_ko": "공주(웅진)",
+    "name_en": "Gongju (Ungjin)",
+    "coords": [
+      36.46,
+      127.12
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 475,
+        "to": 538,
+        "name_ko": "웅진"
+      },
+      {
+        "from": 538,
+        "to": 9999,
+        "name_ko": "공주"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "note": "475년 백제 문주왕 천도."
+  },
+  {
+    "id": "gungnae",
+    "name_ko": "국내성(지안)",
+    "name_en": "Gungnae (Ji'an)",
+    "coords": [
+      41.13,
+      126.19
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 427,
+        "name_ko": "국내성"
+      },
+      {
+        "from": 427,
+        "to": 9999,
+        "name_ko": "지안"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "note": "고구려 초기 수도. 광개토 대왕릉비 소재."
+  },
+  {
+    "id": "sanggyeong",
+    "name_ko": "상경 용천부(발해)",
+    "name_en": "Sanggyeong (Balhae)",
+    "coords": [
+      44.1,
+      129.4
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": 755,
+        "to": 926,
+        "name_ko": "상경 용천부"
+      },
+      {
+        "from": 926,
+        "to": 9999,
+        "name_ko": "상경성 유적"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "발해의 수도."
+  },
+  {
+    "id": "ganghwa",
+    "name_ko": "강화도",
+    "name_en": "Ganghwa Island",
+    "coords": [
+      37.75,
+      126.45
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "강화"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "note": "몽골 침입 시 고려의 임시 수도(1232~1270), 병인양요·신미양요·강화도 조약의 현장."
+  },
+  {
+    "id": "hansando",
+    "name_ko": "한산도",
+    "name_en": "Hansan Island",
+    "coords": [
+      34.78,
+      128.48
+    ],
+    "type": "battlefield",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "한산도"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "1592년 한산도 대첩."
+  },
+  {
+    "id": "busan",
+    "name_ko": "부산(동래)",
+    "name_en": "Busan (Dongnae)",
+    "coords": [
+      35.1,
+      129.04
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1876,
+        "name_ko": "동래·부산포"
+      },
+      {
+        "from": 1876,
+        "to": 9999,
+        "name_ko": "부산"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "조선 시대 왜관 소재지. 1876년 개항."
+  },
+  {
+    "id": "cheongsanri",
+    "name_ko": "청산리",
+    "name_en": "Cheongsanri",
+    "coords": [
+      42.9,
+      129.5
+    ],
+    "type": "battlefield",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "청산리"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "1920년 청산리 대첩."
+  },
+  {
+    "id": "panmunjom",
+    "name_ko": "판문점",
+    "name_en": "Panmunjom",
+    "coords": [
+      37.96,
+      126.68
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "판문점"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "1953년 정전 협정 체결지."
+  },
+  {
+    "id": "kyoto",
+    "name_ko": "교토",
+    "name_en": "Kyoto",
+    "coords": [
+      35.01,
+      135.77
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 794,
+        "to": 1868,
+        "name_ko": "헤이안쿄(교토)"
+      },
+      {
+        "from": 1868,
+        "to": 9999,
+        "name_ko": "교토"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "note": "794~1868년 일본의 수도."
+  },
+  {
+    "id": "nara",
+    "name_ko": "나라",
+    "name_en": "Nara",
+    "coords": [
+      34.69,
+      135.8
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 710,
+        "to": 794,
+        "name_ko": "헤이조쿄"
+      },
+      {
+        "from": 794,
+        "to": 9999,
+        "name_ko": "나라"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "note": "도다이지 대불 소재."
+  },
+  {
+    "id": "kamakura",
+    "name_ko": "가마쿠라",
+    "name_en": "Kamakura",
+    "coords": [
+      35.32,
+      139.55
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "가마쿠라"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "note": "가마쿠라 막부의 중심지."
+  },
+  {
+    "id": "tokyo",
+    "name_ko": "에도(도쿄)",
+    "name_en": "Edo (Tokyo)",
+    "coords": [
+      35.68,
+      139.75
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1868,
+        "name_ko": "에도"
+      },
+      {
+        "from": 1868,
+        "to": 9999,
+        "name_ko": "도쿄"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "note": "에도 막부의 소재지, 1868년 도쿄로 개칭."
+  },
+  {
+    "id": "osaka",
+    "name_ko": "오사카",
+    "name_en": "Osaka",
+    "coords": [
+      34.69,
+      135.5
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "오사카"
+      }
+    ],
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "note": "도요토미 히데요시의 오사카성."
+  },
+  {
+    "id": "nagasaki",
+    "name_ko": "나가사키",
+    "name_en": "Nagasaki",
+    "coords": [
+      32.75,
+      129.87
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "나가사키"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "note": "에도 시대 유일한 대외 창구(데지마), 1945년 원폭 투하."
+  },
+  {
+    "id": "hiroshima",
+    "name_ko": "히로시마",
+    "name_en": "Hiroshima",
+    "coords": [
+      34.39,
+      132.46
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "히로시마"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "note": "1945년 8월 6일 원폭 투하."
+  },
+  {
+    "id": "tanegashima",
+    "name_ko": "다네가시마",
+    "name_en": "Tanegashima",
+    "coords": [
+      30.6,
+      130.98
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "다네가시마"
+      }
+    ],
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "note": "1543년 포르투갈인에 의해 조총이 전래된 섬."
+  },
+  {
+    "id": "beijing",
+    "name_ko": "베이징",
+    "name_en": "Beijing",
+    "coords": [
+      39.9,
+      116.4
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1153,
+        "name_ko": "연경"
+      },
+      {
+        "from": 1153,
+        "to": 1271,
+        "name_ko": "중도"
+      },
+      {
+        "from": 1271,
+        "to": 1368,
+        "name_ko": "대도"
+      },
+      {
+        "from": 1368,
+        "to": 1421,
+        "name_ko": "북평"
+      },
+      {
+        "from": 1421,
+        "to": 9999,
+        "name_ko": "베이징(북경)"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "note": "원 대도 이후 중국의 수도."
+  },
+  {
+    "id": "luoyang",
+    "name_ko": "뤄양(낙양)",
+    "name_en": "Luoyang",
+    "coords": [
+      34.62,
+      112.45
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "낙양(뤄양)"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "note": "동주·후한·북위의 수도. 룽먼 석굴."
+  },
+  {
+    "id": "nanjing",
+    "name_ko": "난징",
+    "name_en": "Nanjing",
+    "coords": [
+      32.06,
+      118.8
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1368,
+        "name_ko": "건업·건강"
+      },
+      {
+        "from": 1368,
+        "to": 9999,
+        "name_ko": "난징(남경)"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "note": "남조·명 초·중화민국의 수도, 1937년 난징 대학살."
+  },
+  {
+    "id": "hangzhou",
+    "name_ko": "항저우",
+    "name_en": "Hangzhou",
+    "coords": [
+      30.25,
+      120.17
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1129,
+        "name_ko": "항주"
+      },
+      {
+        "from": 1129,
+        "to": 1276,
+        "name_ko": "임안"
+      },
+      {
+        "from": 1276,
+        "to": 9999,
+        "name_ko": "항저우"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "남송의 수도, 마르코 폴로가 극찬한 도시."
+  },
+  {
+    "id": "kaifeng",
+    "name_ko": "카이펑",
+    "name_en": "Kaifeng",
+    "coords": [
+      34.8,
+      114.3
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "개봉(카이펑)"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "note": "북송의 수도."
+  },
+  {
+    "id": "shanghai",
+    "name_ko": "상하이",
+    "name_en": "Shanghai",
+    "coords": [
+      31.23,
+      121.47
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "상하이"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "note": "난징 조약으로 개항, 대한민국 임시 정부 수립지."
+  },
+  {
+    "id": "guangzhou",
+    "name_ko": "광저우",
+    "name_en": "Guangzhou",
+    "coords": [
+      23.13,
+      113.26
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "광저우(광주)"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "note": "당 이후 해상 교역의 관문, 청의 유일한 개항장(공행 무역), 아편 전쟁의 발단지."
+  },
+  {
+    "id": "dunhuang",
+    "name_ko": "둔황",
+    "name_en": "Dunhuang",
+    "coords": [
+      40.14,
+      94.66
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "둔황"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "note": "막고굴. 비단길의 요충지."
+  },
+  {
+    "id": "kashgar",
+    "name_ko": "카슈가르",
+    "name_en": "Kashgar",
+    "coords": [
+      39.47,
+      75.99
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "카슈가르"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "타림 분지 서쪽 비단길 교차점."
+  },
+  {
+    "id": "shenyang",
+    "name_ko": "심양(선양)",
+    "name_en": "Shenyang",
+    "coords": [
+      41.8,
+      123.4
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1634,
+        "name_ko": "심양"
+      },
+      {
+        "from": 1634,
+        "to": 1657,
+        "name_ko": "성경(盛京)"
+      },
+      {
+        "from": 1657,
+        "to": 9999,
+        "name_ko": "선양"
+      }
+    ],
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "note": "후금·청 초기의 수도."
+  },
+  {
+    "id": "harbin",
+    "name_ko": "하얼빈",
+    "name_en": "Harbin",
+    "coords": [
+      45.75,
+      126.63
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "하얼빈"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "1909년 안중근 의거."
+  },
+  {
+    "id": "chongqing",
+    "name_ko": "충칭",
+    "name_en": "Chongqing",
+    "coords": [
+      29.56,
+      106.55
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "충칭"
+      }
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "note": "항일 전쟁기 중화민국 수도, 대한민국 임시 정부 마지막 소재지."
+  },
+  {
+    "id": "ulaanbaatar",
+    "name_ko": "울란바토르",
+    "name_en": "Ulaanbaatar",
+    "coords": [
+      47.92,
+      106.92
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1639,
+        "to": 1924,
+        "name_ko": "우르가"
+      },
+      {
+        "from": 1924,
+        "to": 9999,
+        "name_ko": "울란바토르"
+      }
+    ],
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "note": "몽골의 수도."
+  },
+  {
+    "id": "samarkand",
+    "name_ko": "사마르칸트",
+    "name_en": "Samarkand",
+    "coords": [
+      39.65,
+      66.97
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "사마르칸트"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "비단길의 중심 도시, 티무르 제국의 수도."
+  },
+  {
+    "id": "bukhara",
+    "name_ko": "부하라",
+    "name_en": "Bukhara",
+    "coords": [
+      39.77,
+      64.42
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "부하라"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "이슬람 학문의 중심지, 이븐 시나의 출신지 인근."
+  },
+  {
+    "id": "delhi",
+    "name_ko": "델리",
+    "name_en": "Delhi",
+    "coords": [
+      28.65,
+      77.2
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "델리"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "델리 술탄국·무굴 제국·인도의 수도."
+  },
+  {
+    "id": "agra",
+    "name_ko": "아그라",
+    "name_en": "Agra",
+    "coords": [
+      27.18,
+      78.02
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "아그라"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "무굴 제국의 수도, 타지마할 소재."
+  },
+  {
+    "id": "pataliputra",
+    "name_ko": "파탈리푸트라(파트나)",
+    "name_en": "Pataliputra (Patna)",
+    "coords": [
+      25.6,
+      85.1
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1000,
+        "name_ko": "파탈리푸트라"
+      },
+      {
+        "from": 1000,
+        "to": 9999,
+        "name_ko": "파트나"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "마우리아·굽타 왕조의 수도."
+  },
+  {
+    "id": "mohenjo_daro",
+    "name_ko": "모헨조다로",
+    "name_en": "Mohenjo-daro",
+    "coords": [
+      27.33,
+      68.14
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "모헨조다로"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "인더스 문명의 계획도시 유적."
+  },
+  {
+    "id": "calicut",
+    "name_ko": "캘리컷(코지코드)",
+    "name_en": "Calicut (Kozhikode)",
+    "coords": [
+      11.25,
+      75.78
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "캘리컷"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "note": "정화 함대의 기착지, 1498년 바스쿠 다 가마 도착지."
+  },
+  {
+    "id": "bodh_gaya",
+    "name_ko": "보드가야",
+    "name_en": "Bodh Gaya",
+    "coords": [
+      24.7,
+      84.99
+    ],
+    "type": "religious",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "보드가야"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "석가모니가 깨달음을 얻은 곳."
+  },
+  {
+    "id": "hanoi",
+    "name_ko": "하노이(탕롱)",
+    "name_en": "Hanoi (Thăng Long)",
+    "coords": [
+      21.03,
+      105.85
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1010,
+        "to": 1831,
+        "name_ko": "탕롱"
+      },
+      {
+        "from": 1831,
+        "to": 9999,
+        "name_ko": "하노이"
+      }
+    ],
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "note": "리 왕조 이후 베트남의 수도."
+  },
+  {
+    "id": "hue",
+    "name_ko": "후에",
+    "name_en": "Huế",
+    "coords": [
+      16.47,
+      107.58
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "후에"
+      }
+    ],
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "note": "응우옌 왕조의 수도."
+  },
+  {
+    "id": "angkor",
+    "name_ko": "앙코르",
+    "name_en": "Angkor",
+    "coords": [
+      13.43,
+      103.87
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "앙코르"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "앙코르 와트·앙코르 톰."
+  },
+  {
+    "id": "malacca",
+    "name_ko": "믈라카",
+    "name_en": "Malacca",
+    "coords": [
+      2.19,
+      102.25
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "믈라카"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "note": "동서 해상 교역의 요충지."
+  },
+  {
+    "id": "ayutthaya_city",
+    "name_ko": "아유타야",
+    "name_en": "Ayutthaya",
+    "coords": [
+      14.35,
+      100.57
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "아유타야"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "아유타야 왕국의 수도."
+  },
+  {
+    "id": "palembang",
+    "name_ko": "팔렘방",
+    "name_en": "Palembang",
+    "coords": [
+      -2.98,
+      104.75
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "팔렘방"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "스리위자야의 중심지."
+  },
+  {
+    "id": "manila",
+    "name_ko": "마닐라",
+    "name_en": "Manila",
+    "coords": [
+      14.6,
+      120.98
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "마닐라"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "에스파냐 갈레온 무역의 아시아 거점."
+  },
+  {
+    "id": "bandung",
+    "name_ko": "반둥",
+    "name_en": "Bandung",
+    "coords": [
+      -6.91,
+      107.6
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "반둥"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1955년 아시아·아프리카 회의 개최지."
+  },
+  {
+    "id": "babylon",
+    "name_ko": "바빌론",
+    "name_en": "Babylon",
+    "coords": [
+      32.54,
+      44.42
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "바빌론"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "바빌로니아·신바빌로니아의 수도."
+  },
+  {
+    "id": "ur",
+    "name_ko": "우르",
+    "name_en": "Ur",
+    "coords": [
+      30.96,
+      46.1
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "우르"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "수메르의 도시 국가, 지구라트."
+  },
+  {
+    "id": "nineveh",
+    "name_ko": "니네베",
+    "name_en": "Nineveh",
+    "coords": [
+      36.36,
+      43.15
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "니네베"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "아시리아의 수도."
+  },
+  {
+    "id": "persepolis",
+    "name_ko": "페르세폴리스",
+    "name_en": "Persepolis",
+    "coords": [
+      29.93,
+      52.89
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "페르세폴리스"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "아케메네스 페르시아의 의례 수도."
+  },
+  {
+    "id": "damascus",
+    "name_ko": "다마스쿠스",
+    "name_en": "Damascus",
+    "coords": [
+      33.51,
+      36.29
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "다마스쿠스"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "우마이야 왕조의 수도."
+  },
+  {
+    "id": "medina",
+    "name_ko": "메디나",
+    "name_en": "Medina",
+    "coords": [
+      24.47,
+      39.61
+    ],
+    "type": "religious",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 622,
+        "name_ko": "야스리브"
+      },
+      {
+        "from": 622,
+        "to": 9999,
+        "name_ko": "메디나"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "622년 헤지라의 목적지."
+  },
+  {
+    "id": "jerusalem",
+    "name_ko": "예루살렘",
+    "name_en": "Jerusalem",
+    "coords": [
+      31.78,
+      35.23
+    ],
+    "type": "religious",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "예루살렘"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "유대교·크리스트교·이슬람교의 성지."
+  },
+  {
+    "id": "isfahan",
+    "name_ko": "이스파한",
+    "name_en": "Isfahan",
+    "coords": [
+      32.65,
+      51.67
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "이스파한"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "셀주크·사파비 왕조의 수도."
+  },
+  {
+    "id": "ctesiphon",
+    "name_ko": "크테시폰",
+    "name_en": "Ctesiphon",
+    "coords": [
+      33.09,
+      44.58
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "크테시폰"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "파르티아·사산 왕조의 수도."
+  },
+  {
+    "id": "hormuz",
+    "name_ko": "호르무즈",
+    "name_en": "Hormuz",
+    "coords": [
+      27.1,
+      56.45
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "호르무즈"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "인도양 교역의 페르시아만 관문."
+  },
+  {
+    "id": "athens_city",
+    "name_ko": "아테네",
+    "name_en": "Athens",
+    "coords": [
+      37.98,
+      23.73
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "아테네"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "고대 그리스 민주 정치의 중심."
+  },
+  {
+    "id": "sparta_city",
+    "name_ko": "스파르타",
+    "name_en": "Sparta",
+    "coords": [
+      37.07,
+      22.43
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "스파르타"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": ""
+  },
+  {
+    "id": "rome",
+    "name_ko": "로마",
+    "name_en": "Rome",
+    "coords": [
+      41.9,
+      12.5
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "로마"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "로마 제국·교황령의 수도."
+  },
+  {
+    "id": "alexandria",
+    "name_ko": "알렉산드리아",
+    "name_en": "Alexandria",
+    "coords": [
+      31.2,
+      29.92
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -331,
+        "to": 9999,
+        "name_ko": "알렉산드리아"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "기원전 331년 알렉산드로스가 건설. 헬레니즘 학문의 중심."
+  },
+  {
+    "id": "carthage_city",
+    "name_ko": "카르타고",
+    "name_en": "Carthage",
+    "coords": [
+      36.85,
+      10.32
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "카르타고"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": ""
+  },
+  {
+    "id": "florence",
+    "name_ko": "피렌체",
+    "name_en": "Florence",
+    "coords": [
+      43.77,
+      11.25
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "피렌체"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "르네상스의 중심 도시."
+  },
+  {
+    "id": "genoa",
+    "name_ko": "제노바",
+    "name_en": "Genoa",
+    "coords": [
+      44.41,
+      8.93
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "제노바"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "콜럼버스의 출신지, 지중해 무역 도시."
+  },
+  {
+    "id": "paris",
+    "name_ko": "파리",
+    "name_en": "Paris",
+    "coords": [
+      48.86,
+      2.35
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "파리"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "프랑스 혁명의 무대."
+  },
+  {
+    "id": "versailles",
+    "name_ko": "베르사유",
+    "name_en": "Versailles",
+    "coords": [
+      48.8,
+      2.12
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "베르사유"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "루이 14세의 궁전, 1919년 베르사유 조약."
+  },
+  {
+    "id": "london",
+    "name_ko": "런던",
+    "name_en": "London",
+    "coords": [
+      51.5,
+      -0.12
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "런던"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "산업 혁명 시기 세계 경제의 중심."
+  },
+  {
+    "id": "manchester",
+    "name_ko": "맨체스터",
+    "name_en": "Manchester",
+    "coords": [
+      53.48,
+      -2.24
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "맨체스터"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "면공업 중심의 산업 혁명 도시."
+  },
+  {
+    "id": "madrid",
+    "name_ko": "마드리드",
+    "name_en": "Madrid",
+    "coords": [
+      40.4,
+      -3.7
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "마드리드"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": ""
+  },
+  {
+    "id": "lisbon",
+    "name_ko": "리스본",
+    "name_en": "Lisbon",
+    "coords": [
+      38.72,
+      -9.14
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "리스본"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "신항로 개척의 출항지."
+  },
+  {
+    "id": "amsterdam",
+    "name_ko": "암스테르담",
+    "name_en": "Amsterdam",
+    "coords": [
+      52.37,
+      4.9
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "암스테르담"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "17세기 세계 무역·금융의 중심."
+  },
+  {
+    "id": "vienna",
+    "name_ko": "빈",
+    "name_en": "Vienna",
+    "coords": [
+      48.2,
+      16.37
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "빈"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1529·1683년 오스만 포위, 1815년 빈 회의."
+  },
+  {
+    "id": "berlin",
+    "name_ko": "베를린",
+    "name_en": "Berlin",
+    "coords": [
+      52.52,
+      13.4
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "베를린"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "독일 제국의 수도, 냉전기 분단의 상징(베를린 장벽)."
+  },
+  {
+    "id": "moscow",
+    "name_ko": "모스크바",
+    "name_en": "Moscow",
+    "coords": [
+      55.75,
+      37.62
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "모스크바"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "러시아·소련의 수도."
+  },
+  {
+    "id": "st_petersburg",
+    "name_ko": "상트페테르부르크",
+    "name_en": "Saint Petersburg",
+    "coords": [
+      59.93,
+      30.3
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1703,
+        "to": 1914,
+        "name_ko": "상트페테르부르크"
+      },
+      {
+        "from": 1914,
+        "to": 1924,
+        "name_ko": "페트로그라드"
+      },
+      {
+        "from": 1924,
+        "to": 1991,
+        "name_ko": "레닌그라드"
+      },
+      {
+        "from": 1991,
+        "to": 9999,
+        "name_ko": "상트페테르부르크"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1703년 표트르 대제가 건설, 1917년 러시아 혁명의 무대."
+  },
+  {
+    "id": "kyiv",
+    "name_ko": "키이우(키예프)",
+    "name_en": "Kyiv",
+    "coords": [
+      50.45,
+      30.52
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "키예프(키이우)"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "키예프 공국의 수도."
+  },
+  {
+    "id": "wittenberg",
+    "name_ko": "비텐베르크",
+    "name_en": "Wittenberg",
+    "coords": [
+      51.87,
+      12.65
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "비텐베르크"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1517년 루터의 95개조 반박문."
+  },
+  {
+    "id": "sarajevo",
+    "name_ko": "사라예보",
+    "name_en": "Sarajevo",
+    "coords": [
+      43.86,
+      18.41
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "사라예보"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1914년 사라예보 사건."
+  },
+  {
+    "id": "cairo",
+    "name_ko": "카이로",
+    "name_en": "Cairo",
+    "coords": [
+      30.04,
+      31.24
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 969,
+        "to": 9999,
+        "name_ko": "카이로"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "969년 파티마 왕조가 건설. 아이유브·맘루크 왕조의 수도."
+  },
+  {
+    "id": "giza",
+    "name_ko": "기자",
+    "name_en": "Giza",
+    "coords": [
+      29.98,
+      31.13
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "기자"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "피라미드와 스핑크스."
+  },
+  {
+    "id": "timbuktu",
+    "name_ko": "팀북투",
+    "name_en": "Timbuktu",
+    "coords": [
+      16.77,
+      -3.0
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "팀북투"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "사하라 횡단 교역과 이슬람 학문의 중심."
+  },
+  {
+    "id": "great_zimbabwe_site",
+    "name_ko": "그레이트 짐바브웨",
+    "name_en": "Great Zimbabwe",
+    "coords": [
+      -20.27,
+      30.93
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "그레이트 짐바브웨"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": ""
+  },
+  {
+    "id": "aksum_city",
+    "name_ko": "악숨",
+    "name_en": "Aksum",
+    "coords": [
+      14.13,
+      38.72
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "악숨"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": ""
+  },
+  {
+    "id": "cape_town",
+    "name_ko": "케이프타운",
+    "name_en": "Cape Town",
+    "coords": [
+      -33.92,
+      18.42
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": 1652,
+        "to": 9999,
+        "name_ko": "케이프타운"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1652년 네덜란드 동인도 회사가 건설."
+  },
+  {
+    "id": "suez",
+    "name_ko": "수에즈 운하",
+    "name_en": "Suez Canal",
+    "coords": [
+      30.6,
+      32.3
+    ],
+    "type": "route_node",
+    "era_names": [
+      {
+        "from": 1869,
+        "to": 9999,
+        "name_ko": "수에즈 운하"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1869년 개통."
+  },
+  {
+    "id": "cape_of_good_hope",
+    "name_ko": "희망봉",
+    "name_en": "Cape of Good Hope",
+    "coords": [
+      -34.36,
+      18.47
+    ],
+    "type": "natural",
+    "era_names": [
+      {
+        "from": 1488,
+        "to": 9999,
+        "name_ko": "희망봉"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1488년 바르톨로메우 디아스 도달."
+  },
+  {
+    "id": "mexico_city",
+    "name_ko": "테노치티틀란(멕시코시티)",
+    "name_en": "Tenochtitlan (Mexico City)",
+    "coords": [
+      19.43,
+      -99.13
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1325,
+        "to": 1521,
+        "name_ko": "테노치티틀란"
+      },
+      {
+        "from": 1521,
+        "to": 9999,
+        "name_ko": "멕시코시티"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1325년 아스테카가 건설한 호수 위 도시."
+  },
+  {
+    "id": "machu_picchu",
+    "name_ko": "마추픽추",
+    "name_en": "Machu Picchu",
+    "coords": [
+      -13.16,
+      -72.55
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "마추픽추"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "잉카의 산악 도시 유적."
+  },
+  {
+    "id": "lima",
+    "name_ko": "리마",
+    "name_en": "Lima",
+    "coords": [
+      -12.05,
+      -77.04
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1535,
+        "to": 9999,
+        "name_ko": "리마"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "1535년 피사로가 건설한 페루 부왕령의 수도."
+  },
+  {
+    "id": "potosi",
+    "name_ko": "포토시",
+    "name_en": "Potosí",
+    "coords": [
+      -19.58,
+      -65.75
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": 1545,
+        "to": 9999,
+        "name_ko": "포토시"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "에스파냐 식민지 최대의 은광."
+  },
+  {
+    "id": "philadelphia",
+    "name_ko": "필라델피아",
+    "name_en": "Philadelphia",
+    "coords": [
+      39.95,
+      -75.17
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "필라델피아"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1776년 독립 선언."
+  },
+  {
+    "id": "washington_dc",
+    "name_ko": "워싱턴 D.C.",
+    "name_en": "Washington, D.C.",
+    "coords": [
+      38.9,
+      -77.04
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1790,
+        "to": 9999,
+        "name_ko": "워싱턴 D.C."
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "미국의 수도."
+  },
+  {
+    "id": "new_york",
+    "name_ko": "뉴욕",
+    "name_en": "New York",
+    "coords": [
+      40.71,
+      -74.01
+    ],
+    "type": "city",
+    "era_names": [
+      {
+        "from": 1624,
+        "to": 1664,
+        "name_ko": "뉴암스테르담"
+      },
+      {
+        "from": 1664,
+        "to": 9999,
+        "name_ko": "뉴욕"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "국제 연합 본부 소재지."
+  },
+  {
+    "id": "san_salvador",
+    "name_ko": "산살바도르섬(과나하니)",
+    "name_en": "San Salvador Island",
+    "coords": [
+      24.0,
+      -74.5
+    ],
+    "type": "natural",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1492,
+        "name_ko": "과나하니"
+      },
+      {
+        "from": 1492,
+        "to": 9999,
+        "name_ko": "산살바도르"
+      }
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "note": "1492년 콜럼버스 첫 상륙지(통설)."
+  },
+  {
+    "id": "havana",
+    "name_ko": "아바나",
+    "name_en": "Havana",
+    "coords": [
+      23.13,
+      -82.38
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "아바나"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": ""
+  },
+  {
+    "id": "sydney",
+    "name_ko": "시드니",
+    "name_en": "Sydney",
+    "coords": [
+      -33.87,
+      151.21
+    ],
+    "type": "port",
+    "era_names": [
+      {
+        "from": 1788,
+        "to": 9999,
+        "name_ko": "시드니"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "1788년 영국 유형 식민지로 출발."
+  },
+  {
+    "id": "easter_island",
+    "name_ko": "이스터섬(라파누이)",
+    "name_en": "Easter Island (Rapa Nui)",
+    "coords": [
+      -27.11,
+      -109.35
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 1722,
+        "name_ko": "라파누이"
+      },
+      {
+        "from": 1722,
+        "to": 9999,
+        "name_ko": "이스터섬"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "폴리네시아인이 세운 모아이 석상. 1722년 네덜란드 탐험대가 도달."
+  },
+  {
+    "id": "hawaii",
+    "name_ko": "하와이",
+    "name_en": "Hawaii",
+    "coords": [
+      21.3,
+      -157.85
+    ],
+    "type": "site",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "하와이"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "폴리네시아인의 정착지. 1941년 진주만 공습."
+  },
+  {
+    "id": "botany_bay",
+    "name_ko": "보터니만",
+    "name_en": "Botany Bay",
+    "coords": [
+      -34.0,
+      151.2
+    ],
+    "type": "natural",
+    "era_names": [
+      {
+        "from": -3000,
+        "to": 9999,
+        "name_ko": "보터니만"
+      }
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "note": "1770년 제임스 쿡 상륙지."
   }
 ]

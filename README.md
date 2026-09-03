@@ -11,7 +11,7 @@
 | --- | --- | --- |
 | 1 | 프로젝트 초기화 · Firebase 연결 · Firestore 설계 · Security Rules + 테스트 · 정적 데이터 배치 | ✅ 완료 |
 | 2 | 3D 지구본 + 연대 슬라이더 + 샘플 데이터 20개 | ✅ 완료 (`/globe`) |
-| 3 | 역사 데이터 전체 입력 + 검색·레이어 | ⏳ |
+| 3 | 역사 데이터 전체 입력 + 검색·레이어 | ✅ 완료 (왕조 166 · 인물 218 · 장소 110 · 사건 137 · 교역로 11) |
 | 4 | 학생 가입(학급코드) + 마킹·거리·루트 | ⏳ |
 | 5 | 교사 가입 + 학급 관리 + 수업 설계 + 성취기준 연동 | ⏳ |
 | 6 | 활동지 생성기 + PDF/HTML 다운로드 | ⏳ |
@@ -47,15 +47,16 @@
 │   │   ├── studentAuth.ts   # 학급코드·학생 가상 이메일·문서 ID 규칙
 │   │   └── history.ts       # 연대 필터링 · Haversine · 루트 길이 · Douglas-Peucker
 │   ├── components/
-│   │   ├── globe/           # GlobeCanvas(r3f) · PolityOverlay(캔버스 텍스처) · BordersOverlay · Markers · pick
+│   │   ├── globe/           # GlobeCanvas(r3f) · PolityOverlay · RoutesOverlay · BordersOverlay · Markers · pick
 │   │   ├── timeline/        # 연대 슬라이더(정밀도·직접 입력·북마크 점프·키보드)
-│   │   └── panels/          # DetailPanel · ComparePanel(동시대 비교) · LayerPanel · ListView(접근성 대체)
+│   │   └── panels/          # DetailPanel · ComparePanel(동시대 비교) · LayerPanel · SearchBox · ListView(접근성 대체)
 │   ├── pages/               # LandingPage · GlobePage · DevStatusPage (나머지는 단계별 추가)
 │   ├── store/               # Zustand 스토어 (2단계부터)
 │   └── types/               # history.ts(데이터 스키마) · firestore.ts(컬렉션 문서)
 ├── public/textures/         # NASA Blue Marble 지구 텍스처(2048/1024, 퍼블릭 도메인)
 ├── public/geo/              # Natural Earth 110m 국경선(경량 JSON, 퍼블릭 도메인)
-├── scripts/validate-data.ts # 정적 데이터 스키마·참조 검증
+├── scripts/data-src/        # 역사 데이터 원본(조각 .py) + merge.py → src/data/*.json 생성
+├── scripts/validate-data.ts # 정적 데이터 스키마·참조·분포 검증
 ├── scripts/build-geo.mjs    # Natural Earth GeoJSON → 경량 JSON 변환
 ├── tests/rules/             # Security Rules 테스트
 ├── docs/

@@ -57,7 +57,7 @@ export function PolityOverlay() {
         else ctx.lineTo(x, y);
       });
       ctx.closePath();
-      ctx.fillStyle = hexToRgba(color, isSel ? 0.62 : p.is_approximate || circle ? 0.3 : 0.42);
+      ctx.fillStyle = hexToRgba(color, isSel ? 0.62 : circle ? 0.2 : p.is_approximate ? 0.3 : 0.42);
       ctx.fill();
       ctx.lineWidth = isSel ? 5 : 2.5;
       ctx.strokeStyle = isSel ? '#ffffff' : hexToRgba(color, 0.95);

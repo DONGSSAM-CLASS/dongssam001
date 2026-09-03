@@ -6,6 +6,7 @@ import { latLonToVec3, vec3ToLatLon } from '@/lib/geo';
 import { useGlobeStore } from '@/store/globeStore';
 import { PolityOverlay } from './PolityOverlay';
 import { BordersOverlay } from './BordersOverlay';
+import { RoutesOverlay } from './RoutesOverlay';
 import { Markers } from './Markers';
 import { pickPolityAt } from './pick';
 import { useVisiblePolities } from '@/lib/useVisibleData';
@@ -145,6 +146,7 @@ export function GlobeCanvas() {
       </Suspense>
       <PolityOverlay />
       <BordersOverlay />
+      <RoutesOverlay />
       <Markers />
       <CameraRig />
       <Stars />

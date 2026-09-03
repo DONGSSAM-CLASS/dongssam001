@@ -1,5 +1,51 @@
 [
   {
+    "id": "hammurabi_code",
+    "year": -1750,
+    "name_ko": "함무라비 법전 반포(무렵)",
+    "name_en": "Code of Hammurabi",
+    "coords": [
+      32.54,
+      44.42
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false,
+    "note": "연대는 추정치"
+  },
+  {
+    "id": "persian_wars",
+    "year": -490,
+    "name_ko": "페르시아 전쟁(마라톤 전투)",
+    "name_en": "Greco-Persian Wars (Marathon)",
+    "coords": [
+      38.15,
+      23.97
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "alexander_east",
+    "year": -334,
+    "name_ko": "알렉산드로스의 동방 원정 시작",
+    "name_en": "Alexander's campaign begins",
+    "coords": [
+      40.0,
+      26.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
     "id": "qin_unification",
     "year": -221,
     "name_ko": "진의 중국 통일",
@@ -15,13 +61,163 @@
     "bookmark": true
   },
   {
-    "id": "goryeo_founded",
-    "year": 918,
-    "name_ko": "고려 건국",
-    "name_en": "Founding of Goryeo",
+    "id": "han_founded",
+    "year": -202,
+    "name_ko": "한 건국",
+    "name_en": "Founding of Han",
     "coords": [
-      37.97,
-      126.55
+      34.3,
+      108.9
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "zhang_qian_mission",
+    "year": -139,
+    "name_ko": "장건의 서역 파견",
+    "name_en": "Zhang Qian's mission to the Western Regions",
+    "coords": [
+      34.3,
+      108.9
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "gojoseon_fall",
+    "year": -108,
+    "name_ko": "고조선 멸망(한 군현 설치)",
+    "name_en": "Fall of Gojoseon",
+    "coords": [
+      39.0,
+      125.8
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "silla_founded",
+    "year": -57,
+    "name_ko": "신라 건국(전승)",
+    "name_en": "Founding of Silla (traditional)",
+    "coords": [
+      35.84,
+      129.21
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": false,
+    "note": "『삼국사기』 기록 연대"
+  },
+  {
+    "id": "goguryeo_founded",
+    "year": -37,
+    "name_ko": "고구려 건국(전승)",
+    "name_en": "Founding of Goguryeo (traditional)",
+    "coords": [
+      41.13,
+      126.19
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": false,
+    "note": "『삼국사기』 기록 연대"
+  },
+  {
+    "id": "baekje_founded",
+    "year": -18,
+    "name_ko": "백제 건국(전승)",
+    "name_en": "Founding of Baekje (traditional)",
+    "coords": [
+      37.5,
+      127.1
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": false,
+    "note": "『삼국사기』 기록 연대"
+  },
+  {
+    "id": "milan_edict",
+    "year": 313,
+    "name_ko": "밀라노 칙령",
+    "name_en": "Edict of Milan",
+    "coords": [
+      45.46,
+      9.19
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "rome_split",
+    "year": 395,
+    "name_ko": "로마 제국의 동서 분열",
+    "name_en": "Division of the Roman Empire",
+    "coords": [
+      41.9,
+      12.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "western_rome_fall",
+    "year": 476,
+    "name_ko": "서로마 제국 멸망",
+    "name_en": "Fall of the Western Roman Empire",
+    "coords": [
+      41.9,
+      12.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "sui_unification",
+    "year": 589,
+    "name_ko": "수의 중국 통일",
+    "name_en": "Sui unification of China",
+    "coords": [
+      34.3,
+      109.0
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "salsu",
+    "year": 612,
+    "name_ko": "살수 대첩",
+    "name_en": "Battle of Salsu",
+    "coords": [
+      39.9,
+      125.5
     ],
     "textbook_appearance": [
       "역사②",
@@ -30,33 +226,20 @@
     "bookmark": true
   },
   {
-    "id": "mongol_invasion_japan_1",
-    "year": 1274,
-    "name_ko": "여몽 연합군의 1차 일본 원정",
-    "name_en": "First Mongol invasion of Japan",
+    "id": "tang_founded",
+    "year": 618,
+    "name_ko": "당 건국",
+    "name_en": "Founding of Tang",
     "coords": [
-      33.59,
-      130.4
+      34.27,
+      108.95
     ],
     "textbook_appearance": [
       "역사①",
+      "세계사",
       "동아시아 역사 기행"
     ],
     "bookmark": false
-  },
-  {
-    "id": "fall_of_constantinople",
-    "year": 1453,
-    "name_ko": "콘스탄티노폴리스 함락",
-    "name_en": "Fall of Constantinople",
-    "coords": [
-      41.01,
-      28.98
-    ],
-    "textbook_appearance": [
-      "세계사"
-    ],
-    "bookmark": true
   },
   {
     "id": "hegira",
@@ -70,6 +253,50 @@
     "textbook_appearance": [
       "역사①",
       "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "taika_reform",
+    "year": 645,
+    "name_ko": "다이카 개신",
+    "name_en": "Taika Reform",
+    "coords": [
+      34.6,
+      135.7
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "baekje_fall",
+    "year": 660,
+    "name_ko": "백제 멸망",
+    "name_en": "Fall of Baekje",
+    "coords": [
+      36.28,
+      126.91
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "goguryeo_fall",
+    "year": 668,
+    "name_ko": "고구려 멸망",
+    "name_en": "Fall of Goguryeo",
+    "coords": [
+      39.03,
+      125.75
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
     ],
     "bookmark": true
   },
@@ -88,6 +315,274 @@
     "bookmark": true
   },
   {
+    "id": "balhae_founded",
+    "year": 698,
+    "name_ko": "발해 건국",
+    "name_en": "Founding of Balhae",
+    "coords": [
+      43.0,
+      129.0
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "tours",
+    "year": 732,
+    "name_ko": "투르-푸아티에 전투",
+    "name_en": "Battle of Tours",
+    "coords": [
+      47.0,
+      0.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "talas",
+    "year": 751,
+    "name_ko": "탈라스 전투",
+    "name_en": "Battle of Talas",
+    "coords": [
+      42.5,
+      72.2
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true,
+    "note": "제지술의 서방 전파 계기"
+  },
+  {
+    "id": "an_lushan",
+    "year": 755,
+    "name_ko": "안사의 난",
+    "name_en": "An Lushan Rebellion",
+    "coords": [
+      34.6,
+      112.5
+    ],
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "charlemagne_crowned",
+    "year": 800,
+    "name_ko": "카롤루스 대제의 서로마 황제 대관",
+    "name_en": "Coronation of Charlemagne",
+    "coords": [
+      41.9,
+      12.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "cheonghaejin",
+    "year": 828,
+    "name_ko": "장보고, 청해진 설치",
+    "name_en": "Jang Bogo founds Cheonghaejin",
+    "coords": [
+      34.32,
+      126.75
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "verdun_843",
+    "year": 843,
+    "name_ko": "베르됭 조약(프랑크 왕국 분할)",
+    "name_en": "Treaty of Verdun",
+    "coords": [
+      49.16,
+      5.38
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "goryeo_founded",
+    "year": 918,
+    "name_ko": "고려 건국",
+    "name_en": "Founding of Goryeo",
+    "coords": [
+      37.97,
+      126.55
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "later_three_kingdoms_unified",
+    "year": 936,
+    "name_ko": "고려의 후삼국 통일",
+    "name_en": "Goryeo unifies the Later Three Kingdoms",
+    "coords": [
+      37.97,
+      126.55
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "song_founded",
+    "year": 960,
+    "name_ko": "송 건국",
+    "name_en": "Founding of Song",
+    "coords": [
+      34.8,
+      114.3
+    ],
+    "textbook_appearance": [
+      "역사①"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "hre_founded",
+    "year": 962,
+    "name_ko": "신성 로마 제국 성립",
+    "name_en": "Holy Roman Empire established",
+    "coords": [
+      41.9,
+      12.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "gwiju",
+    "year": 1019,
+    "name_ko": "귀주 대첩",
+    "name_en": "Battle of Gwiju",
+    "coords": [
+      39.5,
+      125.2
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "schism_1054",
+    "year": 1054,
+    "name_ko": "동서 교회의 분열",
+    "name_en": "East–West Schism",
+    "coords": [
+      41.01,
+      28.98
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "canossa",
+    "year": 1077,
+    "name_ko": "카노사의 굴욕",
+    "name_en": "Walk to Canossa",
+    "coords": [
+      44.43,
+      10.46
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "first_crusade",
+    "year": 1096,
+    "name_ko": "제1차 십자군 출발",
+    "name_en": "First Crusade begins",
+    "coords": [
+      48.86,
+      2.35
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "military_coup_goryeo",
+    "year": 1170,
+    "name_ko": "무신 정변",
+    "name_en": "Military coup of Goryeo",
+    "coords": [
+      37.97,
+      126.55
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "jerusalem_1187",
+    "year": 1187,
+    "name_ko": "살라딘의 예루살렘 탈환",
+    "name_en": "Saladin recaptures Jerusalem",
+    "coords": [
+      31.78,
+      35.23
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "kamakura_founded",
+    "year": 1192,
+    "name_ko": "가마쿠라 막부 성립",
+    "name_en": "Kamakura Shogunate established",
+    "coords": [
+      35.32,
+      139.55
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false,
+    "note": "정이대장군 임명 연도"
+  },
+  {
     "id": "mongol_empire_founded",
     "year": 1206,
     "name_ko": "칭기즈 칸 즉위, 몽골 제국 성립",
@@ -104,19 +599,261 @@
     "bookmark": true
   },
   {
-    "id": "imjin_war",
-    "year": 1592,
-    "name_ko": "임진왜란 발발",
-    "name_en": "Imjin War begins",
+    "id": "magna_carta",
+    "year": 1215,
+    "name_ko": "마그나 카르타",
+    "name_en": "Magna Carta",
     "coords": [
-      35.1,
-      129.04
+      51.44,
+      -0.56
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "mongol_invasion_goryeo",
+    "year": 1231,
+    "name_ko": "몽골의 고려 침입 시작",
+    "name_en": "Mongol invasions of Korea begin",
+    "coords": [
+      37.97,
+      126.55
     ],
     "textbook_appearance": [
       "역사②",
       "동아시아 역사 기행"
     ],
     "bookmark": true
+  },
+  {
+    "id": "tripitaka",
+    "year": 1251,
+    "name_ko": "팔만대장경 완성",
+    "name_en": "Tripitaka Koreana completed",
+    "coords": [
+      37.75,
+      126.45
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "fall_of_baghdad",
+    "year": 1258,
+    "name_ko": "몽골의 바그다드 함락(아바스 왕조 멸망)",
+    "name_en": "Siege of Baghdad",
+    "coords": [
+      33.34,
+      44.4
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "marco_polo_journey",
+    "year": 1271,
+    "name_ko": "마르코 폴로의 동방 여행 출발",
+    "name_en": "Marco Polo departs for the East",
+    "coords": [
+      45.44,
+      12.33
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "mongol_invasion_japan_1",
+    "year": 1274,
+    "name_ko": "여몽 연합군의 1차 일본 원정",
+    "name_en": "First Mongol invasion of Japan",
+    "coords": [
+      33.59,
+      130.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "song_fall",
+    "year": 1279,
+    "name_ko": "남송 멸망(원의 중국 통일)",
+    "name_en": "Fall of Southern Song",
+    "coords": [
+      30.25,
+      120.17
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "mongol_invasion_japan_2",
+    "year": 1281,
+    "name_ko": "여몽 연합군의 2차 일본 원정",
+    "name_en": "Second Mongol invasion of Japan",
+    "coords": [
+      33.59,
+      130.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "hundred_years_war",
+    "year": 1337,
+    "name_ko": "백년 전쟁 시작",
+    "name_en": "Hundred Years' War begins",
+    "coords": [
+      48.86,
+      2.35
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "black_death",
+    "year": 1347,
+    "name_ko": "흑사병 유럽 확산",
+    "name_en": "Black Death reaches Europe",
+    "coords": [
+      38.12,
+      13.36
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "ming_founded",
+    "year": 1368,
+    "name_ko": "명 건국",
+    "name_en": "Founding of Ming",
+    "coords": [
+      32.06,
+      118.8
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "joseon_founded",
+    "year": 1392,
+    "name_ko": "조선 건국",
+    "name_en": "Founding of Joseon",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "zheng_he_voyage",
+    "year": 1405,
+    "name_ko": "정화의 남해 원정 시작",
+    "name_en": "Zheng He's first voyage",
+    "coords": [
+      32.06,
+      118.8
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "hangeul",
+    "year": 1443,
+    "name_ko": "훈민정음 창제",
+    "name_en": "Creation of Hunminjeongeum",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "fall_of_constantinople",
+    "year": 1453,
+    "name_ko": "콘스탄티노폴리스 함락",
+    "name_en": "Fall of Constantinople",
+    "coords": [
+      41.01,
+      28.98
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "gutenberg_bible",
+    "year": 1455,
+    "name_ko": "구텐베르크 성서 인쇄",
+    "name_en": "Gutenberg Bible printed",
+    "coords": [
+      49.99,
+      8.27
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "dias_1488",
+    "year": 1488,
+    "name_ko": "디아스, 희망봉 도달",
+    "name_en": "Dias rounds the Cape of Good Hope",
+    "coords": [
+      -34.36,
+      18.47
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
   },
   {
     "id": "columbus_1492",
@@ -134,17 +871,1197 @@
     "bookmark": true
   },
   {
-    "id": "fall_of_baghdad",
-    "year": 1258,
-    "name_ko": "몽골의 바그다드 함락(아바스 왕조 멸망)",
-    "name_en": "Siege of Baghdad",
+    "id": "da_gama_1498",
+    "year": 1498,
+    "name_ko": "바스쿠 다 가마, 인도 항로 개척",
+    "name_en": "Vasco da Gama reaches India",
     "coords": [
-      33.34,
-      44.4
+      11.25,
+      75.78
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "reformation_1517",
+    "year": 1517,
+    "name_ko": "루터의 95개조 반박문(종교 개혁 시작)",
+    "name_en": "Luther's Ninety-five Theses",
+    "coords": [
+      51.87,
+      12.65
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "gimyo_sahwa",
+    "year": 1519,
+    "name_ko": "기묘사화",
+    "name_en": "Gimyo literati purge",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "magellan_1519",
+    "year": 1519,
+    "name_ko": "마젤란 함대 세계 일주 출항",
+    "name_en": "Magellan's circumnavigation begins",
+    "coords": [
+      36.78,
+      -6.35
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "aztec_fall",
+    "year": 1521,
+    "name_ko": "아스테카 제국 멸망",
+    "name_en": "Fall of the Aztec Empire",
+    "coords": [
+      19.43,
+      -99.13
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "mughal_founded",
+    "year": 1526,
+    "name_ko": "무굴 제국 성립(파니파트 전투)",
+    "name_en": "Mughal Empire founded (Panipat)",
+    "coords": [
+      29.39,
+      76.97
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "inca_fall",
+    "year": 1533,
+    "name_ko": "잉카 제국 멸망",
+    "name_en": "Fall of the Inca Empire",
+    "coords": [
+      -13.52,
+      -71.97
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "tanegashima_1543",
+    "year": 1543,
+    "name_ko": "조총의 일본 전래",
+    "name_en": "Arrival of firearms in Japan",
+    "coords": [
+      30.6,
+      130.98
+    ],
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "armada_1588",
+    "year": 1588,
+    "name_ko": "에스파냐 무적함대 패배",
+    "name_en": "Defeat of the Spanish Armada",
+    "coords": [
+      50.8,
+      1.2
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "imjin_war",
+    "year": 1592,
+    "name_ko": "임진왜란 발발",
+    "name_en": "Imjin War begins",
+    "coords": [
+      35.1,
+      129.04
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "eic_1600",
+    "year": 1600,
+    "name_ko": "영국 동인도 회사 설립",
+    "name_en": "English East India Company founded",
+    "coords": [
+      51.5,
+      -0.12
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "edo_founded",
+    "year": 1603,
+    "name_ko": "에도 막부 성립",
+    "name_en": "Edo Shogunate established",
+    "coords": [
+      35.68,
+      139.75
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "thirty_years_war",
+    "year": 1618,
+    "name_ko": "30년 전쟁 시작",
+    "name_en": "Thirty Years' War begins",
+    "coords": [
+      50.09,
+      14.42
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "byeongja_horan",
+    "year": 1636,
+    "name_ko": "병자호란",
+    "name_en": "Qing invasion of Joseon (Byeongja Horan)",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "ming_fall",
+    "year": 1644,
+    "name_ko": "명 멸망·청의 베이징 입성",
+    "name_en": "Fall of Ming · Qing enters Beijing",
+    "coords": [
+      39.9,
+      116.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "westphalia",
+    "year": 1648,
+    "name_ko": "베스트팔렌 조약",
+    "name_en": "Peace of Westphalia",
+    "coords": [
+      51.96,
+      7.63
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "glorious_revolution",
+    "year": 1688,
+    "name_ko": "명예혁명",
+    "name_en": "Glorious Revolution",
+    "coords": [
+      51.5,
+      -0.12
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "nerchinsk",
+    "year": 1689,
+    "name_ko": "네르친스크 조약",
+    "name_en": "Treaty of Nerchinsk",
+    "coords": [
+      51.96,
+      116.6
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "cook_1770",
+    "year": 1770,
+    "name_ko": "제임스 쿡, 오스트레일리아 동해안 도달",
+    "name_en": "James Cook reaches eastern Australia",
+    "coords": [
+      -34.0,
+      151.2
     ],
     "textbook_appearance": [
       "세계사"
     ],
     "bookmark": false
+  },
+  {
+    "id": "us_independence",
+    "year": 1776,
+    "name_ko": "미국 독립 선언",
+    "name_en": "US Declaration of Independence",
+    "coords": [
+      39.95,
+      -75.17
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "first_fleet_1788",
+    "year": 1788,
+    "name_ko": "영국의 시드니 식민지 건설",
+    "name_en": "First Fleet founds Sydney",
+    "coords": [
+      -33.87,
+      151.21
+    ],
+    "textbook_appearance": [
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "french_revolution",
+    "year": 1789,
+    "name_ko": "프랑스 혁명",
+    "name_en": "French Revolution",
+    "coords": [
+      48.86,
+      2.35
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "haiti_1804",
+    "year": 1804,
+    "name_ko": "아이티 독립",
+    "name_en": "Haitian independence",
+    "coords": [
+      19.0,
+      -72.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "hong_gyeongnae_rebellion",
+    "year": 1811,
+    "name_ko": "홍경래의 난",
+    "name_en": "Hong Gyeong-nae Rebellion",
+    "coords": [
+      39.7,
+      125.3
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "vienna_congress",
+    "year": 1815,
+    "name_ko": "빈 회의",
+    "name_en": "Congress of Vienna",
+    "coords": [
+      48.2,
+      16.37
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "opium_war",
+    "year": 1840,
+    "name_ko": "아편 전쟁",
+    "name_en": "First Opium War",
+    "coords": [
+      23.13,
+      113.26
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "nanjing_treaty",
+    "year": 1842,
+    "name_ko": "난징 조약",
+    "name_en": "Treaty of Nanking",
+    "coords": [
+      32.06,
+      118.8
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "revolutions_1848",
+    "year": 1848,
+    "name_ko": "1848년 혁명 · 『공산당 선언』",
+    "name_en": "Revolutions of 1848 · Communist Manifesto",
+    "coords": [
+      48.86,
+      2.35
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "taiping",
+    "year": 1851,
+    "name_ko": "태평천국 운동",
+    "name_en": "Taiping Rebellion",
+    "coords": [
+      32.06,
+      118.8
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "perry_1853",
+    "year": 1853,
+    "name_ko": "페리 내항",
+    "name_en": "Perry Expedition",
+    "coords": [
+      35.3,
+      139.5
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "sepoy",
+    "year": 1857,
+    "name_ko": "세포이 항쟁",
+    "name_en": "Indian Rebellion of 1857",
+    "coords": [
+      28.65,
+      77.2
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "us_civil_war",
+    "year": 1861,
+    "name_ko": "미국 남북 전쟁 · 이탈리아 통일",
+    "name_en": "American Civil War · Unification of Italy",
+    "coords": [
+      38.9,
+      -77.04
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "byeonginyangyo",
+    "year": 1866,
+    "name_ko": "병인양요",
+    "name_en": "French campaign against Korea",
+    "coords": [
+      37.75,
+      126.45
+    ],
+    "textbook_appearance": [
+      "역사②"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "meiji_restoration",
+    "year": 1868,
+    "name_ko": "메이지 유신",
+    "name_en": "Meiji Restoration",
+    "coords": [
+      35.68,
+      139.75
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "suez_1869",
+    "year": 1869,
+    "name_ko": "수에즈 운하 개통",
+    "name_en": "Suez Canal opens",
+    "coords": [
+      30.6,
+      32.3
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "german_unification",
+    "year": 1871,
+    "name_ko": "독일 통일",
+    "name_en": "Unification of Germany",
+    "coords": [
+      48.8,
+      2.12
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "ganghwa_treaty",
+    "year": 1876,
+    "name_ko": "강화도 조약(개항)",
+    "name_en": "Treaty of Ganghwa",
+    "coords": [
+      37.75,
+      126.45
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "berlin_conference",
+    "year": 1884,
+    "name_ko": "베를린 회의(아프리카 분할)",
+    "name_en": "Berlin Conference",
+    "coords": [
+      52.52,
+      13.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "gapsin",
+    "year": 1884,
+    "name_ko": "갑신정변",
+    "name_en": "Gapsin Coup",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "donghak",
+    "year": 1894,
+    "name_ko": "동학 농민 운동 · 청일 전쟁",
+    "name_en": "Donghak Peasant Revolution · First Sino-Japanese War",
+    "coords": [
+      35.6,
+      126.85
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "adwa",
+    "year": 1896,
+    "name_ko": "아도와 전투",
+    "name_en": "Battle of Adwa",
+    "coords": [
+      14.17,
+      38.9
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "korean_empire_proclaimed",
+    "year": 1897,
+    "name_ko": "대한제국 선포",
+    "name_en": "Proclamation of the Korean Empire",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "russo_japanese_war",
+    "year": 1904,
+    "name_ko": "러일 전쟁",
+    "name_en": "Russo-Japanese War",
+    "coords": [
+      38.8,
+      121.3
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "eulsa_treaty",
+    "year": 1905,
+    "name_ko": "을사늑약",
+    "name_en": "Eulsa Treaty",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "annexation_1910",
+    "year": 1910,
+    "name_ko": "국권 피탈(경술국치)",
+    "name_en": "Japanese annexation of Korea",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "xinhai",
+    "year": 1911,
+    "name_ko": "신해혁명",
+    "name_en": "Xinhai Revolution",
+    "coords": [
+      30.6,
+      114.3
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "ww1",
+    "year": 1914,
+    "name_ko": "제1차 세계 대전 발발",
+    "name_en": "World War I begins",
+    "coords": [
+      43.86,
+      18.41
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "russian_revolution",
+    "year": 1917,
+    "name_ko": "러시아 혁명",
+    "name_en": "Russian Revolution",
+    "coords": [
+      59.93,
+      30.3
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "march_first",
+    "year": 1919,
+    "name_ko": "3·1 운동 · 대한민국 임시 정부 수립",
+    "name_en": "March 1st Movement · Provisional Government",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "may_fourth",
+    "year": 1919,
+    "name_ko": "5·4 운동",
+    "name_en": "May Fourth Movement",
+    "coords": [
+      39.9,
+      116.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "versailles_1919",
+    "year": 1919,
+    "name_ko": "베르사유 조약 · 국제 연맹",
+    "name_en": "Treaty of Versailles · League of Nations",
+    "coords": [
+      48.8,
+      2.12
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "cheongsanri_battle",
+    "year": 1920,
+    "name_ko": "봉오동·청산리 대첩",
+    "name_en": "Battles of Bongodong and Cheongsanri",
+    "coords": [
+      42.9,
+      129.5
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "great_depression",
+    "year": 1929,
+    "name_ko": "대공황",
+    "name_en": "Great Depression",
+    "coords": [
+      40.71,
+      -74.01
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "manchurian_incident",
+    "year": 1931,
+    "name_ko": "만주 사변",
+    "name_en": "Mukden Incident",
+    "coords": [
+      41.8,
+      123.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "sino_japanese_war_1937",
+    "year": 1937,
+    "name_ko": "중일 전쟁 발발 · 난징 대학살",
+    "name_en": "Second Sino-Japanese War · Nanjing Massacre",
+    "coords": [
+      32.06,
+      118.8
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "ww2",
+    "year": 1939,
+    "name_ko": "제2차 세계 대전 발발",
+    "name_en": "World War II begins",
+    "coords": [
+      52.23,
+      21.01
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "pearl_harbor",
+    "year": 1941,
+    "name_ko": "태평양 전쟁 발발(진주만 공습)",
+    "name_en": "Attack on Pearl Harbor",
+    "coords": [
+      21.35,
+      -157.95
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "hiroshima_bomb",
+    "year": 1945,
+    "name_ko": "히로시마·나가사키 원폭 투하",
+    "name_en": "Atomic bombings of Hiroshima and Nagasaki",
+    "coords": [
+      34.39,
+      132.46
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "liberation_1945",
+    "year": 1945,
+    "name_ko": "8·15 광복",
+    "name_en": "Liberation of Korea",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "un_founded",
+    "year": 1945,
+    "name_ko": "국제 연합 창설",
+    "name_en": "United Nations founded",
+    "coords": [
+      37.77,
+      -122.42
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "india_independence",
+    "year": 1947,
+    "name_ko": "인도·파키스탄 독립",
+    "name_en": "Independence of India and Pakistan",
+    "coords": [
+      28.6,
+      77.2
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "israel_1948",
+    "year": 1948,
+    "name_ko": "이스라엘 건국 · 세계 인권 선언",
+    "name_en": "Founding of Israel · Universal Declaration of Human Rights",
+    "coords": [
+      31.78,
+      35.23
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "rok_founded",
+    "year": 1948,
+    "name_ko": "대한민국 정부 수립",
+    "name_en": "Establishment of the Republic of Korea",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "prc_founded",
+    "year": 1949,
+    "name_ko": "중화 인민 공화국 수립",
+    "name_en": "Founding of the PRC",
+    "coords": [
+      39.9,
+      116.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "korean_war",
+    "year": 1950,
+    "name_ko": "6·25 전쟁 발발",
+    "name_en": "Korean War begins",
+    "coords": [
+      38.0,
+      127.0
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "armistice_1953",
+    "year": 1953,
+    "name_ko": "정전 협정",
+    "name_en": "Korean Armistice Agreement",
+    "coords": [
+      37.96,
+      126.68
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "bandung",
+    "year": 1955,
+    "name_ko": "반둥 회의",
+    "name_en": "Bandung Conference",
+    "coords": [
+      -6.91,
+      107.6
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "ghana_1957",
+    "year": 1957,
+    "name_ko": "가나 독립",
+    "name_en": "Ghana independence",
+    "coords": [
+      5.6,
+      -0.19
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "april_19",
+    "year": 1960,
+    "name_ko": "4·19 혁명",
+    "name_en": "April Revolution",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "cuban_missile",
+    "year": 1962,
+    "name_ko": "쿠바 미사일 위기",
+    "name_en": "Cuban Missile Crisis",
+    "coords": [
+      23.13,
+      -82.38
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "vietnam_war_end",
+    "year": 1975,
+    "name_ko": "베트남 전쟁 종결",
+    "name_en": "End of the Vietnam War",
+    "coords": [
+      10.8,
+      106.7
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "reform_opening",
+    "year": 1978,
+    "name_ko": "중국의 개혁·개방",
+    "name_en": "China's Reform and Opening-up",
+    "coords": [
+      39.9,
+      116.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "may_18",
+    "year": 1980,
+    "name_ko": "5·18 민주화 운동",
+    "name_en": "May 18 Democratic Uprising",
+    "coords": [
+      35.16,
+      126.85
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "june_1987",
+    "year": 1987,
+    "name_ko": "6월 민주 항쟁",
+    "name_en": "June Democratic Struggle",
+    "coords": [
+      37.57,
+      126.98
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "berlin_wall_fall",
+    "year": 1989,
+    "name_ko": "베를린 장벽 붕괴",
+    "name_en": "Fall of the Berlin Wall",
+    "coords": [
+      52.52,
+      13.4
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "ussr_dissolved",
+    "year": 1991,
+    "name_ko": "소련 해체",
+    "name_en": "Dissolution of the Soviet Union",
+    "coords": [
+      55.75,
+      37.62
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": true
+  },
+  {
+    "id": "korea_china_relations",
+    "year": 1992,
+    "name_ko": "한중 수교",
+    "name_en": "Korea–China diplomatic relations",
+    "coords": [
+      39.9,
+      116.4
+    ],
+    "textbook_appearance": [
+      "동아시아 역사 기행"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "mandela_1994",
+    "year": 1994,
+    "name_ko": "만델라, 남아프리카 공화국 대통령 취임",
+    "name_en": "Mandela becomes president",
+    "coords": [
+      -25.75,
+      28.19
+    ],
+    "textbook_appearance": [
+      "역사①",
+      "세계사"
+    ],
+    "bookmark": false
+  },
+  {
+    "id": "inter_korean_summit",
+    "year": 2000,
+    "name_ko": "남북 정상 회담",
+    "name_en": "Inter-Korean Summit",
+    "coords": [
+      39.03,
+      125.75
+    ],
+    "textbook_appearance": [
+      "역사②",
+      "동아시아 역사 기행"
+    ],
+    "bookmark": true
   }
 ]

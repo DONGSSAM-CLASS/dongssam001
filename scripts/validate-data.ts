@@ -58,7 +58,8 @@ for (const p of polities) {
   if (typeof p.start_year !== 'number' || typeof p.end_year !== 'number') errors.push(`${w}: 연도 숫자 아님`);
   else {
     if ((p.start_year as number) > (p.end_year as number)) errors.push(`${w}: start_year > end_year`);
-    if ((p.start_year as number) < YEAR_MIN || (p.end_year as number) > 2100) warn.push(`${w}: 타임라인 범위 밖 연도`);
+    // end_year 9999 = 현재 존속
+    if ((p.start_year as number) < YEAR_MIN || ((p.end_year as number) > 2100 && p.end_year !== 9999)) warn.push(`${w}: 타임라인 범위 밖 연도`);
   }
   if (!isLatLon(p.centroid)) errors.push(`${w}: centroid 잘못됨`);
   if (!Array.isArray(p.area_polygon)) errors.push(`${w}: area_polygon 배열 아님`);
@@ -135,6 +136,22 @@ console.log(`왕조·국가 ${polities.length}/${target.polities} · 인물 ${fi
 const byRegion = new Map<string, number>();
 for (const p of polities) byRegion.set(p.region as string, (byRegion.get(p.region as string) ?? 0) + 1);
 console.log('문화권별 왕조:', Object.fromEntries(byRegion));
+
+// 대륙 × 시대 분포표 — 비어 보이는 칸(0)을 찾기 위한 점검
+const ERAS: [string, number, number][] = [
+  ['BC3000~BC500', -3000, -500], ['BC500~AD500', -500, 500], ['500~1000', 500, 1000], ['1000~1500', 1000, 1500], ['1500~1800', 1500, 1800], ['1800~2000', 1800, 2000],
+];
+const regions = [...REGIONS];
+const header = ['문화권', ...ERAS.map((e) => e[0])];
+const rows: string[][] = regions.map((r) => [
+  r,
+  ...ERAS.map(([, a, b]) => String(polities.filter((p) => p.region === r && (p.start_year as number) <= b && (p.end_year as number) >= a).length)),
+]);
+console.log('\n── 대륙 × 시대 왕조 분포(활성 개수) ──');
+console.log(header.join('\t'));
+for (const r of rows) console.log(r.join('\t'));
+const empty = rows.flatMap((r) => r.slice(1).map((v, i) => (v === '0' ? `${r[0]} ${ERAS[i][0]}` : null)).filter(Boolean));
+if (empty.length) console.log('비어 있는 칸:', empty.join(', '));
 if (warn.length) {
   console.log(`\n⚠ 경고 ${warn.length}건`);
   for (const w of warn) console.log('  -', w);
