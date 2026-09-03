@@ -4,13 +4,20 @@ import { Link } from 'react-router-dom';
 import { db } from '@/lib/firebase';
 import { formatYear } from '@/lib/history';
 import { useAuthStore } from '@/store/authStore';
-import type { SessionDoc, StudentWorkDoc } from '@/types/firestore';
+import type { MissionDoc, SessionDoc, StudentWorkDoc, SubmissionDoc } from '@/types/firestore';
 
-/** 학생 내 기록: 세션별 핀·루트 목록 + PNG 내보내기 (html2canvas, 클라이언트 처리) */
+function whenText(ts: unknown): string {
+  const t = ts as { toDate?: () => Date } | null;
+  return t?.toDate ? t.toDate().toLocaleString('ko-KR') : '';
+}
+
+/** 학생 내 기록: 세션별 핀·루트·제출 미션 + PNG 내보내기 (html2canvas, 클라이언트 처리) */
 export default function StudentRecordsPage() {
   const profile = useAuthStore((s) => s.profile);
   const [works, setWorks] = useState<(StudentWorkDoc & { id: string })[] | null>(null);
   const [titles, setTitles] = useState<Record<string, string>>({});
+  const [subs, setSubs] = useState<(SubmissionDoc & { id: string })[]>([]);
+  const [missionTitles, setMissionTitles] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
   const sheet = useRef<HTMLDivElement>(null);
@@ -25,8 +32,14 @@ export default function StudentRecordsPage() {
         // 세션 제목을 함께 보여준다
         const ids = [...new Set(rows.map((r) => r.sessionId))];
         const sessions = await Promise.all(ids.map((id) => getDoc(doc(db, 'sessions', id)).catch(() => null)));
+        // 내가 제출한 미션 (규칙상 자기 번호 문서만 조회 가능)
+        const subSnap = await getDocs(query(collection(db, 'submissions'), where('classId', '==', profile.classId), where('number', '==', profile.number))).catch(() => null);
+        const subRows = subSnap ? subSnap.docs.map((d) => ({ id: d.id, ...(d.data() as SubmissionDoc) })) : [];
+        const missions = await Promise.all([...new Set(subRows.map((x) => x.missionId))].map((id) => getDoc(doc(db, 'missions', id)).catch(() => null)));
         if (!alive) return;
         setWorks(rows);
+        setSubs(subRows);
+        setMissionTitles(Object.fromEntries(missions.filter(Boolean).map((m) => [m!.id, (m!.data() as MissionDoc | undefined)?.title ?? m!.id])));
         setTitles(Object.fromEntries(sessions.filter(Boolean).map((sn) => [sn!.id, (sn!.data() as SessionDoc | undefined)?.title ?? sn!.id])));
       } catch (e) {
         if (alive) setError((e as Error).message);
@@ -87,6 +100,20 @@ export default function StudentRecordsPage() {
                   ))}
                 </tbody>
               </table>
+              {subs.filter((x) => x.sessionId === w.sessionId && x.status === 'submitted').length > 0 && (
+                <>
+                  <h3 className="mt-3 text-sm font-semibold">🎯 제출한 미션</h3>
+                  <ul className="mt-1 text-xs space-y-1">
+                    {subs.filter((x) => x.sessionId === w.sessionId && x.status === 'submitted').map((x) => (
+                      <li key={x.id} className="border-t border-slate-800 pt-1">
+                        <span className="font-semibold">{missionTitles[x.missionId] ?? '미션'}</span>
+                        <span className="text-slate-400"> · {whenText(x.submittedAt)}</span>
+                        {x.answers?.note && <p className="text-slate-300">{x.answers.note}</p>}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
               {w.routes.length > 0 && (
                 <>
                   <h3 className="mt-3 text-sm font-semibold">🧭 루트 ({w.routes.length})</h3>

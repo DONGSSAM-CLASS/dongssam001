@@ -13,6 +13,11 @@ interface Props {
   onExportPng: () => void;
 }
 
+function whenText(ts: unknown): string {
+  const t = ts as { toDate?: () => Date } | null;
+  return t?.toDate ? t.toDate().toLocaleString('ko-KR') : '';
+}
+
 function download(content: string, filename: string, type: string) {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
@@ -77,6 +82,21 @@ export function MonitorPanel({ sessionTitle, members, submissions, missions, onE
         </ul>
       )}
 
+      {only !== null && (
+        <div className="border-t border-slate-700 pt-2 text-xs">
+          <h3 className="font-semibold text-slate-300">{only}번 학생 상세</h3>
+          {published.map((m) => {
+            const sub = submissions.find((x) => x.missionId === m.id && x.number === only);
+            return (
+              <div key={m.id} className="mt-1">
+                <p className="text-slate-300">🎯 {m.title} — {sub?.status === 'submitted' ? `제출 ${whenText(sub.submittedAt)}` : sub ? '작성 중' : '미제출'}</p>
+                {sub?.answers?.note && <p className="text-slate-400 whitespace-pre-line">{sub.answers.note}</p>}
+              </div>
+            );
+          })}
+          {published.length === 0 && <p className="text-slate-400">배포한 미션이 없습니다.</p>}
+        </div>
+      )}
       <div className="border-t border-slate-700 pt-2 flex flex-wrap gap-1 text-xs">
         <button type="button" className="btn-icon text-xs" onClick={() => download(rowsToCsv(rows, sessionTitle), `${sessionTitle}-요약.csv`, 'text/csv;charset=utf-8')}>📊 요약 CSV</button>
         <button type="button" className="btn-icon text-xs" onClick={() => download(detailCsv(members, works, sessionTitle), `${sessionTitle}-핀루트.csv`, 'text/csv;charset=utf-8')}>📊 핀·루트 CSV</button>

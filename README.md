@@ -5,6 +5,8 @@
 
 > 이 저장소에는 기존 미션 게임(`동쌤의 중학교 2학년 세계사 탐험대.html`)도 그대로 남겨 두었습니다. 새 앱과는 별개의 정적 파일입니다.
 
+> 다른 도구(예: Codex)에서 이어서 작업한다면 **[CODEX_HANDOFF.md](CODEX_HANDOFF.md)** 를 먼저 읽어 주세요.
+
 ## 구현 진행 상황
 
 | 단계 | 내용 | 상태 |
@@ -79,6 +81,7 @@
 ├── docs/
 │   ├── FIRESTORE_SCHEMA.md  # 컬렉션 설계와 할당량 절약 전략
 │   └── DECISIONS.md         # 요구사항 밖 판단 기록(질문·가정 포함)
+├── CODEX_HANDOFF.md         # 인수인계(현재 상태·주의사항·남은 일)
 ├── DATA_NOTES.md            # 역사 데이터 출처·불확실 항목·TODO
 └── TEACHER_GUIDE.md         # 교사용 사용 설명서
 ```
