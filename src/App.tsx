@@ -11,6 +11,11 @@ const StudentJoinPage = lazy(() => import('./pages/student/StudentJoinPage'));
 const StudentHomePage = lazy(() => import('./pages/student/StudentHomePage'));
 const StudentGlobePage = lazy(() => import('./pages/student/StudentGlobePage'));
 const StudentRecordsPage = lazy(() => import('./pages/student/StudentRecordsPage'));
+const TeacherAuthPage = lazy(() => import('./pages/teacher/TeacherAuthPage'));
+const TeacherDashboardPage = lazy(() => import('./pages/teacher/TeacherDashboardPage'));
+const ClassDetailPage = lazy(() => import('./pages/teacher/ClassDetailPage'));
+const LessonDesignPage = lazy(() => import('./pages/teacher/LessonDesignPage'));
+const TeacherGlobePage = lazy(() => import('./pages/teacher/TeacherGlobePage'));
 
 function Loading() {
   return <div className="flex h-full items-center justify-center text-slate-400">불러오는 중…</div>;
@@ -24,7 +29,11 @@ function Loading() {
  *  /student              학생 홈(세션 목록)
  *  /student/globe/:id    학생용 지구본(세션 연결, 핀·거리·루트 저장)
  *  /student/records      학생 내 기록
- *  /teacher/*            교사 대시보드·학급·수업 설계·지구본 (5단계)
+ *  /teacher/login        교사 가입·로그인
+ *  /teacher              교사 대시보드(학급 목록·최근 세션)
+ *  /teacher/classes/:id  학급 상세(학생 관리·학급코드·세션)
+ *  /teacher/design       수업 설계(성취기준 → 세션)
+ *  /teacher/globe/:id    교사용 지구본(수업 모드/따라오기)
  *  /admin/data           데이터 검수 (8단계)
  *  /dev/status           개발 상태
  */
@@ -39,6 +48,11 @@ export default function App() {
         <Route path="/student" element={<RequireRole role="student"><StudentHomePage /></RequireRole>} />
         <Route path="/student/globe/:sessionId" element={<RequireRole role="student"><StudentGlobePage /></RequireRole>} />
         <Route path="/student/records" element={<RequireRole role="student"><StudentRecordsPage /></RequireRole>} />
+        <Route path="/teacher/login" element={<TeacherAuthPage />} />
+        <Route path="/teacher" element={<RequireRole role="teacher"><TeacherDashboardPage /></RequireRole>} />
+        <Route path="/teacher/classes/:classId" element={<RequireRole role="teacher"><ClassDetailPage /></RequireRole>} />
+        <Route path="/teacher/design" element={<RequireRole role="teacher"><LessonDesignPage /></RequireRole>} />
+        <Route path="/teacher/globe/:sessionId" element={<RequireRole role="teacher"><TeacherGlobePage /></RequireRole>} />
         <Route path="/dev/status" element={<DevStatusPage />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>

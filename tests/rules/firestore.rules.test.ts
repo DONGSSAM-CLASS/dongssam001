@@ -200,6 +200,23 @@ describe('student signup', () => {
     b.update(doc(db, 'class_members', `${CLASS_ID}_8`), { uid: S8.uid, joinedAt: now(), lastSeenAt: now() });
     await assertSucceeds(b.commit());
   });
+  it('교사는 자기 학급 사이에서만 학생을 이동시킬 수 있다', async () => {
+    // T1 이 두 번째 학급을 소유
+    await env.withSecurityRulesDisabled(async (c) => {
+      await setDoc(doc(c.firestore(), 'classes', 'class1b'), { teacherId: T1.uid, name: '2-2', code: 'AAA111', authPrefix: 'AAA111', schoolLevel: '중학교', subject: '역사①', archived: false, settings: { walkKmPerDay: 30, sailKmPerDay: 120, horseKmPerDay: 60 }, createdAt: now(), codeUpdatedAt: now() });
+    });
+    const db = ctx(T1).firestore();
+    const b = writeBatch(db);
+    b.set(doc(db, 'class_members', 'class1b_7'), { classId: 'class1b', number: 7, uid: S7.uid, displayName: '학생7', active: true, authGeneration: 0, resetPending: false, joinedAt: now(), lastSeenAt: now() });
+    b.update(doc(db, 'users', S7.uid), { classId: 'class1b', number: 7 });
+    b.delete(doc(db, 'class_members', `${CLASS_ID}_7`));
+    await assertSucceeds(b.commit());
+    // 다른 교사(T2)는 T1 의 학급에 명단을 만들 수 없고, T1 의 학생을 자기 학급으로 옮길 수도 없다.
+    // (T2 가 자기 학급에 남의 uid 로 행을 만들어도 학생의 users.classId 를 바꿀 수 없어 접근 권한은 생기지 않는다)
+    const db2 = ctx(T2).firestore();
+    await assertFails(setDoc(doc(db2, 'class_members', 'class1b_9'), { classId: 'class1b', number: 9, uid: null, displayName: '침입', active: true, authGeneration: 0, resetPending: false, joinedAt: null, lastSeenAt: null }));
+    await assertFails(updateDoc(doc(db2, 'users', S7.uid), { classId: OTHER_CLASS_ID }));
+  });
   it('비밀번호 초기화(세대 1) 후 새 계정이 자리를 이어받는다', async () => {
     // 교사가 초기화
     await assertSucceeds(updateDoc(doc(ctx(T1).firestore(), 'class_members', `${CLASS_ID}_7`), { authGeneration: 1, resetPending: true }));

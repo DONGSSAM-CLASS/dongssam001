@@ -8,10 +8,10 @@ import { PolityOverlay } from './PolityOverlay';
 import { BordersOverlay } from './BordersOverlay';
 import { RoutesOverlay } from './RoutesOverlay';
 import { UserOverlay } from './UserOverlay';
-import { useWorkStore } from '@/store/workStore';
 import { Markers } from './Markers';
 import { pickPolityAt } from './pick';
 import { useVisiblePolities } from '@/lib/useVisibleData';
+import { useWorkStore } from '@/store/workStore';
 
 export const EARTH_RADIUS = 1;
 const TEXTURE_URL = '/textures/earth-blue-marble-2048.jpg';
@@ -26,11 +26,13 @@ function isLowEndDevice() {
 function Earth() {
   const url = useMemo(() => (isLowEndDevice() ? TEXTURE_LOW_URL : TEXTURE_URL), []);
   const texture = useTexture(url);
+  const invalidate = useThree((s) => s.invalidate);
   useEffect(() => {
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.anisotropy = 4;
     texture.needsUpdate = true;
-  }, [texture]);
+    invalidate();
+  }, [texture, invalidate]);
   const polities = useVisiblePolities();
   const select = useGlobeStore((s) => s.select);
   const flyTo = useGlobeStore((s) => s.flyTo);
@@ -82,7 +84,7 @@ function EarthFallback() {
 /** 카메라 제어: OrbitControls + flyTo 애니메이션 + FPS 측정 */
 function CameraRig() {
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
-  const { camera } = useThree();
+  const { camera, invalidate } = useThree();
   const fly = useGlobeStore((s) => s.fly);
   const setFps = useGlobeStore((s) => s.setFps);
   const anim = useRef<{ from: THREE.Vector3; to: THREE.Vector3; start: number; token: number } | null>(null);
@@ -93,7 +95,8 @@ function CameraRig() {
     const dist = fly.distance ?? camera.position.length();
     const [x, y, z] = latLonToVec3(fly.lat, fly.lon, dist);
     anim.current = { from: camera.position.clone(), to: new THREE.Vector3(x, y, z), start: performance.now(), token: fly.token };
-  }, [fly, camera]);
+    invalidate();
+  }, [fly, camera, invalidate]);
 
   useFrame((_, delta) => {
     const a = anim.current;
@@ -108,6 +111,7 @@ function CameraRig() {
       camera.position.copy(dir.multiplyScalar(dist));
       camera.lookAt(0, 0, 0);
       if (t >= 1) anim.current = null;
+      else invalidate(); // 애니메이션이 끝날 때까지 다음 프레임 요청
     }
     controls.current?.update();
     // FPS (1초 단위)
@@ -133,6 +137,7 @@ function CameraRig() {
       onChange={() => {
         const c = controls.current;
         if (c) c.rotateSpeed = 0.15 + 0.35 * ((camera.position.length() - 1.25) / 2.75);
+        invalidate();
       }}
     />
   );
@@ -144,8 +149,9 @@ export function GlobeCanvas() {
       camera={{ position: latLonToVec3(30, 105, 2.6), fov: 45, near: 0.1, far: 100 }}
       dpr={[1, 1.5]}
       gl={{ antialias: true, powerPreference: 'high-performance' }}
-      // 저사양 기기: 조작이 없을 때 렌더링을 멈춰 배터리·CPU 절약
-      frameloop="always"
+      // 저사양 기기: 조작·데이터 변경이 있을 때만 렌더링해 CPU 를 아낀다.
+      // (매 프레임 렌더링하면 소프트웨어 렌더링 환경에서 메인 스레드가 포화되어 네트워크 응답까지 늦어진다)
+      frameloop="demand"
       className="touch-none"
       aria-hidden="true"
     >
@@ -161,9 +167,37 @@ export function GlobeCanvas() {
       <UserOverlay />
       <Markers />
       <CameraRig />
+      <SceneInvalidator />
       <Stars />
     </Canvas>
   );
+}
+
+/**
+ * demand 렌더링에서 장면을 다시 그려야 하는 상태 변화를 감지해 한 프레임을 요청한다.
+ * (연대·레이어·선택·표기·학생 핀/루트·거리 측정 지점)
+ */
+function SceneInvalidator() {
+  const invalidate = useThree((s) => s.invalidate);
+  const year = useGlobeStore((s) => s.year);
+  const layers = useGlobeStore((s) => s.layers);
+  const selection = useGlobeStore((s) => s.selection);
+  const showEnglish = useGlobeStore((s) => s.showEnglish);
+  const textbookFilter = useGlobeStore((s) => s.textbookFilter);
+  const textbookOnly = useGlobeStore((s) => s.textbookOnly);
+  const highlightPolities = useGlobeStore((s) => s.highlightPolities);
+  const measurePoints = useGlobeStore((s) => s.measurePoints);
+  const pins = useWorkStore((s) => s.pins);
+  const routes = useWorkStore((s) => s.routes);
+  const draftRoute = useWorkStore((s) => s.draftRoute);
+  const pendingPin = useWorkStore((s) => s.pendingPin);
+  useEffect(() => {
+    // 캔버스 텍스처가 갱신된 다음 프레임을 그리도록 두 번 요청한다
+    invalidate();
+    const id = requestAnimationFrame(() => invalidate());
+    return () => cancelAnimationFrame(id);
+  }, [invalidate, year, layers, selection, showEnglish, textbookFilter, textbookOnly, highlightPolities, measurePoints, pins, routes, draftRoute, pendingPin]);
+  return null;
 }
 
 function Stars() {

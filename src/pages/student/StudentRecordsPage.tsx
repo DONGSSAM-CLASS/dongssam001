@@ -1,24 +1,40 @@
 import { useEffect, useRef, useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import { db } from '@/lib/firebase';
 import { formatYear } from '@/lib/history';
 import { useAuthStore } from '@/store/authStore';
-import type { StudentWorkDoc } from '@/types/firestore';
+import type { SessionDoc, StudentWorkDoc } from '@/types/firestore';
 
 /** 학생 내 기록: 세션별 핀·루트 목록 + PNG 내보내기 (html2canvas, 클라이언트 처리) */
 export default function StudentRecordsPage() {
   const profile = useAuthStore((s) => s.profile);
   const [works, setWorks] = useState<(StudentWorkDoc & { id: string })[] | null>(null);
+  const [titles, setTitles] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
   const sheet = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!profile || profile.role !== 'student') return;
-    getDocs(query(collection(db, 'student_work'), where('classId', '==', profile.classId), where('number', '==', profile.number)))
-      .then((snap) => setWorks(snap.docs.map((d) => ({ id: d.id, ...(d.data() as StudentWorkDoc) }))))
-      .catch((e) => setError((e as Error).message));
+    let alive = true;
+    void (async () => {
+      try {
+        const snap = await getDocs(query(collection(db, 'student_work'), where('classId', '==', profile.classId), where('number', '==', profile.number)));
+        const rows = snap.docs.map((d) => ({ id: d.id, ...(d.data() as StudentWorkDoc) }));
+        // 세션 제목을 함께 보여준다
+        const ids = [...new Set(rows.map((r) => r.sessionId))];
+        const sessions = await Promise.all(ids.map((id) => getDoc(doc(db, 'sessions', id)).catch(() => null)));
+        if (!alive) return;
+        setWorks(rows);
+        setTitles(Object.fromEntries(sessions.filter(Boolean).map((sn) => [sn!.id, (sn!.data() as SessionDoc | undefined)?.title ?? sn!.id])));
+      } catch (e) {
+        if (alive) setError((e as Error).message);
+      }
+    })();
+    return () => {
+      alive = false;
+    };
   }, [profile]);
 
   const exportPng = async () => {
@@ -59,7 +75,7 @@ export default function StudentRecordsPage() {
         ) : (
           works.map((w) => (
             <section key={w.id} className="mt-4">
-              <h2 className="font-semibold text-amber-300">세션 {w.sessionId}</h2>
+              <h2 className="font-semibold text-amber-300">{titles[w.sessionId] ?? '수업 세션'}</h2>
               <h3 className="mt-2 text-sm font-semibold">📍 핀 ({w.pins.length})</h3>
               <table className="mt-1 w-full text-xs">
                 <thead className="text-left text-slate-400"><tr><th className="py-1">연대</th><th>장소</th><th>좌표</th><th>메모</th></tr></thead>

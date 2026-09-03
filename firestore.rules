@@ -168,11 +168,13 @@ service cloud.firestore {
         || (isStudent() && resource.data.uid == uid());
       allow list: if isAdmin() || ownsClass(resource.data.classId);
 
-      // (a) 교사가 명단을 미리 등록 (uid 없이) — 학생은 가입 시 자기 번호 문서를 채움
+      // (a) 교사가 명단을 미리 등록(uid 없이) 하거나, 자기 학급 사이에서 학생을 이동(uid 유지)
+      //     두 학급 모두 그 교사 소유여야 하므로 다른 교사의 학생을 끌어올 수는 없다.
       allow create: if ownsClass(request.resource.data.classId)
         && memberId == request.resource.data.classId + '_' + string(request.resource.data.number)
         && request.resource.data.number is int
-        && (!request.resource.data.keys().hasAny(['uid']) || request.resource.data.uid == null);
+        && request.resource.data.keys().hasOnly(['classId', 'number', 'uid', 'displayName', 'nickname', 'active', 'authGeneration', 'resetPending', 'joinedAt', 'lastSeenAt'])
+        && (!request.resource.data.keys().hasAny(['uid']) || request.resource.data.uid == null || request.resource.data.uid is string);
       // (b) 학생 자가 등록: 가상 이메일의 접두어·번호가 학급/문서 ID와 일치해야 함
       allow create: if isStudentEmail()
         && memberId == request.resource.data.classId + '_' + string(request.resource.data.number)

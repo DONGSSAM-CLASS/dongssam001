@@ -20,14 +20,12 @@ export default function LandingPage() {
         <div className="rounded-2xl bg-slate-800/70 p-6 border border-slate-700">
           <h2 className="text-xl font-semibold">👩‍🏫 교사</h2>
           <p className="mt-2 text-sm text-slate-300">이메일 또는 Google 계정으로 로그인하고 학급을 개설합니다.</p>
-          <button
-            type="button"
-            disabled
-            className="mt-4 w-full rounded-xl bg-amber-400 px-4 py-3 font-bold text-slate-900 disabled:opacity-50"
-            title="5단계에서 구현"
+          <Link
+            to={profile?.role === 'teacher' ? '/teacher' : '/teacher/login'}
+            className="mt-4 block w-full rounded-xl bg-amber-400 px-4 py-3 text-center font-bold text-slate-900"
           >
-            교사 로그인 (준비 중)
-          </button>
+            {profile?.role === 'teacher' ? '내 대시보드로' : '교사 로그인 / 가입'}
+          </Link>
         </div>
         <div className="rounded-2xl bg-slate-800/70 p-6 border border-slate-700">
           <h2 className="text-xl font-semibold">🧑‍🎓 학생</h2>

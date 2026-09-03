@@ -13,7 +13,7 @@
 | 2 | 3D 지구본 + 연대 슬라이더 + 샘플 데이터 20개 | ✅ 완료 (`/globe`) |
 | 3 | 역사 데이터 전체 입력 + 검색·레이어 | ✅ 완료 (왕조 166 · 인물 218 · 장소 110 · 사건 137 · 교역로 11) |
 | 4 | 학생 가입(학급코드) + 마킹·거리·루트 | ✅ 완료 |
-| 5 | 교사 가입 + 학급 관리 + 수업 설계 + 성취기준 연동 | ⏳ |
+| 5 | 교사 가입 + 학급 관리 + 수업 설계 + 성취기준 연동 | ✅ 완료 |
 | 6 | 활동지 생성기 + PDF/HTML 다운로드 | ⏳ |
 | 7 | 실시간 모니터링 + 따라오기 모드 | ⏳ |
 | 8 | 데이터 검수 화면 + 접근성·성능 점검 + 배포 문서 | ⏳ |
@@ -46,6 +46,9 @@
 │   │   ├── firebase.ts      # Firebase 초기화(.env → 에뮬레이터 연결 · 영속 캐시)
 │   │   ├── authService.ts   # 교사/학생 가입·로그인, 프로필 로딩
 │   │   ├── workService.ts   # 학생 핀·루트 동기화(디바운스 1.5초, 문서 1개)
+│   │   ├── classService.ts  # 학급 개설·코드 재발급·학생 관리(초기화/비활성/이동)
+│   │   ├── sessionService.ts# 수업 세션·미션 CRUD, 따라오기, 실시간 리스너
+│   │   ├── standards.ts     # 성취기준 트리 + 연대·왕조·인물 자동 추천
 │   │   ├── studentAuth.ts   # 학급코드·학생 가상 이메일·문서 ID 규칙
 │   │   ├── geo.ts           # 위경도↔3D · 폴리곤 판정 · 지오데식 원
 │   │   └── history.ts       # 연대 필터링 · Haversine · 루트 길이 · Douglas-Peucker
@@ -55,7 +58,8 @@
 │   │   └── panels/          # DetailPanel · ComparePanel(동시대 비교) · LayerPanel · SearchBox · ListView(접근성 대체)
 │   ├── pages/
 │   │   ├── LandingPage · GlobePage(자유 탐색) · DevStatusPage
-│   │   └── student/         # StudentJoinPage · StudentHomePage · StudentGlobePage · StudentRecordsPage
+│   │   ├── student/         # StudentJoinPage · StudentHomePage · StudentGlobePage · StudentRecordsPage
+│   │   └── teacher/         # TeacherAuthPage · TeacherDashboardPage · ClassDetailPage · LessonDesignPage · TeacherGlobePage
 │   ├── store/               # Zustand 스토어 (2단계부터)
 │   └── types/               # history.ts(데이터 스키마) · firestore.ts(컬렉션 문서)
 ├── public/textures/         # NASA Blue Marble 지구 텍스처(2048/1024, 퍼블릭 도메인)
@@ -150,6 +154,7 @@ Spark 요금제 Firestore 일일 한도: 읽기 50,000 · 쓰기 20,000 · 삭�
 - 왕조 영역은 정치체마다 메시를 만들지 않고, 활성 정치체를 **등장방형 캔버스 한 장(2048×1024)** 에 그려 반투명 텍스처로 입힙니다. 연대가 바뀌면 캔버스만 다시 그리므로 드로우콜이 늘지 않습니다.
 - 인물·장소 마커와 이름표는 DOM 오버레이(drei `Html`)이며, 지구 뒷면 판정은 레이캐스트 대신 법선·카메라 내적으로 처리합니다.
 - 저사양 기기(논리 코어 ≤4 또는 메모리 ≤4GB)는 1024px 텍스처를 사용하고, DPR 은 최대 1.5 로 제한합니다.
+- **필요할 때만 렌더링(`frameloop="demand"`)**: 조작이나 데이터 변경이 있을 때만 한 프레임을 그립니다. 매 프레임 렌더링하면 저사양·소프트웨어 렌더링 환경에서 메인 스레드가 포화되어 Firestore 응답까지 지연되는 것을 실측으로 확인했습니다(쓰기 9초 타임아웃 → 0.5초).
 - 현대 국경선(Natural Earth)은 토글할 때 한 번만 내려받아 별도 캔버스 텍스처로 그립니다.
 
 ## 라이선스 · 데이터 출처
