@@ -308,6 +308,15 @@ describe('missions & submissions', () => {
     await assertSucceeds(getDoc(doc(db, 'missions', 'm1')));
     await assertFails(getDoc(doc(db, 'missions', 'm_hidden')));
   });
+  it('교사는 세션 단위로 제출물을 실시간 조회하고 학생은 자기 것만 조회한다', async () => {
+    const sub = { missionId: 'm1', sessionId: 'sess_open', classId: CLASS_ID, number: 7, uid: S7.uid, answers: {}, pinIds: [], routeIds: [], status: 'submitted', submittedAt: now(), updatedAt: now() };
+    await assertSucceeds(setDoc(doc(ctx(S7).firestore(), 'submissions', 'm1_7'), sub));
+    await assertSucceeds(getDocs(query(collection(ctx(T1).firestore(), 'submissions'), where('classId', '==', CLASS_ID), where('sessionId', '==', 'sess_open'))));
+    await assertSucceeds(getDocs(query(collection(ctx(S7).firestore(), 'submissions'), where('classId', '==', CLASS_ID), where('number', '==', 7))));
+    // 다른 번호의 제출물을 함께 가져오려는 쿼리는 거부된다
+    await assertFails(getDocs(query(collection(ctx(S7).firestore(), 'submissions'), where('classId', '==', CLASS_ID))));
+    await assertFails(getDocs(query(collection(ctx(T2).firestore(), 'submissions'), where('classId', '==', CLASS_ID), where('sessionId', '==', 'sess_open'))));
+  });
   it('학생은 공개 미션에 자기 제출물을 만들고, 교사는 피드백만 쓸 수 있다', async () => {
     const sub = { missionId: 'm1', sessionId: 'sess_open', classId: CLASS_ID, number: 7, uid: S7.uid, answers: {}, pinIds: [], routeIds: [], status: 'submitted', submittedAt: now(), updatedAt: now() };
     await assertSucceeds(setDoc(doc(ctx(S7).firestore(), 'submissions', 'm1_7'), sub));

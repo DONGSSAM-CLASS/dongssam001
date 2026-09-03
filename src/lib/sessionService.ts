@@ -16,7 +16,8 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import type { CameraState, LayerKey, MissionDoc, SessionDoc, SessionStatus, StudentWorkDoc, WorksheetItem } from '@/types/firestore';
+import type { CameraState, LayerKey, MissionDoc, SessionDoc, SessionStatus, StudentWorkDoc, SubmissionDoc, WorksheetItem } from '@/types/firestore';
+import { submissionDocId } from './studentAuth';
 
 export const DEFAULT_SESSION_LAYERS: Record<LayerKey, boolean> = {
   polities: true,
@@ -136,6 +137,64 @@ export async function createMission(teacherId: string, input: Omit<MissionDoc, '
 export async function listSessionMissions(sessionId: string, classId: string) {
   const snap = await getDocs(query(collection(db, 'missions'), where('classId', '==', classId), where('sessionId', '==', sessionId)));
   return snap.docs.map((d) => ({ id: d.id, ...(d.data() as MissionDoc) }));
+}
+
+/** 수업 중에만 켜는 제출물 리스너 (교사 모니터링) */
+export function watchClassSubmissions(
+  classId: string,
+  sessionId: string,
+  cb: (rows: (SubmissionDoc & { id: string })[]) => void,
+  onError?: (e: Error) => void,
+) {
+  return onSnapshot(
+    query(collection(db, 'submissions'), where('classId', '==', classId), where('sessionId', '==', sessionId)),
+    (snap) => cb(snap.docs.map((d) => ({ id: d.id, ...(d.data() as SubmissionDoc) }))),
+    (e) => onError?.(e),
+  );
+}
+
+/**
+ * 세션의 미션 구독.
+ * 학생은 규칙상 "공개된 미션"만 읽을 수 있으므로 쿼리에도 published == true 제약을 넣어야 한다
+ * (Security Rules 는 필터가 아니라서, 읽을 수 없는 문서가 결과에 포함될 수 있는 쿼리는 통째로 거부된다).
+ */
+export function watchClassMissions(
+  classId: string,
+  sessionId: string,
+  cb: (rows: (MissionDoc & { id: string })[]) => void,
+  onError?: (e: Error) => void,
+  publishedOnly = false,
+) {
+  const constraints = [where('classId', '==', classId), where('sessionId', '==', sessionId)];
+  if (publishedOnly) constraints.push(where('published', '==', true));
+  return onSnapshot(
+    query(collection(db, 'missions'), ...constraints),
+    (snap) => cb(snap.docs.map((d) => ({ id: d.id, ...(d.data() as MissionDoc) }))),
+    (e) => onError?.(e),
+  );
+}
+
+/** 학생이 미션을 제출한다 (문서 ID = missionId_번호) */
+export async function submitMission(input: {
+  missionId: string;
+  sessionId: string;
+  classId: string;
+  number: number;
+  uid: string;
+  answers: Record<string, string>;
+  pinIds: string[];
+  routeIds: string[];
+  status: 'draft' | 'submitted';
+}) {
+  const { missionId, number, ...rest } = input;
+  const payload: SubmissionDoc = {
+    missionId,
+    number,
+    ...rest,
+    submittedAt: input.status === 'submitted' ? serverTimestamp() : null,
+    updatedAt: serverTimestamp(),
+  };
+  await setDoc(doc(db, 'submissions', submissionDocId(missionId, number)), payload);
 }
 
 export async function updateMission(missionId: string, patch: Partial<MissionDoc>) {

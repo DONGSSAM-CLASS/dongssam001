@@ -30,11 +30,12 @@ export function GlobeWorkspace({ header, leftExtra, rightExtra, hideCompare }: P
           <div className="ml-auto"><SearchBox /></div>
         </header>
         <div className="flex flex-1 min-h-0 items-start justify-between gap-2">
-          <div className="flex flex-col gap-2 max-h-full overflow-y-auto pointer-events-auto">
+          {/* 좌우 패널은 화면을 넘어가면 각자 스크롤한다(작은 태블릿에서 내용이 잘리지 않도록) */}
+          <div className="flex flex-col gap-2 min-h-0 max-h-full overflow-y-auto pointer-events-auto">
             <LayerPanel />
             {leftExtra}
           </div>
-          <div className="flex flex-col gap-2 items-end max-h-full">
+          <div className="flex flex-col gap-2 items-end min-h-0 max-h-full overflow-y-auto pointer-events-auto">
             {rightExtra}
             <DetailPanel />
           </div>

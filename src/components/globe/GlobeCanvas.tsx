@@ -8,6 +8,8 @@ import { PolityOverlay } from './PolityOverlay';
 import { BordersOverlay } from './BordersOverlay';
 import { RoutesOverlay } from './RoutesOverlay';
 import { UserOverlay } from './UserOverlay';
+import { ClassOverlay } from './ClassOverlay';
+import { useMonitorStore } from '@/store/monitorStore';
 import { Markers } from './Markers';
 import { pickPolityAt } from './pick';
 import { useVisiblePolities } from '@/lib/useVisibleData';
@@ -148,7 +150,7 @@ export function GlobeCanvas() {
     <Canvas
       camera={{ position: latLonToVec3(30, 105, 2.6), fov: 45, near: 0.1, far: 100 }}
       dpr={[1, 1.5]}
-      gl={{ antialias: true, powerPreference: 'high-performance' }}
+      gl={{ antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: true }}
       // 저사양 기기: 조작·데이터 변경이 있을 때만 렌더링해 CPU 를 아낀다.
       // (매 프레임 렌더링하면 소프트웨어 렌더링 환경에서 메인 스레드가 포화되어 네트워크 응답까지 늦어진다)
       frameloop="demand"
@@ -165,6 +167,7 @@ export function GlobeCanvas() {
       <BordersOverlay />
       <RoutesOverlay />
       <UserOverlay />
+      <ClassOverlay />
       <Markers />
       <CameraRig />
       <SceneInvalidator />
@@ -191,12 +194,15 @@ function SceneInvalidator() {
   const routes = useWorkStore((s) => s.routes);
   const draftRoute = useWorkStore((s) => s.draftRoute);
   const pendingPin = useWorkStore((s) => s.pendingPin);
+  const classWorks = useMonitorStore((s) => s.works);
+  const onlyNumber = useMonitorStore((s) => s.onlyNumber);
+  const showClassWork = useMonitorStore((s) => s.showClassWork);
   useEffect(() => {
     // 캔버스 텍스처가 갱신된 다음 프레임을 그리도록 두 번 요청한다
     invalidate();
     const id = requestAnimationFrame(() => invalidate());
     return () => cancelAnimationFrame(id);
-  }, [invalidate, year, layers, selection, showEnglish, textbookFilter, textbookOnly, highlightPolities, measurePoints, pins, routes, draftRoute, pendingPin]);
+  }, [invalidate, year, layers, selection, showEnglish, textbookFilter, textbookOnly, highlightPolities, measurePoints, pins, routes, draftRoute, pendingPin, classWorks, onlyNumber, showClassWork]);
   return null;
 }
 
