@@ -1,0 +1,32 @@
+name: Deploy 독도네컷 to Firebase Hosting
+
+# dokdo-necut/ 폴더가 바뀐 채로 main 에 push 되면 그 폴더만 Firebase Hosting 에
+# 자동 배포합니다. (같은 저장소의 History Globe 앱과 완전히 분리된 별도 배포)
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dokdo-necut/**'
+      - '.github/workflows/dokdo-necut-deploy.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Firebase Hosting (live channel)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          # Firebase 콘솔에서 발급한 서비스 계정 JSON 을
+          # 저장소 Secret(FIREBASE_SERVICE_ACCOUNT_DOKDO)에 등록해야 합니다.
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DOKDO }}
+          projectId: dokdo-necut
+          channelId: live
+          entryPoint: ./dokdo-necut
