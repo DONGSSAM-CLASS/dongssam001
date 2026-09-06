@@ -1,0 +1,2 @@
+# PDF 파싱 스크립트(extract.py) 로컬 실행용. 배포물에는 포함되지 않는다.
+pdfplumber>=0.11

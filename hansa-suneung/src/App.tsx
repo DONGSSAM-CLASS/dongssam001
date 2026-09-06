@@ -2,6 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ExplorePage from './pages/ExplorePage';
 import HeatmapPage from './pages/HeatmapPage';
+import TeacherHome from './pages/teacher/TeacherHome';
+import VerifyPage from './pages/teacher/VerifyPage';
 import Placeholder from './pages/Placeholder';
 
 /**
@@ -24,7 +26,11 @@ export default function App() {
         <Route path="records" element={<Placeholder title="내 학습 기록" />} />
         <Route path="report" element={<Placeholder title="취약 단원 리포트" />} />
         <Route path="plan" element={<Placeholder title="D-day 학습 플랜" />} />
-        <Route path="teacher" element={<Placeholder title="교사용" />} />
+        <Route path="teacher" element={<TeacherHome />} />
+        <Route path="teacher/verify" element={<VerifyPage />} />
+        <Route path="teacher/project" element={<Placeholder title="수업 투사 모드" />} />
+        <Route path="teacher/worksheet" element={<Placeholder title="학습지 내보내기" />} />
+        <Route path="teacher/share" element={<Placeholder title="필터 공유(QR)" />} />
       </Route>
       <Route path="*" element={<Placeholder title="페이지를 찾을 수 없습니다" />} />
     </Routes>

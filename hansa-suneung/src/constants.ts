@@ -5,3 +5,15 @@ export const COPYRIGHT_FOOTER =
 // 평가원 수능 기출문제 게시판 (원본 확인 경로)
 export const KICE_BOARD_URL =
   'https://www.suneung.re.kr/boardCnts/list.do?boardID=1500234&m=0403&s=suneung';
+
+import type { ItemType } from './types/schema';
+
+// itemType 허용값 (프롬프트 4장)
+export const ITEM_TYPES: ItemType[] = [
+  '사료제시형',
+  '지도·시각자료형',
+  '인물형',
+  '연표·순서형',
+  '개념이해형',
+  '기타',
+];
