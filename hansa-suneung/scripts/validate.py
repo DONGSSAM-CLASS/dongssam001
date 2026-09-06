@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-scripts/validate.py — 배포 데이터 무결성 검사. 오류가 있으면 exit code 1 로 배포(빌드)를 막는다.
+scripts/validate.py — 배포 데이터 무결성 검사(Python 대체본). 오류가 있으면 exit code 1.
+
+주의: 빌드(npm run verify-data)는 이제 Python 없이 동작하도록 Node 판(scripts/validate.mjs)을 쓴다.
+이 파이썬 스크립트는 동일 검사의 대체 실행용이며, 두 파일의 검사 항목은 동일하게 유지할 것.
 
 검사 항목(프롬프트 6장):
   [오류] 존재하지 않는 unitIds 참조

@@ -44,7 +44,7 @@ Vite + React + TypeScript · Tailwind CSS · Noto Sans KR · react-router · qrc
 cd hansa-suneung
 npm install
 npm run dev          # 개발 서버 (데이터가 비어 있으면 data/_sample 예시로 확인 — 프로덕션 제외)
-npm run verify-data  # 데이터 무결성 검사 (scripts/validate.py)
+npm run verify-data  # 데이터 무결성 검사 (Node — scripts/validate.mjs, Python 불필요)
 npm run build        # verify-data → tsc → vite build (dist/ 생성)
 ```
 
@@ -101,7 +101,7 @@ src/
   types/schema.ts   데이터 모델 타입
 data/raw/           평가원 원본 PDF (로컬 전용, 커밋/배포 안 함)
 data/_sample/       개발용 예시 데이터([SAMPLE-예시데이터], DEV에서만 로드)
-scripts/            extract.py(파싱) · validate.py(검증)
+scripts/            extract.py(PDF 파싱·Python) · validate.mjs(검증·Node, 빌드 게이트) · validate.py(검증 Python 대체본)
 firebase.json .firebaserc   Hosting 배포 설정
 ```
 

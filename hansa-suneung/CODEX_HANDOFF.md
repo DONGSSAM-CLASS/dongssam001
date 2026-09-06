@@ -66,8 +66,9 @@ src/
                             WorksheetPage, SharePage, ProjectionPage}
 scripts/
   extract.py                data/raw/*.pdf → data/items.draft.json (topic/unitIds 비움, evidence 채움)
-  validate.py               무결성 검사(오류 시 exit 1로 배포 차단). npm run verify-data.
-  requirements.txt          pdfplumber
+  validate.mjs              무결성 검사(Node, 의존성 없음). npm run verify-data → build 게이트. Python 불필요.
+  validate.py               같은 검사의 Python 대체본(선택). 두 파일 검사 항목 동일 유지.
+  requirements.txt          pdfplumber (extract.py 전용)
 data/raw/                   평가원 원본 PDF (로컬 전용, .gitignore — 커밋/배포 안 함)
 data/_sample/               개발용 예시 문항([SAMPLE-] 접두어, DEV 전용)
 firebase.json .firebaserc   Hosting 배포 설정(public=dist, SPA rewrite, 캐시 헤더)
@@ -105,8 +106,8 @@ README.md                   사용/배포 안내
 cd hansa-suneung
 npm install
 npm run dev          # 개발 서버(데이터 비면 data/_sample 예시 오버레이 — 프로덕션 제외)
-npm run verify-data  # 데이터 무결성 검사(python scripts/validate.py)
-npm run build        # verify-data → tsc -b → vite build (dist/)
+npm run verify-data  # 데이터 무결성 검사(Node: scripts/validate.mjs, Python 불필요)
+npm run build        # verify-data → tsc -b → vite build (dist/). Python 없이 동작.
 npm run preview      # 프로덕션 미리보기
 ```
 타입/빌드는 항상 `npx tsc -b`로 0 에러 확인. 프로덕션 번들에 샘플 없음 확인: `ls dist/assets | grep -i sample`(비어야 정상).
