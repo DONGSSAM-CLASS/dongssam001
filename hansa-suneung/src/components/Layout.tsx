@@ -16,8 +16,10 @@ export default function Layout() {
   const { middleMode, setMiddleMode } = useSettings();
   return (
     <div className="flex min-h-screen flex-col">
-      <SampleBanner />
-      <header className="sticky top-0 z-10 border-b bg-white/95 backdrop-blur">
+      <div className="no-print">
+        <SampleBanner />
+      </div>
+      <header className="no-print sticky top-0 z-10 border-b bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5">
           <NavLink to="/" className="mr-2 flex flex-col leading-tight">
             <span className="text-base font-bold text-slate-900">한국사 수능 기출 단원 연동</span>
@@ -63,11 +65,11 @@ export default function Layout() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-4">
+      <main className="print-area mx-auto w-full max-w-6xl flex-1 px-4 py-4">
         <Outlet />
       </main>
 
-      <footer className="border-t bg-white px-4 py-3 text-center text-[11px] text-slate-500">
+      <footer className="no-print border-t bg-white px-4 py-3 text-center text-[11px] text-slate-500">
         {COPYRIGHT_FOOTER}
       </footer>
     </div>

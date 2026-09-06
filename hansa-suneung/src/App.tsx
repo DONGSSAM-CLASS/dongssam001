@@ -8,6 +8,9 @@ import ReportPage from './pages/ReportPage';
 import PlanPage from './pages/PlanPage';
 import TeacherHome from './pages/teacher/TeacherHome';
 import VerifyPage from './pages/teacher/VerifyPage';
+import WorksheetPage from './pages/teacher/WorksheetPage';
+import SharePage from './pages/teacher/SharePage';
+import ProjectionPage from './pages/teacher/ProjectionPage';
 import Placeholder from './pages/Placeholder';
 
 /**
@@ -32,10 +35,11 @@ export default function App() {
         <Route path="plan" element={<PlanPage />} />
         <Route path="teacher" element={<TeacherHome />} />
         <Route path="teacher/verify" element={<VerifyPage />} />
-        <Route path="teacher/project" element={<Placeholder title="수업 투사 모드" />} />
-        <Route path="teacher/worksheet" element={<Placeholder title="학습지 내보내기" />} />
-        <Route path="teacher/share" element={<Placeholder title="필터 공유(QR)" />} />
+        <Route path="teacher/worksheet" element={<WorksheetPage />} />
+        <Route path="teacher/share" element={<SharePage />} />
       </Route>
+      {/* 투사 모드는 전체화면(학생 네비게이션 없음) 전용 라우트 */}
+      <Route path="teacher/project" element={<ProjectionPage />} />
       <Route path="*" element={<Placeholder title="페이지를 찾을 수 없습니다" />} />
     </Routes>
   );

@@ -9,3 +9,22 @@
 body {
   @apply font-sans text-slate-800 bg-slate-50;
 }
+
+/* 인쇄(학습지 내보내기 — 기능 12): 화면 전용 요소를 감추고 흑백 인쇄에 맞춘다. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .print-area {
+    padding: 0 !important;
+  }
+  table {
+    page-break-inside: auto;
+  }
+  tr {
+    page-break-inside: avoid;
+  }
+}
