@@ -48,8 +48,11 @@ export default function ProjectionPage() {
 
   const goFullscreen = () => {
     const el = document.documentElement;
-    if (document.fullscreenElement) document.exitFullscreen();
-    else el.requestFullscreen?.();
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    } else {
+      el.requestFullscreen?.().catch(() => {});
+    }
   };
 
   return (
