@@ -3,13 +3,14 @@ import { COPYRIGHT_FOOTER } from '../constants';
 import { useSettings } from '../settings/SettingsContext';
 import SampleBanner from './SampleBanner';
 
+// middleOnly=false 인 항목은 수능 문항 세부(빈도·검색 등)를 다루므로 중학생 모드에서 숨긴다.
 const navItems = [
-  { to: '/', label: '단원 탐색', end: true },
-  { to: '/heatmap', label: '출제 빈도' },
-  { to: '/search', label: '검색' },
-  { to: '/records', label: '내 학습' },
-  { to: '/report', label: '취약 단원' },
-  { to: '/plan', label: 'D-day 플랜' },
+  { to: '/', label: '단원 탐색', end: true, showInMiddle: true },
+  { to: '/heatmap', label: '출제 빈도', showInMiddle: false },
+  { to: '/search', label: '검색', showInMiddle: false },
+  { to: '/records', label: '내 학습', showInMiddle: true },
+  { to: '/report', label: '취약 단원', showInMiddle: false },
+  { to: '/plan', label: 'D-day 플랜', showInMiddle: false },
 ];
 
 export default function Layout() {
@@ -26,7 +27,9 @@ export default function Layout() {
             <span className="text-[11px] text-slate-500">2022 개정 교육과정 연계</span>
           </NavLink>
           <nav className="flex flex-wrap items-center gap-1 text-sm">
-            {navItems.map((n) => (
+            {navItems
+              .filter((n) => !middleMode || n.showInMiddle)
+              .map((n) => (
               <NavLink
                 key={n.to}
                 to={n.to}

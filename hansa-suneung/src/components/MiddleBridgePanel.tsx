@@ -33,6 +33,24 @@ export default function MiddleBridgePanel({ unitId }: { unitId: string }) {
           <div className="text-xs font-semibold text-emerald-700">중학교 단원</div>
           <div className="text-base font-bold text-emerald-900">{m.msTitle}</div>
           <p className="mt-2 text-sm leading-relaxed text-emerald-900">{m.bridgeSummary}</p>
+          {m.hsUnitIds.length > 0 && (
+            <div className="mt-3">
+              <div className="text-xs font-semibold text-emerald-700">연결되는 고등학교 단원</div>
+              <div className="mt-1 flex flex-wrap gap-1.5">
+                {m.hsUnitIds.map((id) => {
+                  const hs = unitById.get(id);
+                  return (
+                    <span
+                      key={id}
+                      className="rounded-md border border-emerald-300 bg-white px-2 py-0.5 text-xs text-emerald-800"
+                    >
+                      {hs?.unit.title ?? id}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       ))}
     </div>
