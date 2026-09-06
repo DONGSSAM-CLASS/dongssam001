@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ExplorePage from './pages/ExplorePage';
+import HeatmapPage from './pages/HeatmapPage';
 import Placeholder from './pages/Placeholder';
 
 /**
@@ -18,7 +19,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<ExplorePage />} />
-        <Route path="heatmap" element={<Placeholder title="출제 빈도 히트맵" />} />
+        <Route path="heatmap" element={<HeatmapPage />} />
         <Route path="search" element={<Placeholder title="검색 · 역방향 탐색" />} />
         <Route path="records" element={<Placeholder title="내 학습 기록" />} />
         <Route path="report" element={<Placeholder title="취약 단원 리포트" />} />

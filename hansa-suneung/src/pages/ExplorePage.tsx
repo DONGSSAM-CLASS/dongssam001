@@ -8,7 +8,7 @@ import MiddleBridgePanel from '../components/MiddleBridgePanel';
 
 /** 단원 트리 탐색 + 문항 카드 (기능 1, 3). 선택 단원은 URL(?unit=)로 공유 가능. */
 export default function ExplorePage() {
-  const { unitById, itemsForUnit } = useData();
+  const { unitById, itemsForUnit, examById } = useData();
   const { middleMode } = useSettings();
   const [params, setParams] = useSearchParams();
   const selectedId = params.get('unit');
@@ -19,8 +19,21 @@ export default function ExplorePage() {
     setParams(next, { replace: true });
   };
 
+  const yearParam = params.get('year');
+  const yearFilter = yearParam ? Number(yearParam) : null;
+
   const selected = selectedId ? unitById.get(selectedId) : null;
-  const items = selectedId ? itemsForUnit(selectedId, { verifiedOnly: true }) : [];
+  const allItems = selectedId ? itemsForUnit(selectedId, { verifiedOnly: true }) : [];
+  const items =
+    yearFilter != null
+      ? allItems.filter((it) => examById.get(it.examId)?.schoolYear === yearFilter)
+      : allItems;
+
+  const clearYear = () => {
+    const next = new URLSearchParams(params);
+    next.delete('year');
+    setParams(next, { replace: true });
+  };
 
   return (
     <div className="grid gap-4 md:grid-cols-[300px_1fr]">
@@ -60,7 +73,18 @@ export default function ExplorePage() {
               </div>
             ) : (
               <>
-                <p className="mb-2 text-sm text-slate-500">기출 주제 {items.length}건</p>
+                <div className="mb-2 flex items-center gap-2">
+                  <p className="text-sm text-slate-500">기출 주제 {items.length}건</p>
+                  {yearFilter != null && (
+                    <button
+                      type="button"
+                      onClick={clearYear}
+                      className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 hover:bg-blue-200"
+                    >
+                      {yearFilter}학년도만 보기 ✕
+                    </button>
+                  )}
+                </div>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {items.map((it) => (
                     <ItemCard key={it.itemId} item={it} />
