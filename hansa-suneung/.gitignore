@@ -21,3 +21,7 @@ firebase-debug.log
 
 # TS incremental build info
 *.tsbuildinfo
+
+# Python
+__pycache__/
+*.pyc
