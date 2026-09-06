@@ -3,6 +3,9 @@ import Layout from './components/Layout';
 import ExplorePage from './pages/ExplorePage';
 import HeatmapPage from './pages/HeatmapPage';
 import SearchPage from './pages/SearchPage';
+import RecordsPage from './pages/RecordsPage';
+import ReportPage from './pages/ReportPage';
+import PlanPage from './pages/PlanPage';
 import TeacherHome from './pages/teacher/TeacherHome';
 import VerifyPage from './pages/teacher/VerifyPage';
 import Placeholder from './pages/Placeholder';
@@ -24,9 +27,9 @@ export default function App() {
         <Route index element={<ExplorePage />} />
         <Route path="heatmap" element={<HeatmapPage />} />
         <Route path="search" element={<SearchPage />} />
-        <Route path="records" element={<Placeholder title="내 학습 기록" />} />
-        <Route path="report" element={<Placeholder title="취약 단원 리포트" />} />
-        <Route path="plan" element={<Placeholder title="D-day 학습 플랜" />} />
+        <Route path="records" element={<RecordsPage />} />
+        <Route path="report" element={<ReportPage />} />
+        <Route path="plan" element={<PlanPage />} />
         <Route path="teacher" element={<TeacherHome />} />
         <Route path="teacher/verify" element={<VerifyPage />} />
         <Route path="teacher/project" element={<Placeholder title="수업 투사 모드" />} />

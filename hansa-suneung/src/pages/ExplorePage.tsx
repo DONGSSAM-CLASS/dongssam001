@@ -5,6 +5,7 @@ import { unitPath } from '../lib/units';
 import UnitTree from '../components/UnitTree';
 import ItemCard from '../components/ItemCard';
 import MiddleBridgePanel from '../components/MiddleBridgePanel';
+import UnitStatusControl from '../components/UnitStatusControl';
 
 /** 단원 트리 탐색 + 문항 카드 (기능 1, 3). 선택 단원은 URL(?unit=)로 공유 가능. */
 export default function ExplorePage() {
@@ -53,7 +54,13 @@ export default function ExplorePage() {
           <div>
             <div className="mb-3">
               <p className="text-xs text-slate-500">{unitPath(unitById, selected.unit.id)}</p>
-              <h1 className="text-xl font-bold text-slate-900">{selected.unit.title}</h1>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h1 className="text-xl font-bold text-slate-900">{selected.unit.title}</h1>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-slate-400">내 학습</span>
+                  <UnitStatusControl unitId={selected.unit.id} />
+                </div>
+              </div>
               {selected.unit.keywords && selected.unit.keywords.length > 0 && (
                 <div className="mt-1 flex flex-wrap gap-1">
                   {selected.unit.keywords.map((k) => (
