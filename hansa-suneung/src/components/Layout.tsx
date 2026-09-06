@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { COPYRIGHT_FOOTER } from '../constants';
+import { COPYRIGHT_FOOTER, KICE_BOARD_URL } from '../constants';
 import { useSettings } from '../settings/SettingsContext';
 import SampleBanner from './SampleBanner';
 
@@ -73,7 +73,17 @@ export default function Layout() {
       </main>
 
       <footer className="no-print border-t bg-white px-4 py-3 text-center text-[11px] text-slate-500">
-        {COPYRIGHT_FOOTER}
+        <p>
+          <a
+            href={KICE_BOARD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-blue-600 hover:underline"
+          >
+            한국교육과정평가원 수능 기출문제 게시판 바로가기 ↗
+          </a>
+        </p>
+        <p className="mt-1">{COPYRIGHT_FOOTER}</p>
       </footer>
     </div>
   );
