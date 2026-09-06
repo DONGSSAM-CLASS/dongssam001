@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ExplorePage from './pages/ExplorePage';
 import HeatmapPage from './pages/HeatmapPage';
+import SearchPage from './pages/SearchPage';
 import TeacherHome from './pages/teacher/TeacherHome';
 import VerifyPage from './pages/teacher/VerifyPage';
 import Placeholder from './pages/Placeholder';
@@ -22,7 +23,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<ExplorePage />} />
         <Route path="heatmap" element={<HeatmapPage />} />
-        <Route path="search" element={<Placeholder title="검색 · 역방향 탐색" />} />
+        <Route path="search" element={<SearchPage />} />
         <Route path="records" element={<Placeholder title="내 학습 기록" />} />
         <Route path="report" element={<Placeholder title="취약 단원 리포트" />} />
         <Route path="plan" element={<Placeholder title="D-day 학습 플랜" />} />
