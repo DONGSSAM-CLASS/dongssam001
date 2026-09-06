@@ -1,0 +1,35 @@
+[
+  {
+    "examId": "2024-CSAT",
+    "schoolYear": 2024,
+    "type": "수능",
+    "subject": "한국사",
+    "boardUrl": "https://www.suneung.re.kr/boardCnts/list.do?boardID=1500234&m=0403&s=suneung",
+    "questionPdfUrl": null,
+    "answerPdfUrl": null,
+    "totalItems": 20,
+    "verified": false
+  },
+  {
+    "examId": "2025-CSAT",
+    "schoolYear": 2025,
+    "type": "수능",
+    "subject": "한국사",
+    "boardUrl": "https://www.suneung.re.kr/boardCnts/list.do?boardID=1500234&m=0403&s=suneung",
+    "questionPdfUrl": null,
+    "answerPdfUrl": null,
+    "totalItems": 20,
+    "verified": false
+  },
+  {
+    "examId": "2026-CSAT",
+    "schoolYear": 2026,
+    "type": "수능",
+    "subject": "한국사",
+    "boardUrl": "https://www.suneung.re.kr/boardCnts/list.do?boardID=1500234&m=0403&s=suneung",
+    "questionPdfUrl": null,
+    "answerPdfUrl": null,
+    "totalItems": 20,
+    "verified": false
+  }
+]

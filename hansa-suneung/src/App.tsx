@@ -1,26 +1,31 @@
-import { COPYRIGHT_FOOTER } from './constants';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import ExplorePage from './pages/ExplorePage';
+import Placeholder from './pages/Placeholder';
 
 /**
- * 1단계 골격 화면.
- * 실제 기능(단원 트리, 히트맵, 검색 등)은 이후 단계에서 추가한다.
+ * 화면 라우팅.
+ *  /            단원 탐색 + 문항 카드 (기능 1, 3)
+ *  /heatmap     출제 빈도 히트맵 (기능 2)          [3단계]
+ *  /search      검색 + 역방향 탐색 (기능 4, 5)     [5단계]
+ *  /records     내 학습 기록 (기능 6)              [6단계]
+ *  /report      취약 단원 리포트 (기능 7)          [6단계]
+ *  /plan        D-day 학습 플랜 (기능 8)           [6단계]
+ *  /teacher     교사용 홈 · 투사/공유/인쇄/검수    [4·7단계]
  */
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="border-b bg-white px-4 py-3">
-        <h1 className="text-lg font-bold">한국사 수능 기출 단원 연동</h1>
-        <p className="text-sm text-slate-500">
-          2022 개정 교육과정 연계 · 학습용 메타데이터
-        </p>
-      </header>
-
-      <main className="flex-1 p-4">
-        <p className="text-slate-600">프로젝트 골격 준비 완료 (1단계).</p>
-      </main>
-
-      <footer className="border-t bg-white px-4 py-3 text-xs text-slate-500">
-        {COPYRIGHT_FOOTER}
-      </footer>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<ExplorePage />} />
+        <Route path="heatmap" element={<Placeholder title="출제 빈도 히트맵" />} />
+        <Route path="search" element={<Placeholder title="검색 · 역방향 탐색" />} />
+        <Route path="records" element={<Placeholder title="내 학습 기록" />} />
+        <Route path="report" element={<Placeholder title="취약 단원 리포트" />} />
+        <Route path="plan" element={<Placeholder title="D-day 학습 플랜" />} />
+        <Route path="teacher" element={<Placeholder title="교사용" />} />
+      </Route>
+      <Route path="*" element={<Placeholder title="페이지를 찾을 수 없습니다" />} />
+    </Routes>
   );
 }
