@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# build output (완전한 정적 사이트 산출물)
+dist/
+
+# 저작권: 평가원 원본 PDF 및 추출 근거 초안은 커밋하지 않는다
+data/raw/*.pdf
+data/**/items.draft.json
+data/**/*.report.txt
+
+# 로컬/에디터
+.DS_Store
+*.local
+.vscode/
+.idea/
+
+# Firebase
+.firebase/
+firebase-debug.log
+
+# TS incremental build info
+*.tsbuildinfo
