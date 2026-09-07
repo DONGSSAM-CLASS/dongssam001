@@ -61,6 +61,9 @@ export function render(app) {
         이 앱은 어떤 개인정보도 수집·전송하지 않습니다.<br>
         모든 기록은 사용 중인 기기에만 저장됩니다.
       </div>
+      <p style="margin:var(--space-3) 0 0;font-size:var(--font-size-xs);color:var(--ink-500);">
+        제작자 : 동쌤(김동은 선생님)
+      </p>
     </div>
   `;
 
