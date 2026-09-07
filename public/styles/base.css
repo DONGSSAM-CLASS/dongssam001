@@ -110,6 +110,13 @@ select {
 .screen-title {
   margin-bottom: var(--space-6);
   text-align: center;
+  padding: 0 var(--space-10, 40px);
+}
+
+@media (max-width: 480px) {
+  .screen-title {
+    padding: 0 var(--space-4);
+  }
 }
 
 .screen-subtitle {

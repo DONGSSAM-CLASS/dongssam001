@@ -128,7 +128,7 @@ export function createPauseButton() {
       <rect x="5.5" y="5" width="2" height="6" rx="0.5"/>
       <rect x="8.5" y="5" width="2" height="6" rx="0.5"/>
     </svg>
-    잠시 멈추기
+    <span class="pause-btn__label">잠시 멈추기</span>
   `;
   btn.addEventListener('click', showBreathingModal);
   document.body.appendChild(btn);
