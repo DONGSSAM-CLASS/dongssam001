@@ -27,7 +27,7 @@ export function showModal(options) {
   if (title) overlay.setAttribute('aria-label', title);
 
   const modal = document.createElement('div');
-  modal.className = 'modal';
+  modal.className = 'app-modal';
 
   if (title) {
     const h = document.createElement('h2');

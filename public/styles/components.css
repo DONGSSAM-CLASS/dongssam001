@@ -236,7 +236,7 @@ a svg {
   animation: fadeIn var(--transition-fast);
 }
 
-.modal {
+.app-modal {
   background: #fffafd;
   border-radius: var(--radius-lg);
   padding: var(--space-8);
@@ -415,7 +415,7 @@ a svg {
     padding: var(--space-4) var(--space-3);
   }
 
-  .modal {
+  .app-modal {
     padding: var(--space-5);
   }
 
