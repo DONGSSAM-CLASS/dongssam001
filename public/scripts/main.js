@@ -1,6 +1,7 @@
 import { registerRoute, initRouter } from './router.js';
 import { loadState } from './state.js';
 import { createPauseButton } from './ui.js';
+import { glossaryMap } from '../data/glossary.js';
 
 import { render as renderIntro } from './screens/s0-intro.js';
 import { render as renderCheckin } from './screens/s1-checkin.js';
@@ -16,6 +17,8 @@ import { render as renderGlossary } from './screens/s10-glossary.js';
 import { render as renderFactcheck } from './screens/s11-factcheck.js';
 
 function boot() {
+  window.__glossaryData = glossaryMap;
+
   loadState();
 
   registerRoute('#/', renderIntro);
