@@ -143,6 +143,7 @@ a svg {
 .chip {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   padding: var(--space-2) var(--space-4);
   border: 1px solid var(--stone-200);
   border-radius: 999px;
@@ -254,6 +255,7 @@ a svg {
 
 .modal__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-6);
   justify-content: flex-end;
@@ -427,7 +429,12 @@ a svg {
   }
 
   .btn {
+    min-height: 44px;
     padding: var(--space-3) var(--space-4);
     font-size: var(--font-size-sm);
+  }
+
+  .modal__actions .btn {
+    flex: 1 1 120px;
   }
 }

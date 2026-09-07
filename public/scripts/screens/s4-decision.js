@@ -50,7 +50,7 @@ export function render(app, params) {
       </section>
 
       <section id="speakers-section" style="margin-bottom:var(--space-4);">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);">
+        <div class="speaker-columns" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);">
           ${node.speakers.map(sp => `
             <div class="card" style="padding:var(--space-3);">
               <p style="font-weight:600;font-size:var(--font-size-sm);margin-bottom:var(--space-1);">${sp.name}</p>

@@ -44,7 +44,7 @@ export function render(app) {
         아래 특징 카드를 아테네 또는 스파르타 쪽으로 배치해 주세요.
       </p>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-bottom:var(--space-4);">
+      <div class="comparison-columns" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-bottom:var(--space-4);">
         <div class="card card--athens" style="text-align:center;padding:var(--space-3);">
           <strong style="color:var(--athens);">아테네 (민주정)</strong>
           <div id="drop-athens" class="drop-zone" style="min-height:40px;margin-top:var(--space-2);"></div>
