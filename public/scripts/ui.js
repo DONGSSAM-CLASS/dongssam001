@@ -123,15 +123,12 @@ export function createPauseButton() {
   btn.className = 'pause-btn';
   btn.setAttribute('aria-label', '잠시 멈추기');
   btn.innerHTML = `
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-      <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/>
-      <rect x="5.5" y="5" width="2" height="6" rx="0.5"/>
-      <rect x="8.5" y="5" width="2" height="6" rx="0.5"/>
-    </svg>
+    <i data-lucide="circle-pause"></i>
     <span class="pause-btn__label">잠시 멈추기</span>
   `;
   btn.addEventListener('click', showBreathingModal);
   document.body.appendChild(btn);
+  if (window.lucide) window.lucide.createIcons({ icons: window.lucide.icons, attrs: { 'aria-hidden': 'true', 'stroke-width': 2 } });
 }
 
 export function removePauseButton() {
@@ -162,8 +159,8 @@ export function createUtilityBar() {
   bar.className = 'utility-bar';
   bar.setAttribute('aria-label', '유틸리티 메뉴');
   bar.innerHTML = `
-    <a href="#/">시작 화면</a>
-    <a href="#/glossary">용어 사전</a>
+    <a href="#/"><i data-lucide="house"></i> 시작 화면</a>
+    <a href="#/glossary"><i data-lucide="book-open"></i> 용어 사전</a>
   `;
   return bar;
 }

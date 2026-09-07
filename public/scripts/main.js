@@ -1,9 +1,9 @@
-import { registerRoute, initRouter } from './router.js';
+import { registerRoute, initRouter } from './router.js?design-1';
 import { loadState } from './state.js';
-import { createPauseButton } from './ui.js';
+import { createPauseButton } from './ui.js?design-1';
 import { glossaryMap } from '../data/glossary.js';
 
-import { render as renderIntro } from './screens/s0-intro.js';
+import { render as renderIntro } from './screens/s0-intro.js?design-1';
 import { render as renderCheckin } from './screens/s1-checkin.js';
 import { render as renderSources } from './screens/s2-sources.js';
 import { render as renderCompare } from './screens/s3-compare.js';

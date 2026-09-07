@@ -5,6 +5,7 @@
 - 이 앱은 Firebase Hosting으로 정적 파일만 제공합니다.
 - Firebase SDK, Authentication, Firestore, Analytics를 사용하지 않습니다.
 - 학생의 답변과 학습 기록은 브라우저 `localStorage`에만 저장됩니다.
+- 디자인 라이브러리와 글꼴은 앱 파일에 함께 포함해 제공합니다.
 - 앱 코드에는 외부 전송 기능이 없습니다.
 - 별명은 선택용 화면 이름이며 실명, 학번, 학교명, 연락처를 입력받지 않습니다.
 

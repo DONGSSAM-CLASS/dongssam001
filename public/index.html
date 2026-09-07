@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="cupcake">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +8,13 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#2E6E8E">
-  <link rel="stylesheet" href="/styles/tokens.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/components.css">
-  <link rel="stylesheet" href="/styles/print.css">
+  <link rel="stylesheet" href="/vendor/daisyui.css?v=design-1">
+  <link rel="stylesheet" href="/vendor/daisyui-themes.css?v=design-1">
+  <link rel="stylesheet" href="/styles/pretendard.css?v=design-1">
+  <link rel="stylesheet" href="/styles/tokens.css?v=design-1">
+  <link rel="stylesheet" href="/styles/base.css?v=design-1">
+  <link rel="stylesheet" href="/styles/components.css?v=design-1">
+  <link rel="stylesheet" href="/styles/print.css?v=design-1">
   <style>
     @keyframes breathe {
       0%   { transform: scale(1);   opacity: 0.6; }
@@ -20,9 +23,11 @@
       100% { transform: scale(1);   opacity: 0.6; }
     }
   </style>
+  <script src="/vendor/tailwind-browser.js?v=design-1"></script>
+  <script src="/vendor/lucide.js?v=design-1" defer></script>
 </head>
 <body>
   <div id="app"></div>
-  <script type="module" src="/scripts/main.js"></script>
+  <script type="module" src="/scripts/main.js?v=design-1"></script>
 </body>
 </html>

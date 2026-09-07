@@ -65,6 +65,10 @@ function handleRouteChange() {
       </div>
     `;
   }
+
+  if (window.lucide) {
+    window.lucide.createIcons({ icons: window.lucide.icons, attrs: { 'aria-hidden': 'true', 'stroke-width': 2 } });
+  }
 }
 
 export function initRouter() {

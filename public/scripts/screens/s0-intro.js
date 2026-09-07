@@ -26,6 +26,9 @@ export function render(app) {
   app.innerHTML = `
     <div class="screen" id="screen-intro" style="text-align:center;">
       ${agoraSvg()}
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-[#55BFC4] shadow-sm">
+        <i data-lucide="sparkles"></i> 역사 탐구·가상 의사결정
+      </div>
       <h1 class="screen-title" style="margin-top:var(--space-6);">아고라의 딜레마</h1>
       <p class="screen-subtitle" style="margin:var(--space-2) auto var(--space-6);">너의 한 표가 폴리스의 운명을 바꾼다</p>
 
@@ -45,13 +48,13 @@ export function render(app) {
           ${hasExisting ? `<strong>${state.nickname}</strong>(으)로 진행 중인 기록이 있습니다.` : ''}
         </p>
         <div style="display:flex;flex-direction:column;gap:var(--space-3);align-items:center;">
-          <button class="btn btn--primary" id="btn-resume">내 기록 이어하기</button>
-          <button class="btn btn--secondary btn--sm" id="btn-new">새로 시작하기</button>
+          <button class="btn btn--primary" id="btn-resume"><i data-lucide="play"></i> 내 기록 이어하기</button>
+          <button class="btn btn--secondary btn--sm" id="btn-new"><i data-lucide="rotate-ccw"></i> 새로 시작하기</button>
         </div>
       </div>
 
       <div style="margin-top:var(--space-8);">
-        <a href="#/teacher" style="font-size:var(--font-size-sm);color:var(--ink-500);">교사용 화면</a>
+        <a href="#/teacher" style="font-size:var(--font-size-sm);color:var(--ink-500);"><i data-lucide="graduation-cap"></i> 교사용 화면</a>
       </div>
 
       <div class="privacy-notice">
