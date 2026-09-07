@@ -12,9 +12,9 @@ function createDefaultState() {
     sourceNotes: {},
     compare: { placements: {}, openAnswer: '' },
     decisions: {},
-    perspectives: { p1: '', p2: '', p3: '', p4: '' },
-    bias: {},
-    declaration: { s1: '', s2a: '', s2b: '', s3: '', s4: '' },
+    perspectives: {},
+    biasCheck: {},
+    declaration: {},
     progress: { lastScreen: '', completed: [] }
   };
 }

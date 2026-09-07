@@ -29,6 +29,13 @@
     break-inside: avoid;
   }
 
+  #screen-declaration .screen-title,
+  #screen-declaration .screen-subtitle,
+  #screen-declaration #sentence-inputs,
+  #screen-declaration #declaration-actions {
+    display: none !important;
+  }
+
   .declaration-card {
     border: 2px solid #666;
     padding: 24pt;

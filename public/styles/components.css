@@ -370,6 +370,15 @@
   background: var(--olive);
 }
 
+.declaration-card {
+  border: 2px solid var(--olive);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  background: var(--stone-50, #fafaf8);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
 @media (max-width: 480px) {
   .screen {
     padding: var(--space-4) var(--space-3);
