@@ -116,7 +116,8 @@ export function render(app) {
         <div style="margin-top:var(--space-3);">
           <ul style="font-size:var(--font-size-sm);line-height:1.8;padding-left:var(--space-4);">
             <li>모든 데이터는 학생 기기의 localStorage에만 저장됩니다.</li>
-            <li>외부 서버로 전송되는 정보가 없습니다.</li>
+            <li>학생의 답변은 외부 서버로 전송되지 않습니다.</li>
+            <li>Hosting 접속 로그는 서비스 제공을 위해 처리될 수 있습니다.</li>
             <li>이름, 학번 등 개인식별정보를 수집하지 않습니다.</li>
             <li>닉네임은 익명으로 자동 생성됩니다.</li>
             <li>D5(밀로스) 결과 제시 후 자동으로 호흡 활동이 나타납니다.</li>
