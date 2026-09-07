@@ -1,0 +1,16 @@
+{
+  "name": "아고라의 딜레마",
+  "short_name": "아고라",
+  "description": "K-SEL 기반 펠로폰네소스 전쟁사 탐구·가상 의사결정 웹앱",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F4EE",
+  "theme_color": "#2E6E8E",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

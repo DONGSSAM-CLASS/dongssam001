@@ -1,0 +1,71 @@
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  .pause-btn,
+  .utility-bar,
+  .privacy-notice,
+  .btn,
+  .progress-bar,
+  .modal-overlay,
+  .toast,
+  nav,
+  .step-indicator {
+    display: none !important;
+  }
+
+  .screen {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .declaration-card {
+    border: 2px solid #666;
+    padding: 24pt;
+    margin: 0 auto;
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  .declaration-card h2 {
+    text-align: center;
+    margin-bottom: 16pt;
+  }
+
+  .declaration-line {
+    border-bottom: 1px solid #999;
+    padding: 8pt 0;
+    margin-bottom: 8pt;
+    min-height: 24pt;
+  }
+
+  .declaration-footer {
+    margin-top: 24pt;
+    text-align: right;
+    font-style: italic;
+  }
+
+  @page {
+    margin: 2cm;
+    size: A4;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .badge {
+    border: 1px solid #999;
+  }
+}
