@@ -231,6 +231,8 @@ export interface GameProgressDoc {
   attempts: Record<string, number>;
   /** 획득 배지 라벨 목록 */
   badges: string[];
+  /** 서술형 소감 (키 → 한 문장 소감). 예: epilogue */
+  reflections?: Record<string, string>;
   /** 누적 점수 */
   score: number;
   /** 현재 진행 중(또는 다음에 열) 챕터 id */

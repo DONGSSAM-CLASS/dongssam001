@@ -1,13 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   BadgeCheck,
   BookOpen,
   CheckCircle2,
+  ChevronRight,
   GraduationCap,
   Home,
   Lightbulb,
+  NotebookPen,
+  PenLine,
   RotateCcw,
   Search,
   Trophy,
@@ -17,10 +20,12 @@ import { useAuthStore } from '@/store/authStore';
 import {
   completeChapter,
   loadProgress,
+  saveReflection,
   type GameContext,
 } from '@/lib/gameService';
 import type { GameProgressDoc } from '@/types/firestore';
 import { chapters, totalPoints } from '@/game/story';
+import { chapterTerms, glossary } from '@/game/glossary';
 import type { Chapter, Level } from '@/game/types';
 import { CinematicScene } from '@/game/scenes/CinematicScene';
 import { DialogueLine } from '@/game/components/DialogueLine';
@@ -34,6 +39,7 @@ interface ProgressLike {
   answers: Record<string, string[]>;
   attempts: Record<string, number>;
   badges: string[];
+  reflections: Record<string, string>;
   score: number;
   currentChapter: string;
 }
@@ -41,7 +47,7 @@ interface ProgressLike {
 type Phase = 'briefing' | 'quiz' | 'result';
 
 function freshProgress(level: Level): ProgressLike {
-  return { level, completed: [], answers: {}, attempts: {}, badges: [], score: 0, currentChapter: chapters[0].id };
+  return { level, completed: [], answers: {}, attempts: {}, badges: [], reflections: {}, score: 0, currentChapter: chapters[0].id };
 }
 
 function sameSet(a: string[], b: string[]) {
@@ -69,6 +75,7 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
   const [prog, setProg] = useState<ProgressLike>(() => freshProgress('middle'));
   const [loading, setLoading] = useState(mode === 'student');
   const [saving, setSaving] = useState(false);
+  const [viewIndex, setViewIndex] = useState(0);
 
   const [phase, setPhase] = useState<Phase>('briefing');
   const [picked, setPicked] = useState<string[]>([]);
@@ -93,9 +100,13 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
           answers: p.answers ?? {},
           attempts: p.attempts ?? {},
           badges: p.badges ?? [],
+          reflections: p.reflections ?? {},
           score: p.score ?? 0,
           currentChapter: p.currentChapter ?? chapters[0].id,
         });
+        // 저장된 진행 위치에서 이어서 시작
+        const idx = p.currentChapter === 'done' ? chapters.length : chapters.findIndex((c) => c.id === p.currentChapter);
+        setViewIndex(idx < 0 ? 0 : idx);
       })
       .finally(() => alive && setLoading(false));
     return () => {
@@ -104,23 +115,19 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ctx?.classId, ctx?.number, mode]);
 
-  const currentIndex = useMemo(() => {
-    if (prog.currentChapter === 'done') return chapters.length;
-    const i = chapters.findIndex((c) => c.id === prog.currentChapter);
-    return i < 0 ? chapters.length : i;
-  }, [prog.currentChapter]);
+  // 화면에 보여 줄 챕터 인덱스. 저장된 진행(currentChapter)과 분리해, 정답 직후에도
+  // 해설(result) 화면을 건너뛰지 않고 학생이 '다음 미션'을 누를 때만 넘어가게 한다.
+  const chapter: Chapter | undefined = chapters[viewIndex];
+  const isDone = viewIndex >= chapters.length;
 
-  const chapter: Chapter | undefined = chapters[currentIndex];
-  const isDone = currentIndex >= chapters.length;
-
-  // 챕터가 바뀌면 화면 상태 초기화(활성 챕터 인덱스에 맞춰 로컬 UI 를 동기화)
+  // 표시 챕터가 바뀌면 화면 상태 초기화(활성 챕터에 맞춰 로컬 UI 동기화)
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPhase('briefing');
     setPicked([]);
     setJudged(null);
     setShowHint(false);
-  }, [currentIndex]);
+  }, [viewIndex]);
 
   function togglePick(id: string, multi: boolean) {
     if (judged) return;
@@ -137,8 +144,8 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
       setShowHint(true);
       return;
     }
-    // 정답 → 진행 확정
-    const nextChapter = chapters[currentIndex + 1]?.id ?? 'done';
+    // 정답 → 진행 확정(저장은 다음 챕터로 표시하되, 화면은 해설을 먼저 보여 준다)
+    const nextChapter = chapters[viewIndex + 1]?.id ?? 'done';
     const alreadyDone = prog.completed.includes(chapter.id);
     const earned = alreadyDone ? 0 : chapter.quest.points;
     const nextProg: ProgressLike = {
@@ -173,12 +180,9 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
   }
 
   function goNext() {
-    // currentChapter 가 이미 다음으로 바뀌었으므로 useEffect 가 화면을 초기화한다.
-    // 마지막이면 currentIndex 가 length 가 되어 완료 화면이 뜬다.
-    setPhase('briefing');
-    setJudged(null);
-    setPicked([]);
-    setShowHint(false);
+    // 해설을 확인한 뒤 다음 챕터로. viewIndex 가 바뀌면 useEffect 가 화면을 초기화하고,
+    // 마지막이면 viewIndex 가 length 가 되어 완료 화면이 뜬다.
+    setViewIndex((v) => v + 1);
   }
 
   if (loading) {
@@ -195,7 +199,7 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
       <div className="pointer-events-none fixed right-3 top-3 z-30 sm:right-4 sm:top-4">
         <MissionStatusPanel
           chapters={chapters}
-          currentIndex={isDone ? chapters.length - 1 : currentIndex}
+          currentIndex={isDone ? chapters.length - 1 : viewIndex}
           completedIds={prog.completed}
           score={prog.score}
           badges={prog.badges}
@@ -209,7 +213,10 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
           <select
             className="select select-xs bg-base-100"
             value={prog.level}
-            onChange={(e) => setProg(freshProgress(e.target.value as Level))}
+            onChange={(e) => {
+              setProg(freshProgress(e.target.value as Level));
+              setViewIndex(0);
+            }}
             aria-label="난이도"
           >
             <option value="middle">중등</option>
@@ -219,7 +226,16 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
       )}
 
       {isDone ? (
-        <CompletionScreen prog={prog} mode={mode} onReplay={() => setProg((p) => ({ ...freshProgress(p.level) }))} />
+        <CompletionScreen
+          prog={prog}
+          mode={mode}
+          ctx={ctx}
+          onSaveReflection={(text) => setProg((p) => ({ ...p, reflections: { ...p.reflections, epilogue: text } }))}
+          onReplay={() => {
+            setProg((p) => freshProgress(p.level));
+            setViewIndex(0);
+          }}
+        />
       ) : chapter ? (
         <main className="mx-auto max-w-3xl px-4 pb-24 pt-4 sm:pt-6">
           {/* 시네마틱 헤더 */}
@@ -256,7 +272,7 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
           )}
 
           {phase === 'result' && (
-            <ResultView chapter={chapter} level={prog.level} isLast={currentIndex >= chapters.length - 1} onNext={goNext} />
+            <ResultView chapter={chapter} level={prog.level} isLast={viewIndex >= chapters.length - 1} onNext={goNext} />
           )}
         </main>
       ) : null}
@@ -292,6 +308,8 @@ function BriefingView({ chapter, level, onStart }: { chapter: Chapter; level: Le
           </div>
         ))}
 
+      <ClueNotebook chapterId={chapter.id} level={level} />
+
       <div className="rounded-box border border-primary/20 bg-base-300/40 px-4 py-2 text-[11px] text-base-content/55" style={{ wordBreak: 'keep-all' }}>
         <b className="text-primary/80">교육과정 연계</b> · {chapter.curriculum}
       </div>
@@ -299,6 +317,37 @@ function BriefingView({ chapter, level, onStart }: { chapter: Chapter; level: Le
       <button className="btn btn-primary w-full gap-2" onClick={onStart}>
         <Search className="size-4" aria-hidden /> 단서를 모았다 — 추리 시작
       </button>
+    </div>
+  );
+}
+
+// 단서 수첩 — 챕터별 핵심 용어를 쉬운 말로 풀어 준다
+function ClueNotebook({ chapterId, level }: { chapterId: string; level: Level }) {
+  const terms = chapterTerms[chapterId] ?? [];
+  if (terms.length === 0) return null;
+  return (
+    <div className="rounded-box border border-secondary/30 bg-base-200/50 p-4">
+      <div className="mb-2 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-secondary">
+        <NotebookPen className="size-4" aria-hidden /> 단서 수첩 · 핵심 용어
+      </div>
+      <div className="space-y-1.5">
+        {terms.map((key) => {
+          const e = glossary[key];
+          if (!e) return null;
+          return (
+            <details key={key} className="group rounded-md bg-base-300/50 px-3 py-2">
+              <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-base-content/90">
+                <span className="text-primary">{e.term}</span>
+                {e.hanja && <span className="text-[11px] text-base-content/45">{e.hanja}</span>}
+                <ChevronRight className="ml-auto size-4 text-base-content/40 transition-transform group-open:rotate-90" aria-hidden />
+              </summary>
+              <p className="mt-1.5 text-[13px] leading-relaxed text-base-content/80" style={{ wordBreak: 'keep-all' }}>
+                {e.def[level]}
+              </p>
+            </details>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -430,8 +479,36 @@ function ResultView({ chapter, level, isLast, onNext }: { chapter: Chapter; leve
 }
 
 // ───────────────────────── 완료 ─────────────────────────
-function CompletionScreen({ prog, mode, onReplay }: { prog: ProgressLike; mode: 'student' | 'preview'; onReplay: () => void }) {
+function CompletionScreen({
+  prog,
+  mode,
+  ctx,
+  onSaveReflection,
+  onReplay,
+}: {
+  prog: ProgressLike;
+  mode: 'student' | 'preview';
+  ctx: GameContext | null;
+  onSaveReflection: (text: string) => void;
+  onReplay: () => void;
+}) {
   const navigate = useNavigate();
+  const [reflection, setReflection] = useState(prog.reflections.epilogue ?? '');
+  const [savedText, setSavedText] = useState(prog.reflections.epilogue ?? '');
+  const [savingR, setSavingR] = useState(false);
+  const dirty = reflection.trim() !== savedText.trim();
+
+  async function saveR() {
+    setSavingR(true);
+    try {
+      if (mode === 'student' && ctx) await saveReflection(ctx, 'epilogue', reflection);
+      onSaveReflection(reflection.trim());
+      setSavedText(reflection.trim());
+    } finally {
+      setSavingR(false);
+    }
+  }
+
   return (
     <main className="mx-auto flex min-h-[100dvh] max-w-2xl flex-col items-center justify-center px-5 py-16 text-center">
       <div className="relative mb-6 w-full overflow-hidden rounded-box border border-primary/30 cinematic-letterbox">
@@ -462,6 +539,31 @@ function CompletionScreen({ prog, mode, onReplay }: { prog: ProgressLike; mode: 
             <BadgeIcon name={c.badge.icon} className="size-4" />
           </span>
         ))}
+      </div>
+
+      {/* 한 문장 소감(서술형) */}
+      <div className="mt-6 w-full max-w-lg rounded-box border border-primary/30 bg-base-200/70 p-4 text-left">
+        <label htmlFor="reflection" className="flex items-center gap-1.5 text-sm font-bold text-primary">
+          <PenLine className="size-4" aria-hidden /> 오늘의 한 문장
+        </label>
+        <p className="mt-1 text-xs text-base-content/60" style={{ wordBreak: 'keep-all' }}>
+          당신이 새긴 ‘아직 오지 않은 광복’의 의미를 한 문장으로 적어 보세요. {mode === 'preview' && '(미리보기: 저장 안 됨)'}
+        </p>
+        <textarea
+          id="reflection"
+          className="textarea mt-2 w-full bg-base-100"
+          rows={2}
+          maxLength={200}
+          value={reflection}
+          onChange={(e) => setReflection(e.target.value)}
+          placeholder="예) 광복은 거저 온 것이 아니라, 우리 손으로 싸우려 한 사람들의 선택이 쌓인 결과다."
+        />
+        <div className="mt-2 flex items-center justify-between">
+          <span className="text-[11px] text-base-content/45">{reflection.length}/200 {!dirty && savedText && '· 저장됨 ✓'}</span>
+          <button className="btn btn-primary btn-sm gap-1.5" onClick={saveR} disabled={savingR || !dirty || reflection.trim().length === 0}>
+            {savingR ? <span className="loading loading-spinner loading-xs" /> : <CheckCircle2 className="size-4" aria-hidden />} 소감 저장
+          </button>
+        </div>
       </div>
 
       <div className="mt-7 flex gap-2">

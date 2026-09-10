@@ -122,6 +122,23 @@ export async function completeChapter(
   return next;
 }
 
+/** 서술형 한 문장 소감을 저장한다(예: key='epilogue'). */
+export async function saveReflection(ctx: GameContext, key: string, text: string): Promise<void> {
+  const ref = doc(db, 'game_progress', gameProgressDocId(ctx.classId, ctx.number));
+  const trimmed = text.trim().slice(0, 500);
+  await setDoc(
+    ref,
+    {
+      reflections: { [key]: trimmed },
+      uid: ctx.uid,
+      classId: ctx.classId,
+      number: ctx.number,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true },
+  );
+}
+
 // ───────────────────────── 교사 대시보드 ─────────────────────────
 
 export interface ClassGameProgress {
