@@ -211,6 +211,34 @@ export interface AdminDoc {
   createdAt: TimestampField;
 }
 
+/**
+ * 『아직 오지 않은 광복』 게임 진행 저장 — 학생 1명당 문서 1개.
+ * 문서 ID = `${classId}_${number}` (세션과 독립적). 학생 본인이 쓰고, 담당 교사가 읽는다(대시보드).
+ */
+export type GameLevel = 'middle' | 'high';
+
+export interface GameProgressDoc {
+  classId: string;
+  number: number;
+  uid: string;
+  /** 학생이 고른 난이도 */
+  level: GameLevel;
+  /** 완료한 챕터 id 목록 */
+  completed: string[];
+  /** 챕터별 제출 답안 (chapterId → 선택한 option id 배열) */
+  answers: Record<string, string[]>;
+  /** 챕터별 시도 횟수 */
+  attempts: Record<string, number>;
+  /** 획득 배지 라벨 목록 */
+  badges: string[];
+  /** 누적 점수 */
+  score: number;
+  /** 현재 진행 중(또는 다음에 열) 챕터 id */
+  currentChapter: string;
+  startedAt: TimestampField;
+  updatedAt: TimestampField;
+}
+
 export type ReviewStatus = 'pending' | 'approved' | 'needs_fix';
 
 /** 문서 ID = `${kind}_${itemId}` */

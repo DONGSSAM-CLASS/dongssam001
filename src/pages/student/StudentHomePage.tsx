@@ -36,6 +36,20 @@ export default function StudentHomePage() {
         </div>
       </header>
 
+      {/* 『아직 오지 않은 광복』 게임 진입 */}
+      <section className="mt-6">
+        <Link
+          to="/game"
+          className="group relative block overflow-hidden rounded-2xl border border-amber-500/40 bg-gradient-to-br from-[#241a0f] to-[#12100a] p-5 shadow-xl transition hover:border-amber-400"
+        >
+          <span className="absolute right-4 top-4 text-3xl opacity-30 transition group-hover:opacity-60">🎖️</span>
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400/90">역사 추리 시뮬레이션</p>
+          <h2 className="mt-1 text-xl font-bold text-amber-200">『아직 오지 않은 광복』</h2>
+          <p className="text-sm text-amber-100/70">1940년 9월, 그들이 걸었던 선택 · 약 15~20분</p>
+          <span className="mt-3 inline-block rounded-xl bg-amber-400 px-4 py-2 text-sm font-bold text-slate-900">게임 시작 / 이어하기 →</span>
+        </Link>
+      </section>
+
       <section className="mt-6" aria-labelledby="sessions">
         <h2 id="sessions" className="text-lg font-semibold">수업 세션</h2>
         {error && <p className="text-sm text-red-300">{error}</p>}

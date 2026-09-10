@@ -16,6 +16,19 @@ export default function LandingPage() {
         <p className="mt-1 text-sm text-slate-400">2022 개정 교육과정 · 역사(중학교) / 세계사 / 동아시아 역사 기행</p>
       </header>
 
+      <Link
+        to={profile?.role === 'student' ? '/game' : '/join'}
+        className="group relative w-full max-w-2xl overflow-hidden rounded-2xl border border-amber-500/40 bg-gradient-to-br from-[#241a0f] to-[#0f0b06] p-6 shadow-xl transition hover:border-amber-400"
+      >
+        <span className="absolute right-5 top-5 text-4xl opacity-25 transition group-hover:opacity-50">🎖️</span>
+        <p className="text-xs font-semibold uppercase tracking-widest text-amber-400/90">한국광복군 창설 기념 · 역사 추리 시뮬레이션</p>
+        <h2 className="mt-1 text-2xl font-bold text-amber-200">『아직 오지 않은 광복』</h2>
+        <p className="mt-0.5 text-sm text-amber-100/70">1940년 9월, 그들이 걸었던 선택 · 실제 사료로 추리하는 15~20분</p>
+        <span className="mt-3 inline-block rounded-xl bg-amber-400 px-4 py-2 text-sm font-bold text-slate-900">
+          {profile?.role === 'student' ? '게임 시작 / 이어하기 →' : '학급코드로 입장해 시작하기 →'}
+        </span>
+      </Link>
+
       <section className="grid gap-4 sm:grid-cols-2 w-full max-w-2xl" aria-label="시작하기">
         <div className="rounded-2xl bg-slate-800/70 p-6 border border-slate-700">
           <h2 className="text-xl font-semibold">👩‍🏫 교사</h2>
@@ -57,6 +70,7 @@ export default function LandingPage() {
         <p className="mt-1">
           <Link className="underline" to="/globe">지구본 바로 탐색하기</Link> · <Link className="underline" to="/dev/status">개발 상태 보기</Link>
         </p>
+        <p className="mt-3 text-[11px] text-slate-500">제작 · 동쌤(김동은 선생님)</p>
       </footer>
     </main>
   );

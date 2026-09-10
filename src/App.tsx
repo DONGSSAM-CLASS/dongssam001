@@ -19,6 +19,8 @@ const TeacherGlobePage = lazy(() => import('./pages/teacher/TeacherGlobePage'));
 const WorksheetPage = lazy(() => import('./pages/teacher/WorksheetPage'));
 const ContentPage = lazy(() => import('./pages/teacher/ContentPage'));
 const DataReviewPage = lazy(() => import('./pages/admin/DataReviewPage'));
+const GameIntroPage = lazy(() => import('./pages/game/GameIntroPage'));
+const GamePlayPage = lazy(() => import('./pages/game/GamePlayPage'));
 
 function Loading() {
   return <div className="flex h-full items-center justify-center text-slate-400">불러오는 중…</div>;
@@ -49,6 +51,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/globe" element={<GlobePage />} />
+        {/* 『아직 오지 않은 광복』 게임 */}
+        <Route path="/game" element={<RequireRole role="student"><GameIntroPage /></RequireRole>} />
+        <Route path="/game/play" element={<RequireRole role="student"><GamePlayPage /></RequireRole>} />
+        <Route path="/game/preview" element={<RequireRole role="teacher"><GamePlayPage mode="preview" /></RequireRole>} />
         <Route path="/join" element={<StudentJoinPage />} />
         <Route path="/student" element={<RequireRole role="student"><StudentHomePage /></RequireRole>} />
         <Route path="/student/globe/:sessionId" element={<RequireRole role="student"><StudentGlobePage /></RequireRole>} />

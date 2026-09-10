@@ -355,6 +355,32 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // ───────────────────────── game_progress ─────────────────────────
+    // 『아직 오지 않은 광복』 게임 진행. 학생 1명 = 문서 1개(세션 독립). 문서 ID = `${classId}_${number}`
+    // { classId, number, uid, level:'middle'|'high', completed[], answers{}, attempts{}, badges[], score, currentChapter, startedAt, updatedAt }
+    match /game_progress/{progressId} {
+      allow get: if isAdmin() || ownsClass(resource.data.classId)
+        || isMember(resource.data.classId, resource.data.number);
+      allow list: if isAdmin() || ownsClass(resource.data.classId)
+        || isMember(resource.data.classId, resource.data.number);
+
+      allow create: if isMember(request.resource.data.classId, request.resource.data.number)
+        && progressId == request.resource.data.classId + '_' + string(request.resource.data.number)
+        && request.resource.data.uid == uid()
+        && request.resource.data.level in ['middle', 'high']
+        && request.resource.data.completed is list && request.resource.data.completed.size() <= 50
+        && request.resource.data.badges is list && request.resource.data.badges.size() <= 50
+        && request.resource.data.score is int;
+      allow update: if isMember(resource.data.classId, resource.data.number)
+        && unchanged(['classId', 'number', 'startedAt'])
+        && request.resource.data.uid == uid()
+        && request.resource.data.level in ['middle', 'high']
+        && request.resource.data.completed is list && request.resource.data.completed.size() <= 50
+        && request.resource.data.badges is list && request.resource.data.badges.size() <= 50
+        && request.resource.data.score is int;
+      allow delete: if ownsClass(resource.data.classId);
+    }
+
     // 그 외 모든 경로는 거부
     match /{document=**} {
       allow read, write: if false;

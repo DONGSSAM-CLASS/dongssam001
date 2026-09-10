@@ -15,6 +15,7 @@ import {
 import { listClassSessions, setSessionStatus, deleteSession } from '@/lib/sessionService';
 import { formatYear } from '@/lib/history';
 import { useAuthStore } from '@/store/authStore';
+import { GameProgressPanel } from '@/game/components/GameProgressPanel';
 import type { ClassDoc, ClassMemberDoc, SessionDoc } from '@/types/firestore';
 
 type ClassRow = ClassDoc & { id: string };
@@ -166,6 +167,8 @@ export default function ClassDetailPage() {
           <button type="submit" disabled={busy} className="rounded-lg bg-slate-700 px-3 py-1.5 text-sm hover:bg-slate-600">＋ 명단 미리 등록</button>
         </form>
       </section>
+
+      <GameProgressPanel classId={cls.id} />
 
       <section className="mt-8" aria-labelledby="cls-sessions">
         <h2 id="cls-sessions" className="text-lg font-semibold">수업 세션 ({sessions.length})</h2>
