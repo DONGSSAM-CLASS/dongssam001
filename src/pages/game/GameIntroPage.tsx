@@ -4,7 +4,7 @@ import { BookMarked, Clock, GraduationCap, LogOut, Play, RotateCcw, ShieldCheck,
 import { useAuthStore } from '@/store/authStore';
 import { signOutAll } from '@/lib/authService';
 import { loadProgress, startGame, type GameContext, type LoadedProgress } from '@/lib/gameService';
-import { CinematicScene } from '@/game/scenes/CinematicScene';
+import { SceneView } from '@/game/scenes/SceneView';
 import { chapters } from '@/game/story';
 import type { Level } from '@/game/types';
 
@@ -66,7 +66,7 @@ export default function GameIntroPage() {
     <div data-theme="gwangbok" className="min-h-full text-base-content">
       <div className="relative isolate min-h-[100dvh] cinematic-letterbox film-vignette overflow-hidden">
         <div className="absolute inset-0 -z-10 opacity-70">
-          <CinematicScene scene="chongqing-night" className="h-full w-full" />
+          <SceneView scene="chongqing-night" className="h-full w-full" />
         </div>
 
         <main className="mx-auto flex min-h-[100dvh] max-w-3xl flex-col items-center justify-center gap-6 px-5 py-16">

@@ -14,6 +14,7 @@
     "test:rules": "firebase emulators:exec --only firestore --project demo-history-globe \"vitest run --project rules\"",
     "test:all": "npm run test && npm run test:rules",
     "data:validate": "tsx scripts/validate-data.ts",
+    "images:generate": "node scripts/generate-scene-images.mjs",
     "emulators": "firebase emulators:start --project demo-history-globe",
     "deploy": "npm run build && firebase deploy",
     "seed": "tsx scripts/seed-emulator.ts"

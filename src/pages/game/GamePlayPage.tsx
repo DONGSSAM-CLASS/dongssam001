@@ -27,7 +27,7 @@ import type { GameProgressDoc } from '@/types/firestore';
 import { chapters, totalPoints } from '@/game/story';
 import { chapterTerms, glossary } from '@/game/glossary';
 import type { Chapter, Level } from '@/game/types';
-import { CinematicScene } from '@/game/scenes/CinematicScene';
+import { SceneView } from '@/game/scenes/SceneView';
 import { DialogueLine } from '@/game/components/DialogueLine';
 import { MissionStatusPanel } from '@/game/components/MissionStatusPanel';
 import { BadgeIcon } from '@/game/components/badgeIcons';
@@ -241,7 +241,7 @@ export default function GamePlayPage({ mode = 'student' }: { mode?: 'student' | 
           {/* 시네마틱 헤더 */}
           <section className="relative mb-5 overflow-hidden rounded-box border border-primary/25 cinematic-letterbox film-vignette">
             <div className="aspect-[16/7] w-full">
-              <CinematicScene scene={chapter.scene} className="h-full w-full" />
+              <SceneView scene={chapter.scene} className="h-full w-full" />
             </div>
             <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-base-100/95 to-transparent p-4">
               <div className="text-xs font-semibold uppercase tracking-widest text-primary/90">{chapter.dateLabel} · {chapter.place}</div>
@@ -512,7 +512,7 @@ function CompletionScreen({
   return (
     <main className="mx-auto flex min-h-[100dvh] max-w-2xl flex-col items-center justify-center px-5 py-16 text-center">
       <div className="relative mb-6 w-full overflow-hidden rounded-box border border-primary/30 cinematic-letterbox">
-        <div className="aspect-[16/6]"><CinematicScene scene="liberation-dawn" className="h-full w-full" /></div>
+        <div className="aspect-[16/6]"><SceneView scene="liberation-dawn" className="h-full w-full" /></div>
       </div>
       <Trophy className="mb-2 size-10 text-warning" aria-hidden />
       <h1 className="text-2xl font-bold text-primary">모든 미션을 마쳤어요!</h1>
