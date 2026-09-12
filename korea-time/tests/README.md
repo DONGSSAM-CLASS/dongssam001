@@ -23,3 +23,16 @@ SHOTS=./shots node uxtest.mjs   # 저장/이어하기, 힌트 잠금, 휴대폰 
 - 기록판 항목이 6개인가, 결과 화면에 성취기준 4개와 제작자 표기가 있는가
 - 콘솔 오류·페이지 오류가 하나도 없는가
 - 380px 좁은 화면에서 가로 스크롤이 생기지 않는가
+
+## 보안 규칙 검사
+
+학생이 남의 기록을 보지 못하는지, 교사가 남의 학급을 건드리지 못하는지,
+다른 반을 사칭해 가입할 수 없는지를 Firestore 에뮬레이터로 확인합니다. (34개 항목)
+
+```bash
+npm i @firebase/rules-unit-testing firebase
+npx firebase-tools emulators:exec --only firestore \
+  --project demo-korea-time "node tests/rules.test.mjs"
+```
+
+에뮬레이터 실행에는 Java 가 필요합니다.
