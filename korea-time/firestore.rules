@@ -1,0 +1,132 @@
+rules_version = '2';
+
+// ===========================================================================
+// 『Let's KOREA TIME』 Firestore 보안 규칙
+//
+// 원칙
+//  1) 학생은 자기 문서만 쓰고, 남의 기록은 읽지 못한다.
+//  2) 교사는 자기가 만든 학급과 그 학급 학생의 기록만 본다.
+//  3) 학생의 로그인 이메일은 <학급코드-번호[-세대]@koreatime.local> 형식뿐이다.
+//     실제 이메일 주소를 학생 계정으로 쓸 수 없도록 형식을 강제한다.
+//  4) 무료(Spark) 요금제만 쓴다 → Cloud Functions 없이 규칙만으로 방어한다.
+// ===========================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── 공통 도우미 ──────────────────────────────────────────────────
+    function signedIn() { return request.auth != null; }
+    function uid() { return request.auth.uid; }
+    function email() { return request.auth.token.email; }
+
+    // 학생 가상 이메일: abc123-7@koreatime.local  또는  abc123-7-2@koreatime.local
+    function isStudentEmail() {
+      return signedIn()
+        && email() is string
+        && email().matches('^[a-z0-9]{6}-[0-9]{1,3}(-[0-9]{1,3})?@koreatime[.]local$');
+    }
+    function isTeacherEmail() { return signedIn() && !isStudentEmail(); }
+
+    function teacherDoc(u) { return /databases/$(database)/documents/teachers/$(u); }
+    function isTeacher() { return isTeacherEmail() && exists(teacherDoc(uid())); }
+
+    function studentDoc(u) { return /databases/$(database)/documents/students/$(u); }
+    function me() { return get(studentDoc(uid())).data; }
+    function isStudent() { return isStudentEmail() && exists(studentDoc(uid())); }
+
+    function classDoc(c) { return /databases/$(database)/documents/classes/$(c); }
+    function classOf(c) { return get(classDoc(c)).data; }
+    function ownsClass(c) { return isTeacher() && exists(classDoc(c)) && classOf(c).teacherId == uid(); }
+
+    function isStr(v, maxLen) { return v is string && v.size() > 0 && v.size() <= maxLen; }
+    function changedOnly(keys) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(keys);
+    }
+
+    // ── 교사 프로필 ──────────────────────────────────────────────────
+    match /teachers/{tid} {
+      allow get: if signedIn() && uid() == tid;
+      allow list: if false;
+      allow create: if isTeacherEmail() && uid() == tid
+        && isStr(request.resource.data.name, 40)
+        && request.resource.data.keys().hasOnly(['name', 'email', 'createdAt']);
+      allow update: if isTeacher() && uid() == tid && changedOnly(['name']);
+      allow delete: if isTeacher() && uid() == tid;
+    }
+
+    // ── 학급 ─────────────────────────────────────────────────────────
+    // 학생은 가입 전이라 아직 프로필이 없다. 코드로 학급을 찾아야 하므로
+    // 로그인하지 않은 사용자에게도 '코드로 조회'만 허용한다.
+    // (학급 문서에는 개인정보가 없다. 이름·코드·교사명뿐이다.)
+    match /classes/{cid} {
+      allow get, list: if true;
+
+      allow create: if isTeacher()
+        && request.resource.data.teacherId == uid()
+        && isStr(request.resource.data.name, 40)
+        && request.resource.data.code is string
+        && request.resource.data.code.matches('^[A-Z0-9]{6}$')
+        && request.resource.data.open == true
+        && request.resource.data.resets is map
+        && request.resource.data.resets.size() == 0;
+
+      // 교사는 가입 개폐와 비밀번호 초기화(resets)만 바꿀 수 있다.
+      allow update: if ownsClass(cid)
+        && changedOnly(['open', 'resets', 'name'])
+        && request.resource.data.teacherId == resource.data.teacherId
+        && request.resource.data.code == resource.data.code;
+
+      allow delete: if ownsClass(cid);
+    }
+
+    // ── 학생 프로필 ──────────────────────────────────────────────────
+    match /students/{sid} {
+      allow get: if signedIn() && (uid() == sid || ownsClass(resource.data.classId));
+      allow list: if isTeacher();
+
+      allow create: if isStudentEmail() && uid() == sid
+        && exists(classDoc(request.resource.data.classId))
+        && classOf(request.resource.data.classId).open == true
+        // 로그인 이메일의 학급코드·번호가 문서 내용과 일치해야 한다(다른 반 사칭 방지)
+        && email().split('-')[0] == classOf(request.resource.data.classId).code.lower()
+        && email().split('@')[0].split('-')[1] == string(request.resource.data.number)
+        && request.resource.data.number is int
+        && request.resource.data.number >= 1 && request.resource.data.number <= 100
+        && isStr(request.resource.data.nickname, 12)
+        && request.resource.data.tier in ['ms', 'hs']
+        && request.resource.data.keys().hasOnly(
+             ['classId','classCode','className','number','nickname','tier','generation','createdAt']);
+
+      allow update: if signedIn() && uid() == sid && changedOnly(['nickname', 'tier']);
+      allow delete: if signedIn() && uid() == sid;
+    }
+
+    // ── 학습 기록 ────────────────────────────────────────────────────
+    // 문서 id 는 `{classId}_{번호}` 다. 비밀번호를 초기화해 uid 가 바뀌어도
+    // 같은 번호면 같은 문서에 이어서 쓴다.
+    match /progress/{pid} {
+      function myProgressId() {
+        return isStudent() && pid == me().classId + '_' + string(me().number);
+      }
+
+      allow get: if myProgressId() || (signedIn() && ownsClass(resource.data.classId));
+      allow list: if isTeacher();
+
+      allow create: if myProgressId()
+        && request.resource.data.classId == me().classId
+        && request.resource.data.number == me().number;
+
+      allow update: if myProgressId()
+        && request.resource.data.classId == resource.data.classId
+        && request.resource.data.number == resource.data.number;
+
+      // 기록 삭제는 담당 교사만(학기 정리용)
+      allow delete: if signedIn() && ownsClass(resource.data.classId);
+    }
+
+    // 그 밖의 모든 경로는 막는다.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
