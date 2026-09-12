@@ -1,0 +1,22 @@
+{
+  "name": "korea-time",
+  "version": "1.0.0",
+  "private": true,
+  "description": "『Let's KOREA TIME』 : 중학생을 위한 고려로의 시간여행 — 2022 개정 역사과 교육과정 연계 고려 시대 방탈출 추리 게임",
+  "type": "module",
+  "scripts": {
+    "serve": "npx serve -l 8321 .",
+    "validate": "node scripts/validate.mjs",
+    "test:play": "node tests/playthrough.mjs ms && node tests/playthrough.mjs hs",
+    "test:ux": "node tests/uxtest.mjs",
+    "test:rules": "firebase emulators:exec --only firestore --project demo-korea-time \"node tests/rules.test.mjs\"",
+    "deploy": "firebase deploy --only hosting,firestore:rules"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "firebase": "^12.19.0",
+    "firebase-tools": "^15.30.0",
+    "playwright": "^1.56.0",
+    "serve": "^14.2.4"
+  }
+}

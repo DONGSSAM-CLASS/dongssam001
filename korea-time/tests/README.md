@@ -36,3 +36,14 @@ npx firebase-tools emulators:exec --only firestore \
 ```
 
 에뮬레이터 실행에는 Java 가 필요합니다.
+
+## 한 줄 명령 (package.json)
+
+```bash
+npm run validate     # 데이터 무결성 검사
+npm run serve        # 로컬 서버 (다른 터미널에서 먼저 띄운다)
+npm run test:play    # 중·고 두 난이도 전체 플레이
+npm run test:ux      # 저장·이어하기, 힌트 개방, 휴대폰 화면
+npm run test:rules   # 보안 규칙 34항목 (Java 필요)
+npm run deploy       # Hosting + 규칙 배포
+```

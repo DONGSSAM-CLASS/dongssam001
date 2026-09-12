@@ -14,3 +14,6 @@ database-debug.log
 .emulator-data/
 coverage
 .DS_Store
+
+# 인수인계용 압축 파일(생성물)
+*-handoff.zip
