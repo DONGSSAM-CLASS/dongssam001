@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23151a24'/%3E%3Ctext x='16' y='22' font-size='17' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='%23ffc94d'%3E%EB%8F%99%3C/text%3E%3C/svg%3E" />
+<title>동쌤 김동은 · 역사 교사 / 에듀테크 개발자</title>
+<meta name="description" content="서울 번동중학교 역사 교사, 에듀테크 교사 연구회 대표 동쌤(김동은)이 직접 개발한 역사·에듀테크 웹앱 자료실과 강의·협업 안내." />
+<meta property="og:title" content="동쌤 김동은 · 역사 교사 / 에듀테크 개발자" />
+<meta property="og:description" content="직접 만든 역사·에듀테크 웹앱을 모아 둔 자료실. 교실에서 QR로 바로 배포하세요." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ko_KR" />
+
+<!-- Pretendard -->
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<!-- Tailwind CSS v4 (browser) -->
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<!-- daisyUI v5 -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@5/daisyui.css" rel="stylesheet" type="text/css" />
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- QR 생성 -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<style>
+/* ── 기본 토큰 ───────────────────────────────── */
+:root{
+  --bg:#151a24;
+  --clay-a:#283242;
+  --clay-b:#1c232f;
+  --gold:#f0b429;
+  --gold-2:#ffc94d;
+  --teal:#2E6E8E;
+  --txt:#e7ecf3;
+  --txt-dim:#a8b3c4;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:104px; background:#151a24}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+  font-size:16.5px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+@media (min-width:768px){ body{font-size:17px} }
+
+/* 점토 질감 노이즈 */
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.03;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+}
+main, header, footer{position:relative; z-index:1}
+
+/* ── 클레이 유틸 ─────────────────────────────── */
+.clay{
+  border-radius:28px;
+  background:linear-gradient(145deg,#283242,#1c232f);
+  box-shadow:
+    12px 12px 28px rgba(0,0,0,.55),
+    -8px -8px 20px rgba(255,255,255,.035),
+    inset 6px 6px 12px rgba(255,255,255,.055),
+    inset -8px -8px 16px rgba(0,0,0,.45);
+  border:1px solid rgba(255,255,255,.04);
+}
+.clay-sm{
+  border-radius:18px;
+  background:linear-gradient(145deg,#283242,#1c232f);
+  box-shadow:
+    6px 6px 14px rgba(0,0,0,.45),
+    -4px -4px 10px rgba(255,255,255,.03),
+    inset 3px 3px 7px rgba(255,255,255,.05),
+    inset -4px -4px 9px rgba(0,0,0,.4);
+  border:1px solid rgba(255,255,255,.04);
+}
+.clay-lg{
+  border-radius:40px;
+  background:linear-gradient(145deg,#2b3646,#1a2029);
+  box-shadow:
+    18px 18px 42px rgba(0,0,0,.6),
+    -12px -12px 30px rgba(255,255,255,.04),
+    inset 8px 8px 18px rgba(255,255,255,.06),
+    inset -12px -12px 24px rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.05);
+}
+.clay-hover{transition:transform .25s var(--ease), box-shadow .25s var(--ease)}
+.clay-hover:hover{
+  transform:translateY(-4px);
+  box-shadow:
+    18px 20px 40px rgba(0,0,0,.6),
+    -10px -10px 26px rgba(255,255,255,.045),
+    inset 6px 6px 12px rgba(255,255,255,.06),
+    inset -8px -8px 16px rgba(0,0,0,.45);
+}
+
+/* ── 클레이 버튼 ─────────────────────────────── */
+.cbtn{
+  display:inline-flex; height:auto; width:auto; align-items:center; justify-content:center; gap:.5rem;
+  min-height:46px; padding:.7rem 1.3rem;
+  border-radius:18px; border:1px solid rgba(255,255,255,.05);
+  font-weight:700; font-size:.95rem; line-height:1.3;
+  color:var(--txt); text-decoration:none; cursor:pointer;
+  background:linear-gradient(145deg,#2c3646,#1d2531);
+  box-shadow:6px 6px 14px rgba(0,0,0,.5), -4px -4px 10px rgba(255,255,255,.035),
+             inset 2px 2px 6px rgba(255,255,255,.05), inset -3px -3px 8px rgba(0,0,0,.4);
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), color .25s var(--ease);
+}
+.cbtn:hover{transform:translateY(-4px); box-shadow:10px 12px 22px rgba(0,0,0,.55), -6px -6px 14px rgba(255,255,255,.04), inset 2px 2px 6px rgba(255,255,255,.06), inset -3px -3px 8px rgba(0,0,0,.4)}
+.cbtn:active{
+  transform:translateY(0);
+  box-shadow:inset 6px 6px 14px rgba(0,0,0,.6), inset -5px -5px 12px rgba(255,255,255,.05);
+}
+.cbtn-gold{
+  color:#20180a;
+  background:linear-gradient(145deg,var(--gold-2),#d99a15);
+  border-color:rgba(255,255,255,.14);
+  box-shadow:8px 8px 18px rgba(0,0,0,.5), -4px -4px 12px rgba(255,255,255,.05),
+             inset 3px 3px 8px rgba(255,255,255,.4), inset -4px -4px 10px rgba(120,80,0,.45);
+}
+.cbtn-gold:active{box-shadow:inset 7px 7px 16px rgba(120,80,0,.55), inset -5px -5px 12px rgba(255,255,255,.35)}
+.cbtn-sm{min-height:44px; padding:.55rem 1rem; font-size:.88rem; border-radius:15px}
+.cbtn-lg{min-height:60px; padding:1rem 2rem; font-size:1.05rem; border-radius:22px}
+
+/* 포커스 링 */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
+  outline:3px solid var(--gold-2); outline-offset:3px; border-radius:14px;
+}
+
+/* ── 아이콘 칩 / 배지 ────────────────────────── */
+.chip-icon{
+  width:56px; height:56px; flex:0 0 56px;
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:50%; color:var(--gold);
+  background:linear-gradient(145deg,#2e3949,#1b222d);
+  box-shadow:7px 7px 16px rgba(0,0,0,.5), -5px -5px 12px rgba(255,255,255,.04),
+             inset 3px 3px 7px rgba(255,255,255,.06), inset -4px -4px 9px rgba(0,0,0,.45);
+}
+.chip-icon svg{width:26px; height:26px}
+.cbadge{
+  display:inline-flex; height:auto; align-items:center; gap:.35rem;
+  padding:.3rem .75rem; border-radius:999px;
+  font-size:.78rem; font-weight:700; letter-spacing:.01em;
+  color:#bfe2f2; background:linear-gradient(145deg,#2a4356,#1b2a35);
+  box-shadow:4px 4px 10px rgba(0,0,0,.4), inset 2px 2px 5px rgba(255,255,255,.06), inset -2px -2px 6px rgba(0,0,0,.4);
+  border:1px solid rgba(46,110,142,.35);
+}
+.cbadge-gold{color:#ffe0a3; background:linear-gradient(145deg,#4a3a16,#2a2110); border-color:rgba(240,180,41,.3)}
+.label-gold{
+  color:var(--gold); font-weight:800; font-size:.82rem;
+  letter-spacing:.14em; text-transform:uppercase;
+}
+
+/* ── 필터 칩 ─────────────────────────────────── */
+.fchip{
+  display:inline-flex; align-items:center; height:auto; min-height:44px; padding:.5rem 1.1rem; border-radius:999px;
+  font-size:.9rem; font-weight:700; color:var(--txt-dim); cursor:pointer;
+  background:linear-gradient(145deg,#273140,#1b222d); border:1px solid rgba(255,255,255,.04);
+  box-shadow:5px 5px 12px rgba(0,0,0,.45), -3px -3px 9px rgba(255,255,255,.03),
+             inset 2px 2px 5px rgba(255,255,255,.04), inset -3px -3px 7px rgba(0,0,0,.4);
+  transition:transform .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.fchip:hover{transform:translateY(-3px); color:var(--txt)}
+.fchip[aria-pressed="true"]{
+  color:#20180a; background:linear-gradient(145deg,var(--gold-2),#d99a15);
+  box-shadow:inset 4px 4px 10px rgba(120,80,0,.4), inset -4px -4px 10px rgba(255,255,255,.35);
+}
+
+/* ── 내비 ────────────────────────────────────── */
+.navshell{position:fixed; top:14px; left:0; right:0; z-index:60; padding:0 16px}
+.navpill{
+  max-width:1120px; min-height:0; margin:0 auto;
+  display:flex; align-items:center; gap:1rem; justify-content:space-between;
+  padding:.6rem 1.1rem; border-radius:24px;
+  background:linear-gradient(145deg,rgba(40,50,66,.85),rgba(28,35,47,.85));
+  border:1px solid rgba(255,255,255,.05);
+  box-shadow:10px 10px 26px rgba(0,0,0,.5), -6px -6px 16px rgba(255,255,255,.03),
+             inset 3px 3px 8px rgba(255,255,255,.05), inset -4px -4px 10px rgba(0,0,0,.4);
+  transition:backdrop-filter .25s var(--ease), background .25s var(--ease);
+}
+.navshell.scrolled .navpill{backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px)}
+.navlink{
+  padding:.45rem .7rem; border-radius:12px; font-size:.9rem; font-weight:600;
+  color:var(--txt-dim); text-decoration:none; white-space:nowrap;
+  transition:color .2s var(--ease), background .2s var(--ease);
+}
+.navlink:hover{color:var(--gold-2); background:rgba(255,255,255,.04)}
+.navmenu{display:none; gap:.15rem; flex-wrap:wrap}
+@media (min-width:1024px){ .navmenu{display:flex} .navtoggle{display:none} }
+.navdrawer{display:none; max-width:1120px; margin:10px auto 0; padding:.8rem}
+.navdrawer.open{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.3rem}
+
+/* ── 섹션 / 블롭 ─────────────────────────────── */
+.section{padding:84px 16px; max-width:1120px; margin:0 auto}
+@media (min-width:768px){ .section{padding:110px 24px} }
+.blob{position:absolute; border-radius:50%; filter:blur(2px); pointer-events:none; z-index:0}
+
+/* 스크롤 페이드인 */
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .6s var(--ease), transform .6s var(--ease)}
+.reveal.shown{opacity:1; transform:none}
+
+/* 그리드 */
+.grid-cards{display:grid; grid-template-columns:1fr; gap:22px}
+@media (min-width:640px){ .grid-cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:1024px){ .grid-cards{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
+.card-clay{display:flex; overflow:visible; flex-direction:column; gap:.9rem; padding:26px}
+.card-title{font-size:1.12rem; font-weight:800; line-height:1.45; margin:0; word-break:keep-all}
+.card-desc{color:var(--txt-dim); font-size:.94rem; margin:0; word-break:keep-all; flex:1}
+
+/* ── QR 모달 ─────────────────────────────────── */
+.qroverlay{
+  position:fixed; inset:0; z-index:100; display:none; opacity:1; pointer-events:auto;
+  align-items:center; justify-content:center; padding:18px;
+  background:rgba(8,11,16,.82); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+}
+.qroverlay.open{display:flex; opacity:1; pointer-events:auto}
+.qrbox{width:100%; max-width:min(96vw,820px); max-height:96vh; overflow:auto; padding:26px; text-align:center}
+@media (max-width:520px){
+  .qroverlay{padding:8px}
+  .qrbox{width:100%; max-width:100%; padding:10px; border-radius:26px}
+  .qrframe{padding:16px; border-radius:20px}
+  .qrurl{padding:.6rem .2rem; font-size:.82rem}
+}
+.qrframe{
+  display:block; width:100%; box-sizing:border-box;
+  background:#fff; padding:28px; border-radius:28px; margin:0 auto;
+  box-shadow:0 18px 40px rgba(0,0,0,.6), inset 0 0 0 1px rgba(0,0,0,.06);
+}
+.qrframe canvas, .qrframe img{display:block; width:100% !important; height:auto !important; margin:0 auto}
+.qrurl{
+  word-break:break-all; font-size:.9rem; color:var(--txt-dim);
+  padding:.7rem 1rem; margin:0;
+}
+
+/* 토스트 */
+.ctoast{
+  position:fixed; left:50%; right:auto; inset-inline-end:auto; bottom:28px;
+  display:block; white-space:normal; transform:translate(-50%,20px);
+  z-index:120; padding:.9rem 1.4rem; border-radius:18px; font-weight:700;
+  background:linear-gradient(145deg,var(--gold-2),#d99a15); color:#20180a;
+  box-shadow:0 14px 30px rgba(0,0,0,.55);
+  opacity:0; pointer-events:none; transition:opacity .25s var(--ease), transform .25s var(--ease);
+}
+.ctoast.show{opacity:1; transform:translate(-50%,0)}
+
+/* 맨 위로 */
+.totop{
+  position:fixed; right:18px; bottom:18px; z-index:70;
+  width:54px; height:54px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .3s var(--ease), transform .25s var(--ease);
+}
+.totop.show{opacity:1; pointer-events:auto}
+
+/* 체크리스트 */
+.checkrow{display:flex; gap:.8rem; align-items:flex-start; padding:.55rem 0}
+.checkrow svg{width:22px; height:22px; flex:0 0 22px; color:var(--gold); margin-top:.25rem}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+body.noscroll{overflow:hidden}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important; transition:none !important}
+  .reveal{opacity:1; transform:none}
+  .clay-hover:hover,.cbtn:hover,.fchip:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ 내비게이션 ══ -->
+<header class="navshell" id="navshell">
+  <nav class="navbar navpill" aria-label="주요 메뉴">
+    <a href="#hero" class="navlink" style="font-weight:800;color:var(--gold-2);font-size:1rem">동쌤 김동은</a>
+    <div class="navmenu" id="navmenu">
+      <a class="navlink" href="#about">소개</a>
+      <a class="navlink" href="#career">이력</a>
+      <a class="navlink" href="#works">개발 자료실</a>
+      <a class="navlink" href="#club">연구회</a>
+      <a class="navlink" href="#channels">채널</a>
+      <a class="navlink" href="#contact">협업 요청</a>
+    </div>
+    <button class="btn cbtn cbtn-sm navtoggle" id="navtoggle" type="button"
+            aria-label="메뉴 열기" aria-expanded="false" aria-controls="navdrawer">
+      <i data-lucide="menu" aria-hidden="true"></i><span class="sr-only">메뉴</span>
+    </button>
+  </nav>
+  <div class="navdrawer clay-sm" id="navdrawer">
+    <a class="navlink" href="#about">소개</a>
+    <a class="navlink" href="#career">이력</a>
+    <a class="navlink" href="#works">개발 자료실</a>
+    <a class="navlink" href="#club">연구회</a>
+    <a class="navlink" href="#channels">채널</a>
+    <a class="navlink" href="#contact">협업 요청</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ══ ① Hero ══ -->
+<section id="hero" style="position:relative; overflow:hidden; padding-top:112px">
+  <div class="blob clay-lg" style="width:320px;height:320px;top:-70px;right:-90px;opacity:.55"></div>
+  <div class="blob clay" style="width:190px;height:190px;bottom:20px;left:-70px;opacity:.45"></div>
+  <div class="blob clay-sm" style="width:120px;height:120px;top:210px;right:16%;opacity:.35"></div>
+  <div class="section" style="padding-top:20px; padding-bottom:40px; position:relative">
+    <p class="label-gold reveal">History · EdTech</p>
+    <h1 class="reveal" style="font-size:clamp(2.2rem,7vw,4rem); font-weight:800; line-height:1.25; margin:.4rem 0 1rem; word-break:keep-all">
+      동쌤 <span style="color:var(--gold-2)">김동은</span>
+    </h1>
+    <p class="reveal" style="font-size:clamp(1.1rem,3.2vw,1.5rem); font-weight:700; margin:0 0 .6rem; word-break:keep-all">
+      역사를 코드로 옮기는 교사
+    </p>
+    <p class="reveal" style="color:var(--txt-dim); margin:0 0 2.2rem; word-break:keep-all">
+      서울 번동중학교 역사 교사 · 에듀테크 교사 연구회(에크연) 대표
+    </p>
+    <div class="reveal" style="display:flex; flex-wrap:wrap; gap:14px">
+      <a class="btn cbtn cbtn-gold cbtn-lg" href="#works">
+        <i data-lucide="layout-grid" aria-hidden="true"></i>개발 자료 보러가기
+      </a>
+      <a class="btn cbtn cbtn-lg" href="#contact">
+        <i data-lucide="handshake" aria-hidden="true"></i>협업 요청하기
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ② 소개 ══ -->
+<section id="about" class="section">
+  <p class="label-gold reveal">About</p>
+  <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.5rem); font-weight:800; margin:.3rem 0 1.4rem">소개</h2>
+  <div class="clay reveal" style="padding:30px; max-width:820px">
+    <p style="margin:0 0 1rem; word-break:keep-all">
+      중학교 교실에서 역사를 가르치는 교사입니다. 수업에서 부족하다고 느낀 도구를 직접 만들기 시작해,
+      지금은 사료 탐구·역사 게임·수업 도구를 웹앱으로 만들어 학생들과 씁니다.
+    </p>
+    <p style="margin:0 0 1rem; word-break:keep-all">
+      기획부터 배포까지 바이브코딩으로 혼자 끌고 가되, 늘 “교실에서 진짜 쓰이는가”를 기준으로 다듬습니다.
+    </p>
+    <p style="margin:0; word-break:keep-all">
+      에듀테크 교사 연구회(에크연) 대표로 선생님들과 경험을 나누고, 연수와 강의로 그 과정을 함께 열어 두고 있습니다.
+    </p>
+  </div>
+  <div class="grid-cards reveal" style="margin-top:26px">
+    <div class="clay clay-hover" style="padding:28px; text-align:center">
+      <div style="font-size:2.8rem; font-weight:800; color:var(--gold-2); line-height:1.2">8</div>
+      <div style="color:var(--txt-dim); font-weight:600">공개 웹앱</div>
+    </div>
+    <div class="clay clay-hover" style="padding:28px; text-align:center">
+      <div style="font-size:2.8rem; font-weight:800; color:var(--gold-2); line-height:1.2">3</div>
+      <div style="color:var(--txt-dim); font-weight:600">운영 채널</div>
+    </div>
+    <div class="clay clay-hover" style="padding:28px; text-align:center">
+      <div style="font-size:2.8rem; font-weight:800; color:var(--gold-2); line-height:1.2">4</div>
+      <div style="color:var(--txt-dim); font-weight:600">협업 분야</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ③ 이력 ══ -->
+<section id="career" class="section">
+  <p class="label-gold reveal">Career</p>
+  <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.5rem); font-weight:800; margin:.3rem 0 1.4rem">이력</h2>
+  <div class="clay-lg clay-hover reveal" style="padding:34px; display:flex; flex-direction:column; gap:1.1rem">
+    <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap">
+      <span class="chip-icon"><i data-lucide="id-card" aria-hidden="true"></i></span>
+      <h3 style="margin:0; font-size:1.4rem; font-weight:800">동쌤 강사 프로필</h3>
+    </div>
+    <p style="margin:0; color:var(--txt-dim); word-break:keep-all">
+      강의 이력·연수 경력 등 전체 프로필은 교사 커뮤니티 ‘티끌’에서 확인하실 수 있습니다.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:.6rem">
+      <span class="badge cbadge">서울 번동중학교 역사 교사</span>
+      <span class="badge cbadge">에듀테크 교사 연구회(에크연) 대표</span>
+      <span class="badge cbadge">2026 게임 리터러시 연구교사</span>
+    </div>
+    <div>
+      <a class="btn cbtn cbtn-gold" href="https://teachle.co.kr/teachers/detail/?teacherId=212"
+         target="_blank" rel="noopener noreferrer">
+        <i data-lucide="external-link" aria-hidden="true"></i>프로필 전체 보기
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ④ 개발 자료실 ══ -->
+<section id="works" class="section">
+  <p class="label-gold reveal">Works</p>
+  <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.5rem); font-weight:800; margin:.3rem 0 .6rem">개발 자료실</h2>
+  <p class="reveal" style="color:var(--txt-dim); margin:0 0 1.6rem; word-break:keep-all">
+    교실에서 바로 쓸 수 있는 역사·에듀테크 웹앱입니다. QR 코드를 띄워 학생들에게 즉시 배포하세요.
+  </p>
+  <div class="reveal" id="filters" role="group" aria-label="분류 필터"
+       style="display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:2rem"></div>
+  <div class="grid-cards" id="project-grid"></div>
+  <p id="empty-msg" hidden style="color:var(--txt-dim)">해당 분류의 자료가 없습니다.</p>
+</section>
+
+<!-- ══ ⑤ 연구회 ══ -->
+<section id="club" class="section">
+  <p class="label-gold reveal">Community</p>
+  <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.5rem); font-weight:800; margin:.3rem 0 1.4rem">에듀테크 교사 연구회</h2>
+  <div class="clay-lg clay-hover reveal"
+       style="padding:40px; display:flex; gap:1.6rem; flex-wrap:wrap; align-items:flex-start;
+              background:linear-gradient(145deg,#2c3d4a,#1a222c); border-color:rgba(240,180,41,.18)">
+    <span class="chip-icon" style="width:72px;height:72px;flex:0 0 72px"><i data-lucide="users-round" aria-hidden="true"></i></span>
+    <div style="flex:1 1 320px; min-width:0">
+      <h3 style="margin:0 0 .4rem; font-size:1.5rem; font-weight:800">에듀테크 교사 연구회</h3>
+      <p style="margin:0 0 .6rem; color:var(--gold-2); font-weight:700; word-break:keep-all">
+        “에듀테크를 통해 교육적 가치를 밝힌다”
+      </p>
+      <p style="margin:0 0 1.2rem; color:var(--txt-dim); word-break:keep-all">
+        교실에서 직접 써 본 에듀테크 경험을 함께 나누는 교사 연구회입니다.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:.7rem">
+        <a class="btn cbtn cbtn-gold" href="https://edutech-teachers.web.app/" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="external-link" aria-hidden="true"></i>홈페이지 가기
+        </a>
+        <button class="btn cbtn" type="button"
+                data-qr-url="https://edutech-teachers.web.app/" data-qr-title="에듀테크 교사 연구회"
+                aria-label="에듀테크 교사 연구회 QR 코드 열기">
+          <i data-lucide="qr-code" aria-hidden="true"></i>QR 코드
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ⑦ 운영 채널 ══ -->
+<section id="channels" class="section">
+  <p class="label-gold reveal">Channels</p>
+  <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.5rem); font-weight:800; margin:.3rem 0 1.4rem">운영 채널</h2>
+  <div class="grid-cards reveal">
+    <a class="card clay clay-hover card-clay" href="https://blog.naver.com/history1592" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:inherit">
+      <span class="chip-icon"><i data-lucide="pen-line" aria-hidden="true"></i></span>
+      <h3 class="card-title">동쌤의 성장공간</h3>
+      <p class="card-desc">네이버 블로그 · 수업 기록과 개발 과정</p>
+      <span class="badge cbadge cbadge-gold"><i data-lucide="external-link" aria-hidden="true" style="width:14px;height:14px"></i>블로그 열기</span>
+    </a>
+    <a class="card clay clay-hover card-clay" href="https://www.instagram.com/dongssam_universe" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:inherit">
+      <span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></span>
+      <h3 class="card-title">인스타그램</h3>
+      <p class="card-desc">@dongssam_universe · 소식과 짧은 기록</p>
+      <span class="badge cbadge cbadge-gold"><i data-lucide="external-link" aria-hidden="true" style="width:14px;height:14px"></i>인스타 열기</span>
+    </a>
+    <a class="card clay clay-hover card-clay" href="https://www.youtube.com/@dongssam_play" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:inherit">
+      <span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></span>
+      <h3 class="card-title">동쌤 플레이</h3>
+      <p class="card-desc">유튜브 · 수업 활용 영상과 시연</p>
+      <span class="badge cbadge cbadge-gold"><i data-lucide="external-link" aria-hidden="true" style="width:14px;height:14px"></i>유튜브 열기</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══ ⑧ 협업 요청 ══ -->
+<section id="contact" class="section">
+  <p class="label-gold reveal">Collaborate</p>
+  <h2 class="reveal" style="font-size:clamp(1.8rem,5vw,2.5rem); font-weight:800; margin:.3rem 0 1.4rem">강의 및 협업 요청</h2>
+
+  <h3 class="reveal" style="font-size:1.2rem; font-weight:800; margin:0 0 1rem">협업 가능한 분야</h3>
+  <div class="grid-cards reveal" style="margin-bottom:2.6rem">
+    <div class="card clay clay-hover card-clay">
+      <span class="chip-icon"><i data-lucide="presentation" aria-hidden="true"></i></span>
+      <h4 class="card-title">교원 연수 · 강의</h4>
+      <p class="card-desc">에듀테크, 역사 수업 설계, AI 활용</p>
+    </div>
+    <div class="card clay clay-hover card-clay">
+      <span class="chip-icon"><i data-lucide="code-xml" aria-hidden="true"></i></span>
+      <h4 class="card-title">수업용 웹앱 · 디지털 콘텐츠 공동 개발</h4>
+      <p class="card-desc">기획부터 배포까지 함께 만듭니다</p>
+    </div>
+    <div class="card clay clay-hover card-clay">
+      <span class="chip-icon"><i data-lucide="file-pen" aria-hidden="true"></i></span>
+      <h4 class="card-title">교육 자료 집필 · 자문</h4>
+      <p class="card-desc">교재, 지도안, 콘텐츠 자문</p>
+    </div>
+    <div class="card clay clay-hover card-clay">
+      <span class="chip-icon"><i data-lucide="handshake" aria-hidden="true"></i></span>
+      <h4 class="card-title">연구회 단위 프로젝트 협업</h4>
+      <p class="card-desc">에크연과 함께하는 공동 프로젝트</p>
+    </div>
+  </div>
+
+  <div class="clay reveal" style="padding:32px; margin-bottom:2rem">
+    <h3 style="font-size:1.2rem; font-weight:800; margin:0 0 1rem">요청 시 담아 주시면 좋은 내용</h3>
+    <ul style="list-style:none; padding:0; margin:0">
+      <li class="checkrow"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>기관/단체명과 담당자 연락처</span></li>
+      <li class="checkrow"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>희망 일정(날짜·시간)과 장소(대면/온라인)</span></li>
+      <li class="checkrow"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>대상과 인원(교사/학생, 예상 인원)</span></li>
+      <li class="checkrow"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>주제와 요청 배경, 희망 진행 시간</span></li>
+      <li class="checkrow"><i data-lucide="check-circle-2" aria-hidden="true"></i><span>예산 및 기타 조건</span></li>
+    </ul>
+  </div>
+
+  <div class="clay-lg reveal" style="padding:36px; text-align:center">
+    <span class="chip-icon" style="margin-bottom:1rem"><i data-lucide="mail" aria-hidden="true"></i></span>
+    <p style="margin:0 0 .3rem; color:var(--txt-dim)">이메일</p>
+    <p style="margin:0 0 1.6rem; font-size:1.25rem; font-weight:800; word-break:break-all">dongssam94@gmail.com</p>
+    <div style="display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center">
+      <a class="btn cbtn cbtn-gold cbtn-lg" id="mailto-btn" href="#">
+        <i data-lucide="send" aria-hidden="true"></i>메일로 협업 문의하기
+      </a>
+      <button class="btn cbtn cbtn-lg" type="button" id="copy-email" aria-label="이메일 주소 복사">
+        <i data-lucide="copy" aria-hidden="true"></i>이메일 주소 복사
+      </button>
+    </div>
+    <p style="margin:1.6rem 0 0; color:var(--txt-dim); font-size:.92rem; word-break:keep-all">
+      보내주신 내용을 확인한 뒤 며칠 이내에 정성껏 회신드리겠습니다. 감사합니다.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ ⑨ 푸터 ══ -->
+<footer class="section" style="padding-top:20px; padding-bottom:60px">
+  <div class="clay" style="padding:28px; display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center">
+    <p style="margin:0; color:var(--txt-dim); font-size:.9rem; word-break:keep-all">
+      © 2026 동쌤(김동은) · 서울 번동중학교 역사 교사
+    </p>
+    <nav aria-label="푸터 링크" style="display:flex; flex-wrap:wrap; gap:.2rem">
+      <a class="navlink" href="mailto:dongssam94@gmail.com">이메일</a>
+      <a class="navlink" href="https://blog.naver.com/history1592" target="_blank" rel="noopener noreferrer">블로그</a>
+      <a class="navlink" href="https://www.instagram.com/dongssam_universe" target="_blank" rel="noopener noreferrer">인스타</a>
+      <a class="navlink" href="https://www.youtube.com/@dongssam_play" target="_blank" rel="noopener noreferrer">유튜브</a>
+    </nav>
+  </div>
+</footer>
+
+<button class="clay totop" id="totop" type="button" aria-label="맨 위로 가기">
+  <i data-lucide="arrow-up" aria-hidden="true"></i>
+</button>
+
+<!-- ══ ⑥ QR 모달 ══ -->
+<div class="modal modal-open qroverlay" id="qr-overlay" role="dialog" aria-modal="true" aria-labelledby="qr-title" hidden>
+  <div class="modal-box clay-lg qrbox" id="qr-box">
+    <h2 id="qr-title" style="font-size:clamp(1.3rem,4vw,2rem); font-weight:800; margin:0 0 1.2rem; word-break:keep-all"></h2>
+    <div class="qrframe" id="qr-frame"><div id="qr-target"></div></div>
+    <p class="qrurl" id="qr-url"></p>
+    <div style="display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center">
+      <button class="btn cbtn cbtn-gold" type="button" id="qr-copy" aria-label="링크 복사">
+        <i data-lucide="link" aria-hidden="true"></i>링크 복사
+      </button>
+      <button class="btn cbtn" type="button" id="qr-close" aria-label="QR 코드 창 닫기">
+        <i data-lucide="x" aria-hidden="true"></i>닫기
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast ctoast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ── 자료 목록: 여기에 객체 한 줄만 추가하면 카드·필터·QR이 자동 반영됩니다 ── */
+const PROJECTS = [
+  { title:"중·고등학생을 위한 세계사 사료 탐구 교실", url:"https://worldhistorysources-dongssam.netlify.app/", desc:"원전·해설·APA 7판 출처로 사료를 읽는 세계사 탐구 도구", category:"사료 탐구", icon:"scroll-text" },
+  { title:"아고라의 딜레마", url:"https://agora-dilemma-class-20260907.web.app/", desc:"K-SEL 기반 펠로폰네소스 전쟁사 가상 의사결정 웹앱", category:"의사결정", icon:"scale" },
+  { title:"독도네컷 · 독도의 날 인생네컷", url:"https://dokdo-necut.web.app/", desc:"역사 인물과 함께 찍는 독도의 날 체험부스 포토부스", category:"체험부스", icon:"camera" },
+  { title:"History Globe · 히스토리 글로브", url:"https://history-globe-psroy.web.app/", desc:"3D 지구본으로 세계사 동시대를 탐색하는 수업 도구", category:"수업 도구", icon:"globe" },
+  { title:"역사 수능 기출 탐색", url:"https://suneung-textbook.web.app/", desc:"교과서 단원별로 연동해 보는 수능 기출 주제 탐색기", category:"학습 지원", icon:"book-open-check" },
+  { title:"아직 오지 않은 광복 · 한국광복군 역사 추리 게임", url:"https://gwangbok-game-20260911.web.app/", desc:"사료를 읽고 선택하며 광복군의 국내 진공 작전을 추리", category:"역사 게임", icon:"search-check" },
+  { title:"『Let's KOREA TIME』 : 중학생을 위한 고려로의 시간여행", url:"https://lets-korea-time-2026.web.app/", desc:"918년 송악에서 1392년 벽란도까지, 고려 시대 방탈출 추리 게임", category:"역사 게임", icon:"hourglass" }
+];
+
+const EMAIL = "dongssam94@gmail.com";
+const $ = (s, r) => (r || document).querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const refreshIcons = () => { try { if (window.lucide) lucide.createIcons(); } catch (e) {} };
+
+/* ── 자료실 렌더링 ── */
+const grid = $("#project-grid");
+const filterBar = $("#filters");
+const emptyMsg = $("#empty-msg");
+let activeFilter = "전체";
+
+function renderFilters() {
+  const cats = ["전체", ...Array.from(new Set(PROJECTS.map((p) => p.category)))];
+  filterBar.innerHTML = cats.map((c) =>
+    '<button type="button" class="fchip" data-cat="' + esc(c) + '" aria-pressed="' +
+    (c === activeFilter) + '">' + esc(c) + "</button>"
+  ).join("");
+}
+
+function renderCards() {
+  const list = PROJECTS.filter((p) => activeFilter === "전체" || p.category === activeFilter);
+  grid.innerHTML = list.map((p) =>
+    '<article class="card clay clay-hover card-clay">' +
+      '<span class="chip-icon"><i data-lucide="' + esc(p.icon) + '" aria-hidden="true"></i></span>' +
+      '<span class="badge cbadge" style="align-self:flex-start">' + esc(p.category) + "</span>" +
+      '<h3 class="card-title">' + esc(p.title) + "</h3>" +
+      '<p class="card-desc">' + esc(p.desc) + "</p>" +
+      '<div style="display:flex; flex-wrap:wrap; gap:.6rem">' +
+        '<a class="btn cbtn cbtn-sm cbtn-gold" href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' +
+          '<i data-lucide="external-link" aria-hidden="true"></i>바로가기</a>' +
+        '<button class="btn cbtn cbtn-sm" type="button" data-qr-url="' + esc(p.url) + '" data-qr-title="' + esc(p.title) +
+          '" aria-label="' + esc(p.title) + ' QR 코드 열기"><i data-lucide="qr-code" aria-hidden="true"></i>QR 코드</button>' +
+      "</div>" +
+    "</article>"
+  ).join("");
+  emptyMsg.hidden = list.length > 0;
+  refreshIcons();
+}
+
+filterBar.addEventListener("click", (e) => {
+  const btn = e.target.closest(".fchip");
+  if (!btn) return;
+  activeFilter = btn.dataset.cat;
+  filterBar.querySelectorAll(".fchip").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+  renderCards();
+});
+
+renderFilters();
+renderCards();
+
+/* ── QR 모달 ── */
+const overlay = $("#qr-overlay");
+const qrTarget = $("#qr-target");
+const qrFrame = $("#qr-frame");
+let lastFocused = null;
+
+function qrSize() {
+  // 교실 송출용: 뷰포트 짧은 변의 60% 이상, 최소 320px.
+  // 단 좁은 화면에서는 모달 안에 들어갈 수 있는 최대 크기로 맞춘다.
+  const narrow = window.innerWidth <= 520;
+  const boxPad = narrow ? 10 : 26;
+  const framePad = narrow ? 16 : 28;
+  const overlayPad = narrow ? 8 : 18;
+  const boxW = Math.min(window.innerWidth * (narrow ? 1 : 0.96), narrow ? 99999 : 820) - overlayPad * 2;
+  const avail = Math.floor(boxW - boxPad * 2 - framePad * 2 - 4);
+  const want = Math.max(320, Math.round(Math.min(window.innerWidth, window.innerHeight) * 0.6));
+  return Math.max(140, Math.min(want, avail, 700));
+}
+
+function openQR(title, url) {
+  lastFocused = document.activeElement;
+  $("#qr-title").textContent = title;
+  $("#qr-url").textContent = url;
+  qrTarget.innerHTML = "";
+  if (window.QRCode) {
+    const s = qrSize();
+    const framePad = window.innerWidth <= 520 ? 16 : 28;
+    qrFrame.style.maxWidth = s + framePad * 2 + "px";
+    try {
+      new QRCode(qrTarget, { text: url, width: s, height: s, correctLevel: QRCode.CorrectLevel.M });
+    } catch (e) { qrTarget.innerHTML = ""; }
+  }
+  qrFrame.hidden = !qrTarget.firstChild;
+  overlay.hidden = false;
+  overlay.classList.add("open");
+  document.body.classList.add("noscroll");
+  refreshIcons();
+  $("#qr-close").focus();
+}
+
+function closeQR() {
+  overlay.classList.remove("open");
+  overlay.hidden = true;
+  document.body.classList.remove("noscroll");
+  qrTarget.innerHTML = "";
+  if (lastFocused && lastFocused.focus) lastFocused.focus();
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-qr-url]");
+  if (btn) { openQR(btn.dataset.qrTitle, btn.dataset.qrUrl); }
+});
+$("#qr-close").addEventListener("click", closeQR);
+overlay.addEventListener("mousedown", (e) => { if (e.target === overlay) closeQR(); });
+$("#qr-copy").addEventListener("click", () => copyText($("#qr-url").textContent, "링크가 복사되었습니다"));
+
+/* 포커스 트랩 + ESC */
+document.addEventListener("keydown", (e) => {
+  if (!overlay.classList.contains("open")) return;
+  if (e.key === "Escape") { closeQR(); return; }
+  if (e.key !== "Tab") return;
+  const items = $("#qr-box").querySelectorAll("button, a[href]");
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
+
+/* ── 복사 + 토스트 ── */
+const toast = $("#toast");
+let toastTimer = null;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+}
+function copyText(text, msg) {
+  const done = () => showToast(msg);
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else { fallbackCopy(text, done); }
+}
+function fallbackCopy(text, done) {
+  const ta = document.createElement("textarea");
+  ta.value = text; ta.setAttribute("readonly", "");
+  ta.style.position = "fixed"; ta.style.left = "-9999px";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { showToast("복사에 실패했습니다"); }
+  document.body.removeChild(ta);
+}
+$("#copy-email").addEventListener("click", () => copyText(EMAIL, "복사되었습니다"));
+
+/* ── 메일 템플릿 ── */
+const MAIL_BODY = [
+  "안녕하세요, 동쌤(김동은) 선생님.", "",
+  "1. 기관/단체명과 담당자 연락처 : ",
+  "2. 희망 일정(날짜·시간)과 장소(대면/온라인) : ",
+  "3. 대상과 인원(교사/학생, 예상 인원) : ",
+  "4. 주제와 요청 배경, 희망 진행 시간 : ",
+  "5. 예산 및 기타 조건 : ", "",
+  "감사합니다."
+].join("\n");
+$("#mailto-btn").href = "mailto:" + EMAIL +
+  "?subject=" + encodeURIComponent("[협업 요청] 기관명 / 주제") +
+  "&body=" + encodeURIComponent(MAIL_BODY);
+
+/* ── 내비 · 스크롤 ── */
+const navshell = $("#navshell");
+const totop = $("#totop");
+const drawer = $("#navdrawer");
+const navtoggle = $("#navtoggle");
+
+navtoggle.addEventListener("click", () => {
+  const open = drawer.classList.toggle("open");
+  navtoggle.setAttribute("aria-expanded", String(open));
+  navtoggle.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
+});
+drawer.addEventListener("click", (e) => {
+  if (e.target.closest("a")) {
+    drawer.classList.remove("open");
+    navtoggle.setAttribute("aria-expanded", "false");
+  }
+});
+
+function onScroll() {
+  const y = window.scrollY;
+  navshell.classList.toggle("scrolled", y > 12);
+  totop.classList.toggle("show", y > 520);
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+totop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+/* ── 스크롤 페이드인 ── */
+const reveals = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("shown"); io.unobserve(en.target); } });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+  reveals.forEach((el) => io.observe(el));
+} else {
+  reveals.forEach((el) => el.classList.add("shown"));
+}
+
+refreshIcons();
+window.addEventListener("load", refreshIcons);
+</script>
+</body>
+</html>
