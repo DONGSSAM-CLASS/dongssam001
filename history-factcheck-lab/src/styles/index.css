@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 글자 크기 3단계 조절 버튼이 이 값을 바꾼다 (작게 15px / 보통 17px / 크게 19px) */
+    --app-font-size: 17px;
+  }
+
+  html {
+    font-size: var(--app-font-size);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    line-height: 1.7;
+    color: theme('colors.ink.DEFAULT');
+    background-color: #efe7d5;
+    background-image: theme('backgroundImage.paper');
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* 본문 16px 이상 보장 */
+  p,
+  li,
+  label,
+  input,
+  textarea,
+  button {
+    font-size: max(1rem, 16px);
+  }
+
+  :focus-visible {
+    outline: 3px solid theme('colors.ink.soft');
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* 수사 기록부 카드 */
+  .card-file {
+    @apply rounded-sm border border-kraft-dark bg-kraft-light/90 p-5 shadow-sm;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-sm border border-ink px-4 py-2 font-bold transition-colors duration-150;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink text-kraft-light hover:bg-ink-deep;
+  }
+
+  .btn-quiet {
+    @apply btn bg-transparent text-ink hover:bg-kraft-dark/40;
+  }
+
+  .stamp {
+    @apply inline-block border-2 border-alert px-2 py-0.5 text-sm font-bold uppercase tracking-wide text-alert;
+  }
+}
+
+/* 저사양 기기·모션 민감 사용자 대응 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
