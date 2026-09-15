@@ -24,6 +24,13 @@ export function AuthProvider({ children }) {
     });
   }, []);
 
+  // 메일 인증을 막 마친 계정은 ID 토큰의 email_verified 클레임이 옛 값일 수 있습니다.
+  // 보안 규칙이 이 클레임을 보므로 로그인 직후 한 번 토큰을 갱신합니다.
+  useEffect(() => {
+    if (!user?.emailVerified) return;
+    user.getIdToken(true).catch(() => { /* 갱신 실패는 다음 로그인에서 해결됩니다 */ });
+  }, [user]);
+
   useEffect(() => {
     if (!user) return undefined;
     setLoading(true);
