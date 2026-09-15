@@ -48,6 +48,15 @@ export default function Layout() {
           2022 개정 교육과정 중학교 「역사」 [9역01-01] · [9역01-02] 수업용 실습 자료. 학습 기록은
           이 기기(localStorage)에만 저장되며 외부로 전송되지 않습니다.
         </p>
+        <p className="mt-2">
+          <Link to="/credits" className="underline underline-offset-2">
+            출처 고지 · 이용 안내
+          </Link>
+          <span className="mx-2">·</span>
+          <Link to="/guide" className="underline underline-offset-2">
+            아카이브 사용법
+          </Link>
+        </p>
       </footer>
     </div>
   );

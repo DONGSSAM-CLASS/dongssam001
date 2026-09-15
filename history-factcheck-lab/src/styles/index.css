@@ -70,12 +70,73 @@
 }
 
 @media print {
+  @page {
+    margin: 14mm;
+  }
+
   .no-print {
     display: none !important;
   }
 
+  :root {
+    /* 인쇄물은 화면 글자 크기 설정과 무관하게 일정해야 한다 */
+    --app-font-size: 11pt;
+    padding: 0;
+  }
+
   body {
-    background: #fff;
+    background: #fff !important;
+    background-image: none !important;
     color: #000;
+  }
+
+  /* 종이에서는 카드 테두리와 그림자가 오히려 읽기를 방해한다 */
+  .card-file {
+    border: none;
+    background: transparent !important;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  /* 한 항목이 페이지 경계에서 잘리지 않게 한다 */
+  .break-inside-avoid,
+  li,
+  article,
+  section,
+  tr {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  /* 배경으로 구분하던 요소는 종이에서 테두리로 바꾼다 */
+  .bg-ink,
+  .bg-alert,
+  .bg-ink-soft,
+  .bg-kraft-dark\/40,
+  .bg-kraft-dark\/30,
+  .bg-kraft-dark\/25,
+  .bg-alert\/10,
+  .bg-alert\/5,
+  .bg-ink\/10 {
+    background: transparent !important;
+    color: #000 !important;
+    border: 1pt solid #666;
+  }
+
+  table {
+    font-size: 9pt;
+  }
+
+  /* 링크는 종이에서 주소가 보여야 확인할 수 있다 */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 8pt;
+    word-break: break-all;
   }
 }

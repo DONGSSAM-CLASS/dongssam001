@@ -8,18 +8,27 @@ function verdictLabel(key) {
   return VERDICT_CHOICES.find((c) => c.key === key)?.label ?? '미판정';
 }
 
-/** 결과 카드를 PNG로 저장한다. 외부 라이브러리 없이 SVG foreignObject → canvas 경로를 쓴다. */
+/**
+ * 결과 카드를 PNG로 저장한다. 외부 라이브러리 없이 SVG foreignObject → canvas 경로를 쓴다.
+ *
+ * 두 가지 함정이 있어 그대로 옮기면 동작하지 않는다.
+ *  1. foreignObject가 든 SVG를 blob: URL로 읽어 캔버스에 그리면 캔버스가 오염(taint)되어
+ *     toDataURL이 막힌다. data: URI로 넘기면 이 문제가 없다.
+ *  2. SVG가 이미지로 읽힐 때는 바깥 자원을 가져오지 않으므로 @font-face는 어차피 쓰이지 않는다.
+ *     그대로 끼워 넣으면 data: URI만 수백 KB로 불어나므로 걷어 내고, 대신 기기에 있는
+ *     한글 글꼴로 그리게 한다.
+ */
 async function saveAsPng(node, filename) {
   const { width } = node.getBoundingClientRect();
   const height = node.scrollHeight;
   const clone = node.cloneNode(true);
   clone.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
 
-  // 렌더링에 쓰인 스타일을 인라인으로 옮겨 붙인다(외부 CSS는 SVG 안에서 적용되지 않는다).
   const cssText = Array.from(document.styleSheets)
     .map((sheet) => {
       try {
         return Array.from(sheet.cssRules)
+          .filter((r) => r.constructor.name !== 'CSSFontFaceRule' && !/^@font-face/i.test(r.cssText))
           .map((r) => r.cssText)
           .join('\n');
       } catch {
@@ -28,42 +37,42 @@ async function saveAsPng(node, filename) {
     })
     .join('\n');
 
+  const fallbackFont =
+    "'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','Nanum Gothic',sans-serif";
+
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
     <foreignObject width="100%" height="100%">
-      <div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;background:#f5efe1;">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;background:#f5efe1;font-family:${fallbackFont};">
         <style>${cssText}</style>
         ${new XMLSerializer().serializeToString(clone)}
       </div>
     </foreignObject>
   </svg>`;
 
-  const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
+  const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 
-  try {
-    const img = new Image();
-    await new Promise((resolve, reject) => {
-      img.onload = resolve;
-      img.onerror = () => reject(new Error('이미지 변환 실패'));
-      img.src = url;
-    });
-    const scale = Math.min(2, window.devicePixelRatio || 1);
-    const canvas = document.createElement('canvas');
-    canvas.width = width * scale;
-    canvas.height = height * scale;
-    const ctx = canvas.getContext('2d');
-    ctx.scale(scale, scale);
-    ctx.fillStyle = '#f5efe1';
-    ctx.fillRect(0, 0, width, height);
-    ctx.drawImage(img, 0, 0);
-    const link = document.createElement('a');
-    link.download = filename;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    return true;
-  } finally {
-    URL.revokeObjectURL(url);
-  }
+  const img = new Image();
+  await new Promise((resolve, reject) => {
+    img.onload = resolve;
+    img.onerror = () => reject(new Error('이미지 변환 실패'));
+    img.src = url;
+  });
+
+  const scale = Math.min(2, window.devicePixelRatio || 1);
+  const canvas = document.createElement('canvas');
+  canvas.width = width * scale;
+  canvas.height = height * scale;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(scale, scale);
+  ctx.fillStyle = '#f5efe1';
+  ctx.fillRect(0, 0, width, height);
+  ctx.drawImage(img, 0, 0);
+
+  const link = document.createElement('a');
+  link.download = filename;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  return true;
 }
 
 export default function Step6Report({ caseData, caseState, state, onChange, studentName }) {
@@ -86,7 +95,9 @@ export default function Step6Report({ caseData, caseState, state, onChange, stud
 
   async function handlePng() {
     try {
-      await saveAsPng(cardRef.current, `역사탐정리포트_${caseData.id}.png`);
+      // 파일 이름에 한글을 쓰면 크로뮴이 download 속성을 무시해 확장자 없는
+      // 'download' 파일로 저장된다. 영문·숫자로만 짓는다.
+      await saveAsPng(cardRef.current, `history-detective-report_${caseData.id}.png`);
     } catch {
       window.alert(
         'PNG 저장에 실패했습니다. 기기가 지원하지 않는 경우일 수 있어요. 대신 "인쇄하기"를 눌러 PDF로 저장해 보세요.',

@@ -8,5 +8,15 @@ export default defineConfig({
     target: 'es2019',
     cssCodeSplit: true,
     chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // 케이스 데이터는 자주 고치는 부분이므로 코드와 분리해 캐시가 오래 살게 한다.
+          if (id.includes('src/data/')) return 'case-data';
+          if (id.includes('node_modules/react')) return 'react-vendor';
+          return undefined;
+        },
+      },
+    },
   },
 });
