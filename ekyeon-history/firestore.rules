@@ -5,7 +5,8 @@ rules_version = '2';
 //  1) 가입 신청자는 자기 문서만 만들 수 있고, status/role/memberType 을 스스로 올릴 수 없다.
 //  2) 관리자 권한은 admins/{uid} 문서의 존재로만 부여된다(클라이언트 생성·삭제 불가, 콘솔에서만).
 //  3) 관리자 작업은 admins/{uid}.verifiedUntil 이 미래일 때만 허용된다(= 메일 2단계 승인).
-//  4) 수업 기록의 소유권은 ownerUid 로 강제하며, 작성자는 ownerUid·authorName·published 를 바꿀 수 없다.
+//  4) 수업 기록의 소유권은 ownerUid 로 강제하며, 작성자는 ownerUid·authorName 을 바꿀 수 없다.
+//     (공개 여부는 작성자 본인도 바꿀 수 있고, 운영진은 모든 글을 관리한다.)
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -115,7 +116,7 @@ service cloud.firestore {
             && request.resource.data.tags is list
             && request.resource.data.tags.size() <= 12);
 
-      // 작성자는 내용만 고칠 수 있고 ownerUid·authorName·published 는 바꿀 수 없습니다.
+      // 작성자는 내용과 공개 여부만 고칠 수 있고 ownerUid·authorName 은 바꿀 수 없습니다.
       allow update: if canEditContent()
         || (canWriteLesson()
             && resource.data.ownerUid == request.auth.uid
@@ -123,8 +124,10 @@ service cloud.firestore {
             && request.resource.data.diff(resource.data).affectedKeys()
                  .hasOnly([
                    'type','title','schoolLevel','grade','unit','summary','body',
-                   'lessonDate','link','thumbnailUrl','tags','updatedAt'
+                   'lessonDate','link','thumbnailUrl','tags','published','updatedAt'
                  ])
+            && request.resource.data.authorName == resource.data.authorName
+            && request.resource.data.published is bool
             && request.resource.data.title.size() > 0
             && request.resource.data.title.size() <= 120
             && request.resource.data.get('summary', '').size() <= 300

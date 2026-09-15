@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, BookOpen, Code2, Handshake, Info, LayoutGrid, Mail, ScrollText, Sparkles,
@@ -6,6 +7,7 @@ import SectionTitle from '../components/SectionTitle';
 import WebAppCard from '../components/WebAppCard';
 import { TEACHER_WEBAPPS } from '../data/webapps';
 import { CONTACT_EMAIL, IDENTITY_BADGES, SITE_NAME } from '../lib/constants';
+import { loadLessons } from '../lib/lessons';
 
 const SPACES = [
   {
@@ -43,6 +45,17 @@ const SPACES = [
 ];
 
 export default function Home() {
+  const [recent, setRecent] = useState([]);
+
+  // 최근 수업 기록 3건 — 공개된 글만 가져옵니다.
+  useEffect(() => {
+    let alive = true;
+    loadLessons({ uid: null, canManageContent: false })
+      .then((rows) => { if (alive) setRecent(rows.slice(0, 3)); })
+      .catch(() => { /* 목록을 못 불러와도 홈 화면은 그대로 보여 줍니다 */ });
+    return () => { alive = false; };
+  }, []);
+
   return (
     <>
       {/* 1. 히어로 — 사이트 정체성 */}
@@ -96,6 +109,36 @@ export default function Home() {
           })}
         </div>
       </section>
+
+      {/* 3. 최근 수업 기록 */}
+      {recent.length > 0 && (
+        <section className="section">
+          <SectionTitle
+            eyebrow="Lessons"
+            title="최근 수업 기록"
+            lead="연구팀 선생님들이 최근에 남긴 수업 나눔과 수업 공개 실적입니다."
+          />
+          <div className="cards">
+            {recent.map((item) => (
+              <article key={item.id} className="lessoncard">
+                <div className="lessoncard__top">
+                  {item.type && <span className="card__type">{item.type}</span>}
+                  {item.lessonDate && <span className="lessoncard__date">{item.lessonDate}</span>}
+                </div>
+                <h3>{item.title}</h3>
+                <p className="lessoncard__meta">
+                  {[item.schoolLevel, item.grade, item.unit].filter(Boolean).join(' · ')}
+                  {item.authorName ? ` / 등록 ${item.authorName}` : ''}
+                </p>
+                {item.summary && <p className="lessoncard__summary">{item.summary}</p>}
+              </article>
+            ))}
+          </div>
+          <div className="mt-8">
+            <Link to="/lessons" className="btn btn--ghost">수업 기록 전체 보기<ArrowRight /></Link>
+          </div>
+        </section>
+      )}
 
       {/* 4. 웹앱 하이라이트 */}
       <section className="section">
