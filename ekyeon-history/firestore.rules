@@ -1,0 +1,176 @@
+rules_version = '2';
+
+// 에듀테크 교사 연구회 역사연구팀 - Firestore 보안 규칙
+// 핵심 원칙
+//  1) 가입 신청자는 자기 문서만 만들 수 있고, status/role/memberType 을 스스로 올릴 수 없다.
+//  2) 관리자 권한은 admins/{uid} 문서의 존재로만 부여된다(클라이언트 생성·삭제 불가, 콘솔에서만).
+//  3) 관리자 작업은 admins/{uid}.verifiedUntil 이 미래일 때만 허용된다(= 메일 2단계 승인).
+//  4) 수업 기록의 소유권은 ownerUid 로 강제하며, 작성자는 ownerUid·authorName·published 를 바꿀 수 없다.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function approverEmail() { return 'dongssam94@gmail.com'; }
+    function isSignedIn()    { return request.auth != null; }
+    function isVerified()    { return isSignedIn() && request.auth.token.email_verified == true; }
+    function isApprover()    { return isVerified() && request.auth.token.email == approverEmail(); }
+    function isAdmin()       { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function adminData()     { return get(/databases/$(database)/documents/admins/$(request.auth.uid)).data; }
+    function isActiveAdmin() { return isAdmin() && adminData().verifiedUntil > request.time; }
+    function me()            { return get(/databases/$(database)/documents/members/$(request.auth.uid)).data; }
+    function isApprovedMember() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/members/$(request.auth.uid))
+        && me().status == 'approved';
+    }
+    function isStaffEditor() {
+      return isVerified() && isApprovedMember() && me().memberType == 'staff';
+    }
+    function canEditContent() { return isActiveAdmin() || isStaffEditor(); }
+
+    // 수업 기록을 쓸 수 있는 사람: 승인된 연구팀 교사와 운영진 (참관 회원 guest 는 읽기 전용)
+    function canWriteLesson() {
+      return isApprovedMember() && me().memberType in ['member', 'staff'];
+    }
+
+    // 가입 신청에서 고를 수 있는 유형 — staff 는 운영진이 승격시켜야만 될 수 있습니다.
+    function signupMemberTypes() { return ['member', 'guest']; }
+
+    // ── 회원 ──────────────────────────────────────────────
+    match /members/{uid} {
+      allow get: if isSignedIn() && (request.auth.uid == uid || isActiveAdmin());
+      allow list: if isActiveAdmin();
+
+      allow create: if isSignedIn()
+        && request.auth.uid == uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.role == 'member'
+        && request.resource.data.memberType in signupMemberTypes()
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.uid == uid
+        && request.resource.data.keys().hasOnly([
+             'uid','email','displayName','school','region','subject','intro',
+             'memberType','status','role','createdAt','updatedAt'
+           ])
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 40
+        && request.resource.data.get('intro', '').size() <= 500;
+
+      // 본인은 프로필만, 활성 관리자는 상태·등급까지 수정 가능
+      allow update: if isActiveAdmin()
+        || (isSignedIn() && request.auth.uid == uid
+            && request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['displayName','school','region','subject','intro','updatedAt']));
+
+      allow delete: if isActiveAdmin();
+    }
+
+    // ── 관리자 계정 ───────────────────────────────────────
+    // 생성/삭제는 Firebase 콘솔에서만. 갱신은 승인 메일 계정만.
+    match /admins/{uid} {
+      allow get: if isSignedIn() && (request.auth.uid == uid || isApprover());
+      allow list: if false;
+      allow update: if isApprover()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['verifiedUntil','lastApprovedAt','lastApprovedBy']);
+      allow create, delete: if false;
+    }
+
+    // ── 관리자 로그인 승인 요청(2단계 인증) ───────────────
+    match /adminSessions/{sessionId} {
+      allow create: if isAdmin()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'requested'
+        && request.resource.data.keys().hasOnly(['uid','adminId','status','requestedAt','userAgent']);
+      allow get: if isApprover() || (isSignedIn() && resource.data.uid == request.auth.uid);
+      allow update: if isApprover()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status','approvedAt','approvedBy']);
+      allow list, delete: if false;
+    }
+
+    // ── 수업 기록 ─────────────────────────────────────────
+    // 공개(published == true)된 글은 비회원도 읽을 수 있고,
+    // 비공개 글은 작성자 본인과 운영진만 볼 수 있습니다.
+    match /lessons/{id} {
+      allow read: if resource.data.published == true
+        || canEditContent()
+        || (isSignedIn() && resource.data.ownerUid == request.auth.uid);
+
+      allow create: if canEditContent()
+        || (canWriteLesson()
+            && request.resource.data.ownerUid == request.auth.uid
+            && request.resource.data.authorName == me().displayName
+            && request.resource.data.published is bool
+            && request.resource.data.keys().hasOnly([
+                 'type','title','schoolLevel','grade','unit','summary','body','lessonDate',
+                 'link','thumbnailUrl','tags','published','ownerUid','authorName',
+                 'createdAt','updatedAt'
+               ])
+            && request.resource.data.title is string
+            && request.resource.data.title.size() > 0
+            && request.resource.data.title.size() <= 120
+            && request.resource.data.get('summary', '').size() <= 300
+            && request.resource.data.get('body', '').size() <= 5000
+            && request.resource.data.tags is list
+            && request.resource.data.tags.size() <= 12);
+
+      // 작성자는 내용만 고칠 수 있고 ownerUid·authorName·published 는 바꿀 수 없습니다.
+      allow update: if canEditContent()
+        || (canWriteLesson()
+            && resource.data.ownerUid == request.auth.uid
+            && request.resource.data.ownerUid == resource.data.ownerUid
+            && request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly([
+                   'type','title','schoolLevel','grade','unit','summary','body',
+                   'lessonDate','link','thumbnailUrl','tags','updatedAt'
+                 ])
+            && request.resource.data.title.size() > 0
+            && request.resource.data.title.size() <= 120
+            && request.resource.data.get('summary', '').size() <= 300
+            && request.resource.data.get('body', '').size() <= 5000);
+
+      allow delete: if canEditContent()
+        || (canWriteLesson() && resource.data.ownerUid == request.auth.uid);
+    }
+
+    // ── 개발 웹앱 갤러리 ──────────────────────────────────
+    match /webapps/{id} {
+      allow read: if true;
+      allow write: if canEditContent();
+    }
+
+    // ── 협업 요청 접수 ────────────────────────────────────
+    // 누구나 접수할 수 있고, 읽기는 운영진만 가능합니다.
+    match /collabRequests/{id} {
+      allow create: if request.resource.data.keys().hasOnly([
+             'category','orgName','contactName','contactInfo','schedule',
+             'audience','message','createdAt'
+           ])
+        && request.resource.data.contactName is string
+        && request.resource.data.contactName.size() > 0
+        && request.resource.data.contactName.size() <= 40
+        && request.resource.data.contactInfo is string
+        && request.resource.data.contactInfo.size() > 0
+        && request.resource.data.contactInfo.size() <= 200
+        && request.resource.data.get('orgName', '').size() <= 120
+        && request.resource.data.get('message', '').size() <= 2000;
+      allow read: if canEditContent();
+      allow update, delete: if isActiveAdmin();
+    }
+
+    // ── 이용현황 카운터(+1 증가만 허용) ───────────────────
+    match /stats/{docId} {
+      allow read: if isActiveAdmin();
+      allow create: if request.resource.data.count == 1
+        && request.resource.data.keys().hasOnly(['key','date','page','count','updatedAt']);
+      allow update: if request.resource.data.count == resource.data.count + 1
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['count','updatedAt']);
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
