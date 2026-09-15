@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { @apply box-border; }
+  html { @apply scroll-smooth bg-base-300; }
+  body { @apply m-0 min-h-screen bg-base-300 font-sans text-base-content antialiased; }
+  a { @apply transition-colors; }
+  button, input, textarea, select { font: inherit; }
+  :focus-visible { @apply outline outline-2 outline-offset-2 outline-primary; }
+  ::selection { @apply bg-primary text-primary-content; }
+}
+
+@layer components {
+  .shell { @apply flex min-h-screen flex-col; }
+  main { @apply flex-1; }
+  .skip { @apply fixed -left-[9999px] top-4 z-[100] rounded-lg bg-primary px-4 py-2 text-primary-content; }
+  .skip:focus { @apply left-4; }
+
+  .nav { @apply sticky top-0 z-50 border-b border-base-content/10 bg-base-300/90 backdrop-blur-xl; }
+  .nav__inner { @apply mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-5 px-5 lg:px-8; }
+  .brand { @apply flex items-center gap-3 no-underline; }
+  .brand__name { @apply hidden text-sm font-bold tracking-tight text-base-content sm:block; }
+  .brand__name small { @apply mt-0.5 block text-[10px] font-medium tracking-[0.22em] text-base-content/50; }
+  .nav__links { @apply flex items-center gap-1; }
+  .nav__links > a:not(.btn) { @apply rounded-lg px-3 py-2 text-sm font-medium text-base-content/65 hover:bg-base-200 hover:text-base-content; }
+  .nav__links > a.active:not(.btn) { @apply bg-base-200 text-primary; }
+  .nav__divider { @apply mx-2 h-5 w-px bg-base-content/10; }
+  .nav__toggle { @apply btn btn-square btn-ghost hidden; }
+
+  .btn--solid { @apply btn-primary; }
+  .btn--ghost { @apply btn-ghost border border-base-content/15; }
+  .btn--lg { @apply btn-lg; }
+  .btn--sm { @apply btn-sm; }
+  .btn svg { @apply h-4 w-4; }
+  .linkbtn { @apply cursor-pointer border-0 bg-transparent p-0 text-primary underline underline-offset-4; }
+
+  .hero { @apply relative isolate overflow-hidden border-b border-base-content/10; }
+  .hero::before { content: ''; @apply absolute inset-0 -z-20 bg-base-300; }
+  .hero::after { content: ''; @apply absolute -right-40 -top-64 -z-10 h-[42rem] w-[42rem] rounded-full bg-primary/15 blur-3xl; }
+  .hero__grid { @apply mx-auto grid min-h-[680px] max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-[1.1fr_.9fr] lg:px-8; }
+  .hero__copy { @apply max-w-3xl; }
+  .hero__badge { @apply badge badge-outline badge-primary mb-6 h-auto gap-2 px-3 py-2 text-xs font-semibold tracking-wide; }
+  .hero__vision { @apply m-0 text-5xl font-black leading-[1.08] tracking-[-0.04em] text-base-content sm:text-6xl lg:text-7xl; }
+  .lit { @apply text-primary; text-shadow: 0 0 36px rgba(56,189,248,.32); }
+  .hero__lead { @apply mt-7 max-w-2xl text-lg leading-8 text-base-content/65; }
+  .hero__lead strong { @apply block text-xl font-bold text-base-content; }
+  .hero__lead p { @apply mb-3 mt-1; }
+  .hero__credentials { @apply m-0 grid list-none gap-1 p-0 text-base leading-7; }
+  .hero__credentials li { @apply relative pl-5; }
+  .hero__credentials li::before { content: '•'; @apply absolute left-0 text-primary; }
+  .hero__actions { @apply mt-9 flex flex-wrap gap-3; }
+  .hero__visual { @apply relative mx-auto w-full max-w-xl; }
+
+  .section, .page { @apply mx-auto max-w-7xl px-5 py-20 lg:px-8; }
+  .page--narrow { @apply max-w-2xl; }
+  .page--admin { @apply max-w-[1800px] py-12; }
+  .sectionhead { @apply mb-10; }
+  .eyebrow { @apply mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary; }
+  .sectionhead h2 { @apply m-0 text-3xl font-extrabold tracking-[-0.025em] sm:text-4xl; }
+  .lead { @apply mt-4 max-w-3xl text-base leading-7 text-base-content/60 sm:text-lg; }
+  .subhead { @apply mb-5 mt-12 text-xl font-bold; }
+
+  .typegrid { @apply grid gap-4 md:grid-cols-2 xl:grid-cols-5; }
+  .typecard { @apply flex min-h-64 flex-col rounded-2xl border border-base-content/10 bg-base-200 p-6 no-underline transition duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-glow; }
+  .typecard--featured { @apply border-primary/40 bg-primary/10; }
+  .typecard--static { @apply hover:translate-y-0 hover:border-base-content/10 hover:shadow-none; }
+  .typecard__icon { @apply mb-7 flex h-11 w-11 items-center justify-center rounded-xl bg-base-300 text-primary transition group-hover:bg-primary group-hover:text-primary-content; }
+  .typecard__icon svg { @apply h-5 w-5; }
+  .typecard__label { @apply text-xl font-bold; }
+  .typecard__tagline { @apply mt-1 text-xs font-semibold text-primary; }
+  .typecard p { @apply mb-6 mt-4 flex-1 text-sm leading-6 text-base-content/55; }
+  .typecard__cta { @apply flex items-center gap-1 text-sm font-bold text-base-content transition group-hover:text-primary; }
+  .typecard__cta svg { @apply h-4 w-4; }
+  .join-note { @apply alert mt-6 border border-primary/20 bg-primary/10 text-sm; }
+  .join-note svg { @apply h-5 w-5 shrink-0 text-primary; }
+  .join-note a { @apply font-bold text-primary underline underline-offset-4; }
+
+  .section--band { @apply pt-0; }
+  .band { @apply grid gap-10 rounded-3xl border border-base-content/10 bg-base-200 p-7 md:grid-cols-[1.1fr_.9fr] md:p-10; }
+  .band h3 { @apply mb-4 text-2xl font-bold; }
+  .band p { @apply m-0 leading-7 text-base-content/60; }
+  .band__list { @apply m-0 grid list-none gap-2 p-0; }
+  .band__list a { @apply flex items-center justify-between rounded-xl border border-base-content/10 bg-base-300 px-4 py-3 text-sm font-semibold no-underline hover:border-primary/40 hover:text-primary; }
+  .band__vision { @apply mt-10 text-center text-xl font-bold tracking-tight text-base-content/70; }
+
+  .cards { @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3; }
+  .card { @apply rounded-2xl border border-base-content/10 bg-base-200 p-6; }
+  .card h3 { @apply m-0 text-lg font-bold; }
+  .card p { @apply leading-7 text-base-content/65; }
+  .card__meta { @apply mt-1 text-sm text-base-content/45; }
+  .card__contact { @apply mt-5 rounded-xl bg-primary/10 px-4 py-3 text-sm font-semibold text-primary; }
+  .card__locked { @apply mt-5 rounded-xl bg-base-300 px-4 py-3 text-sm text-base-content/55; }
+  .card__type { @apply badge badge-primary mb-3 h-auto py-1 text-xs font-bold; }
+  .card__author { @apply mt-1 text-xs font-semibold text-base-content/45; }
+  .profile-link { @apply mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary; }
+  .profile-link svg { @apply h-4 w-4; }
+  .chips { @apply m-0 mt-4 flex list-none flex-wrap gap-2 p-0; }
+  .chips li { @apply badge badge-ghost h-auto py-2 text-xs; }
+  .chips--wide li { @apply text-sm; }
+  .chips li.is-on { @apply badge-primary; }
+  .chips li.is-off { @apply opacity-40; }
+  .newslist { @apply m-0 grid list-none gap-4 p-0; }
+  .newslist li { @apply rounded-2xl border border-base-content/10 bg-base-200 p-6; }
+  .newslist time { @apply text-xs text-primary; }
+  .newslist h3 { @apply mb-2 mt-2 text-lg font-bold; }
+  .newslist p { @apply whitespace-pre-wrap leading-7 text-base-content/60; }
+  .newslist a { @apply mt-3 inline-flex font-semibold text-primary; }
+  .newslist__meta { @apply flex flex-wrap items-center gap-2; }
+  .newslist__meta span { @apply badge badge-primary badge-outline text-xs; }
+  .newslist .newslist__excerpt { @apply font-semibold text-base-content/80; }
+  .content-media { @apply mt-4 grid gap-3; }
+  .content-media > img { @apply max-h-[32rem] w-full rounded-xl object-cover; }
+  .video-frame { @apply aspect-video overflow-hidden rounded-xl bg-black; }
+  .video-frame iframe { @apply h-full w-full border-0; }
+  .media-link { @apply inline-flex w-fit items-center gap-2 rounded-lg bg-base-300 px-4 py-3 text-sm font-semibold text-primary; }
+  .media-link svg, .content-links svg { @apply h-4 w-4; }
+  .content-links { @apply mt-4 flex flex-wrap gap-4; }
+  .content-links a { @apply items-center gap-1; }
+  .linkcard { @apply flex flex-wrap items-center justify-between gap-6 rounded-2xl border border-base-content/10 bg-base-200 p-7; }
+  .linkcard h3 { @apply mb-2 text-xl font-bold; }
+  .linkcard p { @apply m-0 text-base-content/60; }
+  .prose { @apply max-w-none text-base-content/70; }
+  .prose h3 { @apply mb-3 mt-10 text-xl font-bold text-base-content; }
+  .prose p, .prose li { @apply leading-8; }
+  .prose strong { @apply text-primary; }
+
+  .form { @apply grid gap-5 rounded-2xl border border-base-content/10 bg-base-200 p-6 sm:p-8; }
+  .form label { @apply grid gap-2 text-sm font-semibold; }
+  .form input, .form textarea, .form select { @apply w-full rounded-xl border border-base-content/15 bg-base-300 px-4 py-3 font-normal text-base-content placeholder:text-base-content/30 focus:border-primary focus:outline-none; }
+  .form__row { @apply grid gap-5 sm:grid-cols-2; }
+  .form__links { @apply flex flex-wrap justify-between gap-3 text-sm; }
+  .typetabs { @apply mb-5 flex flex-wrap gap-2; }
+  .typetab { @apply btn btn-sm btn-ghost border border-base-content/10; }
+  .typetab.is-active { @apply btn-primary; }
+  .typetabs__desc { @apply mb-6 text-sm leading-6 text-base-content/55; }
+  .error { @apply m-0 rounded-lg bg-error/10 px-3 py-2 text-sm text-error; }
+  .success { @apply m-0 rounded-lg bg-success/10 px-3 py-2 text-sm text-success; }
+  .notice { @apply m-0 rounded-xl border border-warning/20 bg-warning/10 px-4 py-3 text-sm text-warning; }
+  .hint { @apply mt-4 text-sm leading-6 text-base-content/45; }
+  .mono { @apply break-all font-mono text-xs; }
+  .state { @apply mx-auto max-w-2xl px-5 py-20 text-center text-base-content/50; }
+  .state h2 { @apply text-2xl font-bold text-base-content; }
+  .statuscard { @apply grid gap-5 rounded-2xl border border-base-content/10 bg-base-200 p-7 sm:p-9; }
+  .statuscard h2 { @apply m-0 text-2xl font-bold; }
+  .statuscard dl { @apply m-0 grid gap-3; }
+  .statuscard dl > div { @apply flex justify-between gap-4 border-b border-base-content/10 pb-3 text-sm; }
+  .statuscard dt { @apply text-base-content/45; }
+
+  .tablewrap { @apply overflow-x-auto rounded-2xl border border-base-content/10 bg-base-200; }
+  .table { @apply w-full text-sm; }
+  .table th { @apply text-xs text-base-content/50; }
+  .table select { @apply select select-bordered select-sm; }
+  .rowactions { @apply flex gap-2; }
+  .content-manager__head { @apply mb-7 flex flex-wrap items-end justify-between gap-4; }
+  .content-manager__head h3 { @apply m-0 text-2xl font-bold; }
+  .content-manager__head p { @apply mt-2 text-base-content/55; }
+  .content-manager__tip { @apply inline-flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/10 px-3 py-2 text-xs text-primary; }
+  .content-manager__tip svg { @apply h-4 w-4; }
+  .manager-grid { @apply grid items-start gap-6 2xl:grid-cols-[minmax(540px,0.9fr)_minmax(620px,1.35fr)]; }
+  .manager-editor { @apply scroll-mt-28 2xl:sticky 2xl:top-28; }
+  .manager-list { @apply grid gap-3; }
+  .manager-item { @apply grid gap-5 rounded-2xl border border-base-content/10 bg-base-200 p-5 sm:grid-cols-[6rem_minmax(0,1fr)_auto]; }
+  .manager-item:not(:has(.manager-item__thumb)) { @apply sm:grid-cols-[minmax(0,1fr)_auto]; }
+  .manager-item__thumb { @apply aspect-square w-24 rounded-xl bg-base-300 object-cover; }
+  .manager-item__body { @apply min-w-0; }
+  .manager-item h4 { @apply m-0 text-lg font-bold; }
+  .manager-item p { @apply mb-0 mt-2 whitespace-pre-wrap text-sm leading-6 text-base-content/60; }
+  .manager-item__meta { @apply text-xs font-semibold text-primary; }
+  .manager-item .rowactions { @apply shrink-0 self-start; }
+  .manager-item__media { @apply mt-3 flex flex-wrap gap-2; }
+  .manager-item__media span { @apply inline-flex items-center gap-1 rounded-md bg-base-300 px-2 py-1 text-[11px] text-base-content/55; }
+  .manager-item__media svg { @apply h-3 w-3; }
+  .manager-state { @apply max-w-none rounded-2xl border border-base-content/10 bg-base-200; }
+  .editor-heading { @apply flex items-center justify-between gap-3; }
+  .editor-heading h4 { @apply m-0 flex items-center gap-2 text-lg font-bold; }
+  .editor-heading svg { @apply h-5 w-5 text-primary; }
+  .content-check { @apply flex cursor-pointer grid-cols-none items-center gap-2 text-sm font-medium; }
+  .form label.content-check { @apply flex flex-row items-center gap-2; }
+  .form label.content-check input[type='checkbox'] { @apply checkbox checkbox-primary checkbox-sm h-5 w-5 shrink-0 p-0; }
+  .audience-field { @apply rounded-xl border border-base-content/10 p-4; }
+  .audience-field legend { @apply px-2 text-sm font-semibold; }
+  .audience-field > div { @apply mt-2 flex flex-wrap gap-4; }
+  .media-fields { @apply grid gap-5 rounded-xl border border-base-content/10 bg-base-300/50 p-4; }
+  .media-fields__title { @apply flex items-center gap-2 text-sm font-bold text-primary; }
+  .media-fields__title svg { @apply h-4 w-4; }
+  .label-hint { @apply ml-1 text-xs font-normal text-base-content/40; }
+  .member-resource-form { @apply mb-8 scroll-mt-28 border-primary/20; }
+  .member-resource-form .editor-heading h3 { @apply m-0 flex items-center gap-2 text-xl font-bold; }
+  .member-resource-form__guide { @apply m-0 rounded-xl bg-base-300 px-4 py-3 text-sm leading-6 text-base-content/55; }
+  .member-resource-form__guide a { @apply font-bold text-primary underline underline-offset-4; }
+  .resource-notice { @apply mb-6; }
+  .resource-owner-actions { @apply mt-5 flex gap-2 border-t border-base-content/10 pt-4; }
+  .regular-room-note { @apply mb-8 flex gap-4 rounded-2xl border border-primary/20 bg-primary/10 p-5; }
+  .regular-room-note > svg { @apply h-6 w-6 shrink-0 text-primary; }
+  .regular-room-note strong { @apply text-base font-bold; }
+  .regular-room-note p { @apply mb-0 mt-1 text-sm text-base-content/60; }
+  .bars { @apply m-0 grid list-none gap-3 p-0; }
+  .bars li { @apply grid grid-cols-[3.5rem_1fr_3rem] items-center gap-3 text-xs; }
+  .bars__label { @apply text-base-content/45; }
+  .bars__track { @apply h-2 overflow-hidden rounded-full bg-base-200; }
+  .bars__fill { @apply block h-full rounded-full bg-primary; }
+  .bars__value { @apply text-right tabular-nums; }
+
+  .footer { @apply mt-20 border-t border-base-content/10 bg-base-200; }
+  .footer__inner { @apply mx-auto grid max-w-7xl gap-7 px-5 py-12 lg:px-8; }
+  .footer__top { @apply flex flex-wrap items-center justify-between gap-6; }
+  .footer__brand { @apply flex items-center gap-4; }
+  .footer__vision { @apply m-0 text-lg font-bold; }
+  .footer__meta { @apply flex flex-wrap gap-5 text-sm text-base-content/55; }
+  .footer__meta a { @apply hover:text-primary; }
+  .footer__note { @apply m-0 text-xs text-base-content/35; }
+  /* ── 역사연구팀 전용 컴포넌트 (본원 네이밍 규칙 유지) ───────── */
+  .brand__mark { @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary shadow-lg shadow-black/20; }
+  .brand__mark svg { @apply h-6 w-6; }
+  .brand__name--always { @apply block; }
+
+  .hero__badges { @apply mb-6 flex flex-wrap gap-2; }
+  .hero__identity { @apply m-0 grid list-none gap-2 p-0 text-base leading-7 text-base-content/70; }
+  .hero__identity li { @apply relative pl-5; }
+  .hero__identity li::before { content: '•'; @apply absolute left-0 text-primary; }
+  .hero__identity strong { @apply font-bold text-base-content; }
+  .hero__grid--solo { @apply lg:grid-cols-1; }
+
+  .identity-card { @apply grid gap-3 rounded-2xl border border-primary/25 bg-primary/10 p-6 sm:p-7; }
+  .identity-card__badges { @apply flex flex-wrap gap-2; }
+  .identity-card p { @apply m-0 leading-7 text-base-content/70; }
+  .identity-card strong { @apply text-base-content; }
+
+  .linkcard--outbound { @apply no-underline transition hover:border-primary/50 hover:shadow-glow; }
+  .linkcard__action { @apply inline-flex items-center gap-2 text-sm font-bold text-primary; }
+  .linkcard__action svg { @apply h-4 w-4; }
+
+  .appgrid { @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3; }
+  .appcard { @apply flex flex-col rounded-2xl border border-base-content/10 bg-base-200 p-6 transition duration-200 hover:-translate-y-1 hover:border-primary/50 hover:shadow-glow; }
+  .appcard__icon { @apply mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-base-300 text-primary; }
+  .appcard__icon svg { @apply h-5 w-5; }
+  .appcard h3 { @apply m-0 text-lg font-bold leading-7; }
+  .appcard p { @apply mb-6 mt-3 flex-1 text-sm leading-6 text-base-content/55; }
+  .appcard__url { @apply mb-4 break-all font-mono text-[11px] text-base-content/35; }
+  .appcard__actions { @apply flex flex-wrap gap-2; }
+
+  .qr-overlay { @apply fixed inset-0 z-[200] flex items-center justify-center overflow-y-auto bg-black/85 p-4 backdrop-blur-sm; }
+  .qr-dialog { @apply my-auto flex w-full max-w-3xl flex-col items-center gap-5 rounded-3xl border border-base-content/10 bg-base-300 p-6 text-center sm:p-9; }
+  .qr-dialog__frame { @apply rounded-2xl bg-white p-4 shadow-2xl shadow-black/40 sm:p-6; }
+  .qr-dialog__frame canvas { @apply block h-auto w-[min(70vw,70vh)] min-w-[280px] max-w-full; }
+  .qr-dialog h2 { @apply m-0 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl; }
+  .qr-dialog__url { @apply m-0 break-all font-mono text-xs text-base-content/50 sm:text-sm; }
+  .qr-dialog__actions { @apply flex flex-wrap justify-center gap-3; }
+  .qr-dialog__hint { @apply m-0 text-xs text-base-content/35; }
+
+  .gate { @apply mx-auto grid max-w-xl gap-5 rounded-2xl border border-base-content/10 bg-base-200 p-7 sm:p-9; }
+  .gate__icon { @apply flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary; }
+  .gate__icon svg { @apply h-6 w-6; }
+  .gate h2 { @apply m-0 text-2xl font-bold; }
+  .gate p { @apply m-0 leading-7 text-base-content/60; }
+  .gate input { @apply w-full rounded-xl border border-base-content/15 bg-base-300 px-4 py-3 text-center text-lg tracking-[0.4em] text-base-content focus:border-primary focus:outline-none; }
+  .gate__contact { @apply m-0 text-sm leading-6 text-base-content/45; }
+  .gate__contact a { @apply font-semibold text-primary; }
+  .disclaimer { @apply mx-auto mt-8 max-w-2xl text-center text-xs leading-5 text-base-content/35; }
+
+  .drive-cta { @apply mx-auto grid max-w-2xl gap-5 rounded-2xl border border-primary/25 bg-primary/10 p-7 text-center sm:p-9; }
+  .drive-cta h2 { @apply m-0 text-2xl font-bold; }
+  .drive-cta p { @apply m-0 leading-7 text-base-content/65; }
+
+  .steps { @apply m-0 grid list-none gap-4 p-0 md:grid-cols-2 xl:grid-cols-4; }
+  .step { @apply relative rounded-2xl border border-base-content/10 bg-base-200 p-6; }
+  .step__no { @apply mb-4 flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-black text-primary-content; }
+  .step h3 { @apply m-0 text-base font-bold; }
+  .step p { @apply mb-0 mt-2 text-sm leading-6 text-base-content/55; }
+
+  .statstrip { @apply mb-8 flex flex-wrap items-center gap-3 rounded-2xl border border-primary/25 bg-primary/10 px-6 py-5; }
+  .statstrip__num { @apply text-3xl font-black tabular-nums text-primary; }
+  .statstrip__label { @apply text-sm font-semibold text-base-content/65; }
+
+  .filterbar { @apply mb-8 grid gap-4 rounded-2xl border border-base-content/10 bg-base-200 p-5; }
+  .filterbar__row { @apply flex flex-wrap items-center gap-2; }
+  .filterbar__title { @apply mr-1 text-xs font-bold uppercase tracking-[0.18em] text-base-content/40; }
+  .filterchip { @apply btn btn-xs btn-ghost h-auto border border-base-content/10 px-3 py-1.5 text-xs font-semibold; }
+  .filterchip.is-on { @apply btn-primary; }
+
+  .yearsec { @apply mb-12; }
+  .yearsec__head { @apply mb-5 flex items-baseline gap-3 border-b border-base-content/10 pb-3; }
+  .yearsec__year { @apply text-2xl font-black tracking-tight text-primary; }
+  .yearsec__count { @apply text-sm text-base-content/40; }
+
+  .lessoncard { @apply flex flex-col rounded-2xl border border-base-content/10 bg-base-200 p-6; }
+  .lessoncard__top { @apply mb-3 flex flex-wrap items-center gap-2; }
+  .lessoncard__date { @apply text-xs font-semibold text-base-content/45; }
+  .lessoncard h3 { @apply m-0 text-lg font-bold leading-7; }
+  .lessoncard__meta { @apply mt-2 text-xs font-semibold text-base-content/45; }
+  .lessoncard__summary { @apply mb-0 mt-3 text-sm leading-6 text-base-content/60; }
+  .lessoncard__body { @apply mt-3 whitespace-pre-wrap text-sm leading-7 text-base-content/70; }
+  .lessoncard__thumb { @apply mb-5 aspect-video w-full rounded-xl object-cover; }
+  .lessoncard__actions { @apply mt-5 flex gap-2 border-t border-base-content/10 pt-4; }
+  .lessoncard__private { @apply badge badge-warning badge-outline h-auto py-1 text-xs; }
+
+  .guest-note { @apply mb-8 flex flex-wrap items-center gap-4 rounded-2xl border border-primary/25 bg-primary/10 p-5; }
+  .guest-note svg { @apply h-6 w-6 shrink-0 text-primary; }
+  .guest-note strong { @apply block text-base font-bold; }
+  .guest-note small { @apply mt-1 block text-sm text-base-content/60; }
+
+}
+
+@media (max-width: 900px) {
+  .nav__toggle { @apply flex; }
+  .nav__inner { @apply flex-wrap py-3; }
+  .nav__links { @apply hidden w-full flex-col items-stretch border-t border-base-content/10 pt-3; }
+  .nav__links.is-open { @apply flex; }
+  .nav__links > a:not(.btn), .nav__links .btn { @apply w-full justify-start; }
+  .nav__divider { @apply hidden; }
+  .hero__grid { @apply min-h-0 py-16; }
+  .qr-dialog { @apply gap-4 p-5; }
+  .qr-dialog__frame { @apply p-3; }
+  .qr-dialog__frame canvas { @apply w-[min(78vw,60vh)] min-w-0; }
+}
