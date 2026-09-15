@@ -4,8 +4,16 @@ import rubric from '../data/rubric.json';
 import { ALL_CASES, ERROR_TYPES, SOURCE_KINDS, getSource } from '../lib/cases.js';
 import { TEMPLATES } from '../lib/apa.js';
 
-// 교내에서 학생 화면과 교사 화면을 가르는 간단한 가림막이다. 보안 장치가 아니다.
-const GATE_WORD = 'teacher';
+/**
+ * 교내에서 학생 화면과 교사 화면을 가르는 간단한 가림막이다. 보안 장치가 아니다.
+ *
+ * 암호는 빌드할 때 VITE_TEACHER_PASSCODE 환경변수에서 읽는다. 이렇게 하면 암호가
+ * 저장소에 커밋되지 않는다. 다만 백엔드가 없는 앱이라 빌드 결과물 안에는 여전히
+ * 들어가므로, 개발자 도구를 열어 볼 줄 아는 사람은 찾아낼 수 있다.
+ * 학생 기기에서 실수로 정답 화면이 열리는 것을 막는 용도로만 쓴다.
+ */
+const GATE_WORD = (import.meta.env.VITE_TEACHER_PASSCODE ?? 'teacher').trim().toLowerCase();
+const IS_DEFAULT_PASSCODE = !import.meta.env.VITE_TEACHER_PASSCODE;
 const GATE_KEY = 'hfl.teacherGate';
 
 function Gate({ onPass }) {
@@ -31,7 +39,8 @@ function Gate({ onPass }) {
       <h1 className="text-2xl font-bold">교사 모드</h1>
       <p className="mt-2 text-sm leading-reading text-ink-soft">
         정답과 해설이 한꺼번에 보이는 화면입니다. 학생 기기에서 실수로 열리지 않도록 가림막을 두었을
-        뿐, 보안 장치가 아닙니다. 암호는 코드에 그대로 들어 있으니 민감한 정보를 넣지 마세요.
+        뿐, 보안 장치가 아닙니다. 백엔드가 없는 앱이라 암호는 빌드 결과물 안에 들어 있으니,
+        다른 곳에서 쓰는 비밀번호를 재사용하지 마세요.
       </p>
       <label htmlFor="gate" className="mt-4 block text-sm font-bold">
         암호
@@ -47,7 +56,12 @@ function Gate({ onPass }) {
         className="mt-1 w-full rounded-sm border border-kraft-dark bg-white/80 p-2"
         autoComplete="off"
       />
-      <p className="mt-1 text-xs text-ink-soft">기본 암호: teacher (배포 전에 바꾸어 주세요)</p>
+      {IS_DEFAULT_PASSCODE ? (
+        <p className="mt-1 rounded-sm border border-alert/50 bg-alert/5 p-2 text-xs leading-reading">
+          <strong>기본 암호(teacher)가 그대로 쓰이고 있습니다.</strong> 배포 전에{' '}
+          <code>.env.local</code>에 <code>VITE_TEACHER_PASSCODE</code>를 설정하고 다시 빌드해 주세요.
+        </p>
+      ) : null}
       {error ? <p className="mt-2 text-sm text-alert">암호가 맞지 않습니다.</p> : null}
       <button type="submit" className="btn-primary mt-3">
         들어가기

@@ -24,6 +24,8 @@ npm run dev          # http://localhost:5173
 | `npm run check` | 채점기·저장 코드·케이스 데이터 자체 점검 (29건) |
 | `npm run verify-links` | 사료 URL 점검 |
 | `npm run verify-links -- --write` | 점검 결과를 `urlVerified`에 반영 |
+| `npm run deploy` | 배포 전 점검 → 빌드 → Firebase Hosting 배포 |
+| `npm run deploy:dry` | 배포 직전까지만 점검 (실제 배포는 하지 않음) |
 
 ---
 
@@ -129,7 +131,7 @@ npm run verify-links
 
 ### 운영 팁
 
-- **교사 모드 암호는 배포 전에 바꾸세요.** `src/pages/TeacherPage.jsx`의 `GATE_WORD`. 코드에 그대로 들어 있으므로 보안 장치가 아니라 오조작 방지용 가림막입니다.
+- **교사 모드 암호는 배포 전에 바꾸세요.** `.env.local`의 `VITE_TEACHER_PASSCODE`. 보안 장치가 아니라 오조작 방지용 가림막이므로, 다른 곳에서 쓰는 비밀번호를 재사용하지 마세요.
 - **활동지 인쇄**: 교사 모드 → 학급용 활동지 → 케이스 선택 → 인쇄. 기기가 모자라는 교실에서 종이 병행에 쓸 수 있습니다.
 - **기기를 옮길 때**: 홈 화면에서 '이어받기 코드'를 만들어 복사합니다. 함께 나오는 6자리 확인 번호는 코드를 제대로 옮겼는지 대조하는 체크섬이며, 그 6자리만으로는 복원되지 않습니다(백엔드가 없기 때문입니다).
 - **글자 크기**: 화면 오른쪽 위 작게/보통/크게 버튼. 기기별로 저장됩니다.
@@ -166,7 +168,8 @@ src/
 └─ styles/          index.css
 scripts/
 ├─ self-check.mjs   순수 로직·데이터 무결성 점검
-└─ verify-links.mjs 사료 URL 점검
+├─ verify-links.mjs 사료 URL 점검
+└─ deploy.mjs       배포 전 점검 + 빌드 + 배포
 ```
 
 ---
@@ -205,13 +208,46 @@ npm run verify-links   # 새로 넣은 URL 확인
 
 ## 배포 (Firebase Hosting)
 
+### 처음 한 번만
+
 ```bash
-npm run build
-# .firebaserc 의 YOUR_PROJECT_ID 를 실제 프로젝트 ID로 바꾼 뒤
-npx firebase deploy --only hosting
+# 1) Firebase 콘솔에서 프로젝트 생성 (없다면)
+#    https://console.firebase.google.com
+
+# 2) 로그인 — 브라우저가 열립니다
+npx firebase login
+
+# 3) 이 폴더를 프로젝트에 연결
+npx firebase use --add
 ```
 
-`firebase.json`은 `dist/`를 배포하며, 해시가 붙은 정적 자원은 장기 캐시, `index.html`은 `no-cache`로 설정되어 있습니다.
+`firebase use --add`를 실행하면 프로젝트 목록에서 하나를 고르게 되고, `.firebaserc`가 자동으로 채워집니다. 직접 `.firebaserc`의 `YOUR_PROJECT_ID`를 실제 ID로 바꿔도 됩니다.
+
+### 배포
+
+```bash
+npm run deploy
+```
+
+이 한 줄이 아래를 순서대로 합니다.
+
+1. 교사 모드 암호가 설정되었는지 (기본값이면 중단)
+2. Firebase 프로젝트 ID가 채워졌는지 (플레이스홀더면 중단)
+3. Firebase 로그인 여부 (안 되어 있으면 중단)
+4. `npm run check` 자체 점검 29건
+5. `npm run build`
+6. 빌드 결과물에 설정한 암호가 실제로 반영되었는지
+7. `firebase deploy --only hosting`
+
+점검에 걸리면 **무엇을 어떻게 고치면 되는지 알려 주고 멈춥니다.** 배포 직전까지만 확인하려면 `npm run deploy:dry`를 쓰세요.
+
+`firebase.json`은 `dist/`를 배포하며, 해시가 붙은 정적 자원은 장기 캐시, `index.html`은 `no-cache`, 그리고 보안 헤더와 CSP가 설정되어 있습니다.
+
+### 배포 뒤 확인할 것
+
+1. `/#/teacher` 에서 새 암호로 들어가지는지
+2. 학생 기기(모바일)에서 워크벤치 탭 전환이 정상인지
+3. `npm run verify-links` 로 사료 링크가 살아 있는지
 
 ---
 
@@ -221,7 +257,7 @@ npx firebase deploy --only hosting
 - **6자리 복구 코드만으로는 진행 상황을 복원할 수 없습니다.** 백엔드가 없어 6자리에 데이터를 담을 수 없기 때문입니다. 실제 데이터는 긴 Base64 '이어받기 코드'에 들어 있고, 6자리는 옮겨 적기를 대조하는 확인 번호로 쓰입니다. 화면에도 그렇게 안내합니다.
 - **PNG 저장은 기기에 따라 실패할 수 있습니다.** 외부 라이브러리 없이 SVG `foreignObject` → canvas 경로를 쓰기 때문입니다. 실패 시 안내가 뜨며, 인쇄(PDF 저장)로 대체할 수 있습니다.
 - **폰트 CSS가 큽니다**(gzip 약 58KB). 분할 서브셋을 쓰면 실제 폰트 파일은 필요한 조각만 내려받지만, `@font-face` 선언 자체가 많아집니다. 통합 서브셋은 굵기당 850KB 한 덩어리라 더 불리해 현재 방식을 택했습니다.
-- **교사 모드 암호는 보안 장치가 아닙니다.** 코드에 그대로 들어 있습니다.
+- **교사 모드 암호는 보안 장치가 아닙니다.** `.env.local`로 저장소에서는 빠지지만, 백엔드가 없어 빌드 결과물 안에는 그대로 들어갑니다.
 
 ---
 

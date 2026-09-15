@@ -9,7 +9,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "verify-links": "node scripts/verify-links.mjs",
-    "check": "node scripts/self-check.mjs"
+    "check": "node scripts/self-check.mjs",
+    "deploy": "node scripts/deploy.mjs",
+    "deploy:dry": "node scripts/deploy.mjs --dry-run"
   },
   "dependencies": {
     "@fontsource/noto-sans-kr": "^5.2.5",
