@@ -3,6 +3,8 @@ import {
   ArrowRight, BookOpen, Code2, Handshake, Info, LayoutGrid, Mail, ScrollText, Sparkles,
 } from 'lucide-react';
 import SectionTitle from '../components/SectionTitle';
+import WebAppCard from '../components/WebAppCard';
+import { TEACHER_WEBAPPS } from '../data/webapps';
 import { CONTACT_EMAIL, IDENTITY_BADGES, SITE_NAME } from '../lib/constants';
 
 const SPACES = [
@@ -92,6 +94,21 @@ export default function Home() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      {/* 4. 웹앱 하이라이트 */}
+      <section className="section">
+        <SectionTitle
+          eyebrow="Web apps"
+          title="수업에 바로 쓰는 웹앱"
+          lead="[QR 코드] 버튼을 누르면 화면 전면에 QR 이 떠서 학생들이 바로 접속할 수 있습니다."
+        />
+        <div className="appgrid">
+          {TEACHER_WEBAPPS.slice(0, 3).map((app) => <WebAppCard key={app.id} app={app} />)}
+        </div>
+        <div className="mt-8">
+          <Link to="/webapps" className="btn btn--ghost">웹앱 전체 보기<ArrowRight /></Link>
         </div>
       </section>
 
