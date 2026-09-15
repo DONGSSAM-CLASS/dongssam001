@@ -1,21 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
-import PagePlaceholder from '../components/PagePlaceholder.jsx';
-
+/** /report/:caseId 는 학습 루프의 6단계와 같은 화면이므로 그쪽으로 넘긴다. */
 export default function ReportPage() {
   const { caseId } = useParams();
-
-  return (
-    <PagePlaceholder
-      title="탐정 리포트"
-      phase="Phase 3 · Phase 6"
-      curriculum="평가 (2)-(다), 평가 (2)-(라) 루브릭 4개 축"
-    >
-      <p>
-        사건 번호 <code>{caseId}</code>의 문장 판정 정확도 · 사료 검증 점수 · APA 점수 · 작성한 서사 ·
-        루브릭 자기평가를 한 장에 모은 결과 카드가 들어갑니다. 인쇄(print CSS)와 PNG 저장을
-        지원합니다.
-      </p>
-    </PagePlaceholder>
-  );
+  return <Navigate to={`/learn/${caseId}/6`} replace />;
 }

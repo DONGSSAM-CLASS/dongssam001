@@ -10,12 +10,15 @@ import '@fontsource/noto-sans-kr/400.css';
 import '@fontsource/noto-sans-kr/700.css';
 
 import App from './App.jsx';
+import { ProgressProvider } from './hooks/useProgress.jsx';
 import './styles/index.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HashRouter>
-      <App />
+      <ProgressProvider>
+        <App />
+      </ProgressProvider>
     </HashRouter>
   </React.StrictMode>,
 );

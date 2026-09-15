@@ -1,42 +1,104 @@
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import PagePlaceholder from '../components/PagePlaceholder.jsx';
-
-// 모든 케이스 공통 6단계 학습 루프 (0~6)
-export const LOOP_STEPS = [
-  { no: 0, name: '탐구 질문 다듬기', basis: '교수·학습 (2)-(나), 평가 (2)-(라)①' },
-  { no: 1, name: 'AI에게 묻기', basis: '교수·학습 (2)-(마)' },
-  { no: 2, name: '문장 판정', basis: '과정·기능 ②' },
-  { no: 3, name: '사료 검증 워크벤치', basis: '교수·학습 (2)-(가), 과정·기능 ①' },
-  { no: 4, name: '출처 기재', basis: '과정·기능 ③' },
-  { no: 5, name: '세 줄 출처 메모 + 나의 서사', basis: '과정·기능 ④, 평가 (2)-(나)' },
-  { no: 6, name: '탐정 리포트', basis: '평가 (2)-(다)' },
-];
+import StepIndicator, { STEP_META } from '../components/StepIndicator.jsx';
+import Step0Question from '../components/steps/Step0Question.jsx';
+import Step1Ask from '../components/steps/Step1Ask.jsx';
+import Step2Verdict from '../components/steps/Step2Verdict.jsx';
+import Step3Workbench from '../components/steps/Step3Workbench.jsx';
+import Step4Citation from '../components/steps/Step4Citation.jsx';
+import Step5Narrative from '../components/steps/Step5Narrative.jsx';
+import Step6Report from '../components/steps/Step6Report.jsx';
+import NotFoundPage from './NotFoundPage.jsx';
+import { useProgress } from '../hooks/useProgress.jsx';
+import { getCase } from '../lib/cases.js';
+import { completedSteps } from '../lib/scoring.js';
 
 export default function LearningLoopPage() {
-  const { caseId } = useParams();
+  const { caseId, step } = useParams();
+  const navigate = useNavigate();
+  const { progress, getCaseState, updateCaseStep, markVisited } = useProgress();
+
+  const caseData = getCase(caseId);
+  const stepNo = Math.min(6, Math.max(0, Number.parseInt(step ?? '0', 10) || 0));
+
+  useEffect(() => {
+    if (caseData) markVisited(caseId, stepNo);
+  }, [caseData, caseId, stepNo, markVisited]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }, [stepNo]);
+
+  if (!caseData) return <NotFoundPage />;
+
+  const caseState = getCaseState(caseId);
+  const done = completedSteps(caseData, caseState);
+  const meta = STEP_META[stepNo];
+
+  function goto(next) {
+    navigate(`/learn/${caseId}/${next}`);
+  }
+
+  const stepProps = {
+    caseData,
+    onChange: (value) => updateCaseStep(caseId, `step${stepNo}`, value),
+  };
 
   return (
-    <PagePlaceholder
-      title="학습 루프"
-      phase="Phase 3"
-      curriculum="과정·기능 ①~④ 전체와 1:1 대응"
-    >
-      <p className="mb-3">
-        사건 번호: <code>{caseId}</code>
+    <div className="space-y-4">
+      <StepIndicator current={stepNo} done={done} onJump={goto} />
+
+      <header className="no-print">
+        <p className="text-xs tracking-widest text-ink-soft">
+          사건 파일 · {caseData.period} · 성취기준 {caseData.curriculum.standards.join(', ')}
+        </p>
+        <h1 className="text-xl font-bold leading-snug">{caseData.title}</h1>
+        <p className="text-sm text-ink-soft">
+          {stepNo}단계 · {meta.name} <span className="mx-1">|</span> 교육과정 근거: {meta.basis}
+        </p>
+      </header>
+
+      {stepNo === 0 ? <Step0Question {...stepProps} state={caseState.step0} /> : null}
+      {stepNo === 1 ? <Step1Ask caseData={caseData} /> : null}
+      {stepNo === 2 ? <Step2Verdict {...stepProps} state={caseState.step2} /> : null}
+      {stepNo === 3 ? <Step3Workbench {...stepProps} state={caseState.step3} /> : null}
+      {stepNo === 4 ? <Step4Citation {...stepProps} state={caseState.step4} /> : null}
+      {stepNo === 5 ? <Step5Narrative {...stepProps} state={caseState.step5} /> : null}
+      {stepNo === 6 ? (
+        <Step6Report
+          {...stepProps}
+          state={caseState.step6}
+          caseState={caseState}
+          studentName={progress.name}
+        />
+      ) : null}
+
+      <nav className="no-print flex flex-wrap items-center justify-between gap-2 border-t border-kraft-dark pt-4">
+        <button
+          type="button"
+          onClick={() => goto(stepNo - 1)}
+          disabled={stepNo === 0}
+          className="btn-quiet disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          ← 이전 단계
+        </button>
+        <Link to={`/cases/${caseData.track}`} className="text-sm underline underline-offset-2">
+          사건부 목록으로
+        </Link>
+        <button
+          type="button"
+          onClick={() => goto(stepNo + 1)}
+          disabled={stepNo === 6}
+          className="btn-primary disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          다음 단계 →
+        </button>
+      </nav>
+
+      <p className="no-print text-xs text-ink-soft">
+        단계를 오가도 입력한 내용은 이 기기에 그대로 남는다.
       </p>
-      <p className="mb-3">
-        상단 고정 스텝 인디케이터와 단계별 화면이 이 자리에 들어갑니다. 뒤로 가기를 허용하되 입력값은
-        보존합니다.
-      </p>
-      <ol className="list-decimal space-y-1 pl-6" start={0}>
-        {LOOP_STEPS.map((step) => (
-          <li key={step.no}>
-            <span className="font-bold">{step.name}</span>
-            <span className="text-sm text-ink-soft"> — {step.basis}</span>
-          </li>
-        ))}
-      </ol>
-    </PagePlaceholder>
+    </div>
   );
 }
