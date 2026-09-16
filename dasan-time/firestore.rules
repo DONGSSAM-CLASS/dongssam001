@@ -1,0 +1,246 @@
+rules_version = '2';
+
+// 다산의 시간 — Firestore 보안 규칙
+//
+// 지키려는 것
+//  1. 교사는 자기 학급과 그 아래 문서만 다룬다.
+//  2. 학생은 자기 결과물만 읽고 쓴다. 다른 학생의 결과물은 읽을 수 없다.
+//  3. 사용 시간(s1_a1)은 본인과 담당 교사 말고는 아무도 읽을 수 없다.
+//  4. 교사 평가(evals)는 학생이 아예 접근할 수 없다.
+//  5. editLocked 가 켜져 있으면 학생은 더 이상 쓸 수 없다.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /* ---------------- 공통 도우미 ---------------- */
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function myUid() {
+      return request.auth.uid;
+    }
+
+    function classDoc(classId) {
+      return get(/databases/$(database)/documents/classes/$(classId)).data;
+    }
+
+    function isTeacherOf(classId) {
+      return signedIn() && classDoc(classId).teacherUid == myUid();
+    }
+
+    // 학생 문서가 있고 active 이면 그 학급의 학생이다.
+    function studentDoc(classId) {
+      return get(/databases/$(database)/documents/classes/$(classId)/students/$(myUid())).data;
+    }
+
+    function isStudentOf(classId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/classes/$(classId)/students/$(myUid()))
+        && studentDoc(classId).active == true;
+    }
+
+    function myGroup(classId) {
+      return studentDoc(classId).group;
+    }
+
+    // 선생님이 수정을 잠갔는지
+    function editLocked(classId) {
+      return classDoc(classId).editLocked == true;
+    }
+
+    // 한 칸 500자 제한. 값 안에 들어 있는 문자열을 모두 확인한다.
+    function shortString(value) {
+      return !(value is string) || value.size() <= 500;
+    }
+
+    // 한 활동지의 칸 개수를 제한한다.
+    // 칸마다의 글자 수(500자)는 규칙 언어로 맵을 훑을 수 없어 클라이언트에서 자른다.
+    // (src/lib/defaults.ts 의 MAX_FIELD_LENGTH 와 같은 값)
+    function fieldsWithinLimit(map) {
+      return map.keys().size() <= 40;
+    }
+
+    /* ---------------- users ---------------- */
+
+    match /users/{uid} {
+      // 본인 문서만 읽는다. 목록 조회는 막는다.
+      allow get: if signedIn() && uid == myUid();
+      allow create: if signedIn()
+        && uid == myUid()
+        && request.resource.data.role in ['teacher', 'student'];
+      allow update: if false;
+      allow delete: if false;
+      allow list: if false;
+    }
+
+    /* ---------------- teachers ---------------- */
+
+    match /teachers/{uid} {
+      allow get: if signedIn() && uid == myUid();
+      allow create, update: if signedIn()
+        && uid == myUid()
+        && shortString(request.resource.data.school)
+        && shortString(request.resource.data.name)
+        && request.resource.data.name is string
+        && request.resource.data.school is string;
+      allow delete, list: if false;
+    }
+
+    /* ---------------- classCodes ---------------- */
+    //
+    // 학생은 "가입하기 전에" 코드를 넣고 "○○ 선생님의 3학년 2반이 맞나요?"를 확인한다.
+    // 그 시점에는 아직 계정이 없으므로 로그인 없이 문서 하나를 읽을 수 있어야 한다.
+    // 대신 목록 훑기(list)는 막아 두어, 코드를 모르면 아무것도 알아낼 수 없다.
+    // 이 문서에는 학급 이름과 교사 이름만 들어 있고 학생 정보는 들어 있지 않다.
+    match /classCodes/{code} {
+      allow get: if true;
+      allow list: if false;
+      allow create: if signedIn()
+        && request.resource.data.teacherUid == myUid()
+        && request.resource.data.classId is string;
+      allow update, delete: if signedIn() && resource.data.teacherUid == myUid();
+    }
+
+    /* ---------------- classes ---------------- */
+
+    match /classes/{classId} {
+      // 교사는 자기 학급 전체, 학생은 자기 학급 문서를 읽는다.
+      // 학급 문서에는 민감한 개인 정보가 들어 있지 않다(차시 상태, 공동 시간 등).
+      allow get: if isTeacherOf(classId) || isStudentOf(classId);
+      // 목록 조회는 교사가 자기 학급을 찾을 때만 쓴다.
+      // list 규칙은 결과 문서마다 확인하므로, teacherUid 로 거르지 않은 질의는 통째로 막힌다.
+      allow list: if signedIn() && resource.data.teacherUid == myUid();
+
+      allow create: if signedIn()
+        && request.resource.data.teacherUid == myUid()
+        && request.resource.data.name is string
+        && shortString(request.resource.data.name);
+      allow update: if isTeacherOf(classId)
+        && request.resource.data.teacherUid == resource.data.teacherUid;
+      allow delete: if isTeacherOf(classId);
+
+      /* ------- 학생 명단 ------- */
+      match /students/{studentUid} {
+        allow read: if isTeacherOf(classId) || (signedIn() && studentUid == myUid());
+        // 가입할 때 본인 문서를 만든다.
+        allow create: if signedIn()
+          && studentUid == myUid()
+          && request.resource.data.name is string
+          && request.resource.data.number is int
+          && request.resource.data.loginId is string
+          && shortString(request.resource.data.name)
+          && shortString(request.resource.data.loginId);
+        // 이름·번호·모둠 수정과 내보내기는 교사만 한다.
+        allow update, delete: if isTeacherOf(classId);
+      }
+
+      /* ------- 번호 자리 예약 ------- */
+      //
+      // 학생은 가입할 때 학급 명단을 읽을 수 없다(다른 학생 이름이 새면 안 된다).
+      // 그래서 번호마다 문서를 하나 두고, 이미 있으면 create 가 실패하게 한다.
+      // 문서에는 uid 만 들어 있고 이름·번호 외의 정보는 담지 않는다.
+      match /numbers/{number} {
+        allow read: if isTeacherOf(classId);
+        // create 는 문서가 없을 때만 통과하므로, 같은 번호를 두 명이 잡을 수 없다.
+        allow create: if signedIn() && request.resource.data.uid == myUid();
+        allow update: if false;
+        allow delete: if isTeacherOf(classId);
+      }
+
+      /* ------- 결과물 ------- */
+      match /submissions/{docId} {
+        // 교사는 자기 학급 전체를 읽는다.
+        // 학생은 자기 문서만 읽는다. 그래서 s1_a1(사용 시간)도 남이 볼 수 없다.
+        allow get: if isTeacherOf(classId)
+          || (signedIn() && resource.data.ownerUid == myUid());
+        // 학생 질의는 ownerUid 로 걸러야만 통과한다. 남의 결과물은 목록에도 나오지 않는다.
+        allow list: if isTeacherOf(classId)
+          || (isStudentOf(classId) && resource.data.ownerUid == myUid());
+
+        allow create, update: if
+          // 교사는 칭찬 한 줄만 덧붙인다.
+          isTeacherOf(classId)
+          || (
+            isStudentOf(classId)
+            && !editLocked(classId)
+            && docId == myUid() + '_' + request.resource.data.activityId
+            && request.resource.data.ownerUid == myUid()
+            && request.resource.data.activityId is string
+            && request.resource.data.status in ['draft', 'submitted']
+            && request.resource.data.data is map
+            && fieldsWithinLimit(request.resource.data.data)
+            // 학생은 칭찬(praise)을 스스로 바꿀 수 없다.
+            && (!('praise' in request.resource.data)
+                || request.resource.data.praise == resource.data.praise)
+          );
+        allow delete: if isTeacherOf(classId);
+      }
+
+      /* ------- 교사 평가 (학생 접근 불가) ------- */
+      match /evals/{docId} {
+        allow read, write: if isTeacherOf(classId);
+      }
+
+      /* ------- 감정 지도 ------- */
+      // 작성자 uid 를 저장하지 않는다. 같은 학급 학생과 교사만 읽는다.
+      match /emotions/{docId} {
+        allow read: if isTeacherOf(classId) || isStudentOf(classId);
+        allow create: if isStudentOf(classId)
+          && !editLocked(classId)
+          && request.resource.data.word is string
+          && shortString(request.resource.data.word)
+          && request.resource.data.hidden == false;
+        // 숨기기는 교사만 한다.
+        allow update, delete: if isTeacherOf(classId);
+      }
+
+      /* ------- 모둠 보드 ------- */
+      // 같은 모둠 학생만 쓸 수 있다. 읽기는 같은 학급 학생과 교사가 한다.
+      match /groupBoards/{boardId} {
+        allow read: if isTeacherOf(classId) || isStudentOf(classId);
+        allow create, update: if isTeacherOf(classId)
+          || (
+            isStudentOf(classId)
+            && !editLocked(classId)
+            && request.resource.data.group == myGroup(classId)
+            && boardId == request.resource.data.activityId + '_' + string(myGroup(classId))
+          );
+        allow delete: if isTeacherOf(classId);
+      }
+
+      /* ------- 갤러리 ------- */
+      // 별칭과 출입증 내용만 들어 있다. 이름과 사용 시간은 저장하지 않는다.
+      match /gallery/{studentUid} {
+        allow read: if isTeacherOf(classId) || isStudentOf(classId);
+        allow create, update: if isStudentOf(classId)
+          && studentUid == myUid()
+          && !editLocked(classId)
+          && request.resource.data.alias is string
+          && shortString(request.resource.data.alias)
+          && request.resource.data.card is map
+          && request.resource.data.visible is bool;
+        allow delete: if isTeacherOf(classId) || (signedIn() && studentUid == myUid());
+      }
+
+      /* ------- 동료 평가 투표 ------- */
+      // 학생은 자기 표만 읽고 쓴다. 집계는 교사 화면에서 한다.
+      match /votes/{studentUid} {
+        allow read: if isTeacherOf(classId) || (signedIn() && studentUid == myUid());
+        allow create, update: if isStudentOf(classId)
+          && studentUid == myUid()
+          && classDoc(classId).voteClosed != true
+          && request.resource.data.picks is list
+          && request.resource.data.picks.size() <= 2
+          && shortString(request.resource.data.reason);
+        allow delete: if isTeacherOf(classId);
+      }
+    }
+
+    // 위에서 허용하지 않은 모든 경로는 막는다.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

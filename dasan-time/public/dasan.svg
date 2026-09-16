@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="다산의 시간">
+  <rect width="64" height="64" rx="14" fill="#fbe3ef"/>
+  <!-- 초가집 지붕 -->
+  <path d="M12 30 L32 14 L52 30 Z" fill="#e5a6c4"/>
+  <!-- 집 몸체 -->
+  <rect x="18" y="30" width="28" height="18" rx="3" fill="#fff6fa" stroke="#e5a6c4" stroke-width="2"/>
+  <!-- 문 -->
+  <rect x="28" y="37" width="8" height="11" rx="2" fill="#a86a8c"/>
+  <!-- 붓 한 획 -->
+  <path d="M20 54 C28 50 36 50 44 54" stroke="#65c3c8" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,40 @@
+{
+  "name": "dasan-time",
+  "private": true,
+  "version": "1.0.0",
+  "description": "다산의 시간 — 중학교 3학년 역사 수업용 웹앱 (2022 개정 교육과정, 조선 사회의 변동)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "deploy": "npm run build && firebase deploy --only hosting,firestore",
+    "emulators": "firebase emulators:start --project demo-dasan-time",
+    "test:rules": "firebase emulators:exec --only firestore --project demo-dasan-time \"vitest run\""
+  },
+  "dependencies": {
+    "firebase": "^10.14.1",
+    "html2canvas-pro": "^1.5.11",
+    "jspdf": "^2.5.2",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.454.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.1",
+    "recharts": "^2.13.3"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^3.0.4",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "daisyui": "^5.0.43",
+    "firebase-tools": "^13.35.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.6.3",
+    "vite": "^6.3.5",
+    "vitest": "^2.1.9"
+  }
+}

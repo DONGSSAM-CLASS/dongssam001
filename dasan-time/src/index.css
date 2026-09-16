@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: cupcake --default;
+}
+
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo",
+    "Noto Sans KR", sans-serif;
+}
+
+:root {
+  font-family: var(--font-sans);
+}
+
+html,
+body {
+  /* 휴대폰 360px 너비에서 가로 스크롤이 생기지 않도록 한다. */
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-size: 17px;
+  line-height: 1.7;
+  word-break: keep-all; /* 한국어 낱말이 중간에서 잘리지 않게 한다. */
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* 버튼은 손가락으로 누르기 쉽게 최소 44px 높이를 지킨다. */
+.btn {
+  min-height: 2.75rem;
+  height: auto;
+}
+
+/* 인쇄·PDF 화면에서는 화면용 장식(내비게이션 등)을 숨긴다. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-page {
+    break-after: page;
+  }
+}
