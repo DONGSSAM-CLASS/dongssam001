@@ -1,0 +1,36 @@
+name: 교실 국가 타이쿤 — 주식 시세 갱신
+
+# Cloud Scheduler 대체입니다(Spark 무료 요금제에는 Scheduler 가 없습니다).
+# cron 은 UTC 기준입니다. 아래는 한국 시간으로
+#   평일 09:00~15:30 사이 30분 간격 + 장 마감 뒤 종가 1회
+# 에 해당합니다. (00:00 UTC = 09:00 KST)
+on:
+  schedule:
+    - cron: '0,30 0-6 * * 1-5'   # KST 09:00 ~ 15:30, 30분 간격
+    - cron: '10 7 * * 1-5'       # KST 16:10 — 장 마감 뒤 종가 확정
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tycoon-prices
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tycoon
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --legacy-peer-deps
+      - name: 시세 가져와 Firestore 캐시 갱신
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TYCOON }}
+          TYCOON_CLASS_ID: ${{ secrets.TYCOON_CLASS_ID }}
+        run: npm run prices

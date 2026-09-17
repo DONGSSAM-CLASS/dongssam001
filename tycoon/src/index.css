@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Noto Sans KR', system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif;
+
+  /* 역할 테마 색 — 대통령 남색 / 회장단 보라 / 장관 초록 / 국민 하늘 */
+  --color-navy-50: #eef2ff;
+  --color-navy-100: #dbe3ff;
+  --color-navy-500: #2b4a91;
+  --color-navy-600: #1f3a78;
+  --color-navy-700: #172c5c;
+}
+
+:root {
+  font-family: var(--font-sans);
+  /* 접근성: 본문 최소 16px */
+  font-size: 16px;
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fb;
+  color: #111827;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 터치 영역 44px 이상 */
+button,
+a.btn,
+input,
+select {
+  min-height: 44px;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+  .print-card { break-inside: avoid; }
+}

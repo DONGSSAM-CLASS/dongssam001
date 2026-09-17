@@ -1,0 +1,324 @@
+rules_version = '2';
+
+// ============================================================================
+//  동쌤의 교실 국가 타이쿤 — Firestore Security Rules
+//  Firebase Spark(무료) 요금제 전용. Cloud Functions 가 없으므로 이 파일이
+//  사실상 "백엔드"입니다. 코인의 무결성은 전부 여기서 강제합니다.
+//
+//  [핵심 원리 — 복식부기 원장]
+//  코인은 절대 생기거나 사라지지 않습니다. 모든 이동은 아래 3개 문서를
+//  하나의 batch(원자적 묶음) 로 함께 써야만 통과합니다.
+//    ① classes/{c}/transactions/{txId}   (새로 생성, 수정·삭제 영구 금지)
+//    ② 보내는 계정 accounts/{from}       balance -= amount, lastTxId = txId
+//    ③ 받는 계정   accounts/{to}         balance += amount, lastTxId = txId
+//  각 계정 규칙이 getAfter() 로 "상대 계정도 같은 금액만큼 반대로 움직였는가"를
+//  직접 확인하므로, 한쪽만 늘리는 위조가 불가능합니다.
+//
+//  [발행·소각]
+//  MINT 계정을 두고 국고 발행은 MINT → TREASURY 이동으로 처리합니다.
+//  따라서 "모든 계정 잔액의 합 == 0" 이 언제나 성립하고,
+//  통화량 = -(MINT 계정 잔액) 으로 계산됩니다. MINT 만 음수를 허용합니다.
+//
+//  [문서 조회 한도]
+//  batch 1건당 get()/getAfter() 는 20회까지입니다. 그래서 25명 급여를
+//  한 batch 로 묶지 않고 학생 1명당 1 batch 로 순차 실행합니다.
+//  (멱등성은 payrolls/{월}/slips/{번호} 문서의 create-only 로 보장)
+// ============================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------------------------------------------------------------- 공통
+    function signedIn() { return request.auth != null; }
+    function uid() { return request.auth.uid; }
+
+    function classPath(classId) {
+      return /databases/$(database)/documents/classes/$(classId);
+    }
+    function classData(classId) { return get(classPath(classId)).data; }
+
+    // 대통령 = 담임교사. 이 앱의 최고 관리자입니다.
+    function isTeacher(classId) {
+      return signedIn() && classData(classId).teacherId == uid();
+    }
+
+    function memberPath(classId) {
+      return /databases/$(database)/documents/classes/$(classId)/members/$(uid());
+    }
+    function isMember(classId) { return signedIn() && exists(memberPath(classId)); }
+    function memberData(classId) { return get(memberPath(classId)).data; }
+    function myNumber(classId) { return memberData(classId).number; }
+    function myAccount(classId) { return 'S' + myNumber(classId); }
+    function hasRole(classId, roleKey) {
+      return isMember(classId) && roleKey in memberData(classId).roles;
+    }
+
+    // 학생 가상 이메일 규칙: {authPrefix}-{번호}-g{세대}@student.local
+    // (Firebase Auth 가 이메일을 소문자로 정규화하므로 authPrefix 는 소문자로 저장)
+    function expectedEmail(classId, number) {
+      return classData(classId).authPrefix + '-' + number + '-g'
+        + string(get(/databases/$(database)/documents/classes/$(classId)/roster/$(number)).data.authGeneration)
+        + '@student.local';
+    }
+    function emailMatches(classId, number) {
+      return signedIn()
+        && request.auth.token.email != null
+        && request.auth.token.email == expectedEmail(classId, number);
+    }
+
+    function isInt(v) { return v is int; }
+    function positiveInt(v) { return v is int && v > 0; }
+
+    // ------------------------------------------------------------- 학급 코드
+    // 학생이 로그인 전에 학급을 찾아야 하므로, 코드를 정확히 아는 경우에만
+    // get 을 허용합니다. list(목록 조회)는 금지라 코드 전수조사가 불가능합니다.
+    // 노출 정보는 classId · authPrefix · 번호별 세대뿐이며 학생 이름은 없습니다.
+    match /classCodes/{code} {
+      allow get: if true;
+      allow list: if false;
+      allow create: if signedIn()
+        && request.resource.data.teacherId == uid()
+        && request.resource.data.keys().hasAll(['classId', 'teacherId', 'authPrefix']);
+      allow update: if resource.data.teacherId == uid();
+      allow delete: if resource.data.teacherId == uid();
+    }
+
+    // ----------------------------------------------------------------- 학급
+    match /classes/{classId} {
+      allow get: if isTeacher(classId) || isMember(classId);
+      allow list: if signedIn() && resource.data.teacherId == uid();
+      allow create: if signedIn()
+        && request.resource.data.teacherId == uid()
+        && request.resource.data.allowNegativeBalance == false
+        && request.resource.data.createdAt == request.time;
+      // 담임교사만 수정. teacherId 는 절대 바뀌지 않습니다.
+      allow update: if isTeacher(classId)
+        && request.resource.data.teacherId == resource.data.teacherId;
+      allow delete: if false;   // 학급은 삭제하지 않고 보관합니다.
+
+      // ------------------------------------------------------------ 설정
+      match /settings/{docId} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow write: if isTeacher(classId);
+      }
+
+      // ------------------------------------------------------- 명단(공개)
+      // 같은 학급 구성원이 서로 볼 수 있는 최소 정보입니다.
+      // PIN 같은 비밀값은 여기 두지 않고 roster 에 둡니다.
+      match /students/{number} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow create, delete: if isTeacher(classId);
+        // 교사는 자유롭게 수정. 학생은 "첫 로그인 시 자기 번호를 한 번 연결"하는
+        // uid 필드만, 그것도 아직 비어 있을 때만 쓸 수 있습니다.
+        allow update: if isTeacher(classId)
+          || (
+            signedIn()
+            && resource.data.uid == null
+            && request.resource.data.uid == uid()
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['uid', 'claimedAt'])
+            && emailMatches(classId, number)
+          );
+      }
+
+      // ------------------------------------------------- 명부 비밀값(교사 전용)
+      // 초기 PIN 과 PIN 초기화 세대. 학생은 읽을 수 없습니다.
+      match /roster/{number} {
+        allow read, write: if isTeacher(classId);
+      }
+
+      // --------------------------------------------------------- 구성원
+      // uid → 번호·역할 매핑. 권한 판정의 기준입니다.
+      // 역할(roles)은 교사만 바꿀 수 있습니다.
+      match /members/{memberUid} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow create: if isTeacher(classId)
+          || (
+            signedIn() && memberUid == uid()
+            && request.resource.data.roles.size() == 0
+            && emailMatches(classId, request.resource.data.number)
+            && getAfter(/databases/$(database)/documents/classes/$(classId)/students/$(request.resource.data.number)).data.uid == uid()
+          );
+        allow update, delete: if isTeacher(classId);
+      }
+
+      // ----------------------------------------------------------- 부처
+      match /ministries/{ministryId} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow write: if isTeacher(classId);
+      }
+
+      // =======================================================  원 장  =======
+      // 거래는 한 번 쓰면 끝. 수정도 삭제도 영원히 불가능합니다.
+      match /transactions/{txId} {
+        allow read: if isTeacher(classId)
+          || (isMember(classId) && (
+                resource.data.fromAccount == myAccount(classId)
+             || resource.data.toAccount == myAccount(classId)
+          ));
+        allow list: if isTeacher(classId) || isMember(classId);
+        allow create: if txCreateValid(classId);
+        allow update, delete: if false;
+      }
+
+      function txCreateValid(cid) {
+        let tx = request.resource.data;
+        return tx.keys().hasAll(['type', 'fromAccount', 'toAccount', 'amount', 'reason', 'actorUid', 'createdAt'])
+          && positiveInt(tx.amount)
+          && tx.fromAccount is string && tx.toAccount is string
+          && tx.fromAccount != tx.toAccount
+          && tx.actorUid == uid()
+          && tx.createdAt == request.time      // 과거 거래 재사용(리플레이) 차단
+          && tx.reason is string && tx.reason.size() > 0 && tx.reason.size() <= 200
+          && txTypeAllowed(cid, tx);
+      }
+
+      // 거래 유형별로 "누가" "어느 방향으로" 만들 수 있는지 정합니다.
+      // 5~8단계(청약·은행·주식)의 학생 주도 거래는 해당 단계에서 추가합니다.
+      function txTypeAllowed(cid, tx) {
+        return
+          // 국고 발행·소각 — 대통령 전용
+          (tx.type == 'MINT'  && isTeacher(cid) && tx.fromAccount == 'MINT' && tx.toAccount == 'TREASURY')
+          || (tx.type == 'BURN' && isTeacher(cid) && tx.fromAccount == 'TREASURY' && tx.toAccount == 'MINT')
+          // 국고 → 학생 (월급·상점·지원금·대출실행)
+          || (tx.type in ['PAYROLL', 'MERIT', 'SUBSIDY', 'DEPOSIT_INTEREST']
+              && isTeacher(cid) && tx.fromAccount == 'TREASURY')
+          // 학생 → 국고 (소득세·벌점·수수료·급여회수·청약대금)
+          || (tx.type in ['TAX', 'PENALTY', 'FEE', 'CLAWBACK', 'AUCTION']
+              && isTeacher(cid) && tx.toAccount == 'TREASURY')
+          // 수동 잔액 조정 — 대통령 전용, 사유 필수(위 create 규칙에서 이미 강제)
+          || (tx.type == 'ADJUST' && isTeacher(cid));
+      }
+
+      // ------------------------------------------------------------ 계정
+      match /accounts/{accountId} {
+        allow read: if isTeacher(classId)
+          || accountId == 'TREASURY' || accountId == 'MINT'   // 국고·통화량은 공개
+          || (isMember(classId) && accountId == myAccount(classId))
+          // 기획재정부 장관은 전체 보유고를 조회할 수 있습니다(5-6).
+          || hasRole(classId, 'FINANCE_MINISTER');
+        allow list: if isTeacher(classId) || hasRole(classId, 'FINANCE_MINISTER');
+
+        // 계정은 교사가 잔액 0 으로만 만들 수 있습니다.
+        allow create: if isTeacher(classId)
+          && request.resource.data.balance == 0
+          && request.resource.data.lastTxId == null;
+        allow delete: if false;
+
+        // 잔액 변경은 오직 "짝이 맞는 복식부기 batch" 안에서만 가능합니다.
+        allow update: if accountMoveValid(classId, accountId);
+      }
+
+      function accountMoveValid(cid, accId) {
+        let before = resource.data;
+        let after = request.resource.data;
+        let txId = after.lastTxId;
+        let tx = getAfter(/databases/$(database)/documents/classes/$(cid)/transactions/$(txId)).data;
+        let delta = after.balance - before.balance;
+        let isFrom = tx.fromAccount == accId;
+        let otherId = isFrom ? tx.toAccount : tx.fromAccount;
+        let otherPath = /databases/$(database)/documents/classes/$(cid)/accounts/$(otherId);
+
+        return
+          // 잔액·마지막거래·갱신시각 외의 필드는 건드릴 수 없습니다.
+          after.diff(before).affectedKeys().hasOnly(['balance', 'lastTxId', 'updatedAt'])
+          && after.updatedAt == request.time
+          && txId is string
+          // 이 batch 안에서 방금 만들어진 거래여야 합니다.
+          && tx.createdAt == request.time
+          && positiveInt(tx.amount)
+          && (isFrom || tx.toAccount == accId)
+          && delta == (isFrom ? -tx.amount : tx.amount)
+          // 상대 계정도 같은 batch 안에서 정확히 반대 방향으로 움직여야 합니다.
+          && getAfter(otherPath).data.lastTxId == txId
+          && getAfter(otherPath).data.balance - get(otherPath).data.balance
+             == (isFrom ? tx.amount : -tx.amount)
+          // 음수 잔액: MINT 계정만 항상 허용(= 발행 누계), 나머지는 학급 설정을 따릅니다.
+          && (accId == 'MINT' || after.balance >= 0 || classData(cid).allowNegativeBalance == true);
+      }
+
+      // --------------------------------------------------------- 급여대장
+      // payrolls/{YYYY-MM} 은 create-only, slips/{번호} 도 create-only 이므로
+      // 같은 달 급여가 두 번 지급되는 일이 구조적으로 불가능합니다.
+      match /payrolls/{month} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow create: if isTeacher(classId) && request.resource.data.executedAt == request.time;
+        allow update: if isTeacher(classId)
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['status', 'totals', 'paidCount', 'updatedAt']);
+        allow delete: if false;
+
+        match /slips/{number} {
+          allow read: if isTeacher(classId)
+            || (isMember(classId) && number == myNumber(classId));
+          allow create: if isTeacher(classId);   // ★ 한 번만. 재지급 불가 = 멱등
+          allow update, delete: if false;
+        }
+      }
+
+      // ---------------------------------------------------- 지적·급여보류
+      match /warnings/{warningId} {
+        allow read: if isTeacher(classId)
+          || (isMember(classId) && resource.data.number == myNumber(classId));
+        allow list: if isTeacher(classId) || isMember(classId);
+        allow create: if isTeacher(classId);
+        // 취소만 가능하고 사유와 이력이 남습니다. 삭제는 불가능합니다.
+        allow update: if isTeacher(classId)
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['canceled', 'cancelReason', 'canceledAt']);
+        allow delete: if false;
+      }
+
+      match /warningCounts/{key} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow write: if isTeacher(classId);
+      }
+
+      // 보류 해제 권한은 대통령에게만 있습니다(5-3).
+      match /salaryHolds/{key} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow write: if isTeacher(classId);
+      }
+
+      match /meritPresets/{presetId} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow write: if isTeacher(classId);
+      }
+
+      // --------------------------------------------------------- 감사 로그
+      // 누가 무엇을 했는지 남기는 기록. 수정·삭제 불가.
+      match /auditLogs/{logId} {
+        allow read: if isTeacher(classId);
+        allow create: if signedIn()
+          && request.resource.data.actorUid == uid()
+          && request.resource.data.at == request.time;
+        allow update, delete: if false;
+      }
+
+      // --------------------------------------------------------- 관보(공지)
+      match /notices/{noticeId} {
+        allow read: if isTeacher(classId) || isMember(classId);
+        allow write: if isTeacher(classId);
+      }
+
+      // ======================================================================
+      //  5~8단계에서 열 컬렉션 — 지금은 전면 차단 상태입니다.
+      //  각 단계를 구현할 때 이 자리에 규칙을 추가하세요.
+      //  (auctions / bids / bank / deposits / loans / approvals
+      //   / stocks / holdings / orders / reports)
+      // ======================================================================
+    }
+
+    // ------------------------------------------------- 전역 시세 캐시(읽기전용)
+    // GitHub Actions 가 서비스 계정으로 씁니다. 서비스 계정은 규칙을 우회하므로
+    // 클라이언트 쓰기는 전면 금지해도 됩니다.
+    match /stockPrices/{ticker} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    // 그 밖의 모든 경로는 거부합니다.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
