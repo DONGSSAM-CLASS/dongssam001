@@ -181,6 +181,35 @@ describe('인물 · 연표 · 아이템 · 낱말', () => {
     }
   });
 
+  it('모든 인물의 차림새에 근거가 적혀 있다', () => {
+    for (const figure of Object.values(figures)) {
+      const app = figure.appearance;
+      expect(app, figure.id).toBeDefined();
+      expect(app.note.trim().length, `${figure.id} 의 복장 근거가 비어 있음`).toBeGreaterThan(10);
+      // 색은 모두 6자리 16진수여야 한다 (오타가 나면 three 가 조용히 검게 칠한다)
+      for (const key of ['coat', 'trim', 'lower'] as const) {
+        expect(app[key], `${figure.id}.${key}`).toMatch(/^#[0-9a-fA-F]{6}$/);
+      }
+    }
+  });
+
+  it('여성 인물은 여성 한복이나 군복을 입는다', () => {
+    // 1920~40년대 여성이 남성용 두루마기나 양복을 입은 모습으로 그려지면 시대 오인을 부른다.
+    for (const id of ['jeongjeonghwa', 'bangsunhui']) {
+      expect(figures[id].appearance.garment, id).toBe('hanbok-woman');
+    }
+    for (const id of ['ogwangsim', 'jibokyeong']) {
+      expect(figures[id].appearance.garment, id).toBe('uniform');
+    }
+  });
+
+  it('광복군 인물은 군복과 군모 차림이다', () => {
+    for (const id of ['jicheongcheon', 'ibeomseok', 'kimhakgyu', 'hanjiseong', 'jangjunha']) {
+      expect(figures[id].appearance.garment, id).toBe('uniform');
+      expect(figures[id].appearance.headwear, id).toBe('military-cap');
+    }
+  });
+
   it('영입 가능한 인물은 보정치를 가진다', () => {
     for (const figure of recruitableFigures) {
       expect(figure.bonus, `${figure.id} 에 bonus 없음`).toBeDefined();

@@ -203,6 +203,93 @@ export type MapId =
   | 'chongqing'
   | 'xian';
 
+/* ────────────────────── 인물의 차림새 (고증) ────────────────────── */
+
+/**
+ * 겉옷의 종류.
+ *
+ * 1919~1945년 독립운동가의 사진을 보면 차림이 크게 갈린다.
+ * 나이 든 인사는 한복 두루마기, 해외에서 교섭하던 인사는 양복,
+ * 광복군은 중국식 군복, 여성은 저고리와 치마를 입었다.
+ * 이 구분이 화면에서 인물을 알아보는 가장 큰 단서가 된다.
+ */
+export type GarmentKind =
+  /** 두루마기 — 발목까지 내려오는 한복 겉옷. 흰 동정과 고름이 특징 */
+  | 'durumagi'
+  /** 여성 한복 — 짧은 저고리와 가슴 위에서 퍼지는 치마 */
+  | 'hanbok-woman'
+  /** 양복 — 재킷·조끼·넥타이 */
+  | 'suit'
+  /** 광복군 군복 — 중국군 계열 상의에 혁대와 각반 */
+  | 'uniform'
+  /** 중국식 장삼(長衫) — 중국 인사 */
+  | 'changshan'
+  /** 학생복 — 목까지 올라오는 깃에 단추가 한 줄 */
+  | 'student';
+
+/** 머리 모양 */
+export type HairKind =
+  /** 짧게 깎은 머리 */
+  | 'cropped'
+  /** 가르마를 탄 단발 */
+  | 'parted'
+  /** 뒤로 넘긴 머리 */
+  | 'sleek'
+  /** 상투 — 망건을 두르고 정수리에 튼 머리 */
+  | 'topknot'
+  /** 쪽머리 — 뒤통수 아래에 낮게 쪽을 지고 비녀를 꽂은 머리 */
+  | 'bun'
+  /** 단발머리 — 여성의 짧은 머리 */
+  | 'bob'
+  /** 숱이 적은 머리 */
+  | 'balding';
+
+/** 수염 */
+export type FacialHair = 'none' | 'mustache' | 'beard' | 'long-beard';
+
+/** 머리에 쓰는 것 */
+export type HeadwearKind =
+  | 'none'
+  /** 갓 — 넓고 평평한 양태에 원통형 대우, 갓끈을 늘어뜨린다 */
+  | 'gat'
+  /** 중절모 — 챙이 둥글고 위가 눌린 서양 모자 */
+  | 'fedora'
+  /** 군모 — 챙이 달린 낮은 모자 */
+  | 'military-cap'
+  /** 탕건 — 갓 안에 쓰는 낮은 관 */
+  | 'tanggeon';
+
+/** 손에 든 것 */
+export type HandProp = 'none' | 'cane' | 'briefcase' | 'book' | 'scroll';
+
+/**
+ * 인물의 차림새.
+ *
+ * ⚠ **얼굴은 재현하지 않는다.** 널리 알려진 사진에서 확인되는
+ *   「옷·머리 모양·안경·수염」만 옮기고, 이목구비는 양식화한다.
+ *   생성한 얼굴을 실존 인물의 초상처럼 보이게 하면 역사 오인을 부르기 때문이다.
+ *   차림의 근거는 `note` 에 적는다.
+ */
+export interface Appearance {
+  garment: GarmentKind;
+  /** 겉옷 색 */
+  coat: string;
+  /** 동정·고름·옷깃 등 보조 색 */
+  trim: string;
+  /** 치마·바지 색 */
+  lower: string;
+  hair: HairKind;
+  facialHair: FacialHair;
+  /** 안경을 썼는지 (사진으로 확인되는 인물만 true) */
+  glasses: boolean;
+  headwear: HeadwearKind;
+  /** 나이대 — 자세와 피부 톤에 반영한다 */
+  age: 'young' | 'middle' | 'old';
+  holding?: HandProp;
+  /** 이 차림의 근거 */
+  note: string;
+}
+
 /* ────────────────────────── 인물 ────────────────────────── */
 
 /** 실존 인물 */
@@ -218,8 +305,8 @@ export interface Figure {
   track: QuestTrack;
   /** 아바타 테마 색 */
   accent: string;
-  /** 옷 색 (3D 캐릭터 렌더링) */
-  outfit: { coat: string; trim: string; hat?: string };
+  /** 차림새 — 3D 캐릭터와 초상화가 같은 데이터를 쓴다 */
+  appearance: Appearance;
   /** 인물 소개 (수준별) */
   bio: Leveled;
   /** 중학교 교과서에 이름이 나오는 인물인지 */

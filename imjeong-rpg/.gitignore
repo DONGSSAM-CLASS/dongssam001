@@ -6,3 +6,6 @@ dist
 public/assets/higgsfield/*.jpg
 public/assets/higgsfield/*.png
 public/assets/higgsfield/*.mp4
+
+# TypeScript 증분 빌드 캐시 (생성물)
+*.tsbuildinfo

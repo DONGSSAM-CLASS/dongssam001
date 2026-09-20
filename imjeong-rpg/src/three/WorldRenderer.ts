@@ -144,9 +144,9 @@ export class WorldRenderer {
     // 거상에서도 캐릭터가 건물 뒤로 들어가면 건물이 비쳐 보인다 —
     // 이게 없으면 쿼터뷰에서 내 캐릭터를 놓치기 십상이다.
     this.ghostMaterial = new THREE.MeshBasicMaterial({
-      color: new THREE.Color('#cfd6dc'),
+      color: new THREE.Color('#8fa2b2'),
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.17,
       depthWrite: false,
     });
 
@@ -339,11 +339,11 @@ export class WorldRenderer {
       this.worldGroup.add(character.group);
 
       const label = this.makeLabel(figure.name, placement.bubble);
-      label.position.set(0, 2.15, 0);
+      label.position.set(0, 1.98, 0);
       character.group.add(label);
 
       const marker = createQuestMarker();
-      marker.group.position.set(0, 3.05, 0);
+      marker.group.position.set(0, 2.42, 0);
       marker.group.visible = false;
       character.group.add(marker.group);
       this.disposables.push(...marker.geometries, ...character.geometries);
@@ -403,6 +403,8 @@ export class WorldRenderer {
     }
 
     for (const entry of this.occluders) this.setGhost(entry, blocking.has(entry.group));
+    // 무언가에 가려졌을 때만 플레이어 실루엣을 켠다
+    if (this.player?.xray) this.player.xray.visible = blocking.size > 0;
   }
 
   private buildPlayer(map: WorldMap, playerFigure: Figure): void {
@@ -577,7 +579,7 @@ export class WorldRenderer {
       npc.label.element.style.opacity = showName ? '1' : '0';
       if (npc.marker?.visible) {
         // 느낌표가 위아래로 통통 튄다 — 멀리서도 눈에 띈다.
-        npc.marker.position.y = 3.05 + Math.sin(time * 3.2 + npc.cell.x) * 0.14;
+        npc.marker.position.y = 2.42 + Math.sin(time * 3.2 + npc.cell.x) * 0.13;
         npc.marker.rotation.y = Math.sin(time * 1.4) * 0.5;
       }
     }

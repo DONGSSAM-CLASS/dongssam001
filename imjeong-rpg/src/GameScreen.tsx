@@ -196,7 +196,7 @@ export default function GameScreen() {
       <div className="world-layer" ref={containerRef} />
 
       <div className="hud">
-        <PortraitBar resources={resources} />
+        <PortraitBar resources={resources} figure={dialogueFigure ?? figures.player} />
         <SituationPanel
           map={map}
           act={act}

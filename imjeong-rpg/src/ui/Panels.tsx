@@ -5,6 +5,7 @@ import { figures } from '../data/figures';
 import { timelineSorted } from '../data/timeline';
 import { items as itemTable } from '../data/items';
 import { isUnlocked } from '../engine/rules';
+import { portraitDataUrl } from './portrait';
 import type { PanelKind } from '../store/gameStore';
 
 const TITLES: Record<Exclude<PanelKind, null>, string> = {
@@ -164,7 +165,8 @@ function Party({ level, party }: { level: Level; party: string[] }) {
         const figure = figures[id];
         if (!figure) return null;
         return (
-          <div className="list-item" key={id}>
+          <div className="list-item party-item" key={id}>
+            <img className="party-portrait" src={portraitDataUrl(figure)} alt="" />
             <div className="list-title" style={{ color: figure.accent }}>
               {figure.name}
               {figure.hanja ? ` (${figure.hanja})` : ''}

@@ -1,4 +1,5 @@
-import type { Level, Resources, WorldMap } from '../types';
+import type { Figure, Level, Resources, WorldMap } from '../types';
+import { portraitDataUrl } from './portrait';
 import { RESOURCE_ICONS, RESOURCE_LABELS, heatLevel, HEAT_TEXT } from '../engine/rules';
 import type { ResourceKey } from '../types';
 import { acts } from '../data/quests';
@@ -12,15 +13,13 @@ import type { PanelKind } from '../store/gameStore';
  */
 
 /* ── 좌상단: 초상과 상태 막대 ── */
-export function PortraitBar({ resources }: { resources: Resources }) {
+export function PortraitBar({ resources, figure }: { resources: Resources; figure: Figure }) {
   const heat = heatLevel(resources.heat);
   return (
     <div className="portrait-bar frame">
-      <div className="portrait" aria-hidden>
-        🖋️
-      </div>
+      <img className="portrait" src={portraitDataUrl(figure)} alt={`${figure.name} 초상`} />
       <div className="status-stack">
-        <div className="status-name">임시정부 서기</div>
+        <div className="status-name">{figure.name}</div>
         <Meter kind="prestige" label="국제 신망" value={resources.prestige} />
         <Meter kind="unity" label="통합도" value={resources.unity} />
         <Meter kind="heat" label="일제 감시" value={resources.heat} title={HEAT_TEXT[heat].middle} />

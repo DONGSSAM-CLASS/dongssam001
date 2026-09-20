@@ -1,5 +1,6 @@
 import type { Figure, Level, Quest } from '../types';
 import { GlossaryText } from './GlossaryText';
+import { portraitDataUrl } from './portrait';
 
 /**
  * NPC 대화창.
@@ -29,9 +30,13 @@ export function Dialogue({
   return (
     <div className="dialogue frame" role="dialog" aria-label={`${figure.name}과(와)의 대화`}>
       <div className="dialogue-head">
-        <div className="dialogue-avatar" style={{ background: figure.accent + '33', color: figure.accent }}>
-          <span aria-hidden>{figure.inTextbook ? '★' : '◆'}</span>
-        </div>
+        {/* 초상 — 3D 화면에서는 작아서 안 보이는 옷차림을 여기서 크게 보여 준다 */}
+        <img
+          className="dialogue-portrait"
+          src={portraitDataUrl(figure)}
+          alt={`${figure.name} 초상`}
+          style={{ borderColor: figure.accent }}
+        />
         <div>
           <div className="dialogue-name">
             {figure.name}
@@ -47,6 +52,9 @@ export function Dialogue({
       </div>
       <div className="source-cite" style={{ marginTop: 10 }}>
         근거 · {figure.sourceNote}
+      </div>
+      <div className="source-note" style={{ marginTop: 4 }}>
+        차림새 · {figure.appearance.note}
       </div>
 
       {quest && (

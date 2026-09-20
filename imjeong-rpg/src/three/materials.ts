@@ -162,8 +162,28 @@ export function clothMaterial(color: string): THREE.Material {
   return std(`c.${color}`, { color, roughness: 0.88 });
 }
 
-export function skinMaterial(): THREE.Material {
-  return std('c.skin', { color: '#e6c3a0', roughness: 0.78 });
+/** 피부 — 나이대에 따라 톤을 조금 달리한다 */
+export function skinMaterial(tone = '#e2bf9b'): THREE.Material {
+  return std(`c.skin.${tone}`, { color: tone, roughness: 0.78 });
+}
+
+/**
+ * 윤곽선 재질 — 뒷면만 그려서 물체 바깥에 어두운 테두리를 남긴다.
+ *
+ * 『거상』의 인물은 2D 그림이라 선이 또렷하다. 3D 모델은 그 선이 없어
+ * 배경에 묻히고 「물렁한 덩어리」처럼 보인다. 같은 모양을 조금 키워
+ * 뒷면만 어둡게 그리면 손으로 그린 듯한 테두리가 생긴다.
+ */
+export function outlineMaterial(): THREE.Material {
+  const key = 'outline';
+  const hit = materials.get(key);
+  if (hit) return hit;
+  const material = new THREE.MeshBasicMaterial({
+    color: new THREE.Color('#241d16'),
+    side: THREE.BackSide,
+  });
+  materials.set(key, material);
+  return material;
 }
 
 /** 빛나는 것 (등불, 표식) — 조명 영향을 받지 않는다 */

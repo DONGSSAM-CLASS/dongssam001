@@ -26,8 +26,10 @@ cd imjeong-rpg && npm install && npm run check
 2. **`choice.historical` 과 정답이 일치해야 합니다.** 정답인 선택지만 `historical: true`.
 3. **일자·판본에 이설이 있는 사건에는 `caveat` 를 답니다.**
    지금 필수로 검사하는 것: `q-founding`, `q-declaration-war`, `q-hongkou`, `q-cairo`, `q-mandate-dispute`.
-4. **실존 인물의 얼굴을 3D 로 재현하지 않습니다.** 옷차림과 색으로만 구분합니다.
-   (`src/three/character.ts` 상단 주석)
+4. **실존 인물의 얼굴을 재현하지 않습니다.** 사진으로 확인되는 **옷·머리·안경·수염**만
+   `src/data/figures.ts` 의 `appearance` 에 옮기고, 이목구비는 양식화합니다.
+   차림을 바꾸거나 추가할 때는 `appearance.note` 에 **근거를 반드시 적습니다.**
+   (`src/three/character.ts` · `src/ui/portrait.ts` 상단 주석)
 5. **폭력 장면을 조작하게 하지 않습니다.** 의열 투쟁은 판단과 결과로 다룹니다.
 6. **개인정보를 수집하지 않습니다.** 로그인·서버 저장을 추가하지 마세요.
    추가해야 한다면 학교 개인정보 처리 절차를 먼저 밟아야 합니다.
@@ -41,13 +43,15 @@ cd imjeong-rpg && npm install && npm run check
 | 바꾸고 싶은 것 | 고칠 파일 |
 | --- | --- |
 | 문제·사료·해설·보상 | `src/data/quests.ts` |
-| 인물 정보·옷 색·영입 보정 | `src/data/figures.ts` |
+| 인물 정보·차림새(복장·머리·안경·수염)·영입 보정 | `src/data/figures.ts` |
 | 도시 지형·건물·NPC 위치·소품 | `scripts/gen-maps.py` → `python3 scripts/gen-maps.py` |
 | 연표 | `src/data/timeline.ts` |
 | 낱말 풀이 | `src/data/glossary.ts` |
 | 자원 규칙·채점·보상 | `src/engine/rules.ts` |
 | 카메라 각도·줌 | `src/engine/isometric.ts` |
-| 건물 모양 | `src/three/buildings.ts` |
+| 3D 인물(옷 모양·비례) | `src/three/character.ts` |
+| 2D 초상 그림 | `src/ui/portrait.ts` |
+| 건물 모양·단청·현수막 | `src/three/buildings.ts` |
 | 나무·소품 | `src/three/props.ts` |
 | 재질감(텍스처) | `src/three/textures.ts` |
 | 맵별 조명·안개·꽃잎 | `src/three/atmosphere.ts` |
@@ -86,7 +90,11 @@ cd imjeong-rpg && npm install && npm run check
 
 - [ ] **실내 장면.** 건물에 들어가면 실내 맵으로 전환. (`'+'` 실내 바닥 타일은 이미 준비됨)
 - [ ] **밤·비 프리셋.** `atmosphere.ts` 에 시간대를 추가하고 창문 불빛(`litWindows`)을 켜기.
-- [ ] **캐릭터 표정.** 지금은 눈·눈썹만 있습니다. 대화 중 감정 변화를 주면 몰입이 늡니다.
+- [ ] **캐릭터 표정.** 지금은 눈·눈썹·입만 있습니다. 대화 중 감정 변화를 주면 몰입이 늡니다.
+- [ ] **옷의 무늬.** 지금은 단색입니다. 여성 한복의 색동 끝동, 군복의 계급장 같은 작은 무늬를
+      `textures.ts` 방식으로 그려 넣으면 한 단계 더 올라갑니다.
+- [ ] **차림 근거 보강.** `appearance.note` 는 「널리 알려진 사진에서 확인된다」 수준입니다.
+      국가보훈부 공훈전자사료관·독립기념관의 특정 사진을 찾아 출처를 구체화하세요.
 - [ ] **힉스필드 삽화 24장 생성.** `npm run assets:higgsfield` → `docs/HIGGSFIELD_MCP.md`
 
 ### 4-4. 접근성·성능
@@ -117,6 +125,15 @@ cd imjeong-rpg && npm install && npm run check
 맵 지형 문자열에는 **땅만** 그립니다. 건물과 부피 있는 소품의 발자국은
 `buildWorldGrid()` 가 자동으로 통행 불가로 바꿉니다. 지형과 건물이 어긋나
 캐릭터가 벽을 뚫는 사고를 원천적으로 막기 위한 구조입니다.
+
+### 인물의 차림은 한 군데에서만 정합니다
+
+`figures.ts` 의 `appearance` 하나를 3D 캐릭터(`three/character.ts`)와
+2D 초상(`ui/portrait.ts`)이 **함께** 읽습니다. 그래서 옷을 고치면 둘 다 바뀌고,
+둘이 어긋날 일이 없습니다. **새 인물을 넣을 때도 `appearance` 를 반드시 채우세요.**
+테스트가 색 표기와 근거 문장을 검사합니다.
+
+확인은 `?lineup`(3D 줄 세우기)과 `?portraits`(2D 초상 격자)에서 합니다.
 
 ### 재질은 공유합니다
 

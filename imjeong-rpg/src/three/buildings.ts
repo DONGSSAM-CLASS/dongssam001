@@ -445,6 +445,29 @@ export function createBuilding(spec: BuildingSpec): BuiltBuilding {
   group.position.set(spec.x + w / 2, 0, spec.z + d / 2);
   const top = BUILDERS[spec.style](ctx);
 
+  /**
+   * 단청 — 처마 밑 목재에 칠한 색 띠.
+   * 첨부한 『거상』 화면의 기와집이 화려해 보이는 큰 이유가 이 색 띠다.
+   * 동아시아 목조 건축에만 넣는다 (서양식 관청·막사·천막에는 없다).
+   */
+  if (spec.style === 'chinese' || spec.style === 'hanok' || spec.style === 'chongqing') {
+    const beamY = FLOOR_H * floors + 0.04;
+    const dancheong: Array<[string, number]> = [
+      ['#2f5f6e', 0.0],
+      ['#8d3b3b', 0.055],
+      ['#3f6b45', 0.11],
+      ['#c2a355', 0.165],
+    ];
+    for (const [color, offset] of dancheong) {
+      box(ctx, w + 0.5, 0.05, d + 0.5, buildMaterials.stoneTrim(color), [0, beamY - offset, 0], undefined, 1.6);
+    }
+    // 기둥 머리의 색 마디
+    for (const sx of [-1, 1]) {
+      box(ctx, 0.17, 0.3, 0.17, buildMaterials.stoneTrim('#8d3b3b'), [(sx * w) / 2, beamY - 0.28, d / 2 + 0.03], undefined, 1.6);
+      box(ctx, 0.19, 0.06, 0.19, buildMaterials.stoneTrim('#2f5f6e'), [(sx * w) / 2, beamY - 0.13, d / 2 + 0.03], undefined, 1.6);
+    }
+  }
+
   // 글자 없는 나무 현판 — 이름은 CSS 라벨로 또렷하게 띄운다.
   // (텍스처로 구운 글씨는 비스듬한 시점에서 읽기 어렵고 지붕에 가린다.)
   if (spec.sign) {
@@ -454,6 +477,16 @@ export function createBuilding(spec: BuildingSpec): BuiltBuilding {
     box(ctx, plaqueW, 0.38, 0.09, buildMaterials.stoneTrim('#3c3227'), [0, y, d / 2 + 0.22], undefined, 1.2);
     box(ctx, plaqueW + 0.14, 0.07, 0.14, buildMaterials.wood('#7a6144'), [0, y + 0.22, d / 2 + 0.22], undefined, 1.4);
     box(ctx, plaqueW + 0.14, 0.07, 0.14, buildMaterials.wood('#7a6144'), [0, y - 0.22, d / 2 + 0.22], undefined, 1.4);
+    // 현판 양옆으로 늘어뜨린 붉은 세로 천
+    for (const sx of [-1, 1]) {
+      const bannerX = sx * (Math.min(w * 0.58, 2.2) / 2 + 0.62);
+      if (Math.abs(bannerX) < w / 2 + 0.3) {
+        box(ctx, 0.3, 1.5, 0.05, buildMaterials.stoneTrim('#8d3231'), [bannerX, y - 0.62, d / 2 + 0.16], undefined, 1.2);
+        box(ctx, 0.34, 0.09, 0.09, buildMaterials.wood('#6b5741'), [bannerX, y + 0.16, d / 2 + 0.16], undefined, 1.6);
+        box(ctx, 0.3, 0.1, 0.06, buildMaterials.stoneTrim('#c2a355'), [bannerX, y - 1.34, d / 2 + 0.17], undefined, 1.6);
+      }
+    }
+
     // 현판 양옆의 등롱
     for (const sx of [-1, 1]) {
       const lamp = add(
