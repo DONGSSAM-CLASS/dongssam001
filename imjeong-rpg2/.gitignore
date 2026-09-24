@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+.env.local
+*.local
+# 힉스필드 영상은 용량이 커서 올리지 않는다. (이미지는 커밋해도 된다 — 배포에 함께 실린다)
+public/assets/higgsfield/*.mp4
+
+# TypeScript 증분 빌드 캐시 (생성물)
+*.tsbuildinfo
