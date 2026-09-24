@@ -1,0 +1,845 @@
+{
+  "model": "gpt-image-2",
+  "note": "모델 이름과 파라미터(size, background, quality)는 사용하는 OpenAI API 문서로 먼저 확인하세요. gpt-image 계열은 size 1024x1024/1536x1024/1024x1536, background transparent|opaque, quality high를 지원합니다.",
+  "style": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks.",
+  "negative": "Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+  "items": [
+    {
+      "id": "char_sejong_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/sejong.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of King Sejong the Great of Joseon Korea (15th century), wearing a crimson gonryongpo royal robe with round gold dragon embroidery on chest and shoulders, a black ikseongwan hat with two small upright wing-shaped flaps at the back, a jade-plaque belt, neat black mustache and short beard, calm wise smile, holding a rolled hangul scroll in one hand. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "세종대왕 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_sejong_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/sejong_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of King Sejong the Great of Joseon Korea (15th century), wearing a crimson gonryongpo royal robe with round gold dragon embroidery on chest and shoulders, a black ikseongwan hat with two small upright wing-shaped flaps at the back, a jade-plaque belt, neat black mustache and short beard, calm wise smile, holding a rolled hangul scroll in one hand, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "세종대왕 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_sejong_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/sejong_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of King Sejong the Great of Joseon Korea (15th century), wearing a crimson gonryongpo royal robe with round gold dragon embroidery on chest and shoulders, a black ikseongwan hat with two small upright wing-shaped flaps at the back, a jade-plaque belt, neat black mustache and short beard, calm wise smile, holding a rolled hangul scroll in one hand. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "세종대왕 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_sejong_driving",
+      "category": "character",
+      "file": "assets/ref/characters/sejong_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. King Sejong the Great of Joseon Korea (15th century), wearing a crimson gonryongpo royal robe with round gold dragon embroidery on chest and shoulders, a black ikseongwan hat with two small upright wing-shaped flaps at the back, a jade-plaque belt, neat black mustache and short beard, calm wise smile, holding a rolled hangul scroll in one hand, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "세종대왕 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_yisunsin_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/yisunsin.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of Admiral Yi Sun-sin of Joseon Korea (16th century), wearing dark navy dujeong-gap studded armor with rows of brass rivets and red trim, a dark iron helmet with a gold band, a tall gold spike and a red horsehair tassel, black mustache and beard, steady determined expression. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "이순신 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_yisunsin_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/yisunsin_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of Admiral Yi Sun-sin of Joseon Korea (16th century), wearing dark navy dujeong-gap studded armor with rows of brass rivets and red trim, a dark iron helmet with a gold band, a tall gold spike and a red horsehair tassel, black mustache and beard, steady determined expression, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "이순신 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_yisunsin_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/yisunsin_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of Admiral Yi Sun-sin of Joseon Korea (16th century), wearing dark navy dujeong-gap studded armor with rows of brass rivets and red trim, a dark iron helmet with a gold band, a tall gold spike and a red horsehair tassel, black mustache and beard, steady determined expression. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "이순신 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_yisunsin_driving",
+      "category": "character",
+      "file": "assets/ref/characters/yisunsin_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Admiral Yi Sun-sin of Joseon Korea (16th century), wearing dark navy dujeong-gap studded armor with rows of brass rivets and red trim, a dark iron helmet with a gold band, a tall gold spike and a red horsehair tassel, black mustache and beard, steady determined expression, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "이순신 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_saimdang_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/saimdang.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of Shin Saimdang, Joseon-era painter and poet (16th century), wearing a pale pink jeogori with a white collar band and a crimson ribbon tie, a deep indigo chima skirt, glossy black hair in a low bun with a gold binyeo hairpin, gentle graceful smile, holding a fine ink brush. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "신사임당 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_saimdang_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/saimdang_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of Shin Saimdang, Joseon-era painter and poet (16th century), wearing a pale pink jeogori with a white collar band and a crimson ribbon tie, a deep indigo chima skirt, glossy black hair in a low bun with a gold binyeo hairpin, gentle graceful smile, holding a fine ink brush, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "신사임당 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_saimdang_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/saimdang_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of Shin Saimdang, Joseon-era painter and poet (16th century), wearing a pale pink jeogori with a white collar band and a crimson ribbon tie, a deep indigo chima skirt, glossy black hair in a low bun with a gold binyeo hairpin, gentle graceful smile, holding a fine ink brush. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "신사임당 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_saimdang_driving",
+      "category": "character",
+      "file": "assets/ref/characters/saimdang_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Shin Saimdang, Joseon-era painter and poet (16th century), wearing a pale pink jeogori with a white collar band and a crimson ribbon tie, a deep indigo chima skirt, glossy black hair in a low bun with a gold binyeo hairpin, gentle graceful smile, holding a fine ink brush, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "신사임당 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_yugwansun_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/yugwansun.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of Yu Gwan-sun, Korean independence activist of 1919, as a respectful 17-year-old student, wearing a plain white jeogori and a black skirt in 1919 Korean student style, black hair neatly pulled back, brave hopeful expression, holding a small Taegukgi flag. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "유관순 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_yugwansun_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/yugwansun_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of Yu Gwan-sun, Korean independence activist of 1919, as a respectful 17-year-old student, wearing a plain white jeogori and a black skirt in 1919 Korean student style, black hair neatly pulled back, brave hopeful expression, holding a small Taegukgi flag, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "유관순 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_yugwansun_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/yugwansun_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of Yu Gwan-sun, Korean independence activist of 1919, as a respectful 17-year-old student, wearing a plain white jeogori and a black skirt in 1919 Korean student style, black hair neatly pulled back, brave hopeful expression, holding a small Taegukgi flag. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "유관순 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_yugwansun_driving",
+      "category": "character",
+      "file": "assets/ref/characters/yugwansun_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Yu Gwan-sun, Korean independence activist of 1919, as a respectful 17-year-old student, wearing a plain white jeogori and a black skirt in 1919 Korean student style, black hair neatly pulled back, brave hopeful expression, holding a small Taegukgi flag, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "유관순 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_kimyusin_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/kimyusin.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of General Kim Yu-sin of Silla (7th century), wearing gilt-bronze lamellar armor, a golden conical helmet with a plume, a royal purple cape, a sheathed sword on the back, black mustache, confident expression. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "김유신 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_kimyusin_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/kimyusin_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of General Kim Yu-sin of Silla (7th century), wearing gilt-bronze lamellar armor, a golden conical helmet with a plume, a royal purple cape, a sheathed sword on the back, black mustache, confident expression, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "김유신 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_kimyusin_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/kimyusin_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of General Kim Yu-sin of Silla (7th century), wearing gilt-bronze lamellar armor, a golden conical helmet with a plume, a royal purple cape, a sheathed sword on the back, black mustache, confident expression. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "김유신 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_kimyusin_driving",
+      "category": "character",
+      "file": "assets/ref/characters/kimyusin_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. General Kim Yu-sin of Silla (7th century), wearing gilt-bronze lamellar armor, a golden conical helmet with a plume, a royal purple cape, a sheathed sword on the back, black mustache, confident expression, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "김유신 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_cleopatra_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/cleopatra.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of Cleopatra VII, queen of Ptolemaic Egypt, wearing a white pleated linen gown, a broad gold usekh collar inlaid with lapis lazuli and carnelian, a gold diadem with a uraeus cobra, sleek black hair with straight bangs, elegant confident smile. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "클레오파트라 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_cleopatra_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/cleopatra_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of Cleopatra VII, queen of Ptolemaic Egypt, wearing a white pleated linen gown, a broad gold usekh collar inlaid with lapis lazuli and carnelian, a gold diadem with a uraeus cobra, sleek black hair with straight bangs, elegant confident smile, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "클레오파트라 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_cleopatra_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/cleopatra_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of Cleopatra VII, queen of Ptolemaic Egypt, wearing a white pleated linen gown, a broad gold usekh collar inlaid with lapis lazuli and carnelian, a gold diadem with a uraeus cobra, sleek black hair with straight bangs, elegant confident smile. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "클레오파트라 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_cleopatra_driving",
+      "category": "character",
+      "file": "assets/ref/characters/cleopatra_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Cleopatra VII, queen of Ptolemaic Egypt, wearing a white pleated linen gown, a broad gold usekh collar inlaid with lapis lazuli and carnelian, a gold diadem with a uraeus cobra, sleek black hair with straight bangs, elegant confident smile, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "클레오파트라 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_napoleon_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/napoleon.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of Napoleon Bonaparte, Emperor of the French (early 19th century), wearing a navy blue military coat with gold epaulettes and buttons, a white waistcoat, a black bicorne hat worn sideways with a blue-white-red cockade, short brown hair, commanding grin. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "나폴레옹 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_napoleon_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/napoleon_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of Napoleon Bonaparte, Emperor of the French (early 19th century), wearing a navy blue military coat with gold epaulettes and buttons, a white waistcoat, a black bicorne hat worn sideways with a blue-white-red cockade, short brown hair, commanding grin, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "나폴레옹 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_napoleon_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/napoleon_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of Napoleon Bonaparte, Emperor of the French (early 19th century), wearing a navy blue military coat with gold epaulettes and buttons, a white waistcoat, a black bicorne hat worn sideways with a blue-white-red cockade, short brown hair, commanding grin. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "나폴레옹 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_napoleon_driving",
+      "category": "character",
+      "file": "assets/ref/characters/napoleon_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Napoleon Bonaparte, Emperor of the French (early 19th century), wearing a navy blue military coat with gold epaulettes and buttons, a white waistcoat, a black bicorne hat worn sideways with a blue-white-red cockade, short brown hair, commanding grin, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "나폴레옹 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_genghis_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/genghis.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of Genghis Khan of the Mongol Empire (13th century), wearing a brown silk deel robe with gold trim and a sash, a fur-brimmed hat with a red crown and gold finial, long drooping black mustache and goatee, fearless expression. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "징기스칸 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_genghis_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/genghis_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of Genghis Khan of the Mongol Empire (13th century), wearing a brown silk deel robe with gold trim and a sash, a fur-brimmed hat with a red crown and gold finial, long drooping black mustache and goatee, fearless expression, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "징기스칸 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_genghis_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/genghis_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of Genghis Khan of the Mongol Empire (13th century), wearing a brown silk deel robe with gold trim and a sash, a fur-brimmed hat with a red crown and gold finial, long drooping black mustache and goatee, fearless expression. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "징기스칸 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_genghis_driving",
+      "category": "character",
+      "file": "assets/ref/characters/genghis_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Genghis Khan of the Mongol Empire (13th century), wearing a brown silk deel robe with gold trim and a sash, a fur-brimmed hat with a red crown and gold finial, long drooping black mustache and goatee, fearless expression, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "징기스칸 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_davinci_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/davinci.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of Leonardo da Vinci, Renaissance genius (early 16th century), wearing a dark burgundy beret and a brown Renaissance robe, long flowing white hair and a long white beard, curious twinkling eyes, holding a sketchbook with flying-machine drawings. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "다 빈치 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_davinci_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/davinci_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of Leonardo da Vinci, Renaissance genius (early 16th century), wearing a dark burgundy beret and a brown Renaissance robe, long flowing white hair and a long white beard, curious twinkling eyes, holding a sketchbook with flying-machine drawings, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "다 빈치 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_davinci_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/davinci_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of Leonardo da Vinci, Renaissance genius (early 16th century), wearing a dark burgundy beret and a brown Renaissance robe, long flowing white hair and a long white beard, curious twinkling eyes, holding a sketchbook with flying-machine drawings. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "다 빈치 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_davinci_driving",
+      "category": "character",
+      "file": "assets/ref/characters/davinci_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Leonardo da Vinci, Renaissance genius (early 16th century), wearing a dark burgundy beret and a brown Renaissance robe, long flowing white hair and a long white beard, curious twinkling eyes, holding a sketchbook with flying-machine drawings, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "다 빈치 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "char_joan_portrait",
+      "category": "character",
+      "file": "assets/ui/portraits/joan.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Bust portrait of Joan of Arc (15th century France), wearing polished steel plate armor, short brown pageboy haircut, holding a white banner with a gold fleur-de-lis, brave serene expression. Front three-quarter view facing slightly left, looking at the viewer, centered, head and shoulders filling 80% of the frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "잔 다르크 선택 카드·로딩·결과·순위표 초상화 (현재 makePortraits 대체)"
+    },
+    {
+      "id": "char_joan_fullbody",
+      "category": "character",
+      "file": "assets/ref/characters/joan_fullbody.png",
+      "size": "1024x1536",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Full-body character render of Joan of Arc (15th century France), wearing polished steel plate armor, short brown pageboy haircut, holding a white banner with a gold fleur-de-lis, brave serene expression, wearing white racing gloves, standing in a relaxed heroic pose, full figure visible from head to shoes, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "잔 다르크 로딩 화면·결과 시상대 일러스트, 3D 모델링 참고"
+    },
+    {
+      "id": "char_joan_turnaround",
+      "category": "character",
+      "file": "assets/ref/characters/joan_turnaround.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Character turnaround model sheet of Joan of Arc (15th century France), wearing polished steel plate armor, short brown pageboy haircut, holding a white banner with a gold fleur-de-lis, brave serene expression. Three views side by side on a plain light-grey background: front view, left side view, back view, same character, same scale, neutral A-pose, even flat lighting, no shadows, orthographic camera. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "잔 다르크 이미지→3D 변환(GLB) 입력 및 모델링 기준 시트"
+    },
+    {
+      "id": "char_joan_driving",
+      "category": "character",
+      "file": "assets/ref/characters/joan_driving.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Joan of Arc (15th century France), wearing polished steel plate armor, short brown pageboy haircut, holding a white banner with a gold fleur-de-lis, brave serene expression, seated and gripping a small racing steering wheel with both hands, leaning forward with excitement, viewed from front three-quarter, only the character (no vehicle), isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "잔 다르크 카트 탑승 자세 모델링 참고"
+    },
+    {
+      "id": "kart_kart_hero",
+      "category": "kart",
+      "file": "assets/ref/karts/kart_hero.png",
+      "size": "1536x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Hero product render of a small lightweight open-wheel go-kart: low tubular chassis, rounded front nose fairing with a number plate, side pods, chrome front and rear bumpers, exposed engine with twin chrome exhaust pipes, small rear spoiler, chunky slick tires. Neutral grey-and-white livery with a blank number roundel so it can be recolored in game. Front three-quarter view from slightly above, empty driver seat, whole vehicle in frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "레이싱 카트 차량 선택 카드 이미지, 모델링 참고"
+    },
+    {
+      "id": "kart_kart_ortho",
+      "category": "kart",
+      "file": "assets/ref/karts/kart_ortho.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Vehicle blueprint sheet of a small lightweight open-wheel go-kart: low tubular chassis, rounded front nose fairing with a number plate, side pods, chrome front and rear bumpers, exposed engine with twin chrome exhaust pipes, small rear spoiler, chunky slick tires: four orthographic views arranged in a grid on a plain light-grey background — side view, front view, rear view, top view — same scale, flat even lighting, no perspective, no shadows, neutral grey livery, empty seat. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "레이싱 카트 이미지→3D 변환 입력, 비율 기준 (길이 3~4m)"
+    },
+    {
+      "id": "kart_formula_hero",
+      "category": "kart",
+      "file": "assets/ref/karts/formula_hero.png",
+      "size": "1536x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Hero product render of a sleek open-wheel formula racer: long narrow tapered nose, wide multi-element front wing with endplates, sidepods, tall rear wing, driver halo, exposed suspension arms, wide slick tires. Neutral grey-and-white livery with a blank number roundel so it can be recolored in game. Front three-quarter view from slightly above, empty driver seat, whole vehicle in frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "포뮬러 차량 선택 카드 이미지, 모델링 참고"
+    },
+    {
+      "id": "kart_formula_ortho",
+      "category": "kart",
+      "file": "assets/ref/karts/formula_ortho.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Vehicle blueprint sheet of a sleek open-wheel formula racer: long narrow tapered nose, wide multi-element front wing with endplates, sidepods, tall rear wing, driver halo, exposed suspension arms, wide slick tires: four orthographic views arranged in a grid on a plain light-grey background — side view, front view, rear view, top view — same scale, flat even lighting, no perspective, no shadows, neutral grey livery, empty seat. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "포뮬러 이미지→3D 변환 입력, 비율 기준 (길이 3~4m)"
+    },
+    {
+      "id": "kart_sports_hero",
+      "category": "kart",
+      "file": "assets/ref/karts/sports_hero.png",
+      "size": "1536x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Hero product render of a low sleek two-seat open sports roadster: smooth curved body, wraparound windshield, glowing LED headlights and red taillights, side air intakes, ducktail spoiler, twin chrome exhaust tips, five-spoke alloy wheels. Neutral grey-and-white livery with a blank number roundel so it can be recolored in game. Front three-quarter view from slightly above, empty driver seat, whole vehicle in frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "스포츠카 차량 선택 카드 이미지, 모델링 참고"
+    },
+    {
+      "id": "kart_sports_ortho",
+      "category": "kart",
+      "file": "assets/ref/karts/sports_ortho.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Vehicle blueprint sheet of a low sleek two-seat open sports roadster: smooth curved body, wraparound windshield, glowing LED headlights and red taillights, side air intakes, ducktail spoiler, twin chrome exhaust tips, five-spoke alloy wheels: four orthographic views arranged in a grid on a plain light-grey background — side view, front view, rear view, top view — same scale, flat even lighting, no perspective, no shadows, neutral grey livery, empty seat. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "스포츠카 이미지→3D 변환 입력, 비율 기준 (길이 3~4m)"
+    },
+    {
+      "id": "kart_buggy_hero",
+      "category": "kart",
+      "file": "assets/ref/karts/buggy_hero.png",
+      "size": "1536x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Hero product render of an off-road dune buggy: tubular roll cage, roof light bar, huge knobby tires, visible coil-over suspension springs, skid plate, rear spare tire, exposed engine. Neutral grey-and-white livery with a blank number roundel so it can be recolored in game. Front three-quarter view from slightly above, empty driver seat, whole vehicle in frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "오프로드 버기 차량 선택 카드 이미지, 모델링 참고"
+    },
+    {
+      "id": "kart_buggy_ortho",
+      "category": "kart",
+      "file": "assets/ref/karts/buggy_ortho.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Vehicle blueprint sheet of an off-road dune buggy: tubular roll cage, roof light bar, huge knobby tires, visible coil-over suspension springs, skid plate, rear spare tire, exposed engine: four orthographic views arranged in a grid on a plain light-grey background — side view, front view, rear view, top view — same scale, flat even lighting, no perspective, no shadows, neutral grey livery, empty seat. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "오프로드 버기 이미지→3D 변환 입력, 비율 기준 (길이 3~4m)"
+    },
+    {
+      "id": "kart_classic_hero",
+      "category": "kart",
+      "file": "assets/ref/karts/classic_hero.png",
+      "size": "1536x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Hero product render of a 1950s classic cigar-shaped grand prix race car: long rounded aluminum body, oval front grille with vertical bars, white racing roundels on the sides, small wraparound windscreen, headrest fairing, side exhaust pipes, wire-spoke wheels. Neutral grey-and-white livery with a blank number roundel so it can be recolored in game. Front three-quarter view from slightly above, empty driver seat, whole vehicle in frame, isolated on a transparent background. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "클래식 레이서 차량 선택 카드 이미지, 모델링 참고"
+    },
+    {
+      "id": "kart_classic_ortho",
+      "category": "kart",
+      "file": "assets/ref/karts/classic_ortho.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Vehicle blueprint sheet of a 1950s classic cigar-shaped grand prix race car: long rounded aluminum body, oval front grille with vertical bars, white racing roundels on the sides, small wraparound windscreen, headrest fairing, side exhaust pipes, wire-spoke wheels: four orthographic views arranged in a grid on a plain light-grey background — side view, front view, rear view, top view — same scale, flat even lighting, no perspective, no shadows, neutral grey livery, empty seat. Avoid: text, watermark, logo, extra limbs, deformed hands, blurry, low resolution, cropped subject, busy background.",
+      "use": "클래식 레이서 이미지→3D 변환 입력, 비율 기준 (길이 3~4m)"
+    },
+    {
+      "id": "livery_sejong",
+      "category": "kart",
+      "file": "assets/textures/livery/sejong.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, royal blue with gold accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_yisunsin",
+      "category": "kart",
+      "file": "assets/textures/livery/yisunsin.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, crimson red with navy accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_saimdang",
+      "category": "kart",
+      "file": "assets/textures/livery/saimdang.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, blossom pink with white accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_yugwansun",
+      "category": "kart",
+      "file": "assets/textures/livery/yugwansun.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, pearl white with red and blue accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_kimyusin",
+      "category": "kart",
+      "file": "assets/textures/livery/kimyusin.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, royal purple with gold accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_cleopatra",
+      "category": "kart",
+      "file": "assets/textures/livery/cleopatra.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, gold with lapis blue accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_napoleon",
+      "category": "kart",
+      "file": "assets/textures/livery/napoleon.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, imperial navy with red accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_genghis",
+      "category": "kart",
+      "file": "assets/textures/livery/genghis.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, saddle brown with gold accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_davinci",
+      "category": "kart",
+      "file": "assets/textures/livery/davinci.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, forest green with parchment accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "livery_joan",
+      "category": "kart",
+      "file": "assets/textures/livery/joan.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable car-paint livery texture, flat top-down, steel silver with royal blue accents, dynamic racing stripes and subtle motif inspired by the character's era, clean vector-like shapes, no text, no numbers, even lighting, square tile.",
+      "use": "캐릭터별 카트 도장 (MeshPhysicalMaterial.map)"
+    },
+    {
+      "id": "tex_asphalt",
+      "category": "texture",
+      "file": "assets/textures/asphalt.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable top-down photo texture of fine racetrack asphalt with subtle aggregate, faint rubber tire marks, no lines, even overcast lighting, square tile.",
+      "use": "도로 기본 (T_.asphalt 대체, 흰 선·연석은 코드로 덧그림)"
+    },
+    {
+      "id": "tex_curb",
+      "category": "texture",
+      "file": "assets/textures/curb.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable top-down texture of a racing curb with alternating red and white painted blocks along the vertical axis, slightly worn paint, square tile.",
+      "use": "연석"
+    },
+    {
+      "id": "tex_sand",
+      "category": "texture",
+      "file": "assets/textures/sand.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable top-down photo texture of warm golden beach sand with tiny ripples and shells, even sunlight, square tile.",
+      "use": "선셋 비치 모래"
+    },
+    {
+      "id": "tex_grass",
+      "category": "texture",
+      "file": "assets/textures/grass.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable top-down photo texture of short lush green lawn grass, even lighting, square tile.",
+      "use": "경복궁 바깥 잔디"
+    },
+    {
+      "id": "tex_pave_bakseok",
+      "category": "texture",
+      "file": "assets/textures/pave_bakseok.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable top-down photo texture of Gyeongbokgung palace courtyard 'bakseok' pavement: large irregular rectangular granite slabs with soft rounded edges and narrow earth joints, warm beige-grey stone, even lighting, square tile.",
+      "use": "경복궁 박석 마당"
+    },
+    {
+      "id": "tex_granite_blocks",
+      "category": "texture",
+      "file": "assets/textures/granite_blocks.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable front-facing photo texture of a Korean palace granite block wall with staggered rectangular blocks, light grey stone, square tile.",
+      "use": "석축·월대·광화문 석재"
+    },
+    {
+      "id": "tex_roof_giwa",
+      "category": "texture",
+      "file": "assets/textures/roof_giwa.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable texture of dark grey Korean giwa clay roof tiles seen from above along the slope, rows of convex and concave tiles, subtle glaze, square tile.",
+      "use": "기와지붕"
+    },
+    {
+      "id": "tex_dancheong_band",
+      "category": "texture",
+      "file": "assets/textures/dancheong_band.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless horizontally tileable decorative band of Korean dancheong painting: malachite green base with red, blue, white and yellow lotus and geometric motifs, flat frontal view, wide strip.",
+      "use": "처마 아래 단청 띠"
+    },
+    {
+      "id": "tex_lattice_window",
+      "category": "texture",
+      "file": "assets/textures/lattice_window.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Front-facing texture of a traditional Korean wooden lattice window (changsal) with hanji paper behind, red-brown wood grid, flat even lighting, square.",
+      "use": "전각 창살"
+    },
+    {
+      "id": "tex_red_pillar_wood",
+      "category": "texture",
+      "file": "assets/textures/red_pillar_wood.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable texture of red-lacquered Korean palace wooden pillar with subtle vertical wood grain, square tile.",
+      "use": "붉은 기둥"
+    },
+    {
+      "id": "tex_palm_bark",
+      "category": "texture",
+      "file": "assets/textures/palm_bark.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless vertically tileable texture of palm tree trunk bark with horizontal ring scars, warm brown, square tile.",
+      "use": "야자수 줄기"
+    },
+    {
+      "id": "tex_palm_frond",
+      "category": "texture",
+      "file": "assets/textures/palm_frond.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Single tropical palm frond leaf, top view, bright green, isolated on a transparent background, stem along the horizontal center line from left to right.",
+      "use": "야자수 잎 (알파 텍스처)"
+    },
+    {
+      "id": "tex_pine_bark",
+      "category": "texture",
+      "file": "assets/textures/pine_bark.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable texture of Korean red pine bark with reddish-brown plates, square tile.",
+      "use": "소나무 줄기"
+    },
+    {
+      "id": "tex_water_sea",
+      "category": "texture",
+      "file": "assets/textures/water_sea.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Seamless tileable top-down texture of clear turquoise tropical sea surface with gentle ripples, square tile.",
+      "use": "바다 표면 색 (노멀맵은 코드 유지)"
+    },
+    {
+      "id": "tex_stand_crowd",
+      "category": "texture",
+      "file": "assets/textures/stand_crowd.png",
+      "size": "1024x1024",
+      "background": "opaque",
+      "prompt": "Wide frontal photo-like illustration of a colorful cheering stadium crowd seated on tiered grandstand seats, many small diverse cartoon-realistic spectators waving flags, no text, even lighting.",
+      "use": "관중석 관중 판 (현재 인스턴스 캡슐 대체 가능)"
+    },
+    {
+      "id": "logo",
+      "category": "ui",
+      "file": "assets/ui/logo.png",
+      "size": "1536x1024",
+      "background": "transparent",
+      "prompt": "Game logo lettering that reads exactly \"SUPERSTAR KART\" in bold italic chunky letters, glossy gold-to-orange gradient with dark brown outline and 3D bevel, speed streaks, isolated on a transparent background, no other text.",
+      "use": "타이틀 로고"
+    },
+    {
+      "id": "item_rocket",
+      "category": "ui",
+      "file": "assets/ui/items/rocket.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Game item icon: a Joseon-dynasty singijeon fire-arrow rocket with a red gunpowder tube and white fletching, flying diagonally with a small flame, isolated on a transparent background, icon composition.",
+      "use": "신기전 아이콘"
+    },
+    {
+      "id": "item_turtle",
+      "category": "ui",
+      "file": "assets/ui/items/turtle.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Game item icon: a black iron cannonball with a tiny gold turtle-ship (geobukseon) dragon head emblem, glowing orange trail, isolated on a transparent background, icon composition.",
+      "use": "거북선 포탄 아이콘"
+    },
+    {
+      "id": "item_celadon",
+      "category": "ui",
+      "file": "assets/ui/items/celadon.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Game item icon: a Goryeo celadon maebyeong vase with inlaid white crane and cloud pattern, jade-green glaze with glossy highlights, isolated on a transparent background, icon composition.",
+      "use": "고려청자 아이콘"
+    },
+    {
+      "id": "item_crown",
+      "category": "ui",
+      "file": "assets/ui/items/crown.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Game item icon: a golden Silla-style royal crown with jade gogok ornaments, radiant sparkle, isolated on a transparent background, icon composition.",
+      "use": "왕의 위엄 아이콘"
+    },
+    {
+      "id": "track_beach",
+      "category": "ui",
+      "file": "assets/ui/tracks/beach.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Key art of a sunset beach kart racing circuit: winding asphalt track with red-white curbs along golden sand, palm trees, turquoise sea, rocky islands, a red-white lighthouse, grandstands, warm golden-hour sky, aerial three-quarter view, no vehicles, no text.",
+      "use": "선셋 비치 코스 카드·로딩 배경"
+    },
+    {
+      "id": "track_palace",
+      "category": "ui",
+      "file": "assets/ui/tracks/palace.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Key art of a kart racing circuit inside Gyeongbokgung palace, Seoul: asphalt track passing through the stone arches of Gwanghwamun gate, curved giwa roofs with dancheong, Geunjeongjeon hall, Gyeonghoeru pavilion over a lotus pond, pine trees, Bugaksan mountain, clear blue sky, aerial three-quarter view, no vehicles, no text.",
+      "use": "경복궁 코스 카드·로딩 배경"
+    },
+    {
+      "id": "bg_menu",
+      "category": "ui",
+      "file": "assets/ui/bg_menu.png",
+      "size": "1536x1024",
+      "background": "opaque",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Abstract menu background for a kart racing game: deep indigo-blue gradient with soft light streaks, bokeh, subtle checkered flag pattern fading at the edges, empty center, no text.",
+      "use": "메뉴 배경"
+    },
+    {
+      "id": "ult_sejong",
+      "category": "ui",
+      "file": "assets/ui/ults/sejong.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing a glowing hangul scroll with floating consonant letters, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_yisunsin",
+      "category": "ui",
+      "file": "assets/ui/ults/yisunsin.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing a crane-wing battle formation of ships seen from above with a golden shield, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_saimdang",
+      "category": "ui",
+      "file": "assets/ui/ults/saimdang.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing colorful butterflies and insects from a Joseon grass-and-insect painting, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_yugwansun",
+      "category": "ui",
+      "file": "assets/ui/ults/yugwansun.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing a waving Taegukgi flag with rays of light, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_kimyusin",
+      "category": "ui",
+      "file": "assets/ui/ults/kimyusin.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing a charging hwarang warrior silhouette with gold speed lines, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_cleopatra",
+      "category": "ui",
+      "file": "assets/ui/ults/cleopatra.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing a golden cobra and the Nile under starlight, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_napoleon",
+      "category": "ui",
+      "file": "assets/ui/ults/napoleon.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing three cannonballs fired in a fan with smoke, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_genghis",
+      "category": "ui",
+      "file": "assets/ui/ults/genghis.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing a galloping Mongol horse with dust trail, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_davinci",
+      "category": "ui",
+      "file": "assets/ui/ults/davinci.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing Leonardo's ornithopter flying machine, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    },
+    {
+      "id": "ult_joan",
+      "category": "ui",
+      "file": "assets/ui/ults/joan.png",
+      "size": "1024x1024",
+      "background": "transparent",
+      "prompt": "Art direction: premium stylized-realistic 3D render in the look of a modern Korean mobile kart racing game. Physically based materials (glossy clear-coat car paint, brushed metal, chrome, rubber, fabric, skin with subsurface scattering), cinematic soft studio lighting with a warm key light and cool rim light, crisp details, high dynamic range, 8k texture quality. Characters use heroic chibi proportions (head about 1/3 of body height, large expressive eyes) but with realistic skin, hair strands and fabric weave. Historically grounded costumes. Friendly, school-appropriate, no weapons pointed at the viewer, no gore. Do not copy any existing game's characters, logos or brand marks. Circular special-ability icon showing a white fleur-de-lis banner with a radiant halo, purple magical glow, bold readable silhouette, isolated on a transparent background, no text.",
+      "use": "필살기 아이콘 (⚡ 버튼·토스트)"
+    }
+  ]
+}
