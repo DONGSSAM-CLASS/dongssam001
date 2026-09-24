@@ -147,6 +147,10 @@ imjeong-rpg2/
 └─ docs/                     HIGGSFIELD_MCP · HISTORY_SOURCES · DEPLOY
 ```
 
+## Codex 로 이어서 작업하기
+
+`CODEX_시작하기.md`(5분 시작) → `docs/CODEX_HANDOFF.md`(규칙·남은 일) → `CODEX_프롬프트.txt`(그대로 붙여 넣는 프롬프트).
+
 ## 검증
 
 ```bash
