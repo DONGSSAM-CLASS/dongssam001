@@ -45,7 +45,9 @@ function memorial(): WorldMap {
     ...east.map((id, i) => ({ kind: 'honor-plaque' as const, x: 28, z: plaqueZ[i], rot: E, figureId: id })),
     // 북쪽 벽의 연표 액자
     { kind: 'frame', x: 5, z: 1, rot: N, label: '1919 임시헌장' },
-    { kind: 'frame', x: 8, z: 1, rot: N, label: '1919 통합 임시정부' },
+    { kind: 'frame', x: 7, z: 1, rot: N, label: '1919 통합 임시정부' },
+    // 이름을 남기지 못한 분들 — 북쪽 벽 가운데 가까이
+    { kind: 'honor-plaque', x: 9, z: 1, rot: N, figureId: 'unnamed' },
     { kind: 'frame', x: 11, z: 1, rot: N, label: '1927 국무위원제' },
     { kind: 'frame', x: 18, z: 1, rot: N, label: '1941 건국강령' },
     { kind: 'frame', x: 21, z: 1, rot: N, label: '1944 제5차 개헌' },

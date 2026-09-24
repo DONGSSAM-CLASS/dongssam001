@@ -5,6 +5,8 @@ import { GlossaryText } from './GlossaryText';
 import { CinematicImage } from './CinematicImage';
 import type { QuestAttempt } from '../store/gameStore';
 import { blueprint } from '../data/blueprint';
+import { prequelLinks } from '../data/prequel';
+import { useState } from 'react';
 
 const TRACK_LABEL: Record<Quest['track'], string> = {
   law: '헌법·제도',
@@ -42,6 +44,9 @@ export function QuestView({
   const choices = quest.kind === 'order' ? quest.choices : stableShuffle(quest.choices, quest.id);
   const ready = quest.kind === 'order' ? attempt.picked.length === quest.choices.length : attempt.picked.length > 0;
   const pillar = blueprint.find((b) => b.key === quest.blueprint);
+  const link = prequelLinks[quest.id];
+  // 사료 단서 — 답하기 전에 원문을 먼저 읽고 판단하게 한다 (역사가처럼 「증거로」 생각하기)
+  const [clue, setClue] = useState(false);
 
   return (
     <div className="quest-overlay" role="dialog" aria-label={quest.title}>
@@ -105,6 +110,28 @@ export function QuestView({
           })}
         </div>
 
+        {!attempt.submitted && (
+          <div className="clue-box">
+            {!clue ? (
+              <button className="btn small" onClick={() => setClue(true)}>
+                🔎 사료 단서 먼저 보기
+              </button>
+            ) : (
+              <>
+                <div className="clue-head">🔎 사료 단서 — 원문을 읽고 스스로 판단해 보세요 (풀이는 확인한 뒤에 나와요)</div>
+                {quest.sources.map((src) => (
+                  <div className="clue-source" key={src.id}>
+                    <div className="clue-title">
+                      <span className="source-kind">{src.kind}</span> {src.title}
+                    </div>
+                    <div className="source-original">{src.original}</div>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        )}
+
         {!attempt.submitted ? (
           <div className="dialogue-actions">
             <button className="btn primary" disabled={!ready} onClick={onSubmit}>
@@ -131,6 +158,13 @@ export function QuestView({
             <div className="debrief">
               <GlossaryText>{quest.debrief[level]}</GlossaryText>
             </div>
+
+            {link && (
+              <div className="prequel-link">
+                <strong>🔗 1탄에서는 — {link.title}</strong>
+                <span>{link.text}</span>
+              </div>
+            )}
 
             {quest.caveat && <div className="caveat">⚠ 확인할 점 · {quest.caveat}</div>}
 

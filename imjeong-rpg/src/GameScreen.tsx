@@ -11,6 +11,7 @@ import { Dialogue } from './ui/Dialogue';
 import { QuestView } from './ui/QuestView';
 import { Panel } from './ui/Panels';
 import { Tutorial } from './ui/Tutorial';
+import { SequelCard } from './ui/SequelCard';
 import { isUnlocked } from './engine/rules';
 
 /** 퀘스트 완료 시 함께 주어지는 사료 아이템 */
@@ -183,7 +184,7 @@ export default function GameScreen() {
     .sort((a, b) => a.act - b.act)[0];
   const objective = nextQuest
     ? `다음 임무 · ${getMap(nextQuest.map).name}의 ${figures[nextQuest.giver]?.name ?? ''}`
-    : '모든 임무를 기록했습니다.';
+    : '모든 임무를 기록했습니다. 다음 이야기는 2탄에서!';
 
   // 하단 날짜 띠 — 현재 막의 시기를 보여 준다.
   const dateLabel = nextQuest ? nextQuest.dateLabel : '1945. 11. 23.';
@@ -233,6 +234,9 @@ export default function GameScreen() {
             onReplayTutorial={() => useGame.getState().openTutorial()}
           />
         )}
+
+        {/* 모든 임무를 마치면 2탄으로 이어 주는 카드 */}
+        {!nextQuest && !dialogue && !attempt && <SequelCard />}
 
         {dialogue && dialogueFigure && !attempt && (
           <Dialogue

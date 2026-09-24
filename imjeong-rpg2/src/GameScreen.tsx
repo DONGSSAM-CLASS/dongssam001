@@ -15,6 +15,10 @@ import { ActCard, RelicCard, Tutorial } from './ui/Overlays';
 import { HonorPanel } from './ui/HonorPanel';
 import { Ending } from './ui/Ending';
 import { TouchControls } from './ui/TouchControls';
+import { NoteCard, PrequelRecap } from './ui/Learning';
+import { useSettings } from './store/settings';
+import { currentProgressCode } from './store/gameStore';
+import { downloadRecord } from './ui/exportRecord';
 
 /** 이 장소가 몇 막의 무대인지 */
 function actOfMap(map: MapId): number {
@@ -64,6 +68,12 @@ export default function GameScreen() {
   const plaque = useGame((s) => s.plaque);
   const ending = useGame((s) => s.ending);
   const toast = useGame((s) => s.toast);
+  const notes = useGame((s) => s.notes);
+  const noteCard = useGame((s) => s.noteCard);
+  const recapOpen = useGame((s) => s.recapOpen);
+  const recall = useGame((s) => s.recall);
+  const prequelPlayed = useGame((s) => s.prequelPlayed);
+  const settings = useSettings();
 
   const [focus, setFocus] = useState<FocusTarget>(null);
   const [room, setRoom] = useState<string | null>(null);
@@ -71,7 +81,8 @@ export default function GameScreen() {
 
   const map = useMemo(() => getMap(mapId), [mapId]);
   const allDone = quests.every((q) => completed[q.id] === true);
-  const finished = canFinish(quests, completed, donations, letters);
+  const pledge = notes[6] ?? '';
+  const finished = canFinish(quests, completed, donations, letters, pledge);
   const portalOpen = portalTarget({ map: mapId, act, prologueDone, completed }) !== null;
   const donatedIds = useMemo(() => Object.keys(donations).filter((k) => donations[k] > 0), [donations]);
   const letteredIds = useMemo(() => letters.map((l) => l.figureId), [letters]);
@@ -142,7 +153,16 @@ export default function GameScreen() {
   }, [map, mapId, completed, act, prologueDone, allDone, finished]);
 
   /* ── 창이 떠 있는 동안에는 걷지 않는다 ── */
-  const modalOpen = Boolean(dialogue || attempt || showTutorial || actCard || plaque || ending);
+  const modalOpen = Boolean(dialogue || attempt || showTutorial || actCard || plaque || ending || noteCard || recapOpen);
+
+  /* ── 설정을 3D 에 알린다 ── */
+  useEffect(() => {
+    rendererRef.current?.setOptions({
+      headBob: settings.headBob,
+      lookSpeed: settings.lookSpeed,
+      alwaysLabels: settings.alwaysLabels,
+    });
+  }, [settings.headBob, settings.lookSpeed, settings.alwaysLabels]);
   useEffect(() => {
     rendererRef.current?.setPaused(modalOpen);
   }, [modalOpen]);
@@ -171,17 +191,24 @@ export default function GameScreen() {
     if (allDone && mapId === 'memorial') {
       const target = honorees.find((h) => !donatedIds.includes(h.figureId) || !letteredIds.includes(h.figureId));
       const f = target && map.furniture.find((f) => f.kind === 'honor-plaque' && f.figureId === target.figureId);
+      if (!pledge && !target) {
+        const d = map.npcs.find((n) => n.figureId === 'docent');
+        return { label: '해설사 선생님', point: d ? { x: d.x, z: d.z } : null, objective: '마지막으로 「나의 보훈 다짐」을 적어 보세요. (✍️ 생각 노트)' };
+      }
       if (finished && !target) return { label: '', point: null, objective: '모든 분께 마음을 전했어요. 감사 증서를 받아 보세요.' };
       return {
         label: target ? `${figures[target.figureId]?.name} 명패` : '',
-        point: f ? { x: f.x + (f.rot && f.rot > 0 ? 1 : -1), z: f.z } : null,
+        // 명패가 바라보는 쪽 한 칸 앞에 선다
+        point: f ? { x: f.x + Math.round(Math.sin(f.rot ?? 0)), z: f.z + Math.round(Math.cos(f.rot ?? 0)) } : null,
         objective: finished
           ? '마음을 전했어요. 다른 분께도 전하거나 감사 증서를 받으세요.'
-          : '명패 앞에 서서 국가유공자께 기부하고 감사 편지를 써 보세요.',
+          : !pledge && totalDonated(donations) > 0 && letters.length > 0
+            ? '감사 증서를 받으려면 「나의 보훈 다짐」을 적어 주세요. (✍️ 생각 노트)'
+            : '명패 앞에 서서 국가유공자께 기부하고 감사 편지를 써 보세요.',
       };
     }
     return { label: '', point: null, objective: '장소 곳곳을 둘러보세요.' };
-  }, [map, mapId, act, next, prologueDone, portalOpen, completed, allDone, donatedIds, letteredIds, finished]);
+  }, [map, mapId, act, next, prologueDone, portalOpen, completed, allDone, donatedIds, letteredIds, finished, pledge, donations, letters]);
 
   useEffect(() => {
     rendererRef.current?.setGuideTarget(null);
@@ -218,6 +245,8 @@ export default function GameScreen() {
       const s = useGame.getState();
       if (s.attempt) s.closeQuest();
       else if (s.plaque) s.closePlaque();
+      else if (s.noteCard) s.closeNote();
+      else if (s.recapOpen) s.setRecap(false);
       else if (s.dialogue) s.closeDialogue();
       else if (s.relicCard) s.closeRelic();
       else if (s.panel) s.setPanel(null);
@@ -229,7 +258,10 @@ export default function GameScreen() {
   /* ── 대화 내용 ── */
   const dialogueFigure = dialogue ? figures[dialogue.figureId] : null;
   const dialogueQuest = dialogue?.questId ? getQuest(dialogue.questId) : null;
-  const docentSpeech = dialogue?.figureId === 'docent' ? docentLines({ prologueDone, allDone, finished, hasQuest: Boolean(dialogueQuest), nickname }) : undefined;
+  const docentSpeech =
+    dialogue?.figureId === 'docent'
+      ? docentLines({ prologueDone, allDone, finished, hasQuest: Boolean(dialogueQuest), nickname, prequelPlayed, pledge: Boolean(pledge) })
+      : undefined;
 
   const pendingHere = map.npcs.filter((n) => availableQuestFor(n.figureId, mapId, completed, act) !== null).length;
   const solved = solvedIds(completed).length;
@@ -242,7 +274,7 @@ export default function GameScreen() {
         : '';
 
   return (
-    <div className={`game-root${modalOpen ? ' modal-open' : ''}`}>
+    <div className={`game-root${modalOpen ? ' modal-open' : ''}${settings.largeText ? ' text-large' : ''}`}>
       <div className="world-layer" ref={containerRef} />
 
       <div className="hud">
@@ -312,20 +344,33 @@ export default function GameScreen() {
             speech={docentSpeech}
             extra={
               dialogue.figureId === 'docent' && !prologueDone ? (
-                <button
-                  className="btn primary"
-                  autoFocus
-                  onClick={() => {
-                    useGame.getState().finishPrologue();
-                    const portal = map.portals[0];
-                    if (portal) rendererRef.current?.setGuideTarget({ x: portal.x, z: portal.z });
-                  }}
-                >
-                  🚪 기록 수첩을 펼친다
-                </button>
+                <>
+                  <button className="btn" onClick={() => useGame.getState().setRecap(true)}>
+                    📖 1탄 돌아보기{prequelPlayed === 'yes' ? ' · 기억 퀴즈' : ''}
+                  </button>
+                  <button
+                    className="btn primary"
+                    autoFocus
+                    onClick={() => {
+                      useGame.getState().finishPrologue();
+                      const portal = map.portals[0];
+                      if (portal) rendererRef.current?.setGuideTarget({ x: portal.x, z: portal.z });
+                    }}
+                  >
+                    🚪 기록 수첩을 펼친다
+                  </button>
+                </>
               ) : dialogue.figureId === 'docent' && finished ? (
                 <button className="btn primary" onClick={() => useGame.getState().setEnding(true)}>
                   📜 감사 증서 받기
+                </button>
+              ) : dialogue.figureId === 'docent' && allDone && !pledge ? (
+                <button className="btn primary" onClick={() => useGame.getState().openNote(6)}>
+                  ✍️ 나의 보훈 다짐 쓰기
+                </button>
+              ) : dialogue.figureId === 'docent' ? (
+                <button className="btn" onClick={() => useGame.getState().setRecap(true)}>
+                  📖 1탄 돌아보기
                 </button>
               ) : null
             }
@@ -363,7 +408,31 @@ export default function GameScreen() {
         )}
       </div>
 
-      {actCard && <ActCard act={actCard} onClose={() => useGame.getState().closeActCard()} />}
+      {actCard && (
+        <ActCard
+          act={actCard}
+          recallSolved={recall.includes('r-journey')}
+          onRecall={(c) => useGame.getState().answerRecall('r-journey', c)}
+          onClose={() => useGame.getState().closeActCard()}
+        />
+      )}
+      {noteCard && (
+        <NoteCard
+          key={noteCard}
+          act={noteCard}
+          existing={notes[noteCard]}
+          onSave={(text) => useGame.getState().writeNote(noteCard, text)}
+          onClose={() => useGame.getState().closeNote()}
+        />
+      )}
+      {recapOpen && (
+        <PrequelRecap
+          played={prequelPlayed}
+          solved={recall}
+          onAnswer={(id, c) => useGame.getState().answerRecall(id, c)}
+          onClose={() => useGame.getState().setRecap(false)}
+        />
+      )}
       {showTutorial && <Tutorial onClose={() => useGame.getState().closeTutorial()} />}
       {ending && (
         <Ending
@@ -374,6 +443,12 @@ export default function GameScreen() {
           pointsEarned={pointsEarned}
           donations={donations}
           letters={letters}
+          notes={notes}
+          code={currentProgressCode(useGame.getState())}
+          onExport={() => {
+            const st = useGame.getState();
+            downloadRecord(st, currentProgressCode(st));
+          }}
           onBack={() => useGame.getState().setEnding(false)}
           onRestart={() => useGame.getState().resetGame()}
         />
@@ -383,12 +458,22 @@ export default function GameScreen() {
 }
 
 /** 해설사 선생님의 말 — 여행의 어느 단계인지에 따라 달라진다 */
-function docentLines(s: { prologueDone: boolean; allDone: boolean; finished: boolean; hasQuest: boolean; nickname: string }): string[] {
+function docentLines(s: {
+  prologueDone: boolean;
+  allDone: boolean;
+  finished: boolean;
+  hasQuest: boolean;
+  nickname: string;
+  prequelPlayed: 'yes' | 'no' | null;
+  pledge: boolean;
+}): string[] {
   const you = s.nickname ? `${s.nickname} 기록관` : '기록관';
   if (!s.prologueDone) {
     return [
       `어서 와요, ${you}! 여기는 보훈의 전당이에요. 벽을 따라 늘어선 명패는 대한민국 임시정부에서 활동한 분들이랍니다.`,
-      '1탄에서 우리는 광복을 향해 싸운 사람들을 만났죠. 그런데 그분들은 싸우기만 한 게 아니에요. 나라 이름을 짓고, 헌법을 쓰고, 세금과 신문과 외교로 「정부」를 꾸렸어요. 나라를 되찾은 뒤 세울 새 나라의 설계도까지 그렸지요.',
+      s.prequelPlayed === 'no'
+        ? '1탄 『임시정부 1919-1945』에서는 광복을 향해 싸운 사람들의 이야기를 다뤘어요. 처음이라면 「📖 1탄 돌아보기」로 줄거리를 먼저 보고 가요. 그분들은 싸우기만 한 게 아니라, 나라 이름을 짓고 헌법을 쓰고 세금과 신문과 외교로 「정부」를 꾸렸어요.'
+        : '1탄에서 우리는 광복을 향해 싸운 사람들을 만났죠. 그런데 그분들은 싸우기만 한 게 아니에요. 나라 이름을 짓고, 헌법을 쓰고, 세금과 신문과 외교로 「정부」를 꾸렸어요. 나라를 되찾은 뒤 세울 새 나라의 설계도까지 그렸지요. 「📖 1탄 돌아보기」에서 기억을 먼저 꺼내 봐도 좋아요.',
       '여기 이 낡은 기록 수첩을 펼치면 붉은 길 끝의 「시간의 문」이 열려요. 1919년 상하이로 건너가 새 나라가 태어나는 순간을 기록해 오세요. 임무를 풀고 기록 조각을 모으면 「보훈 포인트」가 쌓여요. 돌아오면 그 포인트로 이분들께 마음을 전할 거예요.',
     ];
   }
@@ -399,6 +484,12 @@ function docentLines(s: { prologueDone: boolean; allDone: boolean; finished: boo
     return [
       `${you}, 명패 앞에 놓인 국화와 편지가 보이나요? 여러분이 전한 마음이에요.`,
       '보훈은 거창한 일이 아니에요. 기억하고, 고마워하고, 그분들이 꿈꾼 나라를 오늘 우리가 잘 가꾸는 것 — 그게 보훈이에요. 감사 증서를 받아 가세요.',
+    ];
+  }
+  if (s.allDone && !s.pledge && !s.hasQuest) {
+    return [
+      '이제 모은 보훈 포인트로 마음을 전할 차례예요. 벽의 명패 앞에 서서 바라보면 명패가 열려요. 북쪽 벽에는 이름을 남기지 못한 분들을 위한 명패도 있어요.',
+      '기부하면 흰 국화가, 편지를 쓰면 봉투가 놓여요. 그리고 마지막으로 「나의 보훈 다짐」을 적어 주세요. 기부 한 번·편지 한 통·다짐 하나가 모이면 감사 증서를 받을 수 있어요. (게임 속 포인트는 실제 돈이 아니에요!)',
     ];
   }
   if (s.allDone) {

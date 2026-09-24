@@ -1144,3 +1144,138 @@ kbd {
   .compass { top: 168px; width: 70vw; }
   .room-banner { top: 214px; }
 }
+
+/* ═══════════════════ 2탄 보강 — 1탄 연결 · 사고력 · 보훈 · 교사용 ═══════════════════ */
+
+/* 시작 화면 */
+.prequel-pick { max-width: 620px; margin: 4px auto 14px; text-align: left; font-size: 14px; }
+.prequel-pick > span { color: var(--brass); font-weight: 700; }
+.prequel-pick a, .recap-sheet a, .linklike { color: #f0d79a; }
+.prequel-buttons { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.level-card.small { padding: 9px 12px; font-size: 13.5px; flex: 1 1 240px; }
+.code-restore { max-width: 520px; margin: 14px auto 0; text-align: left; font-size: 14px; color: var(--paper-dim); }
+.code-restore summary { cursor: pointer; color: var(--brass); }
+.code-restore-row { display: flex; gap: 8px; margin-top: 8px; }
+.code-restore-row input {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--paper);
+  font: inherit;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.code-error { display: block; margin-top: 6px; color: #e0a080; font-style: normal; }
+
+/* 1탄 돌아보기 · 기억 퀴즈 */
+.recap-sheet { max-width: 780px; }
+.recap-acts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-top: 12px; }
+.recap-act { padding: 10px 12px; border-radius: 9px; border: 1px solid var(--line); background: rgba(0, 0, 0, 0.25); }
+.recap-act-head { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.recap-act-head span { font-size: 12px; color: var(--brass-dim); }
+.recap-act-head strong { color: var(--brass); }
+.recap-act-head em { font-style: normal; font-size: 12px; color: var(--paper-dim); }
+.recap-act p { margin: 6px 0 0; font-size: 13.5px; }
+.recall { margin: 10px 0; padding: 12px; border-radius: 9px; border: 1px solid var(--line); background: rgba(0, 0, 0, 0.22); text-align: left; }
+.recall-from { font-size: 12px; color: #9cc2dc; }
+.recall-prompt { font-weight: 700; margin: 4px 0 8px; }
+.recall-choices { display: grid; gap: 6px; }
+.recall-explain { margin-top: 8px; font-size: 13.5px; color: var(--paper-dim); }
+.act-recall { max-width: 560px; margin: 0 auto 16px; }
+.linklike { background: none; border: 0; padding: 0; text-decoration: underline; }
+
+/* 퀘스트 — 사료 단서 · 1탄 연결 */
+.clue-box { margin-top: 12px; }
+.clue-head { font-size: 13.5px; color: #9cc2dc; margin-bottom: 6px; }
+.clue-source { margin-bottom: 8px; }
+.clue-title { font-size: 13.5px; font-weight: 700; margin-bottom: 4px; }
+.prequel-link {
+  display: grid;
+  gap: 3px;
+  margin-top: 12px;
+  padding: 10px 13px;
+  border-radius: 8px;
+  border: 1px solid rgba(93, 132, 166, 0.6);
+  background: rgba(93, 132, 166, 0.12);
+  font-size: 14px;
+}
+.prequel-link strong { color: #9cc2dc; }
+.prequel-mini { font-size: 12px; color: #9cc2dc; margin-top: 2px; }
+
+/* 생각 노트 */
+.note-sheet { max-width: 720px; }
+.note-question { font-size: 17px; font-weight: 700; line-height: 1.6; }
+.note-area { min-height: 140px; margin-top: 12px; }
+.note-preview { margin-top: 4px; padding: 6px 9px; border-left: 3px solid var(--brass-dim); font-size: 13px; color: var(--paper); white-space: pre-wrap; }
+
+/* 편지 점검표 */
+.letter-checks { display: grid; gap: 2px; margin-top: 10px; padding: 9px 12px; border-radius: 8px; background: rgba(0, 0, 0, 0.25); font-size: 13.5px; }
+.letter-checks-title { font-size: 12px; color: var(--brass); }
+.letter-checks span[data-ok='true'] { color: #a8c98c; }
+.letter-checks span[data-ok='false'] { color: var(--paper-dim); }
+
+/* 도움말 · 설정 */
+.code-box { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: rgba(0, 0, 0, 0.25); }
+.code-value { font-size: 20px; font-weight: 800; letter-spacing: 0.1em; color: #ffd24a; font-variant-numeric: tabular-nums; word-break: break-all; }
+.settings { display: grid; gap: 10px; }
+.setting-row { display: flex; gap: 10px; align-items: flex-start; padding: 9px 10px; border-radius: 8px; background: rgba(0, 0, 0, 0.25); cursor: pointer; }
+.setting-row input[type='checkbox'] { width: 20px; height: 20px; margin-top: 3px; accent-color: #c9a24b; }
+.setting-row span { display: grid; gap: 2px; flex: 1; }
+.setting-row em { font-style: normal; font-size: 12.5px; color: var(--paper-dim); }
+.setting-row input[type='range'] { width: 100%; accent-color: #c9a24b; }
+
+/* 감사 증서 — 다짐 · 생각 노트 */
+.cert-pledge { margin: 18px 0 4px; padding: 14px 18px; border-radius: 8px; border: 2px solid #c9a24b; background: rgba(201, 162, 75, 0.12); text-align: center; }
+.cert-pledge span { font-size: 13px; letter-spacing: 0.2em; color: #8d7134; }
+.cert-pledge p { margin: 6px 0 0; font-size: 18px; font-weight: 700; color: #3d2c1c; line-height: 1.7; }
+.cert-note { margin: 8px 0; }
+.cert-note-q { font-size: 13px; font-weight: 700; color: #8d7134; }
+.cert-note p { margin: 4px 0; white-space: pre-wrap; font-size: 15px; }
+.cert-foot span:nth-child(2) { font-size: 12px; color: #8d7134; letter-spacing: 0.06em; }
+
+/* 글자 크게 */
+.text-large .dialogue,
+.text-large .quest-sheet,
+.text-large .panel,
+.text-large .relic-card,
+.text-large .situation,
+.text-large .log-box,
+.text-large .interact-prompt { zoom: 1.15; }
+
+/* 교사용 화면 */
+.teacher { position: fixed; inset: 0; overflow-y: auto; padding: 24px; background: #12100c; }
+.teacher h1 { margin: 0 0 10px; color: var(--brass); font-size: 22px; }
+.teacher h2 { color: var(--brass); font-size: 18px; margin: 22px 0 8px; }
+.teacher-gate { max-width: 420px; margin: 12vh auto; padding: 24px; display: grid; gap: 10px; }
+.teacher-gate input, .teacher-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--paper);
+  font: inherit;
+}
+.teacher-head { position: sticky; top: -24px; padding: 12px 0 6px; background: #12100c; z-index: 2; }
+.teacher-head .tabs { align-items: center; }
+.teacher-section { max-width: 1100px; font-size: 14.5px; }
+.teacher-input { width: 100%; min-height: 140px; font-family: ui-monospace, monospace; }
+.teacher-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+.teacher-table th, .teacher-table td { border: 1px solid var(--line); padding: 6px 8px; vertical-align: top; text-align: left; }
+.teacher-table th { background: rgba(201, 162, 75, 0.12); color: var(--brass); }
+.teacher-table tr.bad td { color: #e0a080; }
+.teacher-missed { font-size: 12.5px; color: var(--paper-dim); }
+.teacher-hard { margin-top: 18px; padding: 12px 16px; border-radius: 9px; border: 1px solid rgba(181, 69, 47, 0.5); background: rgba(181, 69, 47, 0.1); }
+.teacher-hard h3 { margin: 0 0 6px; color: #e0a080; }
+.teacher-note { padding: 10px 14px; margin: 10px 0; border-radius: 9px; border: 1px solid var(--line); background: rgba(0, 0, 0, 0.25); }
+.teacher-note h3 { margin: 0; color: var(--brass); font-size: 15px; }
+.teacher code { color: #ffd24a; }
+
+@media print {
+  .teacher { position: static; background: #fff; color: #000; overflow: visible; padding: 0; }
+  .teacher-head .tabs, .teacher-input { display: none; }
+  .teacher-table th, .teacher-table td { border-color: #999; color: #000; }
+  .teacher h1, .teacher h2, .teacher-note h3 { color: #000; }
+}
+.prequel-tag { color: #9cc2dc; border-color: #45657a; font-size: 11px; padding: 1px 7px; }

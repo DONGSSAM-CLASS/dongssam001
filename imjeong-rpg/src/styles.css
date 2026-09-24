@@ -732,3 +732,19 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .gallery-card strong { font-size: 13.5px; color: var(--paper); }
 .gallery-tags { font-size: 12px; color: var(--brass); }
 .gallery-src { font-size: 11px; color: var(--paper-dim); line-height: 1.5; }
+
+/* 2탄으로 이어 주는 카드 */
+.sequel-card {
+  position: absolute;
+  z-index: 13;
+  right: 12px;
+  bottom: 120px;
+  width: min(420px, calc(100vw - 24px));
+  padding: 16px 18px;
+  border-color: rgba(255, 210, 74, 0.6);
+}
+.sequel-kicker { font-size: 12px; color: #ffd24a; }
+.sequel-title { font-size: 18px; font-weight: 800; color: var(--brass); margin: 4px 0 6px; }
+.sequel-body { margin: 6px 0; font-size: 14px; }
+.sequel-card a.btn { text-decoration: none; }
+.sequel-reopen { position: absolute; right: 12px; bottom: 120px; z-index: 13; }

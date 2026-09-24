@@ -13,10 +13,12 @@ import type { Honoree } from '../types';
  *  - 이승만·이동휘·이광수처럼 게임에 등장하되 평가가 크게 엇갈리거나 친일 행적이 있는 인물은
  *    명패에 넣지 않았다. (역사 서술에서는 공과를 사실대로 다룬다.)
  *  - 「게임 속 기부」는 실제 돈이 아니다. 화면마다 이것을 밝힌다.
+ *  - 마지막 명패(unnamed)는 이름을 남기지 못한 협력자들을 기린다. 보훈은 이름이 알려진 분만의 것이 아니다.
  */
 export const honorees: Honoree[] = [
   {
     figureId: 'kimgu',
+    keywords: ['주석','충칭','백범일지','한인애국단','광복군','경무국장','상하이','경교장','27년','스물일곱'],
     headline: '경무국장에서 주석까지 — 임시정부를 끝까지 지킨 사람',
     memory: {
       middle: '충칭의 주석 판공실에서 「이제 전쟁이오, 빨리 결정해야 하오」라고 말씀하셨지요.',
@@ -27,6 +29,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'ahnchangho',
+    keywords: ['통합','세 정부','연통제','내무총장','국민대표회의','힘을 기르'],
     headline: '세 정부를 하나로 묶은 사람',
     memory: {
       middle: '하비로 청사에서 서류 세 뭉치를 올려놓고 「누가 우리를 대표하는지 아무도 모르오」라고 하셨지요.',
@@ -37,6 +40,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'leedongnyeong',
+    keywords: ['의장','임시의정원','대한민국','국호','이름','국무위원','주석'],
     headline: '임시의정원 초대 의장 — 첫 의회의 의사봉을 든 사람',
     memory: {
       middle: '김신부로 회의실에서 「나라의 이름부터 정합시다」라고 첫 안건을 꺼내셨지요.',
@@ -47,6 +51,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'leesiyeong',
+    keywords: ['법무','재무','독립공채','공채','부통령','형제','재산'],
     headline: '법무총장·재무총장 — 1919년부터 1948년까지 새 나라와 함께한 사람',
     memory: {
       middle: '금고 앞에서 독립공채를 보여 주시며 「이건 빌린 돈이오」라고 하셨지요. 1948년에는 초대 부통령이 되셨어요.',
@@ -57,6 +62,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'jochoang',
+    keywords: ['헌장','삼균','건국강령','민주공화','의무교육','균등'],
     headline: '임시헌장과 건국강령을 쓴 사람 — 삼균주의',
     memory: {
       middle: '「독립은 끝이 아니라 시작이오」라며 새 나라의 설계도를 보여 주셨지요.',
@@ -67,6 +73,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'kimgyusik',
+    keywords: ['파리','외교','부주석','강화회의','좌우','통일'],
     headline: '파리에서 세계에 호소하고, 충칭에서 부주석이 된 사람',
     memory: {
       middle: '외무부 방에서 세계 지도를 가리키며 「세계 여러 곳에 창을 냈지」라고 하셨지요.',
@@ -77,6 +84,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'parkeunsik',
+    keywords: ['대통령','탄핵','국무령','헌법','역사','한국통사','혈사'],
     headline: '역사가이자 제2대 임시대통령 — 헌법 절차로 정부를 다시 세운 사람',
     memory: {
       middle: '「대통령이 제 역할을 못 하면, 민주공화국은 어떻게 해야 하겠소?」라고 물으셨지요.',
@@ -87,6 +95,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'jeongjeonghwa',
+    keywords: ['장강일기','자금','국내','살림','부엌','밥'],
     headline: '임시정부의 안살림 — 국경을 넘어 자금을 나른 사람',
     memory: {
       middle: '마당로 부엌에서 「밥은 먹고 일하셔야지요」라며 웃으셨지요.',
@@ -97,6 +106,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'chariseok',
+    keywords: ['비서장','기록','문서','헌법','독립신문','충칭'],
     headline: '비서장 — 스물다섯 해 동안 정부의 문서를 지킨 사람',
     memory: {
       middle: '충칭 비서처에서 「헌법을 고친 기록을 순서대로 정리해 두어야 하오」라고 하셨지요.',
@@ -107,6 +117,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'bangsunhui',
+    keywords: ['의원','의정원','여성','평등','제3조','여성동맹'],
     headline: '임시의정원 의원 — 헌장의 남녀평등을 실천한 사람',
     memory: {
       middle: '「그 약속이 종이에만 머물렀을까요?」라고 물으며 의정원 의원으로 일하셨지요.',
@@ -117,6 +128,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'jicheongcheon',
+    keywords: ['광복군','총사령','군대','1940','연합군'],
     headline: '한국광복군 총사령관 — 정부의 군대를 이끈 사람',
     memory: {
       middle: '태극기 아래에서 「그 군대는 반드시 정부 아래에 있어야 하지」라고 하셨지요.',
@@ -127,6 +139,7 @@ export const honorees: Honoree[] = [
   },
   {
     figureId: 'eomhangseop',
+    keywords: ['선전','환국','귀국','경교장','알리'],
     headline: '선전부장 — 임시정부의 목소리를 세상에 전한 사람',
     memory: {
       middle: '경교장 정원에서 「드디어 돌아왔습니다」라고 하셨지요.',
@@ -134,6 +147,17 @@ export const honorees: Honoree[] = [
     },
     letterHints: ['임시정부의 소식을 세상에 알린 일', '27년 만의 귀국', '정부를 알리는 일의 중요함'],
     sourceNote: '국가보훈부 공훈전자사료관 「엄항섭」.',
+  },
+  {
+    figureId: 'unnamed',
+    keywords: ['연통제', '성금', '애국금', '인구세', '공채', '이름', '동포', '가족', '아이', '요원'],
+    headline: '이름을 남기지 못한 분들 — 연통제 요원, 성금을 보탠 동포, 정부와 함께 걸은 가족들',
+    memory: {
+      middle: '연통제 조직표에, 독립공채 증서에, 곳간의 애국금 장부에 — 이름 없이 스쳐 간 수많은 손길이 있었지요.',
+      high: '임시정부는 국내외 수많은 무명의 협력자 — 연통제·교통국 요원, 애국금과 인구세를 낸 동포, 이동기를 함께한 가족 — 에 기대어 유지되었다.',
+    },
+    letterHints: ['연통제로 목숨 걸고 문서를 나른 사람들', '이름도 없이 성금을 보낸 동포들', '8년의 이동을 함께 견딘 가족과 아이들'],
+    sourceNote: '특정 개인이 아닌 무명의 협력자들을 기리는 명패다. 포상받지 못한 독립운동가는 지금도 국가보훈부가 발굴·심사하고 있다.',
   },
 ];
 

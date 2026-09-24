@@ -9,6 +9,10 @@ import { glossary } from './glossary';
 import { validateMap } from '../engine/grid';
 import { actFromProgress, isUnlocked, nextQuest } from '../engine/rules';
 import { ACT_MAP, availableQuestFor } from '../store/gameStore';
+import { notePrompts } from './notes';
+import { journeyRecall, prequelActs, prequelLinks, prologueRecall } from './prequel';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 /**
  * 콘텐츠 무결성 — 「수업 자료로 쓸 수 있는가」를 코드로 강제한다. (1탄과 같은 원칙)
@@ -144,7 +148,7 @@ describe('기록 조각', () => {
 describe('보훈의 전당', () => {
   it('명패의 주인공은 모두 게임에서 만난 분이다', () => {
     const met = new Set(MAP_ORDER.filter((m) => m !== 'memorial').flatMap((m) => maps[m].npcs.map((n) => n.figureId)));
-    for (const h of honorees) expect(met.has(h.figureId), h.figureId).toBe(true);
+    for (const h of honorees.filter((x) => x.figureId !== 'unnamed')) expect(met.has(h.figureId), h.figureId).toBe(true);
   });
 
   it('명패와 유공자 정보가 하나씩 맞물린다', () => {
@@ -152,7 +156,8 @@ describe('보훈의 전당', () => {
     expect(new Set(plaques)).toEqual(new Set(honorees.map((h) => h.figureId)));
     for (const h of honorees) {
       expect(h.letterHints.length).toBeGreaterThan(1);
-      expect(h.sourceNote).toContain('공훈전자사료관');
+      expect(h.keywords.length, h.figureId).toBeGreaterThan(3);
+      if (h.figureId !== 'unnamed') expect(h.sourceNote).toContain('공훈전자사료관');
     }
   });
 
@@ -176,5 +181,51 @@ describe('인물·연표·낱말', () => {
   it('낱말 풀이가 겹치지 않는다', () => {
     const keys = glossary.flatMap((g) => [g.term, ...(g.aliases ?? [])]);
     expect(new Set(keys).size).toBe(keys.length);
+  });
+});
+
+describe('1탄과의 연결', () => {
+  // 1탄의 퀘스트 파일을 직접 읽어, 2탄이 가리키는 1탄 장면 제목이 실제로 있는지 확인한다
+  const prequelSource = readFileSync(fileURLToPath(new URL('../../../imjeong-rpg/src/data/quests.ts', import.meta.url)), 'utf8');
+  const titles = [...prequelSource.matchAll(/title: '([^']+)'/g)].map((m) => m[1]);
+
+  it('연결표의 퀘스트는 2탄에 있고, 가리키는 1탄 장면 제목은 1탄에 있다', () => {
+    for (const [id, link] of Object.entries(prequelLinks)) {
+      expect(quests.some((q) => q.id === id), id).toBe(true);
+      const named = [...link.title.matchAll(/「([^」]+)」/g)].map((m) => m[1]);
+      expect(named.length, id).toBeGreaterThan(0);
+      for (const t of named) {
+        if (t === '이어지는 법통') continue; // 1탄의 배지 이름
+        expect(titles, `${id} → ${t}`).toContain(t);
+      }
+    }
+  });
+
+  it('기억 퀴즈가 가리키는 1탄 장면도 1탄에 있다', () => {
+    for (const r of [...prologueRecall, journeyRecall]) {
+      const t = r.from.match(/「([^」]+)」/)?.[1];
+      expect(titles, r.id).toContain(t);
+      expect(r.answer).toBeLessThan(r.choices.length);
+    }
+  });
+
+  it('1탄 여섯 막 요약이 1탄의 막 제목과 같다', () => {
+    for (const a of prequelActs) expect(prequelSource, a.title).toContain(a.title);
+  });
+
+  it('연결이 모든 막에 고루 있다', () => {
+    const actsLinked = new Set(quests.filter((q) => prequelLinks[q.id]).map((q) => q.act));
+    for (let a = 1; a <= MAX_ACT; a += 1) expect(actsLinked.has(a), `제${a}막`).toBe(true);
+  });
+});
+
+describe('생각 노트', () => {
+  it('여섯 막 모두에 질문이 있고, 재료와 글머리가 있다', () => {
+    for (let a = 1; a <= MAX_ACT; a += 1) {
+      const p = notePrompts.find((n) => n.act === a);
+      expect(p, `제${a}막`).toBeDefined();
+      expect(p!.starters.length).toBeGreaterThan(1);
+      expect(p!.materials.length).toBeGreaterThan(1);
+    }
   });
 });

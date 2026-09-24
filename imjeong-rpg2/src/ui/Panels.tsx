@@ -6,7 +6,12 @@ import { timeline } from '../data/timeline';
 import { relics } from '../data/relics';
 import { blueprint } from '../data/blueprint';
 import { isUnlocked } from '../engine/rules';
-import { ACT_MAP, type PanelKind } from '../store/gameStore';
+import { ACT_MAP, currentProgressCode, useGame, type PanelKind } from '../store/gameStore';
+import { useSettings } from '../store/settings';
+import { notePrompts } from '../data/notes';
+import { prequelLinks } from '../data/prequel';
+import { downloadRecord } from './exportRecord';
+import { useState } from 'react';
 
 const TITLES: Record<Exclude<PanelKind, null>, string> = {
   quests: '임무 기록',
@@ -14,6 +19,8 @@ const TITLES: Record<Exclude<PanelKind, null>, string> = {
   timeline: '연표 — 새 나라가 만들어진 길',
   atlas: '장소',
   relics: '기록 조각',
+  notes: '생각 노트',
+  settings: '설정',
   help: '도움말',
 };
 
@@ -56,6 +63,8 @@ export function Panel({
         {kind === 'timeline' && <Timeline />}
         {kind === 'atlas' && <Atlas level={level} mapId={mapId} act={act} onTravel={onTravel} />}
         {kind === 'relics' && <Relics level={level} relicIds={relicIds} />}
+        {kind === 'notes' && <Notes />}
+        {kind === 'settings' && <SettingsPanel />}
         {kind === 'help' && <Help onReplayTutorial={onReplayTutorial} onReset={onReset} />}
       </div>
     </div>
@@ -87,6 +96,7 @@ function QuestList({ completed, missed }: { completed: Record<string, boolean>; 
                     {q.dateLabel} · {figures[q.giver]?.name}
                     {done && (missed.includes(q.id) ? ' · 다시 풀어 맞힘' : ' · 한 번에 맞힘')}
                   </div>
+                  {prequelLinks[q.id] && <div className="prequel-mini">🔗 1탄 {prequelLinks[q.id].title}</div>}
                 </div>
               );
             })}
@@ -121,10 +131,16 @@ function Blueprint({ completed }: { completed: Record<string, boolean> }) {
 function Timeline() {
   return (
     <>
+      <p className="list-sub" style={{ marginTop: 0 }}>
+        <span className="tag prequel-tag">1탄</span> 표시는 1탄 『임시정부 1919-1945』에서 자세히 다룬 사건이에요. 두 게임을 합치면 1919년부터
+        1948년까지 한 줄로 이어져요.
+      </p>
       {timeline.map((t) => (
         <div className="timeline-entry" key={t.date + t.title}>
           <div className="timeline-date">{t.label}</div>
-          <div className="timeline-title">{t.title}</div>
+          <div className="timeline-title">
+            {t.title} {t.prequel && <span className="tag prequel-tag">1탄</span>}
+          </div>
           <div className="timeline-detail">{t.detail}</div>
           <div className="timeline-note">근거 · {t.sourceNote}</div>
         </div>
@@ -234,6 +250,19 @@ function Help({ onReplayTutorial, onReset }: { onReplayTutorial(): void; onReset
           <strong>게임 속 포인트는 실제 돈이 아닙니다.</strong> 마음을 전하는 연습이에요.
         </li>
       </ul>
+      <h4>1탄과 이어 보기</h4>
+      <ul>
+        <li>
+          1탄 『임시정부 1919-1945』의 줄거리와 기억 퀴즈는{' '}
+          <button className="linklike" onClick={() => useGame.getState().setRecap(true)}>
+            📖 1탄 돌아보기
+          </button>
+          에서 볼 수 있어요.
+        </li>
+        <li>퀘스트 해설에 「🔗 1탄에서는」이 붙어 있으면, 같은 사건을 1탄은 어떻게 다뤘는지 알려 줘요.</li>
+      </ul>
+      <h4>다른 컴퓨터에서 이어 하기</h4>
+      <ProgressCodeBox />
       <h4>개인정보</h4>
       <ul>
         <li>이름·이메일을 받지 않아요. 기록과 편지는 이 기기의 브라우저 안에만 저장돼요.</li>
@@ -250,6 +279,113 @@ function Help({ onReplayTutorial, onReset }: { onReplayTutorial(): void; onReset
         >
           처음부터 다시
         </button>
+      </div>
+    </div>
+  );
+}
+
+function ProgressCodeBox() {
+  const state = useGame();
+  const code = currentProgressCode(state);
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="code-box">
+      <p className="list-sub" style={{ margin: '0 0 6px' }}>
+        수업이 끝날 때 이 코드를 공책에 적어 두세요. 다음 시간 어느 컴퓨터에서든 시작 화면의 「진행 코드로 이어하기」에 넣으면 돌아와요.
+        (편지·생각 노트의 글은 옮겨지지 않아요)
+      </p>
+      <div className="code-value">{code}</div>
+      <div className="dialogue-actions">
+        <button
+          className="btn small"
+          onClick={() => {
+            void navigator.clipboard?.writeText(code).then(() => setCopied(true));
+          }}
+        >
+          {copied ? '복사했어요' : '코드 복사'}
+        </button>
+        <button className="btn small" onClick={() => downloadRecord(state, code)}>
+          📄 학습 기록 내려받기
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Notes() {
+  const notes = useGame((s) => s.notes);
+  const completed = useGame((s) => s.completed);
+  return (
+    <>
+      <p className="list-sub" style={{ marginTop: 0 }}>
+        한 시대(막)를 마칠 때마다 생각 노트를 써요. 정답이 없는 질문이에요 — 게임에서 본 사실을 근거로 내 생각을 적어 보세요.
+      </p>
+      {notePrompts.map((p) => {
+        const open = quests.filter((q) => q.act === p.act).every((q) => completed[q.id]);
+        return (
+          <div className="list-item" key={p.act} data-locked={!open}>
+            <div className="list-title">
+              {notes[p.act] ? '✍️' : open ? '📝' : '🔒'} {p.act === 6 ? '나의 보훈 다짐' : `제${p.act}막 · ${p.skill}`}
+            </div>
+            <div className="list-sub">{p.question}</div>
+            {notes[p.act] && <div className="note-preview">{notes[p.act]}</div>}
+            {open && (
+              <button className="btn small" style={{ marginTop: 6 }} onClick={() => useGame.getState().openNote(p.act)}>
+                {notes[p.act] ? '고쳐 쓰기' : '지금 쓰기'}
+              </button>
+            )}
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
+function SettingsPanel() {
+  const st = useSettings();
+  return (
+    <div className="settings">
+      <label className="setting-row">
+        <input type="checkbox" checked={st.largeText} onChange={(e) => st.set({ largeText: e.target.checked })} />
+        <span>
+          <strong>글자 크게</strong>
+          <em>대화·문제·패널의 글자를 키워요.</em>
+        </span>
+      </label>
+      <label className="setting-row">
+        <input type="checkbox" checked={!st.headBob} onChange={(e) => st.set({ headBob: !e.target.checked })} />
+        <span>
+          <strong>화면 흔들림 끄기</strong>
+          <em>걸을 때 어지러우면 켜세요.</em>
+        </span>
+      </label>
+      <label className="setting-row">
+        <input type="checkbox" checked={st.alwaysLabels} onChange={(e) => st.set({ alwaysLabels: e.target.checked })} />
+        <span>
+          <strong>이름표 늘 보이기</strong>
+          <em>벽 너머·멀리 있는 사람의 이름도 보여요.</em>
+        </span>
+      </label>
+      <label className="setting-row">
+        <input type="checkbox" checked={st.sound} onChange={(e) => st.set({ sound: e.target.checked })} />
+        <span>
+          <strong>효과음</strong>
+          <em>맞혔을 때·기록 조각·국화를 올릴 때 짧은 소리.</em>
+        </span>
+      </label>
+      <div className="setting-row">
+        <span>
+          <strong>둘러보기 감도 · {st.lookSpeed.toFixed(1)}</strong>
+          <em>화면을 끌 때 도는 빠르기.</em>
+          <input
+            type="range"
+            min={0.5}
+            max={1.8}
+            step={0.1}
+            value={st.lookSpeed}
+            onChange={(e) => st.set({ lookSpeed: Number(e.target.value) })}
+          />
+        </span>
       </div>
     </div>
   );

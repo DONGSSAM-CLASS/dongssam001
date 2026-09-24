@@ -6,7 +6,9 @@ import {
   applyDelta,
   canDonate,
   canFinish,
+  computePointsEarned,
   gradeQuest,
+  letterChecks,
   letterProblem,
   lerpAngle,
   resolveQuest,
@@ -101,5 +103,32 @@ describe('보조 함수', () => {
   });
   it('각도 보간은 짧은 쪽으로 돈다', () => {
     expect(lerpAngle(3, -3, 1)).toBeCloseTo(3 + (2 * Math.PI - 6));
+  });
+});
+
+describe('편지 점검표', () => {
+  it('감사·사실·다짐을 알아본다', () => {
+    const c = letterChecks('선생님 감사합니다. 충칭에서 주석으로 일하셨지요. 앞으로 잊지 않겠습니다.', ['주석', '충칭']);
+    expect(c).toEqual({ thanks: true, fact: true, pledge: true });
+    expect(letterChecks('안녕하세요', ['주석']).fact).toBe(false);
+  });
+});
+
+describe('보훈 다짐과 감사 증서', () => {
+  it('다짐이 비어 있으면 감사 증서가 열리지 않는다', () => {
+    const all = Object.fromEntries(quests.map((x) => [x.id, true]));
+    const letter = [{ figureId: 'kimgu', body: 'x', writtenAt: 1 }];
+    expect(canFinish(quests, all, { kimgu: 100 }, letter, '')).toBe(false);
+    expect(canFinish(quests, all, { kimgu: 100 }, letter, '나는 앞으로')).toBe(true);
+  });
+});
+
+describe('포인트 다시 계산', () => {
+  it('한 번에 다 맞히면 퀘스트·막 보너스·조각·노트가 모두 더해진다', () => {
+    const all = Object.fromEntries(quests.map((x) => [x.id, true]));
+    expect(computePointsEarned(quests, all, [], 17, 6, 6)).toBe(
+      quests.length * POINTS.questFirstTry + 6 * POINTS.actComplete + 17 * POINTS.relic + 6 * POINTS.note,
+    );
+    expect(computePointsEarned(quests, { 'q-name': true }, ['q-name'], 0, 0, 6)).toBe(POINTS.questRetry);
   });
 });

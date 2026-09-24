@@ -74,6 +74,36 @@ export const figures: Record<string, Figure> = {
     sourceNote: '가상 인물이다.',
   },
 
+  /* ─────────────── 보훈의 전당 — 무명의 협력자들 (특정 인물 아님) ─────────────── */
+  unnamed: {
+    id: 'unnamed',
+    name: '이름을 남기지 못한 분들',
+    role: '연통제·교통국 요원, 성금을 보낸 동포, 정부와 함께 걸은 가족들',
+    track: 'unity',
+    accent: '#c9a24b',
+    appearance: {
+      garment: 'durumagi',
+      coat: '#e4dcc8',
+      trim: '#ffffff',
+      lower: '#d8cfb8',
+      hair: 'cropped',
+      facialHair: 'none',
+      glasses: false,
+      headwear: 'none',
+      age: 'middle',
+      note: '특정 인물이 아니므로 초상을 그리지 않고 태극 문양으로 대신한다.',
+    },
+    inTextbook: false,
+    recruitable: false,
+    bio: {
+      middle:
+        '임시정부는 이름난 몇 사람만으로 지켜진 것이 아니에요. 목숨 걸고 연통제 문서를 나른 사람, 끼니를 줄여 성금을 보낸 동포, 8년 동안 정부와 함께 짐을 지고 걸은 가족과 아이들이 있었어요. 그분들 대부분은 이름이 기록에 남지 않았어요.',
+      high:
+        '임시정부의 유지는 연통제·교통국의 비밀 요원, 애국금·인구세·독립공채를 부담한 국내외 동포, 이동기를 함께한 가족 공동체 등 무수한 무명 협력자에 기대었다. 오늘날에도 국가보훈부는 포상받지 못한 독립운동가를 발굴·심사하고 있다.',
+    },
+    sourceNote: '특정 개인이 아니다. 무명 독립운동가 발굴에 관해서는 국가보훈부 안내를 참고.',
+  },
+
   /* ─────────────── 지도부 ─────────────── */
   kimgu: {
     id: 'kimgu',

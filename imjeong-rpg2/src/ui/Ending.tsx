@@ -6,6 +6,8 @@ import { blueprint } from '../data/blueprint';
 import { totalDonated } from '../engine/rules';
 import { portraitDataUrl } from './portrait';
 import { CinematicImage } from './CinematicImage';
+import { notePrompts } from '../data/notes';
+import { PREQUEL_TITLE } from '../data/prequel';
 
 /**
  * 감사 증서 — 여행의 끝.
@@ -22,6 +24,9 @@ export function Ending({
   pointsEarned,
   donations,
   letters,
+  notes,
+  code,
+  onExport,
   onBack,
   onRestart,
 }: {
@@ -32,6 +37,9 @@ export function Ending({
   pointsEarned: number;
   donations: Record<string, number>;
   letters: Letter[];
+  notes: Record<number, string>;
+  code: string;
+  onExport(): void;
   onBack(): void;
   onRestart(): void;
 }) {
@@ -85,6 +93,13 @@ export function Ending({
               </div>
             </div>
 
+            {notes[6] && (
+              <div className="cert-pledge">
+                <span>나의 보훈 다짐</span>
+                <p>「{notes[6]}」</p>
+              </div>
+            )}
+
             {donatedList.length > 0 && (
               <div className="cert-section">
                 <h3>🌼 국화를 올린 분들</h3>
@@ -105,7 +120,10 @@ export function Ending({
                 <h3>✉️ 올린 편지</h3>
                 {letters.map((l) => (
                   <div className="cert-letter" key={l.figureId}>
-                    <div className="cert-letter-to">{figures[l.figureId]?.name} 선생님께</div>
+                    <div className="cert-letter-to">
+                      {figures[l.figureId]?.name}
+                      {l.figureId === 'unnamed' ? '께' : ' 선생님께'}
+                    </div>
                     <p>{l.body}</p>
                     <div className="cert-letter-from">— {who} 올림</div>
                   </div>
@@ -113,8 +131,25 @@ export function Ending({
               </div>
             )}
 
+            {notePrompts.some((p) => p.act < 6 && notes[p.act]) && (
+              <div className="cert-section">
+                <h3>🧠 기록관의 생각 노트</h3>
+                {notePrompts
+                  .filter((p) => p.act < 6 && notes[p.act])
+                  .map((p) => (
+                    <div className="cert-note" key={p.act}>
+                      <div className="cert-note-q">
+                        제{p.act}막 · {p.skill}
+                      </div>
+                      <p>{notes[p.act]}</p>
+                    </div>
+                  ))}
+              </div>
+            )}
+
             <div className="cert-foot">
               <span>{dateText}</span>
+              <span>진행 코드 {code}</span>
               <span>보훈의 전당</span>
             </div>
             <p className="cert-notice">
@@ -127,6 +162,11 @@ export function Ending({
         <CinematicImage name="ending" alt="엔딩 삽화" className="ending-cinematic" caption="삽화 — 사료가 아닙니다" />
 
         <div className="ending-actions frame">
+          <h3>1탄과 2탄, 두 여정을 이어 보면</h3>
+          <p className="list-sub" style={{ marginTop: 0 }}>
+            1탄 『{PREQUEL_TITLE}』은 광복을 향해 <strong>싸운</strong> 이야기, 2탄은 그 싸움 속에서 <strong>나라를 세우고 꾸린</strong>{' '}
+            이야기였어요. 독립은 되찾는 일과 세우는 일이 함께였고, 그 두 길을 모두 걸은 분들이 오늘 편지를 받은 분들이에요.
+          </p>
           <h3>게임 밖에서, 진짜 보훈을 실천하는 방법</h3>
           <ul>
             <li>
@@ -154,6 +194,9 @@ export function Ending({
           <div className="dialogue-actions">
             <button className="btn primary" onClick={() => window.print()}>
               🖨️ 증서와 편지 인쇄하기
+            </button>
+            <button className="btn" onClick={onExport}>
+              📄 학습 기록 내려받기 (선생님께 제출)
             </button>
             <button className="btn" onClick={onBack}>
               보훈의 전당으로 돌아가기

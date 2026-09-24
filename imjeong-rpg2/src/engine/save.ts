@@ -29,6 +29,9 @@ export function emptySave(): SaveState {
     letters: [],
     seenActs: [],
     prologueDone: false,
+    notes: {},
+    prequelPlayed: null,
+    recall: [],
     savedAt: Date.now(),
   };
 }
@@ -51,6 +54,8 @@ export function loadSave(): SaveState | null {
       donations: parsed.donations ?? {},
       letters: parsed.letters ?? [],
       seenActs: parsed.seenActs ?? [],
+      notes: parsed.notes ?? {},
+      recall: parsed.recall ?? [],
       map: MAP_IDS.includes(parsed.map as MapId) ? (parsed.map as MapId) : base.map,
     };
   } catch {

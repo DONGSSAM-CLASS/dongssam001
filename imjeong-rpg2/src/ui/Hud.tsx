@@ -97,6 +97,8 @@ const TOOLS: Array<{ kind: Exclude<PanelKind, null>; icon: string; label: string
   { kind: 'timeline', icon: '📅', label: '연표' },
   { kind: 'atlas', icon: '🗺️', label: '장소' },
   { kind: 'relics', icon: '📜', label: '기록 조각' },
+  { kind: 'notes', icon: '✍️', label: '생각 노트' },
+  { kind: 'settings', icon: '⚙️', label: '설정' },
   { kind: 'help', icon: '❓', label: '도움말' },
 ];
 

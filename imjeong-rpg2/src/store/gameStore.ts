@@ -1,12 +1,17 @@
 import { create } from 'zustand';
 import type { Level, MapId, Quest, ResourceDelta, SaveState } from '../types';
 import { MAX_ACT, getQuest, quests } from '../data/quests';
-import { getRelic } from '../data/relics';
+import { getRelic, relics as relicTable } from '../data/relics';
+import { NOTE_MIN } from '../data/notes';
+import { sfx } from '../ui/sound';
+import { decodeProgress, encodeProgress } from '../engine/progressCode';
 import { figures } from '../data/figures';
 import {
   POINTS,
   actFromProgress,
+  applyDelta,
   canDonate,
+  computePointsEarned,
   isActComplete,
   isUnlocked,
   resolveQuest,
@@ -19,7 +24,7 @@ import { clearSave, emptySave, loadSave, writeSave } from '../engine/save';
  * 2탄에서는 보훈 포인트·기부·편지·막 전환·프롤로그가 더해졌다.
  */
 
-export type PanelKind = 'quests' | 'blueprint' | 'timeline' | 'atlas' | 'relics' | 'help' | null;
+export type PanelKind = 'quests' | 'blueprint' | 'timeline' | 'atlas' | 'relics' | 'notes' | 'settings' | 'help' | null;
 
 export interface DialogueState {
   figureId: string;
@@ -64,8 +69,18 @@ export interface GameState extends SaveState {
   ending: boolean;
   /** 잠깐 떴다 사라지는 알림 */
   toast: { text: string; id: number } | null;
+  /** 생각 노트 쓰기 창 (막 번호) */
+  noteCard: number | null;
+  /** 1탄 돌아보기 창 */
+  recapOpen: boolean;
 
-  start(level: Level, nickname: string): void;
+  start(level: Level, nickname: string, prequelPlayed: 'yes' | 'no' | null): void;
+  restoreFromCode(code: string, nickname: string): boolean;
+  openNote(act: number): void;
+  closeNote(): void;
+  writeNote(act: number, text: string): void;
+  setRecap(open: boolean): void;
+  answerRecall(id: string, correct: boolean): void;
   hydrate(): void;
   setLevel(level: Level): void;
   travel(map: MapId): void;
@@ -111,6 +126,9 @@ function toSave(state: GameState): SaveState {
     letters: state.letters,
     seenActs: state.seenActs,
     prologueDone: state.prologueDone,
+    notes: state.notes,
+    prequelPlayed: state.prequelPlayed,
+    recall: state.recall,
     savedAt: Date.now(),
   };
 }
@@ -161,12 +179,15 @@ export const useGame = create<GameState>((set, get) => {
     plaque: null,
     ending: false,
     toast: null,
+    noteCard: null,
+    recapOpen: false,
 
-    start(level, nickname) {
+    start(level, nickname, prequelPlayed) {
       const fresh = emptySave();
       set({
         ...fresh,
         level,
+        prequelPlayed,
         nickname: nickname.trim().slice(0, 12),
         act: 1,
         started: true,
@@ -180,6 +201,79 @@ export const useGame = create<GameState>((set, get) => {
         plaque: null,
         ending: false,
       });
+      save();
+    },
+
+    restoreFromCode(code, nickname) {
+      const snap = decodeProgress(code, quests.map((q) => q.id), relicTable.map((r) => r.id));
+      if (!snap) return false;
+      const completed = Object.fromEntries(snap.completed.map((id) => [id, true]));
+      const act = actFromProgress(quests, completed, MAX_ACT);
+      const notes: Record<number, string> = {};
+      for (const n of snap.notes) notes[n] = '(다른 기기에서 쓴 생각 노트 — 글은 옮겨 오지 않았어요)';
+      const earned = computePointsEarned(quests, completed, snap.missed, snap.relics.length, snap.notes.length, MAX_ACT);
+      const fresh = emptySave();
+      // 지표는 맞힌 퀘스트의 보상으로 다시 쌓는다 (고른 선택지 기록은 코드에 없다)
+      let resources = fresh.resources;
+      for (const q of quests) if (completed[q.id]) resources = applyDelta(resources, q.reward);
+      const map = act > MAX_ACT ? 'memorial' : ACT_MAP[act];
+      set({
+        ...fresh,
+        level: snap.level,
+        nickname: nickname.trim().slice(0, 12),
+        prologueDone: snap.prologueDone || act > 1,
+        completed,
+        missed: snap.missed,
+        relics: snap.relics,
+        notes,
+        act,
+        map: snap.prologueDone ? map : 'memorial',
+        seenActs: Array.from({ length: Math.min(act, MAX_ACT) }, (_, i) => i + 1),
+        badges: quests.filter((q) => completed[q.id]).map((q) => q.badge.label),
+        resources,
+        points: earned,
+        pointsEarned: earned,
+        started: true,
+        showTutorial: false,
+        log: ['진행 코드로 기록을 이어 펼쳤다. (편지와 생각 노트의 글은 옮겨 오지 않는다)'],
+      });
+      save();
+      return true;
+    },
+
+    openNote(act) {
+      set({ noteCard: act, dialogue: null, panel: null });
+    },
+
+    closeNote() {
+      set({ noteCard: null });
+    },
+
+    writeNote(act, text) {
+      const s = get();
+      const body = text.trim();
+      if (body.replace(/\s+/g, '').length < NOTE_MIN) return;
+      const first = !(act in s.notes);
+      set({
+        notes: { ...s.notes, [act]: body },
+        noteCard: null,
+        points: s.points + (first ? POINTS.note : 0),
+        pointsEarned: s.pointsEarned + (first ? POINTS.note : 0),
+      });
+      get().pushLog(act === 6 ? '나의 보훈 다짐을 적었다.' : `생각 노트 ${act}을(를) 적었다.${first ? ` 보훈 포인트 +${POINTS.note}` : ''}`);
+      if (first) sfx.relic();
+      save();
+    },
+
+    setRecap(open) {
+      set({ recapOpen: open, dialogue: null });
+    },
+
+    answerRecall(id, correct) {
+      const s = get();
+      if (!correct || s.recall.includes(id)) return;
+      set({ recall: [...s.recall, id], points: s.points + POINTS.recall, pointsEarned: s.pointsEarned + POINTS.recall });
+      get().pushLog(`1탄의 기억을 꺼냈다. 보훈 포인트 +${POINTS.recall}`);
       save();
     },
 
@@ -211,6 +305,7 @@ export const useGame = create<GameState>((set, get) => {
         seenActs: showCard ? [...state.seenActs, actHere] : state.seenActs,
       });
       get().pushLog(`시간의 문을 지나 ${mapLabel(map)}에 도착했다.`);
+      sfx.portal();
       save();
     },
 
@@ -288,6 +383,8 @@ export const useGame = create<GameState>((set, get) => {
         act: actFromProgress(quests, completed, MAX_ACT),
       });
       for (const l of logs) get().pushLog(l);
+      if (result.correct) sfx.correct();
+      else sfx.wrong();
       save();
     },
 
@@ -302,8 +399,9 @@ export const useGame = create<GameState>((set, get) => {
       set({ attempt: null });
       if (a?.submitted && a.correct) {
         const quest = getQuest(a.questId);
-        if (isActComplete(quests, get().completed, quest.act) && quest.act < MAX_ACT) {
-          get().notify('🚪 이 시대의 기록을 모두 마쳤어요. 시간의 문으로 가면 다음 시대로 건너갑니다.');
+        if (isActComplete(quests, get().completed, quest.act)) {
+          if (!(quest.act in get().notes)) set({ noteCard: quest.act });
+          if (quest.act < MAX_ACT) get().notify('🚪 이 시대의 기록을 모두 마쳤어요. 시간의 문으로 가면 다음 시대로 건너갑니다.');
         }
       }
     },
@@ -318,6 +416,7 @@ export const useGame = create<GameState>((set, get) => {
         pointsEarned: s.pointsEarned + POINTS.relic,
         relicCard: relicId,
       });
+      sfx.relic();
       get().pushLog(`기록 조각 「${relic?.name ?? relicId}」을(를) 주웠다. 보훈 포인트 +${POINTS.relic}`);
       save();
     },
@@ -341,7 +440,8 @@ export const useGame = create<GameState>((set, get) => {
         points: s.points - amount,
         donations: { ...s.donations, [figureId]: (s.donations[figureId] ?? 0) + amount },
       });
-      get().pushLog(`${figures[figureId]?.name ?? ''} 선생님께 보훈 포인트 ${amount}을(를) 기부하고 국화를 올렸다.`);
+      get().pushLog(`${figures[figureId]?.name ?? ''}께 보훈 포인트 ${amount}을(를) 기부하고 국화를 올렸다.`);
+      sfx.honor();
       save();
       return true;
     },
@@ -349,7 +449,8 @@ export const useGame = create<GameState>((set, get) => {
     writeLetter(figureId, body) {
       const s = get();
       set({ letters: upsertLetter(s.letters, { figureId, body: body.trim(), writtenAt: Date.now() }) });
-      get().pushLog(`${figures[figureId]?.name ?? ''} 선생님께 감사 편지를 올렸다.`);
+      get().pushLog(`${figures[figureId]?.name ?? ''}께 감사 편지를 올렸다.`);
+      sfx.honor();
       save();
     },
 
@@ -407,4 +508,20 @@ export function mapLabel(map: MapId): string {
     chongqing: '1940년 충칭',
     seoul: '1945년 서울 경교장',
   }[map];
+}
+
+/** 지금 기록의 진행 코드 */
+export function currentProgressCode(s: GameState): string {
+  return encodeProgress(
+    {
+      level: s.level,
+      prologueDone: s.prologueDone,
+      completed: Object.keys(s.completed).filter((k) => s.completed[k]),
+      missed: s.missed,
+      relics: s.relics,
+      notes: Object.keys(s.notes).map(Number),
+    },
+    quests.map((q) => q.id),
+    relicTable.map((r) => r.id),
+  );
 }

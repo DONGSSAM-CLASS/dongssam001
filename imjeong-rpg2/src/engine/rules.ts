@@ -56,7 +56,31 @@ export const POINTS = {
   actComplete: 100,
   /** 기부 단위 */
   donationStep: 50,
+  /** 생각 노트 한 편 (성실한 참여에 대한 보상 — 채점하지 않는다) */
+  note: 30,
+  /** 1탄 기억 퀴즈 한 문제 */
+  recall: 20,
 } as const;
+
+/**
+ * 모은 포인트를 기록에서 다시 계산한다 (진행 코드로 옮겨 왔을 때 쓴다).
+ * 기억 퀴즈 포인트는 진행 코드에 담지 않으므로 빼고 센다.
+ */
+export function computePointsEarned(
+  allQuests: Quest[],
+  completed: Record<string, boolean>,
+  missed: string[],
+  relicCount: number,
+  noteCount: number,
+  maxAct: number,
+): number {
+  let sum = 0;
+  for (const q of allQuests) {
+    if (completed[q.id] === true) sum += questPoints(!missed.includes(q.id));
+  }
+  for (let a = 1; a <= maxAct; a += 1) if (isActComplete(allQuests, completed, a)) sum += POINTS.actComplete;
+  return sum + relicCount * POINTS.relic + noteCount * POINTS.note;
+}
 
 /** 퀘스트를 맞혔을 때 받는 포인트 */
 export function questPoints(firstTry: boolean): number {
@@ -201,16 +225,35 @@ export function upsertLetter(letters: Letter[], letter: Letter): Letter[] {
   return [...letters.filter((l) => l.figureId !== letter.figureId), letter];
 }
 
-/** 엔딩(감사 증서)을 열 수 있는 조건: 모든 퀘스트 + 기부 1회 이상 + 편지 1통 이상 */
+/**
+ * 엔딩(감사 증서)을 열 수 있는 조건:
+ * 모든 퀘스트 + 기부 1회 이상 + 편지 1통 이상 + 보훈 다짐(생각 노트 6)
+ */
 export function canFinish(
   allQuests: Quest[],
   completed: Record<string, boolean>,
   donations: Record<string, number>,
   letters: Letter[],
+  pledge = 'x',
 ): boolean {
   return (
-    allQuests.every((q) => completed[q.id] === true) && totalDonated(donations) > 0 && letters.length > 0
+    allQuests.every((q) => completed[q.id] === true) &&
+    totalDonated(donations) > 0 &&
+    letters.length > 0 &&
+    pledge.trim().length > 0
   );
+}
+
+/**
+ * 편지 점검표 — 채점이 아니라 「더 좋은 편지」를 위한 거울.
+ * 감사의 말 · 구체적인 역사 사실 · 오늘의 나와 잇는 다짐이 들어 있는지 본다.
+ */
+export function letterChecks(body: string, keywords: string[]): { thanks: boolean; fact: boolean; pledge: boolean } {
+  return {
+    thanks: /감사|고맙|고마|존경/.test(body),
+    fact: keywords.some((k) => body.includes(k)),
+    pledge: /앞으로|다짐|잊지|기억하|지키|저도|나도|하겠/.test(body),
+  };
 }
 
 /* ───────────────────────── 기타 ───────────────────────── */

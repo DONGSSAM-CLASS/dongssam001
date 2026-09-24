@@ -390,6 +390,8 @@ export interface TimelineEntry {
   track: QuestTrack;
   map?: MapId;
   sourceNote: string;
+  /** 1탄 『임시정부 1919-1945』에서 자세히 다룬 사건 */
+  prequel?: boolean;
 }
 
 /* ────────────────────────── 보훈 ────────────────────────── */
@@ -397,6 +399,8 @@ export interface TimelineEntry {
 /** 에필로그에서 기부·편지를 받는 국가유공자 */
 export interface Honoree {
   figureId: string;
+  /** 편지 점검표가 「구체적인 역사 사실」로 알아볼 낱말 */
+  keywords: string[];
   /** 임시정부에서 한 일 — 한 줄 */
   headline: string;
   /** 게임에서 만난 장면을 떠올리게 하는 말 */
@@ -437,5 +441,11 @@ export interface SaveState {
   /** 막 전환 연출을 이미 본 막 */
   seenActs: number[];
   prologueDone: boolean;
+  /** 생각 노트 — 막 번호 → 글 (6 은 「나의 보훈 다짐」) */
+  notes: Record<number, string>;
+  /** 1탄을 해 보았는지 (시작할 때 고른다) */
+  prequelPlayed: 'yes' | 'no' | null;
+  /** 1탄 기억 퀴즈에서 맞힌 문제 */
+  recall: string[];
   savedAt: number;
 }

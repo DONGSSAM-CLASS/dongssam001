@@ -5,6 +5,8 @@ import { getRelic } from '../data/relics';
 import { CinematicImage } from './CinematicImage';
 import { GlossaryText } from './GlossaryText';
 import { POINTS } from '../engine/rules';
+import { journeyRecall } from '../data/prequel';
+import { RecallQuiz } from './Learning';
 
 /* ───────────────────────── 조작 안내 ───────────────────────── */
 
@@ -78,7 +80,17 @@ export function Tutorial({ onClose }: { onClose(): void }) {
  * 1탄 인수인계 문서의 「막 전환 연출」 과제를 2탄에서 구현했다.
  * public/assets/higgsfield/act-<막>.jpg 가 있으면 배경 삽화로 쓴다.
  */
-export function ActCard({ act, onClose }: { act: number; onClose(): void }) {
+export function ActCard({
+  act,
+  recallSolved,
+  onRecall,
+  onClose,
+}: {
+  act: number;
+  recallSolved: boolean;
+  onRecall(correct: boolean): void;
+  onClose(): void;
+}) {
   const info = acts.find((a) => a.act === act);
   if (!info) return null;
   return (
@@ -92,6 +104,12 @@ export function ActCard({ act, onClose }: { act: number; onClose(): void }) {
           <GlossaryText>{info.bridge}</GlossaryText>
         </p>
         <p className="act-summary">{info.summary}</p>
+        {/* 제4막 앞 — 게임이 건너뛰는 1932~1940년을 1탄의 기억으로 잇는다 */}
+        {act === 4 && (
+          <div className="act-recall">
+            <RecallQuiz q={journeyRecall} solved={recallSolved} onAnswer={onRecall} />
+          </div>
+        )}
         <button className="btn primary" autoFocus onClick={onClose}>
           들어간다
         </button>

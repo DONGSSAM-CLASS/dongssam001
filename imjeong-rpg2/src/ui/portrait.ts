@@ -534,6 +534,8 @@ const cache = new Map<string, string>();
  * 같은 인물은 한 번만 그리고 재사용한다.
  */
 export function portraitDataUrl(figure: Figure): string {
+  // 2탄 — 「이름을 남기지 못한 분들」은 특정인이 아니므로 얼굴 대신 태극과 흰 국화를 그린다
+  if (figure.id === 'unnamed') return EMBLEM;
   const hit = cache.get(figure.id);
   if (hit) return hit;
 
@@ -572,3 +574,17 @@ export function portraitDataUrl(figure: Figure): string {
 export function clearPortraitCache(): void {
   cache.clear();
 }
+
+/** 무명의 협력자들을 위한 상징 그림 (SVG) */
+const EMBLEM =
+  'data:image/svg+xml;charset=utf-8,' +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 288">
+      <defs><radialGradient id="g" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#3a3228"/><stop offset="1" stop-color="#17140f"/></radialGradient></defs>
+      <rect width="240" height="288" fill="url(#g)"/>
+      <circle cx="120" cy="118" r="54" fill="#cd2e3a"/>
+      <path d="M66 118a54 54 0 0 0 108 0a27 27 0 0 0-54 0a27 27 0 0 1-54 0z" fill="#0047a0"/>
+      <g fill="#f3efe2">${Array.from({ length: 14 }, (_, i) => `<ellipse cx="120" cy="222" rx="7" ry="22" transform="rotate(${i * (360 / 14)} 120 236)"/>`).join('')}</g>
+      <circle cx="120" cy="236" r="9" fill="#e2c25a"/>
+    </svg>`,
+  );

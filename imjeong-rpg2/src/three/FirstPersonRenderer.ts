@@ -187,6 +187,8 @@ export class FirstPersonRenderer {
   private roomName: string | null = null;
   private poseTick = 0;
   private sightTick = 0;
+  /** 설정 — 화면 흔들림·둘러보기 감도·이름표 늘 보이기 */
+  private prefs = { headBob: true, lookSpeed: 1, alwaysLabels: false };
 
   /* 끌어서 둘러보기 */
   private drag: { id: number; x: number; y: number; startX: number; startY: number; t: number } | null = null;
@@ -852,6 +854,11 @@ export class FirstPersonRenderer {
     }
   }
 
+  setOptions(options: Partial<{ headBob: boolean; lookSpeed: number; alwaysLabels: boolean }>): void {
+    this.prefs = { ...this.prefs, ...options };
+    this.sightTick = 999;
+  }
+
   /** 터치 조이스틱 입력 (-1~1). x 는 오른쪽, z 는 앞쪽 */
   setMoveInput(x: number, z: number): void {
     this.moveInput = { x, z };
@@ -971,7 +978,7 @@ export class FirstPersonRenderer {
     const moved = Math.hypot(event.clientX - this.drag.startX, event.clientY - this.drag.startY);
     if (moved < 5) return;
     // 터치는 화면이 작아 같은 거리에 더 많이 돌린다
-    const k = event.pointerType === 'touch' ? 0.006 : 0.0042;
+    const k = (event.pointerType === 'touch' ? 0.006 : 0.0042) * this.prefs.lookSpeed;
     this.yaw -= dx * k;
     this.pitch = THREE.MathUtils.clamp(this.pitch - dy * k, -1.1, 1.0);
     this.targetYaw = null;
@@ -1061,9 +1068,9 @@ export class FirstPersonRenderer {
       const d = Math.hypot(npc.cell.x + 0.5 - this.px, npc.cell.z + 0.5 - this.pz);
       if (checkSight) {
         // 벽 너머 사람의 이름표는 숨긴다 (1인칭에서 벽을 뚫고 글자가 보이면 헷갈린다)
-        const seen = this.lineOfSight(npc.cell.x + 0.5, npc.cell.z + 0.5);
+        const seen = this.prefs.alwaysLabels || this.lineOfSight(npc.cell.x + 0.5, npc.cell.z + 0.5);
         if (npc.bubble) npc.bubble.style.display = d < 7 && seen ? '' : 'none';
-        npc.label.element.style.opacity = seen && (d < 16 || npc.marker.visible) ? '1' : '0';
+        npc.label.element.style.opacity = seen && (d < 16 || npc.marker.visible || this.prefs.alwaysLabels) ? '1' : '0';
       }
       if (npc.marker.visible) {
         npc.marker.position.y = 2.5 + Math.sin(time * 3.2 + npc.cell.x) * 0.1;
@@ -1203,7 +1210,7 @@ export class FirstPersonRenderer {
 
   private updateCamera(speed: number, delta = 0): void {
     if (speed > 0.05) this.bob += delta * 9 * Math.min(1.4, speed);
-    const bobY = speed > 0.05 ? Math.sin(this.bob) * 0.035 : 0;
+    const bobY = speed > 0.05 && this.prefs.headBob ? Math.sin(this.bob) * 0.035 : 0;
     this.camera.position.set(this.px, EYE + bobY, this.pz);
     this.camera.rotation.set(this.pitch, this.yaw, 0);
 

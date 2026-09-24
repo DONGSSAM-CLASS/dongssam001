@@ -1,19 +1,25 @@
 import { useState } from 'react';
 import type { Level } from '../types';
 import { CinematicImage } from './CinematicImage';
+import { PREQUEL_TITLE, PREQUEL_URL } from '../data/prequel';
 
 /** 시작 화면 — 1탄과 같은 모양. 난이도와 (선택) 부름말을 정하고 들어간다. */
 export function Intro({
   hasSave,
   onStart,
   onContinue,
+  onRestore,
 }: {
   hasSave: boolean;
-  onStart(level: Level, nickname: string): void;
+  onStart(level: Level, nickname: string, prequelPlayed: 'yes' | 'no' | null): void;
   onContinue(): void;
+  onRestore(code: string, nickname: string): boolean;
 }) {
   const [level, setLevel] = useState<Level>('middle');
   const [nickname, setNickname] = useState('');
+  const [played, setPlayed] = useState<'yes' | 'no' | null>(null);
+  const [code, setCode] = useState('');
+  const [codeError, setCodeError] = useState(false);
   return (
     <div className="intro">
       <div className="intro-card">
@@ -48,6 +54,24 @@ export function Intro({
           </button>
         </div>
 
+        <div className="prequel-pick">
+          <span>
+            1탄 『
+            <a href={PREQUEL_URL} target="_blank" rel="noopener noreferrer">
+              {PREQUEL_TITLE}
+            </a>
+            』을 해 보았나요?
+          </span>
+          <div className="prequel-buttons">
+            <button className="level-card small" aria-pressed={played === 'yes'} onClick={() => setPlayed('yes')}>
+              🙋 해 봤어요 — 기억 퀴즈로 이어 갈래요
+            </button>
+            <button className="level-card small" aria-pressed={played === 'no'} onClick={() => setPlayed('no')}>
+              🌱 처음이에요 — 1탄 줄거리부터 볼래요
+            </button>
+          </div>
+        </div>
+
         <label className="nickname-field">
           <span>편지 끝에 적을 부름말 (선택 · 12자 이내)</span>
           <input
@@ -61,7 +85,7 @@ export function Intro({
         </label>
 
         <div className="dialogue-actions" style={{ justifyContent: 'center' }}>
-          <button className="btn primary" onClick={() => onStart(level, nickname)}>
+          <button className="btn primary" onClick={() => onStart(level, nickname, played)}>
             새로 시작
           </button>
           {hasSave && (
@@ -70,6 +94,32 @@ export function Intro({
             </button>
           )}
         </div>
+
+        <details className="code-restore">
+          <summary>🔑 진행 코드로 이어하기 (다른 컴퓨터에서 하던 것)</summary>
+          <div className="code-restore-row">
+            <input
+              value={code}
+              placeholder="예: 1A2B-3C4D-…"
+              onChange={(e) => {
+                setCode(e.target.value);
+                setCodeError(false);
+              }}
+              autoComplete="off"
+              spellCheck={false}
+            />
+            <button
+              className="btn"
+              disabled={code.replace(/[^0-9A-Za-z]/g, '').length < 6}
+              onClick={() => {
+                if (!onRestore(code, nickname)) setCodeError(true);
+              }}
+            >
+              이어하기
+            </button>
+          </div>
+          {codeError && <em className="code-error">코드가 맞지 않아요. 한 글자씩 다시 확인해 주세요.</em>}
+        </details>
 
         <div className="intro-notice">
           <strong>역사 자료 안내</strong>
