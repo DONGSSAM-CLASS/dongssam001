@@ -1,0 +1,23 @@
+{
+  "name": "naver-blog-tool",
+  "version": "1.0.0",
+  "private": true,
+  "description": "동쌤의 AI 활용 블로그 자동 작성 툴 — 사진 + 메모 → 초안 → 승인 후 네이버 임시저장 (발행은 사람이)",
+  "type": "commonjs",
+  "scripts": {
+    "login": "node scripts/naver_login.js",
+    "check": "node scripts/check_draft.js",
+    "draft": "node scripts/naver_draft.js",
+    "draft:dry": "node scripts/naver_draft.js --dry-run",
+    "preview": "node scripts/preview_draft.js",
+    "mosaic": "node scripts/mosaic.js",
+    "probe": "node scripts/probe_selectors.js"
+  },
+  "dependencies": {
+    "playwright": "^1.55.0",
+    "sharp": "^0.34.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

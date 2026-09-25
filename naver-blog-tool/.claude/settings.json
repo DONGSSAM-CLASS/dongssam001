@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(./**)",
+      "Edit(./**)",
+      "Write(./**)",
+      "Bash(node scripts/:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(npx playwright install:*)",
+      "Bash(ls:*)",
+      "Bash(dir:*)"
+    ],
+    "deny": [
+      "Read(./naver-profile/**)",
+      "Edit(./naver-profile/**)",
+      "Write(./naver-profile/**)"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+node_modules/
+
+# 네이버 로그인 세션 — 절대 커밋·공유 금지
+naver-profile/
+
+# 개인 사진·영상 (원본/모자이크본 모두)
+input/photos/*
+!input/photos/.gitkeep
+input/videos/*
+!input/videos/.gitkeep
+
+# 초안·검증 산출물 (첫 테스트 초안만 추적)
+drafts/*
+!drafts/.gitkeep
+!drafts/20260925-ai-quiz-game.json
