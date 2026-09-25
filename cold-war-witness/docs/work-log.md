@@ -137,6 +137,14 @@ E2E 중 고친 버그: 모달을 코드로 닫을 때 onClose 가 불려 다음 
 
 ---
 
+## 배포 — 미완료, Codex 로 인계
+
+- 이 작업 환경은 `auth.firebase.tools`(Firebase CLI 원격 로그인)·`apis.google.com` 접속이 막혀 `firebase login` 을 할 수 없어 배포하지 못했습니다.
+- 준비했던 OAuth 로그인 링크는 사용되지 않았고, 토큰을 받거나 저장한 적이 없습니다.
+- 배포 절차(dongssamplay@gmail.com, 새 프로젝트 생성 → 웹 앱 → Firestore 서울 → 콘솔에서 Google·익명 로그인 켜기 → `npm run deploy` → 확인 목록)는 **`CODEX_HANDOFF.md` 6장**, Codex 첫 프롬프트는 **`CODEX_PROMPT.md`** 에 있습니다.
+
+---
+
 ## [검증필요] 목록
 
 > 이 작업 환경에서는 외부 사이트 접속이 막혀 있어 **출처 URL 을 직접 열어 확인하지 못했습니다.** 모든 링크를 한 번씩 열어 봐 주세요.

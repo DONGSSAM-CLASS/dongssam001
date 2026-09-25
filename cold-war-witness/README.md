@@ -205,6 +205,7 @@ npm run dev:emu        # 터미널 2: 에뮬레이터에 붙은 개발 서버 ht
 
 ## 9. 문서
 
+- [CODEX_HANDOFF.md](CODEX_HANDOFF.md) · [CODEX_PROMPT.md](CODEX_PROMPT.md) — Codex 로 이어서 작업할 때 (인수인계 · 첫 프롬프트)
 - [docs/work-log.md](docs/work-log.md) — 작업 로그, **[검증필요] 목록**, 결정 사항, 제안
 - [docs/data-model.md](docs/data-model.md) — 폴더 구조, Firestore 구조, 권한 설계
 - [docs/fact-cards.md](docs/fact-cards.md) — 사실 카드 전체 목록 (자동 생성)
