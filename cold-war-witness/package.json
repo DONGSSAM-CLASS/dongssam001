@@ -1,0 +1,31 @@
+{
+  "name": "cold-war-witness",
+  "private": true,
+  "version": "0.1.0",
+  "description": "냉전의 목격자 — 냉전 시대 감시 체험으로 배우는 AI 윤리 (중학교 2학년 역사 3차시 의사결정 시뮬레이션)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "test": "vitest run tests/content.test.ts"
+  },
+  "dependencies": {
+    "firebase": "^10.14.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.6.3",
+    "vite": "^6.3.5",
+    "vitest": "^2.1.9"
+  }
+}

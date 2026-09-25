@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/*
+ * 디자인 콘셉트: 기밀 해제된 냉전 문서 보관소
+ * 색은 여기서만 정한다. 챕터 색은 [data-theme] 로 바꿔 끼운다. (Phase 3 에서 확장)
+ */
+@theme {
+  --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "Nanum Gothic Coding", "D2Coding", ui-monospace, monospace;
+
+  --color-paper: #f4ecd8; /* 오래된 서류 */
+  --color-ink: #2b2620; /* 타자기 잉크 */
+  --color-stamp: #b3261e; /* 빨간 기밀 도장 */
+  --color-declass: #1f6f43; /* 해제됨 도장 */
+
+  /* CH1 동베를린: 회청색 */
+  --color-berlin-900: #26323d;
+  --color-berlin-600: #4f6475;
+  --color-berlin-100: #dfe6ec;
+  /* CH2 1950년대 뉴욕: 세피아·브라운 */
+  --color-newyork-900: #3b2a1a;
+  --color-newyork-600: #7a5634;
+  --color-newyork-100: #efe2cf;
+  /* CH3 1962년 플로리다: 짙은 남색 + 경고 주황 */
+  --color-florida-900: #14213d;
+  --color-florida-600: #2c4a7a;
+  --color-florida-100: #dde4f0;
+  --color-florida-warn: #c2570c;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px; /* 본문 최소 16px */
+  line-height: 1.7;
+  word-break: keep-all; /* 한국어 낱말이 중간에서 잘리지 않게 한다. */
+}
+
+/* 애니메이션 끄기: 운영체제 설정 또는 앱 설정(data-reduce-motion) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
