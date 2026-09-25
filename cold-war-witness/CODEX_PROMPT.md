@@ -59,7 +59,9 @@
 2. 역사적 사실(사건·날짜·수치·실존 인물의 행동·인용문)을 새로 만들어 넣지 마라.
    사실은 src/data/facts.ts 의 사실 카드에만 있다. src/data/principles.ts 의 official·aspects 는 「대한민국 인공지능 윤리원칙」 원문이니 고치지 마라. 꼭 필요하면 needsCheck 표시 + work-log 의 [검증필요] 목록에 적어라.
    실존 인물의 말을 따옴표로 직접 인용하지 마라. 동독·미국 어느 한 진영을 선·악으로 그리지 마라.
-3. 장면·질문·감정·원칙 id 는 src/data/* 와 firestore.rules 가 함께 쓴다. 하나를 바꾸면 다른 쪽도 바꾸고 npm test 로 확인해라.
+3. 장면·질문·감정·원칙 id 와 모둠 프로젝트 id(사실 카드·세부 항목·가치·역할·형식·제작 단계·점검 문항·스토리보드 칸)는
+   src/data/* 와 firestore.rules 가 함께 쓴다. 하나를 바꾸면 다른 쪽도 바꾸고 npm test 로 확인해라.
+   모둠 문서 규칙은 요청당 식 1000개 한도가 있어 ‘바뀐 칸만 검사’하도록 짜여 있다. 규칙을 고치면 npm run test:rules 로 확인해라.
 4. PIN 설계(학생 문서 id = PIN 해시, seats 로 번호 중복 방지)를 되돌리지 마라. PIN 원문을 저장하지 마라.
 5. Firestore 쓰기는 src/lib/db.ts 를 통해서만 한다. 새 경로·필드는 규칙을 먼저 열고 tests/rules.test.ts 에
    "되는 경우 / 안 되는 경우" 테스트를 추가해라.
