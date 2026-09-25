@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import { HeartPulse } from 'lucide-react';
 import { EMOTIONS, EMOTION_PROMPT } from '../data/emotions';
 import type { EmotionId } from '../types/content';
 import { onRadioKeyDown, radioTabIndex } from './radioKeys';
@@ -18,8 +19,10 @@ export function EmotionPicker({
   const id = useId();
   return (
     <fieldset className="flex flex-col gap-2" disabled={disabled}>
-      <legend id={id} className="mb-2 text-[18px] font-bold">
-        ① {EMOTION_PROMPT} <span className="font-normal text-ink-soft">({characterName}의 마음을 골라 보세요)</span>
+      <legend id={id} className="mb-2 flex flex-wrap items-center gap-x-2 text-[18px] font-bold">
+        <span className="badge badge-secondary h-7 w-7 rounded-full p-0 text-[15px]">1</span>
+        <HeartPulse className="h-5 w-5 text-stamp" aria-hidden="true" />
+        {EMOTION_PROMPT} <span className="font-normal text-ink-soft">({characterName}의 마음을 골라 보세요)</span>
       </legend>
       <div
         className="grid grid-cols-5 gap-1 sm:gap-2"
@@ -37,8 +40,8 @@ export function EmotionPicker({
               aria-checked={on}
               tabIndex={radioTabIndex(value, e.id, i)}
               onClick={() => onChange(e.id)}
-              className={`flex min-h-20 flex-col items-center justify-center rounded-lg border-2 px-0.5 py-2 transition-colors ${
-                on ? 'border-ch-900 bg-ch-100 font-bold' : 'border-line bg-white hover:bg-paper'
+              className={`flex min-h-20 flex-col items-center justify-center rounded-box border-2 px-0.5 py-2 transition-all ${
+                on ? 'scale-105 border-secondary-content bg-secondary font-bold shadow-sm' : 'border-base-300 bg-white hover:bg-base-200'
               }`}
             >
               <span className="text-3xl" aria-hidden="true">

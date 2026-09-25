@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { BookOpen, ChevronRight, CircleCheckBig, FolderOpen, Library, Lock, LogOut, Play, RotateCcw, ScrollText, UserRound } from 'lucide-react';
 import { Layout } from '../../components/Layout';
 import { Button, LinkButton, Modal, Notice, Stamp } from '../../components/ui';
 import { ChapterIllustration } from '../../components/Illustration';
@@ -11,7 +12,8 @@ import { chapterStatus, stepLabel } from '../../lib/progress';
 export function StudentBadge() {
   const { session, student } = useReadyStudent();
   return (
-    <span className="rounded-md bg-white/70 px-2 py-1 text-[15px]">
+    <span className="badge h-auto gap-1 border-0 bg-secondary py-1.5 text-[15px] font-bold text-secondary-content">
+      <UserRound className="h-4 w-4" aria-hidden="true" />
       {session.className} · {student.number}번 {student.nickname}
     </span>
   );
@@ -39,7 +41,10 @@ export default function StudentHome() {
         </Notice>
       )}
 
-      <h1 className="typewriter text-2xl font-bold">사건 파일</h1>
+      <h1 className="typewriter flex items-center gap-2 text-2xl font-bold">
+        <FolderOpen className="h-7 w-7 text-declass" aria-hidden="true" />
+        사건 파일
+      </h1>
       <p className="text-ink-soft">선생님이 열어 준 파일만 볼 수 있어요. 다 끝낸 파일에는 ‘해제됨’ 도장이 찍혀요.</p>
 
       <ul className="mt-5 flex flex-col gap-4">
@@ -53,8 +58,8 @@ export default function StudentHome() {
                 className={`dossier relative flex flex-col overflow-hidden sm:flex-row ${open ? '' : 'opacity-75'}`}
               >
                 <ChapterIllustration theme={c.theme} className="h-28 w-full object-cover sm:h-auto sm:w-48" />
-                <div className="flex flex-1 flex-col gap-2 p-4">
-                  <p className="typewriter text-[15px] text-ch-600">
+                <div className="flex flex-1 flex-col gap-2 p-4 pr-24">
+                  <p className="text-[15px] font-semibold text-ch-600">
                     CHAPTER {c.no} · {c.period} · {c.place}
                   </p>
                   <h2 className="typewriter text-[22px] font-bold text-ch-900">「{c.title}」</h2>
@@ -63,26 +68,37 @@ export default function StudentHome() {
                   </p>
                   <div className="mt-1 flex flex-wrap items-center gap-3">
                     {!open ? (
-                      <span className="font-bold text-ink-soft">🔒 아직 잠겨 있어요 — 선생님이 열어 줄 때까지 기다려요</span>
+                      <span className="inline-flex items-center gap-1.5 font-bold text-ink-soft">
+                        <Lock className="h-4 w-4" aria-hidden="true" />
+                        아직 잠겨 있어요 — 선생님이 열어 줄 때까지 기다려요
+                      </span>
                     ) : st === 'done' ? (
                       <LinkButton to={`/play/chapter/${c.id}`} variant="secondary">
+                        <BookOpen className="h-5 w-5" aria-hidden="true" />
                         내 기록 다시 보기
                       </LinkButton>
                     ) : (
                       <LinkButton to={`/play/chapter/${c.id}`} variant="chapter">
-                        {st === 'notStarted' ? '파일 열기 ▶' : `이어 하기 ▶ (${stepLabel(step)})`}
+                        {st === 'notStarted' ? <Play className="h-5 w-5" aria-hidden="true" /> : <RotateCcw className="h-5 w-5" aria-hidden="true" />}
+                        {st === 'notStarted' ? '파일 열기' : `이어 하기 (${stepLabel(step)})`}
                       </LinkButton>
                     )}
                   </div>
                 </div>
                 {st === 'done' && (
                   <div className="absolute top-3 right-3" aria-label="완료">
-                    <Stamp tone="declass">해제됨</Stamp>
+                    <Stamp tone="declass">
+                      <CircleCheckBig className="h-4 w-4" />
+                      해제됨
+                    </Stamp>
                   </div>
                 )}
                 {!open && (
                   <div className="absolute top-3 right-3" aria-hidden="true">
-                    <Stamp>기밀</Stamp>
+                    <Stamp>
+                      <Lock className="h-4 w-4" />
+                      기밀
+                    </Stamp>
                   </div>
                 )}
               </div>
@@ -92,34 +108,37 @@ export default function StudentHome() {
       </ul>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        <Link to="/play/cards" className="dossier flex items-center justify-between p-4 hover:bg-white">
+        <Link to="/play/cards" className="dossier flex items-center justify-between p-4 transition-transform hover:-translate-y-0.5">
           <span>
             <span className="block text-[15px] text-ink-soft">내 원칙 카드 도감</span>
             <span className="typewriter text-xl font-bold">
               {student.cards.length} / {PRINCIPLES.length}장
             </span>
           </span>
-          <span aria-hidden="true" className="text-3xl">
-            🗂️
+          <span className="grid h-12 w-12 place-items-center rounded-full bg-primary text-primary-content">
+            <Library className="h-6 w-6" aria-hidden="true" />
           </span>
         </Link>
         {cls.unlocked.finale ? (
-          <Link to="/play/finale" className="dossier flex items-center justify-between p-4 hover:bg-white">
+          <Link to="/play/finale" className="dossier flex items-center justify-between p-4 transition-transform hover:-translate-y-0.5">
             <span>
               <span className="block text-[15px] text-ink-soft">마지막 활동</span>
               <span className="typewriter text-xl font-bold">
                 {student.declaration ? '내 선언문 · 인증서' : '나의 AI 윤리 실천 선언문'}
               </span>
             </span>
-            <span aria-hidden="true" className="text-3xl">
-              📜
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-accent text-accent-content">
+              <ScrollText className="h-6 w-6" aria-hidden="true" />
             </span>
           </Link>
         ) : (
           <div className="dossier flex items-center justify-between p-4 opacity-75">
             <span>
               <span className="block text-[15px] text-ink-soft">마지막 활동</span>
-              <span className="typewriter text-xl font-bold">🔒 선언문 (아직 잠김)</span>
+              <span className="typewriter inline-flex items-center gap-1.5 text-xl font-bold">
+                <Lock className="h-5 w-5" aria-hidden="true" />
+                선언문 (아직 잠김)
+              </span>
             </span>
           </div>
         )}
@@ -128,13 +147,15 @@ export default function StudentHome() {
       {nextChapter && (
         <div className="mt-6 text-center">
           <Button variant="primary" onClick={() => nav(`/play/chapter/${nextChapter.id}`)} className="text-[19px]">
-            지금 할 파일: CHAPTER {nextChapter.no} 「{nextChapter.title}」 ▶
+            지금 할 파일: CHAPTER {nextChapter.no} 「{nextChapter.title}」
+            <ChevronRight className="h-5 w-5" aria-hidden="true" />
           </Button>
         </div>
       )}
 
       <p className="mt-10 text-center">
-        <button type="button" className="text-[15px] text-ink-soft underline" onClick={() => setAskLeave(true)}>
+        <button type="button" className="btn btn-ghost btn-sm text-[15px] font-normal text-ink-soft" onClick={() => setAskLeave(true)}>
+          <LogOut className="h-4 w-4" aria-hidden="true" />
           이 기기에서 나가기
         </button>
       </p>

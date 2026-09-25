@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Award, ImageDown, Pencil, Printer, FolderOpen } from 'lucide-react';
 import { Layout } from '../../components/Layout';
+import { PrincipleIcon } from '../../components/icons';
 import { Button, LinkButton, Notice, Stamp } from '../../components/ui';
 import { StudentBadge } from './StudentHome';
 import { useReadyStudent } from '../../app/StudentContext';
@@ -58,21 +60,33 @@ export default function CertificatePage() {
   return (
     <Layout right={<StudentBadge />}>
       <div className="no-print mb-4 flex flex-wrap gap-2">
-        <Button onClick={() => window.print()}>🖨️ 인쇄하기</Button>
+        <Button onClick={() => window.print()}>
+          <Printer className="h-5 w-5" aria-hidden="true" />
+          인쇄하기
+        </Button>
         <Button variant="secondary" onClick={saveImage} disabled={busy}>
-          {busy ? '만드는 중…' : '🖼️ 이미지로 저장'}
+          <ImageDown className="h-5 w-5" aria-hidden="true" />
+          {busy ? '만드는 중…' : '이미지로 저장'}
         </Button>
         <LinkButton to="/play/finale" variant="ghost">
+          <Pencil className="h-5 w-5" aria-hidden="true" />
           선언문 고치기
         </LinkButton>
         <LinkButton to="/play" variant="ghost">
+          <FolderOpen className="h-5 w-5" aria-hidden="true" />
           사건 파일 목록
         </LinkButton>
       </div>
 
-      <article className="dossier relative mx-auto flex max-w-2xl flex-col gap-5 border-4 border-double border-ink px-6 py-10 text-center sm:px-10" aria-label="AI 윤리 실천 인증서">
-        <p className="typewriter text-[15px] text-ink-soft">{APP_TITLE}</p>
-        <h1 className="typewriter text-3xl font-bold sm:text-4xl">AI 윤리 실천 인증서</h1>
+      <article
+        className="dossier relative mx-auto flex max-w-2xl flex-col gap-5 border-4 border-double border-secondary-content/40 px-6 py-10 text-center sm:px-10"
+        aria-label="AI 윤리 실천 인증서"
+      >
+        <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-accent text-accent-content">
+          <Award className="h-9 w-9" aria-hidden="true" />
+        </span>
+        <p className="text-[15px] text-ink-soft">{APP_TITLE}</p>
+        <h1 className="typewriter text-3xl font-extrabold sm:text-4xl">AI 윤리 실천 인증서</h1>
         <p className="text-lg">
           {session.className} · {student.number}번 <strong>{student.nickname}</strong>
         </p>
@@ -82,8 +96,13 @@ export default function CertificatePage() {
           <p className="text-[15px] text-ink-soft">모은 원칙 카드 {cards.length}장</p>
           <ul className="mt-2 flex flex-wrap justify-center gap-2">
             {cards.map((c) => (
-              <li key={c.id} className="rounded-full px-3 py-1 text-[15px] font-bold text-white" style={{ backgroundColor: c.color }}>
-                {c.icon} {c.name}
+              <li
+                key={c.id}
+                className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[15px] font-bold text-white"
+                style={{ backgroundColor: c.color }}
+              >
+                <PrincipleIcon id={c.id} className="h-4 w-4" />
+                {c.name}
               </li>
             ))}
           </ul>

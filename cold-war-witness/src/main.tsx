@@ -1,5 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+// Pretendard 글꼴 — 필요한 글자 조각만 내려받는 방식(dynamic subset)으로, 앱과 함께 배포된다.
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import './index.css';
 import App from './App';
 import { APP_TITLE } from './config';

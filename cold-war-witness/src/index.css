@@ -1,42 +1,36 @@
 @import "tailwindcss";
 
+/* daisyUI — ‘cupcake’ 테마 하나만 쓴다 (귀엽고 화사한 파스텔) */
+@plugin "daisyui" {
+  themes: cupcake --default;
+}
+
 /*
- * 디자인 콘셉트: 기밀 해제된 냉전 문서 보관소
- * - 오래된 서류철(paper), 타자기 글씨(mono), 빨간 ‘기밀’ 도장 → 초록 ‘해제됨’ 도장
- * - 챕터 색은 [data-chapter] 로 바꿔 끼운다.
- * 명도 대비: 본문 글자는 모두 WCAG AA(4.5:1) 이상이 되도록 골랐다.
+ * 글꼴: Pretendard (npm 패키지에 들어 있는 글꼴 파일을 앱과 함께 배포 — 외부 CDN 없이 학교망에서도 빠르다)
+ * 색: 화면 코드는 paper·ink·line 같은 이름을 쓰고, 여기서 cupcake 테마 색으로 이어 준다.
+ * 명도 대비: 본문 글자는 모두 WCAG AA(4.5:1) 이상 — e2e 접근성 검사(axe)로 확인한다.
  */
 @theme {
-  --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --font-mono: "Nanum Gothic Coding", "D2Coding", ui-monospace, monospace;
-
-  --color-paper: #f4ecd8;
-  --color-paper-dark: #e8dcc0;
-  --color-folder: #d9c49a;
-  --color-ink: #2b2620;
-  --color-ink-soft: #564c40;
-  --color-stamp: #b3261e;
-  --color-declass: #1f6f43;
-  --color-line: #c9b98f;
-
-  --color-berlin-900: #26323d;
-  --color-berlin-600: #4f6475;
-  --color-berlin-100: #dfe6ec;
-  --color-newyork-900: #3b2a1a;
-  --color-newyork-600: #7a5634;
-  --color-newyork-100: #efe2cf;
-  --color-florida-900: #14213d;
-  --color-florida-600: #2c4a7a;
-  --color-florida-100: #dde4f0;
-  --color-florida-warn: #b04e0a;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "Noto Sans KR", sans-serif;
 
   --animate-stamp: stamp 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) both;
   --animate-rise: rise 0.35s ease-out both;
   --animate-unfold: unfold 0.4s ease-out both;
+  --animate-pop: pop 0.45s cubic-bezier(0.2, 1.5, 0.4, 1) both;
 }
 
-/* 챕터 색 — 화면은 ch-* 이름만 쓴다 */
 @theme inline {
+  --color-paper: var(--color-base-200);
+  --color-paper-dark: var(--color-base-300);
+  --color-folder: var(--color-accent);
+  --color-ink: var(--color-base-content);
+  --color-ink-soft: color-mix(in oklab, var(--color-base-content) 74%, var(--color-base-100));
+  --color-line: var(--color-base-300);
+  --color-stamp: var(--color-secondary-content);
+  --color-declass: var(--color-primary-content);
+
+  /* 챕터 색 — 화면은 ch-* 이름만 쓴다 */
   --color-ch-900: var(--ch-900);
   --color-ch-600: var(--ch-600);
   --color-ch-100: var(--ch-100);
@@ -44,28 +38,31 @@
 }
 
 :root {
-  --ch-900: #2b2620;
-  --ch-600: #564c40;
-  --ch-100: #efe6d0;
-  --ch-accent: #b3261e;
+  --ch-900: var(--color-primary-content);
+  --ch-600: var(--color-primary-content);
+  --ch-100: color-mix(in oklab, var(--color-primary) 30%, white);
+  --ch-accent: var(--color-secondary-content);
 }
+/* CH1 동베를린: 회청색 */
 [data-chapter="berlin"] {
-  --ch-900: var(--color-berlin-900);
-  --ch-600: var(--color-berlin-600);
-  --ch-100: var(--color-berlin-100);
-  --ch-accent: #7a3b2e;
+  --ch-900: #33506a;
+  --ch-600: #4f6e8a;
+  --ch-100: #e5eef7;
+  --ch-accent: #7a4f9e;
 }
+/* CH2 1950년대 뉴욕: 세피아·브라운 */
 [data-chapter="newyork"] {
-  --ch-900: var(--color-newyork-900);
-  --ch-600: var(--color-newyork-600);
-  --ch-100: var(--color-newyork-100);
-  --ch-accent: #8a3a1c;
+  --ch-900: #6e4220;
+  --ch-600: #85562c;
+  --ch-100: #f8ecde;
+  --ch-accent: #a3431f;
 }
+/* CH3 1962년 플로리다: 남색 + 경고 주황 */
 [data-chapter="florida"] {
-  --ch-900: var(--color-florida-900);
-  --ch-600: var(--color-florida-600);
-  --ch-100: var(--color-florida-100);
-  --ch-accent: var(--color-florida-warn);
+  --ch-900: #1f4679;
+  --ch-600: #2f619e;
+  --ch-100: #e3eefc;
+  --ch-accent: #b3500c;
 }
 
 html,
@@ -75,16 +72,14 @@ body {
 }
 
 body {
-  background-color: var(--color-paper);
-  /* 종이 결: 아주 옅은 가로줄 */
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent 0,
-    transparent 31px,
-    rgba(120, 100, 60, 0.05) 31px,
-    rgba(120, 100, 60, 0.05) 32px
-  );
-  color: var(--color-ink);
+  background-color: var(--color-base-100);
+  /* 화사한 물방울 무늬 (아주 옅게) */
+  background-image:
+    radial-gradient(color-mix(in oklab, var(--color-secondary) 35%, transparent) 1.2px, transparent 1.2px),
+    radial-gradient(color-mix(in oklab, var(--color-primary) 30%, transparent) 1.2px, transparent 1.2px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+  color: var(--color-base-content);
   font-family: var(--font-sans);
   font-size: 17px; /* 본문 최소 16px */
   line-height: 1.75;
@@ -96,51 +91,49 @@ body {
 :focus-visible {
   outline: 3px solid #1d4e89;
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
-/* 서류철 카드 */
+/* 카드 (예전 ‘서류철’) */
 .dossier {
-  background: #fbf6ea;
-  border: 1px solid var(--color-line);
-  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
   box-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.04),
-    0 8px 20px -12px rgba(60, 40, 10, 0.35);
+    0 1px 2px rgba(41, 19, 52, 0.04),
+    0 10px 24px -16px rgba(41, 19, 52, 0.25);
 }
 
-/* 타자기 글씨 */
+/* 제목 글꼴 (Pretendard 굵게, 자간 살짝 좁게) */
 .typewriter {
-  font-family: var(--font-mono);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.015em;
 }
 
-/* 도장 */
+/* 도장 — 둥근 스티커 모양 */
 .stamp {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  border: 3px solid currentColor;
-  border-radius: 6px;
-  padding: 0.1em 0.6em;
-  transform: rotate(-8deg);
-  /* 도장 글자가 뒤의 글자와 겹쳐도 읽히도록 옅은 바탕을 깐다 (명도 대비 AA) */
-  background: rgba(255, 255, 255, 0.9);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  border: 2.5px dashed currentColor;
+  border-radius: 999px;
+  padding: 0.15em 0.8em;
+  transform: rotate(-6deg);
+  background: rgba(255, 255, 255, 0.92);
 }
 
 @keyframes stamp {
   0% {
     opacity: 0;
-    transform: scale(2.4) rotate(-20deg);
+    transform: scale(2.2) rotate(-18deg);
   }
   60% {
     opacity: 1;
-    transform: scale(0.92) rotate(-8deg);
+    transform: scale(0.92) rotate(-6deg);
   }
   100% {
     opacity: 1;
-    transform: scale(1) rotate(-8deg);
+    transform: scale(1) rotate(-6deg);
   }
 }
 @keyframes rise {
@@ -156,12 +149,22 @@ body {
 @keyframes unfold {
   from {
     opacity: 0;
-    transform: scaleY(0.85);
+    transform: scaleY(0.9);
     transform-origin: top;
   }
   to {
     opacity: 1;
     transform: none;
+  }
+}
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -183,11 +186,6 @@ body {
   transition-duration: 0.01ms !important;
 }
 
-/* 모달 뒤 배경 */
-dialog::backdrop {
-  background: rgba(30, 24, 16, 0.55);
-}
-
 /* ─────────── 인쇄 ─────────── */
 @page {
   size: A4;
@@ -196,6 +194,7 @@ dialog::backdrop {
 @media print {
   body {
     background: #fff;
+    background-image: none;
     font-size: 11pt;
     line-height: 1.55;
   }

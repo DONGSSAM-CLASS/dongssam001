@@ -39,15 +39,15 @@ export function DistributionChart({
                       <span>
                         {c.label}
                         {isMine && (
-                          <span className="ml-2 rounded bg-ch-900 px-1.5 text-[14px] font-bold text-white">내 선택</span>
+                          <span className="badge ml-2 h-auto border-0 bg-ch-900 py-0.5 text-[14px] font-bold text-white">내 선택</span>
                         )}
                       </span>
                       <span className="typewriter font-bold">
                         {n}명 · {p}%
                       </span>
                     </div>
-                    <div className={`mt-1 w-full overflow-hidden rounded bg-paper-dark ${big ? 'h-6' : 'h-4'}`} aria-hidden="true">
-                      <div className="h-full rounded bg-ch-600 transition-[width] duration-500" style={{ width: `${p}%` }} />
+                    <div className={`mt-1 w-full overflow-hidden rounded-full bg-base-200 ${big ? 'h-6' : 'h-4'}`} aria-hidden="true">
+                      <div className="h-full rounded-full bg-ch-600 transition-[width] duration-500" style={{ width: `${p}%` }} />
                     </div>
                   </li>
                 );

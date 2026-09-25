@@ -5,6 +5,7 @@
  */
 import { useState, type FormEvent } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, DoorOpen, History, LogIn, ShieldCheck, UserPlus } from 'lucide-react';
 import { Layout } from '../../components/Layout';
 import { Button, Notice, TextInput, friendlyError } from '../../components/ui';
 import { useAuth } from '../../app/AuthContext';
@@ -27,30 +28,41 @@ export default function JoinPage() {
   const [mode, setMode] = useState<Mode>(params.get('mode') === 'recover' ? 'recover' : 'new');
   return (
     <Layout>
-      <h1 className="typewriter text-2xl font-bold">학생 입장</h1>
-      <div className="mt-4 grid grid-cols-2 gap-2" role="tablist" aria-label="입장 방법">
+      <h1 className="typewriter flex items-center gap-2 text-2xl font-bold">
+        <DoorOpen className="h-7 w-7 text-declass" aria-hidden="true" />
+        학생 입장
+      </h1>
+      <div className="mt-4 grid grid-cols-2 gap-1 rounded-full bg-base-200 p-1" role="tablist" aria-label="입장 방법">
         {(
           [
             ['new', '처음 들어와요'],
             ['recover', '다른 기기에서 이어 해요'],
           ] as const
-        ).map(([m, label]) => (
+        ).map(([m, label]) => {
+          const Icon = m === 'new' ? UserPlus : History;
+          return (
           <button
             key={m}
             type="button"
             role="tab"
             aria-selected={mode === m}
             onClick={() => setMode(m)}
-            className={`min-h-12 rounded-md border-2 px-2 font-bold ${
-              mode === m ? 'border-ink bg-ink text-paper' : 'border-line bg-white text-ink'
+            className={`flex min-h-12 items-center justify-center gap-1.5 rounded-full px-2 font-bold transition-colors ${
+              mode === m ? 'bg-white text-ink shadow-sm' : 'text-ink-soft hover:text-ink'
             }`}
           >
+            <Icon className="h-5 w-5 shrink-0" aria-hidden="true" />
             {label}
           </button>
-        ))}
+          );
+        })}
       </div>
       <Notice tone="info" className="mt-4">
-        🔒 <strong>{PRIVACY_NOTICE}</strong> 이름·전화번호·이메일은 쓰지 않아요.
+        <span className="inline-flex items-center gap-1 font-bold">
+          <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+          {PRIVACY_NOTICE}
+        </span>{' '}
+        이름·전화번호·이메일은 쓰지 않아요.
       </Notice>
       <div className="mt-4">{mode === 'new' ? <NewJoin initialCode={params.get('code') ?? ''} /> : <Recover initialCode={params.get('code') ?? ''} />}</div>
     </Layout>
@@ -90,11 +102,20 @@ function useClassCodeStep(initialCode: string) {
   return { code, setCode, found, setFound, error, busy, check };
 }
 
+const STEP_NAMES = ['학급 코드', '번호·닉네임', 'PIN 만들기'];
+
 function StepBadge({ now, total }: { now: number; total: number }) {
   return (
-    <p className="typewriter text-[15px] text-ink-soft" aria-label={`${total}단계 가운데 ${now}단계`}>
-      {Array.from({ length: total }, (_, i) => (i < now ? '●' : '○')).join(' ')} &nbsp;{now}/{total} 단계
-    </p>
+    <div>
+      <p className="sr-only">{`${total}단계 가운데 ${now}단계`}</p>
+      <ul className="steps w-full text-[14px]" aria-hidden="true">
+        {STEP_NAMES.slice(0, total).map((n, i) => (
+          <li key={n} className={`step ${i < now ? 'step-secondary' : ''}`}>
+            {n}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -171,15 +192,16 @@ function NewJoin({ initialCode }: { initialCode: string }) {
           />
           <Button type="submit" disabled={cc.busy || cc.code.trim().length === 0}>
             {cc.busy ? '확인하는 중…' : '다음'}
+            <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </Button>
         </form>
       )}
       {step === 2 && (
         <form onSubmit={submitWho} className="flex flex-col gap-4" noValidate>
           <StepBadge now={2} total={3} />
-          <p className="rounded bg-paper px-3 py-2">
-            📁 <strong>{cc.found?.className}</strong> 에 들어가요.{' '}
-            <button type="button" className="underline" onClick={() => setStep(1)}>
+          <p className="rounded-box bg-base-200 px-3 py-2">
+            <strong>{cc.found?.className}</strong> 에 들어가요.{' '}
+            <button type="button" className="link" onClick={() => setStep(1)}>
               코드 다시 쓰기
             </button>
           </p>
@@ -193,7 +215,10 @@ function NewJoin({ initialCode }: { initialCode: string }) {
             placeholder="예: 파란연필"
           />
           {error && <Notice tone="error">{error}</Notice>}
-          <Button type="submit">다음</Button>
+          <Button type="submit">
+            다음
+            <ArrowRight className="h-5 w-5" aria-hidden="true" />
+          </Button>
         </form>
       )}
       {step === 3 && (
@@ -216,9 +241,11 @@ function NewJoin({ initialCode }: { initialCode: string }) {
               }}
               disabled={busy}
             >
+              <ArrowLeft className="h-5 w-5" aria-hidden="true" />
               이전
             </Button>
             <Button type="submit" className="flex-1" disabled={busy}>
+              <LogIn className="h-5 w-5" aria-hidden="true" />
               {busy ? '들어가는 중…' : '입장하기'}
             </Button>
           </div>
@@ -285,6 +312,7 @@ function Recover({ initialCode }: { initialCode: string }) {
       <TextInput label="PIN (숫자 4개)" type="password" value={pin} onChange={(v) => setPin(v.replace(/[^0-9]/g, ''))} inputMode="numeric" maxLength={4} autoComplete="current-password" />
       {error && <Notice tone="error">{error}</Notice>}
       <Button type="submit" disabled={busy || cc.busy}>
+        <History className="h-5 w-5" aria-hidden="true" />
         {busy || cc.busy ? '확인하는 중…' : '이어 하기'}
       </Button>
     </form>

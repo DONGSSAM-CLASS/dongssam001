@@ -46,7 +46,9 @@
 - CSV 내보내기, 학생 PIN 초기화(임시 PIN), 학급 삭제(두 번 확인, 데이터 파기)
 - 수업 자료: 3차시 교수·학습 과정안, 차시별 활동지, 교사용 가이드, 교육과정 연계표 (A4 인쇄·PDF 저장)
 
-**기술**: Vite + React 18 + TypeScript + Tailwind CSS 4 · Firebase(Authentication, Cloud Firestore, Hosting) — **무료 Spark 요금제만 사용**. Cloud Functions·유료 기능·외부 AI API·외부 분석 도구(GA 등) 없음.
+**디자인**: Tailwind CSS 4 + **daisyUI 5 ‘cupcake’ 테마**(귀엽고 화사한 파스텔) · **lucide 아이콘** · **Pretendard 글꼴**(앱과 함께 배포 — 외부 글꼴 서버 없이 학교망에서도 빠름). 감정 체크 5종은 표정이 잘 드러나도록 이모지를 그대로 씁니다.
+
+**기술**: Vite + React 18 + TypeScript + Tailwind CSS 4 + daisyUI 5 · Firebase(Authentication, Cloud Firestore, Hosting) — **무료 Spark 요금제만 사용**. Cloud Functions·유료 기능·외부 AI API·외부 분석 도구(GA 등) 없음.
 
 ---
 

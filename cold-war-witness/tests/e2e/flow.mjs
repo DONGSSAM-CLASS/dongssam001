@@ -57,7 +57,7 @@ log('교사 로그인 OK');
 
 await teacher.getByLabel('새 학급 만들기').fill('2학년 3반');
 await teacher.getByRole('button', { name: '학급 만들기' }).click();
-const codeText = await teacher.locator('strong.typewriter.text-xl').first().textContent();
+const codeText = await teacher.getByTestId('new-class-code').textContent();
 const CODE = codeText.trim();
 log('학급 코드', CODE);
 await teacher.getByRole('link', { name: /2학년 3반/ }).click();
@@ -102,7 +102,7 @@ for (let n = 1; n <= 5; n++) {
   await s1.getByRole('button', { name: '이 선택으로 정하기' }).click();
   await s1.getByRole('button', { name: /실제 역사에서는/ }).click();
   if (n === 1) { await shot(s1, '06-scene1-facts'); await axe(s1, 'scene-facts'); }
-  await s1.getByRole('button', { name: n < 5 ? `장면 ${n + 1}로 ▶` : /AI 시대와 연결하러 가기/ }).click();
+  await s1.getByRole('button', { name: n < 5 ? new RegExp(`장면 ${n + 1}로`) : /AI 시대와 연결하러 가기/ }).click();
 }
 log('장면 1~5 OK');
 
@@ -113,10 +113,10 @@ const boxes = s1.getByLabel('내 생각 쓰기');
 await s1.getByRole('button', { name: /내 정보가 필요 이상으로 모이면/ }).click();
 await boxes.nth(0).pressSequentially('누가 나를 지켜보는지 몰라서 불안해지고 사람들끼리 서로 믿지 못하게 될 것 같다.', { delay: 0 });
 await boxes.nth(1).fill('AI가 판단하더라도 마지막에는 사람이 확인하고 책임을 져야 한다고 생각한다. 그렇지 않으면 결정한 사람이 없다.');
-await s1.getByText('✔ 자동 저장됨').waitFor({ timeout: 10000 });
+await s1.getByText('자동 저장됨').first().waitFor({ timeout: 10000 });
 await shot(s1, '07-reflection');
 await axe(s1, 'reflection');
-await s1.getByRole('button', { name: '🗂️ 원칙 카드 받기' }).click();
+await s1.getByRole('button', { name: /원칙 카드 받기/ }).click();
 await s1.getByRole('heading', { name: /원칙 카드를 받았어요/ }).waitFor();
 await shot(s1, '08-cards-awarded');
 await axe(s1, 'wrapup');
@@ -128,7 +128,7 @@ await axe(s1, 'done');
 log('성찰·카드·마무리 OK');
 
 // ───────── 교사: 현황·분포·하이라이트 ─────────
-await teacher.getByRole('cell', { name: '✔ 완료' }).first().waitFor();
+await teacher.getByRole('cell', { name: '완료' }).first().waitFor();
 await teacher.getByRole('switch', { name: /선택 분포 학생 공개/ }).click();
 await teacher.getByRole('tab', { name: '선택 분포' }).click();
 await teacher.getByText('1명 · 100%').first().waitFor();
@@ -136,7 +136,7 @@ await shot(teacher, '10-teacher-distribution');
 await axe(teacher, 'distribution');
 await teacher.getByRole('tab', { name: '성찰·선언문' }).click();
 await teacher.getByRole('button', { name: '7번 답변 하이라이트' }).click();
-await teacher.getByRole('link', { name: /발표 모드 \(⭐ 1개\)/ }).click();
+await teacher.getByRole('link', { name: /발표 모드 \(하이라이트 1개\)/ }).click();
 await teacher.getByText('우리 반 친구').waitFor();
 await shot(teacher, '11-present');
 await teacher.keyboard.press('Escape');
@@ -188,7 +188,9 @@ log('옛 기기 안내 OK');
 // ───────── PIN 초기화 ─────────
 await teacher.getByRole('button', { name: 'PIN 초기화' }).first().click();
 await teacher.getByRole('button', { name: '초기화', exact: true }).click();
-const tempPin = (await teacher.locator('dialog[open] p.typewriter').textContent()).trim();
+const pinEl = teacher.getByTestId('temp-pin').filter({ hasText: /\d{4}/ });
+await pinEl.waitFor();
+const tempPin = (await pinEl.textContent()).trim();
 await teacher.getByRole('button', { name: '확인했어요' }).click();
 log('임시 PIN', tempPin);
 await s2.goto(`${BASE}/play`);

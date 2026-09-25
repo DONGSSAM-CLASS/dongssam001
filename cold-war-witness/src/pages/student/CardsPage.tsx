@@ -1,4 +1,6 @@
+import { ArrowLeft, Library } from 'lucide-react';
 import { Layout } from '../../components/Layout';
+import { ValueIcon } from '../../components/icons';
 import { LinkButton } from '../../components/ui';
 import { PrincipleCardView } from '../../components/PrincipleCard';
 import { StudentBadge } from './StudentHome';
@@ -10,7 +12,10 @@ export default function CardsPage() {
   const { student } = useReadyStudent();
   return (
     <Layout right={<StudentBadge />} wide>
-      <h1 className="typewriter text-2xl font-bold">🗂️ 내 원칙 카드 도감</h1>
+      <h1 className="typewriter flex items-center gap-2 text-2xl font-bold">
+        <Library className="h-7 w-7 text-declass" aria-hidden="true" />내 원칙 카드 도감
+      </h1>
+      <progress className="progress progress-secondary mt-2 w-full max-w-sm" value={student.cards.length} max={PRINCIPLES.length} aria-hidden="true" />
       <p className="text-ink-soft">
         {PRINCIPLES_TITLE}의 7대 원칙이에요. 챕터 끝에서 성찰을 쓰면 카드를 받아요. ({student.cards.length} / {PRINCIPLES.length}장)
       </p>
@@ -20,8 +25,11 @@ export default function CardsPage() {
         <ul className="mt-2 grid gap-3 sm:grid-cols-3">
           {CORE_VALUES.map((v) => (
             <li key={v.id} className="dossier p-4">
-              <p className="typewriter text-lg font-bold">
-                <span aria-hidden="true">{v.icon}</span> {v.name}
+              <p className="typewriter flex items-center gap-2 text-lg font-bold">
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-accent text-accent-content">
+                  <ValueIcon id={v.id} className="h-5 w-5" />
+                </span>
+                {v.name}
               </p>
               <p className="text-[16px]">{v.description}</p>
             </li>
@@ -49,7 +57,8 @@ export default function CardsPage() {
       <p className="mt-4 text-[14px] text-ink-soft">{PRINCIPLES_NOTE}</p>
       <div className="mt-6">
         <LinkButton to="/play" variant="secondary">
-          ◀ 사건 파일 목록
+          <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+          사건 파일 목록
         </LinkButton>
       </div>
     </Layout>

@@ -4,6 +4,7 @@
  */
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowLeft, Printer } from 'lucide-react';
 import { Button } from '../../components/ui';
 import { MotionToggle } from '../../components/Layout';
 import { LESSON_PLANS, TEACHER_GUIDE, WORKSHEETS } from '../../data/lessonMaterials';
@@ -43,15 +44,16 @@ export default function MaterialsPage() {
   const [doc, setDoc] = useState<DocKey>('plan1');
   const show = (k: DocKey) => doc === 'all' || doc === k;
   return (
-    <div className="min-h-screen bg-[#d8d2c4] print:bg-white">
-      <div className="no-print sticky top-0 z-10 border-b border-line bg-paper-dark">
+    <div className="min-h-screen bg-base-200 print:bg-white">
+      <div className="no-print sticky top-0 z-10 border-b border-base-300 bg-base-100/95 backdrop-blur">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-2 px-4 py-2">
-          <Link to="/teacher" className="underline">
-            ◀ 선생님 화면
+          <Link to="/teacher" className="link inline-flex items-center gap-1">
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            선생님 화면
           </Link>
           <label className="ml-2 flex items-center gap-2">
             <span className="font-bold">자료</span>
-            <select value={doc} onChange={(e) => setDoc(e.target.value as DocKey)} className="min-h-11 rounded-md border-2 border-line bg-white px-2">
+            <select value={doc} onChange={(e) => setDoc(e.target.value as DocKey)} className="select h-11 border-2 border-base-300 bg-white">
               {DOCS.map(([k, label]) => (
                 <option key={k} value={k}>
                   {label}
@@ -59,7 +61,10 @@ export default function MaterialsPage() {
               ))}
             </select>
           </label>
-          <Button onClick={() => window.print()}>🖨️ 인쇄 / PDF로 저장</Button>
+          <Button onClick={() => window.print()}>
+            <Printer className="h-5 w-5" aria-hidden="true" />
+            인쇄 / PDF로 저장
+          </Button>
           <span className="text-[14px] text-ink-soft">인쇄 창에서 ‘PDF로 저장’을 고르면 파일로 저장돼요. (용지 A4)</span>
           <span className="ml-auto">
             <MotionToggle />
@@ -212,7 +217,7 @@ function PlanPrint({ plan }: { plan: LessonPlan }) {
                 </ul>
               </td>
               <td className={td}>
-                {s.app && <p className="font-bold">📱 {s.app}</p>}
+                {s.app && <p className="font-bold">[앱] {s.app}</p>}
                 {s.notes && (
                   <ul className="mt-1 list-disc pl-4">
                     {s.notes.map((n) => (

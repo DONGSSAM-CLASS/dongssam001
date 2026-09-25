@@ -3,19 +3,20 @@
  */
 import { useEffect, useId, useRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { Link, type LinkProps } from 'react-router-dom';
+import { Check, CircleAlert, CircleCheck, Info, LoaderCircle, TriangleAlert } from 'lucide-react';
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'chapter';
+type Variant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'chapter' | 'accent';
 
 const VARIANT: Record<Variant, string> = {
-  primary: 'bg-ink text-paper hover:bg-black disabled:bg-ink-soft/50',
-  secondary: 'bg-paper-dark text-ink border border-line hover:bg-folder disabled:opacity-50',
-  ghost: 'bg-transparent text-ink underline-offset-4 hover:underline disabled:opacity-50',
-  danger: 'bg-stamp text-white hover:bg-[#8f1d16] disabled:opacity-50',
-  chapter: 'bg-ch-900 text-white hover:bg-ch-600 disabled:opacity-50',
+  primary: 'btn-primary',
+  secondary: 'btn-outline border-base-300 bg-base-100 hover:bg-base-200 text-base-content',
+  ghost: 'btn-ghost',
+  danger: 'btn-error text-white bg-[#c0264b] border-[#c0264b] hover:bg-[#a01d3d]',
+  chapter: 'border-0 bg-ch-900 text-white hover:bg-ch-600',
+  accent: 'btn-secondary',
 };
 
-const BASE =
-  'inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 py-2.5 text-[17px] font-bold transition-colors disabled:cursor-not-allowed';
+const BASE = 'btn h-auto min-h-12 rounded-full px-5 py-2 text-[17px] font-bold shadow-none';
 
 export function Button({
   variant = 'primary',
@@ -33,6 +34,8 @@ export function LinkButton({
   return <Link className={`${BASE} ${VARIANT[variant]} ${className}`} {...rest} />;
 }
 
+const NOTICE_ICON = { info: Info, warn: TriangleAlert, error: CircleAlert, ok: CircleCheck } as const;
+
 export function Notice({
   tone = 'info',
   children,
@@ -42,15 +45,18 @@ export function Notice({
   children: ReactNode;
   className?: string;
 }) {
+  // 글자 대비를 지키기 위해 옅은 바탕 + 진한 글자로 만든다.
   const styles = {
-    info: 'border-[#1d4e89] bg-[#e7eef7] text-[#16365e]',
-    warn: 'border-[#9a5b00] bg-[#fdf1d8] text-[#5c3700]',
-    error: 'border-stamp bg-[#fbe5e2] text-[#7a1a14]',
-    ok: 'border-declass bg-[#e2f2e8] text-[#154d2f]',
+    info: 'bg-[#e8f3fb] text-[#17405f] border-[#b9dcf3]',
+    warn: 'bg-[#fff4dc] text-[#5c3a00] border-[#f5d98f]',
+    error: 'bg-[#fdebef] text-[#7d1530] border-[#f5b8c6]',
+    ok: 'bg-[#e4f6f1] text-[#13513f] border-[#a9e2d3]',
   }[tone];
+  const Icon = NOTICE_ICON[tone];
   return (
-    <div role={tone === 'error' ? 'alert' : 'status'} className={`rounded-md border-l-4 px-4 py-3 ${styles} ${className}`}>
-      {children}
+    <div role={tone === 'error' ? 'alert' : 'status'} className={`flex gap-3 rounded-box border px-4 py-3 ${styles} ${className}`}>
+      <Icon className="mt-1 h-5 w-5 shrink-0" aria-hidden="true" />
+      <div className="min-w-0 flex-1">{children}</div>
     </div>
   );
 }
@@ -58,7 +64,7 @@ export function Notice({
 export function Loading({ label = '불러오는 중이에요…' }: { label?: string }) {
   return (
     <div className="flex min-h-[40vh] flex-col items-center justify-center gap-3" role="status" aria-live="polite">
-      <span className="typewriter animate-pulse text-lg text-ink-soft">▮▮▮ 문서 여는 중</span>
+      <span className="loading loading-dots loading-lg text-secondary-content" aria-hidden="true" />
       <span className="text-ink-soft">{label}</span>
     </div>
   );
@@ -107,10 +113,11 @@ export function TextArea({
         aria-describedby={`${id}-count${describedBy ? ` ${describedBy}` : ''}`}
         onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
-        className="w-full rounded-md border-2 border-line bg-white px-3 py-2 text-[17px] leading-relaxed focus:border-ink"
+        className="textarea textarea-lg w-full rounded-box border-2 border-base-300 bg-white text-[17px] leading-relaxed focus:border-primary-content"
       />
       <p id={`${id}-count`} className={`text-right text-[15px] ${enough ? 'text-declass' : 'text-ink-soft'}`}>
-        {minLength ? (enough ? `✔ ${n}자 — 충분해요` : `${n}자 / 최소 ${minLength}자`) : `${n}자`} · 최대 {maxLength}자
+        {minLength && enough && <Check className="mr-1 inline h-4 w-4" aria-hidden="true" />}
+        {minLength ? (enough ? `${n}자 — 충분해요` : `${n}자 / 최소 ${minLength}자`) : `${n}자`} · 최대 {maxLength}자
       </p>
     </div>
   );
@@ -165,7 +172,7 @@ export function TextInput({
         aria-invalid={error ? true : undefined}
         aria-describedby={[hint ? `${id}-hint` : '', error ? `${id}-err` : ''].filter(Boolean).join(' ') || undefined}
         onChange={(e) => onChange(e.target.value)}
-        className="min-h-12 w-full rounded-md border-2 border-line bg-white px-3 text-[18px] focus:border-ink"
+        className="input input-lg h-12 w-full border-2 border-base-300 bg-white text-[18px] focus:border-primary-content"
       />
       {error && (
         <p id={`${id}-err`} className="text-[15px] font-bold text-stamp">
@@ -202,18 +209,23 @@ export function Modal({
     <dialog
       ref={ref}
       aria-labelledby={titleId}
-      // 화면 코드가 닫은 경우(open=false)는 무시하고, 사용자가 Esc 로 닫았을 때만 알린다.
+      className="modal modal-bottom sm:modal-middle"
+      // 화면 코드가 닫은 경우(open=false)는 무시하고, 사용자가 Esc·바깥 누르기로 닫았을 때만 알린다.
       onClose={() => {
         if (openRef.current) onClose();
       }}
-      className="dossier m-auto w-[min(92vw,34rem)] p-0 text-ink"
     >
-      <div className="flex flex-col gap-4 p-5">
+      <div className="modal-box flex flex-col gap-4 text-ink">
         <h2 id={titleId} className="typewriter text-xl font-bold">
           {title}
         </h2>
         {children}
       </div>
+      <form method="dialog" className="modal-backdrop">
+        <button type="submit" aria-label="닫기">
+          닫기
+        </button>
+      </form>
     </dialog>
   );
 }
@@ -253,11 +265,26 @@ export function friendlyError(e: unknown): string {
 /** 자동 저장 상태 표시 */
 export function SaveBadge({ status }: { status: 'idle' | 'saving' | 'saved' | 'error' }) {
   if (status === 'idle') return null;
-  const text = { saving: '저장 중…', saved: '✔ 자동 저장됨', error: '⚠ 저장 못 함 — 인터넷을 확인해 주세요' }[status];
-  const color = { saving: 'text-ink-soft', saved: 'text-declass', error: 'text-stamp font-bold' }[status];
   return (
-    <span role="status" aria-live="polite" className={`text-[15px] ${color}`}>
-      {text}
+    <span role="status" aria-live="polite" className="inline-flex items-center gap-1 text-[15px]">
+      {status === 'saving' && (
+        <>
+          <LoaderCircle className="h-4 w-4 animate-spin text-ink-soft" aria-hidden="true" />
+          <span className="text-ink-soft">저장 중…</span>
+        </>
+      )}
+      {status === 'saved' && (
+        <>
+          <CircleCheck className="h-4 w-4 text-declass" aria-hidden="true" />
+          <span className="text-declass">자동 저장됨</span>
+        </>
+      )}
+      {status === 'error' && (
+        <>
+          <CircleAlert className="h-4 w-4 text-stamp" aria-hidden="true" />
+          <span className="font-bold text-stamp">저장 못 함 — 인터넷을 확인해 주세요</span>
+        </>
+      )}
     </span>
   );
 }

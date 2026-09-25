@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react';
+import { GraduationCap, LogIn, LogOut } from 'lucide-react';
 import { Layout } from '../../components/Layout';
 import { Button, Loading, Notice, friendlyError } from '../../components/ui';
 import { useAuth } from '../../app/AuthContext';
@@ -22,7 +23,10 @@ export function TeacherGate({ children }: { children: ReactNode }) {
   return (
     <Layout>
       <div className="dossier flex flex-col gap-4 p-6">
-        <h1 className="typewriter text-2xl font-bold">선생님 로그인</h1>
+        <h1 className="typewriter flex items-center gap-2 text-2xl font-bold">
+          <GraduationCap className="h-7 w-7 text-declass" aria-hidden="true" />
+          선생님 로그인
+        </h1>
         <p>학급을 만들고, 챕터를 열고, 학생들의 진행 상황과 성찰을 볼 수 있어요.</p>
         {studentHere && (
           <Notice tone="warn">
@@ -46,6 +50,7 @@ export function TeacherGate({ children }: { children: ReactNode }) {
             }
           }}
         >
+          <LogIn className="h-5 w-5" aria-hidden="true" />
           {busy ? '로그인 중…' : 'Google 계정으로 로그인'}
         </Button>
         <p className="text-[15px] text-ink-soft">
@@ -61,7 +66,8 @@ export function TeacherMenu() {
   return (
     <span className="flex items-center gap-2 text-[15px]">
       <span className="hidden max-w-48 truncate sm:inline">{user?.email}</span>
-      <button type="button" className="min-h-10 rounded-md border border-line bg-white/70 px-3 hover:bg-white" onClick={() => void signOut()}>
+      <button type="button" className="btn btn-ghost btn-sm min-h-10 rounded-full font-medium" onClick={() => void signOut()}>
+        <LogOut className="h-4 w-4" aria-hidden="true" />
         로그아웃
       </button>
     </span>

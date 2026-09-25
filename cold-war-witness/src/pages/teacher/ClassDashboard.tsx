@@ -5,6 +5,26 @@
  */
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import {
+  Activity,
+  ArrowLeft,
+  ChartColumn,
+  CircleCheckBig,
+  Download,
+  Eye,
+  EyeOff,
+  FolderOpen,
+  KeyRound,
+  Lock,
+  LockOpen,
+  Maximize2,
+  MessagesSquare,
+  Presentation,
+  Settings,
+  Star,
+  Trash2,
+  type LucideIcon,
+} from 'lucide-react';
 import { Layout } from '../../components/Layout';
 import { Button, LinkButton, Loading, Modal, Notice, TextInput, friendlyError } from '../../components/ui';
 import { DistributionChart } from '../../components/DistributionChart';
@@ -21,11 +41,11 @@ import type { ChapterId } from '../../types/content';
 import type { ClassRecord, StudentRecord } from '../../types/db';
 
 type Tab = 'progress' | 'dist' | 'writing' | 'manage';
-const TABS: [Tab, string][] = [
-  ['progress', '진행 현황'],
-  ['dist', '선택 분포'],
-  ['writing', '성찰·선언문'],
-  ['manage', '학급 관리'],
+const TABS: [Tab, string, LucideIcon][] = [
+  ['progress', '진행 현황', Activity],
+  ['dist', '선택 분포', ChartColumn],
+  ['writing', '성찰·선언문', MessagesSquare],
+  ['manage', '학급 관리', Settings],
 ];
 
 export default function ClassDashboard() {
@@ -68,33 +88,42 @@ function Dashboard() {
   return (
     <Layout wide right={<TeacherMenu />}>
       <p>
-        <Link to="/teacher" className="text-[15px] underline">
-          ◀ 내 학급 목록
+        <Link to="/teacher" className="link inline-flex items-center gap-1 text-[15px]">
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />내 학급 목록
         </Link>
       </p>
       <div className="mt-1 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="typewriter text-2xl font-bold">📁 {cls.name}</h1>
+          <h1 className="typewriter flex items-center gap-2 text-2xl font-bold">
+            <FolderOpen className="h-7 w-7 text-declass" aria-hidden="true" />
+            {cls.name}
+          </h1>
           <p className="text-ink-soft">학생 {students.length}명 입장</p>
         </div>
-        <button type="button" onClick={() => setBigCode(true)} className="dossier px-4 py-2 text-left hover:bg-white">
-          <span className="block text-[14px] text-ink-soft">학급 코드 (눌러서 크게 보기)</span>
-          <span className="typewriter text-2xl font-bold tracking-[0.3em]">{cls.code}</span>
+        <button type="button" onClick={() => setBigCode(true)} className="dossier flex items-center gap-3 px-4 py-2 text-left">
+          <span>
+            <span className="block text-[14px] text-ink-soft">학급 코드 (눌러서 크게 보기)</span>
+            <span className="text-2xl font-extrabold tracking-[0.3em]">{cls.code}</span>
+          </span>
+          <Maximize2 className="h-5 w-5 text-ink-soft" aria-hidden="true" />
         </button>
       </div>
 
       <Controls cls={cls} />
 
-      <div className="mt-6 flex flex-wrap gap-1 border-b-2 border-ink" role="tablist">
-        {TABS.map(([t, label]) => (
+      <div className="mt-6 flex flex-wrap gap-1 rounded-box bg-base-200 p-1" role="tablist">
+        {TABS.map(([t, label, Icon]) => (
           <button
             key={t}
             type="button"
             role="tab"
             aria-selected={tab === t}
             onClick={() => setTab(t)}
-            className={`min-h-12 rounded-t-md px-4 font-bold ${tab === t ? 'bg-ink text-paper' : 'bg-paper-dark text-ink hover:bg-folder'}`}
+            className={`flex min-h-12 flex-1 items-center justify-center gap-1.5 rounded-box px-4 font-bold transition-colors ${
+              tab === t ? 'bg-white text-ink shadow-sm' : 'text-ink-soft hover:text-ink'
+            }`}
           >
+            <Icon className="h-5 w-5" aria-hidden="true" />
             {label}
           </button>
         ))}
@@ -107,7 +136,7 @@ function Dashboard() {
       </div>
 
       <Modal open={bigCode} onClose={() => setBigCode(false)} title="학급 코드">
-        <p className="typewriter text-center text-6xl font-bold tracking-[0.3em] sm:text-7xl">{cls.code}</p>
+        <p className="text-center text-6xl font-extrabold tracking-[0.3em] text-secondary-content sm:text-7xl">{cls.code}</p>
         <p className="text-center">
           학생 입장 주소: <strong className="break-all">{joinUrl}</strong>
         </p>
@@ -124,14 +153,15 @@ function Toggle({
   on,
   onChange,
   sub,
-  icons = ['🔓', '🔒'],
+  icons = [LockOpen, Lock],
 }: {
   label: string;
   on: boolean;
   onChange: (v: boolean) => Promise<void>;
   sub?: string;
-  icons?: [string, string];
+  icons?: [LucideIcon, LucideIcon];
 }) {
+  const [OnIcon, OffIcon] = icons;
   const [busy, setBusy] = useState(false);
   return (
     <button
@@ -147,14 +177,17 @@ function Toggle({
           setBusy(false);
         }
       }}
-      className={`flex min-h-14 flex-col items-start justify-center rounded-md border-2 px-3 py-2 text-left ${
-        on ? 'border-declass bg-[#e2f2e8]' : 'border-line bg-white'
+      className={`flex min-h-16 items-center gap-3 rounded-box border-2 px-3 py-2 text-left transition-colors ${
+        on ? 'border-primary bg-primary/25' : 'border-base-300 bg-white'
       }`}
     >
-      <span className="font-bold">
-        {on ? icons[0] : icons[1]} {label}
+      <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${on ? 'bg-primary text-primary-content' : 'bg-base-200 text-ink-soft'}`}>
+        {on ? <OnIcon className="h-5 w-5" aria-hidden="true" /> : <OffIcon className="h-5 w-5" aria-hidden="true" />}
       </span>
-      <span className="text-[14px] text-ink-soft">{sub ?? (on ? '열림 — 누르면 잠가요' : '잠김 — 누르면 열어요')}</span>
+      <span className="min-w-0 flex-1">
+        <span className="block font-bold leading-snug">{label}</span>
+        <span className="text-[14px] text-ink-soft">{sub ?? (on ? '열림 — 누르면 잠가요' : '잠김 — 누르면 열어요')}</span>
+      </span>
     </button>
   );
 }
@@ -184,7 +217,7 @@ function Controls({ cls }: { cls: ClassRecord }) {
         <Toggle label="선언문 (3차시 후반)" on={cls.unlocked.finale} onChange={(v) => run(() => setUnlocked(cls.id, 'finale', v))} />
         <Toggle
           label="선택 분포 학생 공개"
-          icons={['👀', '🙈']}
+          icons={[Eye, EyeOff]}
           on={cls.showDistribution}
           sub={cls.showDistribution ? '학생 마무리 화면에 보여요' : '선생님만 봐요'}
           onChange={(v) => run(() => setShowDistribution(cls.id, v))}
@@ -233,9 +266,9 @@ function ProgressTab({ students }: { students: StudentRecord[] }) {
         })}
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse bg-white/60 text-left text-[16px]">
+        <table className="table table-zebra w-full min-w-[640px] rounded-box bg-white text-[16px]">
           <thead>
-            <tr className="border-b-2 border-ink">
+            <tr className="text-[15px] text-ink">
               <th className="p-2">번호</th>
               <th className="p-2">닉네임</th>
               {CHAPTERS.map((c) => (
@@ -250,14 +283,21 @@ function ProgressTab({ students }: { students: StudentRecord[] }) {
           </thead>
           <tbody>
             {students.map((s) => (
-              <tr key={s.id} className="border-b border-line">
+              <tr key={s.id}>
                 <td className="p-2 font-bold">{s.number}</td>
                 <td className="p-2">{s.nickname}</td>
                 {CHAPTERS.map((c) => {
                   const st = chapterStatus(s, c.id);
                   return (
-                    <td key={c.id} className={`p-2 ${st === 'done' ? 'font-bold text-declass' : ''}`}>
-                      {st === 'done' ? '✔ 완료' : stepLabel(s.progress[c.id])}
+                    <td key={c.id} className="p-2">
+                      {st === 'done' ? (
+                        <span className="inline-flex items-center gap-1 font-bold text-declass">
+                          <CircleCheckBig className="h-4 w-4" aria-hidden="true" />
+                          완료
+                        </span>
+                      ) : (
+                        stepLabel(s.progress[c.id])
+                      )}
                     </td>
                   );
                 })}
@@ -291,13 +331,13 @@ function DistTab({ students }: { students: StudentRecord[] }) {
             type="button"
             aria-pressed={ch === c.id}
             onClick={() => setCh(c.id)}
-            className={`min-h-11 rounded-md border-2 px-3 font-bold ${ch === c.id ? 'border-ink bg-ink text-paper' : 'border-line bg-white'}`}
+            className={`btn h-auto min-h-11 rounded-full px-4 ${ch === c.id ? 'btn-neutral' : 'border-base-300 bg-white'}`}
           >
             CH{c.no} 「{c.title}」
           </button>
         ))}
         <label className="ml-auto flex items-center gap-2">
-          <input type="checkbox" checked={big} onChange={(e) => setBig(e.target.checked)} className="h-5 w-5" />
+          <input type="checkbox" checked={big} onChange={(e) => setBig(e.target.checked)} className="toggle toggle-primary" />
           화면 공유용 큰 글씨
         </label>
       </div>
@@ -365,7 +405,7 @@ function WritingTab({ cls, students, highlights }: { cls: ClassRecord; students:
       <div className="flex flex-wrap items-end gap-3">
         <label className="flex flex-col gap-1">
           <span className="font-bold">질문 고르기</span>
-          <select value={pid} onChange={(e) => setPid(e.target.value)} className="min-h-12 rounded-md border-2 border-line bg-white px-2 text-[16px]">
+          <select value={pid} onChange={(e) => setPid(e.target.value)} className="select h-12 border-2 border-base-300 bg-white text-[16px]">
             {prompts.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.title}
@@ -374,29 +414,34 @@ function WritingTab({ cls, students, highlights }: { cls: ClassRecord; students:
           </select>
         </label>
         <label className="flex min-h-12 items-center gap-2">
-          <input type="checkbox" checked={onlyStar} onChange={(e) => setOnlyStar(e.target.checked)} className="h-5 w-5" />
-          ⭐ 하이라이트만
+          <input type="checkbox" checked={onlyStar} onChange={(e) => setOnlyStar(e.target.checked)} className="checkbox checkbox-warning" />
+          <Star className="h-4 w-4 fill-[#f5b301] text-[#b7791f]" aria-hidden="true" />
+          하이라이트만
         </label>
         <LinkButton to={`/teacher/class/${cls.id}/present`} className="ml-auto">
-          📽️ 발표 모드 (⭐ {starCount}개)
+          <Presentation className="h-5 w-5" aria-hidden="true" />
+          발표 모드 (하이라이트 {starCount}개)
         </LinkButton>
       </div>
-      {prompt.id !== 'declaration' && <p className="rounded bg-paper-dark px-3 py-2">{prompt.text}</p>}
+      {prompt.id !== 'declaration' && <p className="rounded-box bg-base-200 px-3 py-2">{prompt.text}</p>}
       {error && <Notice tone="error">{error}</Notice>}
       {rows.length === 0 ? (
         <p className="text-ink-soft">아직 답변이 없어요.</p>
       ) : (
         <ul className="flex flex-col gap-2">
           {rows.map(({ s, text, key }) => (
-            <li key={key} className={`dossier flex gap-3 p-4 ${highlights[key] ? 'border-2 border-[#b8860b]' : ''}`}>
+            <li key={key} className={`dossier flex gap-3 p-4 ${highlights[key] ? 'border-2 border-[#f5b301] bg-[#fffaeb]' : ''}`}>
               <button
                 type="button"
                 aria-pressed={!!highlights[key]}
                 aria-label={`${s.number}번 답변 하이라이트`}
                 onClick={() => void toggle(key)}
-                className="h-11 w-11 shrink-0 rounded-md border border-line bg-white text-2xl"
+                className="btn btn-circle h-11 w-11 shrink-0 border-base-300 bg-white"
               >
-                {highlights[key] ? '⭐' : '☆'}
+                <Star
+                  className={`h-6 w-6 ${highlights[key] ? 'fill-[#f5b301] text-[#b7791f]' : 'text-ink-soft'}`}
+                  aria-hidden="true"
+                />
               </button>
               <div>
                 <p className="text-[15px] font-bold text-ink-soft">
@@ -469,22 +514,29 @@ function ManageTab({ cls, students }: { cls: ClassRecord; students: StudentRecor
       {error && <Notice tone="error">{error}</Notice>}
 
       <section className="dossier p-5">
-        <h2 className="typewriter text-lg font-bold">📥 CSV 내보내기</h2>
+        <h2 className="typewriter flex items-center gap-2 text-lg font-bold">
+          <Download className="h-5 w-5 text-declass" aria-hidden="true" />
+          CSV 내보내기
+        </h2>
         <p>번호·닉네임·감정·선택·성찰 답변·선언문을 엑셀에서 열 수 있는 표로 내려받아요. (평가·기록용)</p>
         <Button className="mt-3" onClick={downloadCsv} disabled={students.length === 0}>
+          <Download className="h-5 w-5" aria-hidden="true" />
           CSV 내려받기 ({students.length}명)
         </Button>
       </section>
 
       <section className="dossier p-5">
-        <h2 className="typewriter text-lg font-bold">🔑 학생 PIN 초기화</h2>
+        <h2 className="typewriter flex items-center gap-2 text-lg font-bold">
+          <KeyRound className="h-5 w-5 text-declass" aria-hidden="true" />
+          학생 PIN 초기화
+        </h2>
         <p>PIN을 잊은 학생이 있으면 초기화하세요. 새 임시 PIN이 나오고, 학생은 ‘다른 기기에서 이어 해요’로 들어오면 돼요. 기록은 그대로 남아요.</p>
         {students.length === 0 ? (
           <p className="mt-2 text-ink-soft">아직 학생이 없어요.</p>
         ) : (
           <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {students.map((s) => (
-              <li key={s.id} className="flex items-center justify-between gap-2 rounded-md border border-line bg-white px-3 py-2">
+              <li key={s.id} className="flex items-center justify-between gap-2 rounded-box border border-base-300 bg-white px-3 py-2">
                 <span>
                   <strong>{s.number}번</strong> {s.nickname}
                 </span>
@@ -497,8 +549,11 @@ function ManageTab({ cls, students }: { cls: ClassRecord; students: StudentRecor
         )}
       </section>
 
-      <section className="dossier border-2 border-stamp p-5">
-        <h2 className="typewriter text-lg font-bold text-stamp">🗑️ 학급 삭제 (데이터 파기)</h2>
+      <section className="dossier border-2 border-[#f5b8c6] p-5">
+        <h2 className="typewriter flex items-center gap-2 text-lg font-bold text-[#a01d3d]">
+          <Trash2 className="h-5 w-5" aria-hidden="true" />
+          학급 삭제 (데이터 파기)
+        </h2>
         <p>학기가 끝나면 학급을 삭제해 학생 기록을 모두 지우세요. 선택·성찰·선언문이 모두 사라지며 되돌릴 수 없어요. 필요하면 먼저 CSV를 내려받으세요.</p>
         <Button variant="danger" className="mt-3" onClick={() => setDelStep(1)}>
           학급 삭제하기
@@ -524,7 +579,9 @@ function ManageTab({ cls, students }: { cls: ClassRecord; students: StudentRecor
 
       <Modal open={!!tempPin} onClose={() => setTempPin(null)} title="새 임시 PIN">
         <p>{tempPin?.number}번 학생에게 알려 주세요. 이 창을 닫으면 다시 볼 수 없어요.</p>
-        <p className="typewriter text-center text-6xl font-bold tracking-[0.3em]">{tempPin?.pin}</p>
+        <p data-testid="temp-pin" className="text-center text-6xl font-extrabold tracking-[0.3em] text-secondary-content">
+          {tempPin?.pin}
+        </p>
         <p className="text-[15px] text-ink-soft">학생: 첫 화면 → 학생으로 들어가기 → ‘다른 기기에서 이어 해요’ → 학급 코드 · 번호 · 이 PIN</p>
         <Button onClick={() => setTempPin(null)}>확인했어요</Button>
       </Modal>

@@ -38,8 +38,8 @@ export async function drawCertificate(d: CertificateData): Promise<string> {
   canvas.width = W;
   canvas.height = H;
   const ctx = canvas.getContext('2d')!;
-  const sans = '"Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif';
-  const mono = '"Nanum Gothic Coding", monospace';
+  const sans = '"Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif';
+  const mono = sans;
 
   // 종이
   ctx.fillStyle = '#fbf6ea';

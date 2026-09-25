@@ -6,7 +6,26 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import {
+  ArrowRight,
+  Award,
+  Bot,
+  Check,
+  CircleCheckBig,
+  ClipboardList,
+  FileSearch,
+  FolderClosed,
+  FolderOpen,
+  History,
+  Lock,
+  MessageCircleQuestion,
+  MessageCircleHeart,
+  Play,
+  ScrollText,
+  UsersRound,
+} from 'lucide-react';
 import { Layout, FictionNotice } from '../../components/Layout';
+import { PrincipleIcon } from '../../components/icons';
 import { Button, LinkButton, Notice, SaveBadge, Stamp, friendlyError } from '../../components/ui';
 import { FactCardView } from '../../components/FactCard';
 import { PrincipleCardView } from '../../components/PrincipleCard';
@@ -77,7 +96,7 @@ export default function ChapterPage() {
       )}
       {locked ? (
         <Notice tone="warn">
-          🔒 선생님이 이 파일을 아직 열지 않았거나 잠시 잠갔어요. 선생님의 안내를 기다려 주세요.
+          <Lock className="mr-1 inline h-4 w-4" aria-hidden="true" />선생님이 이 파일을 아직 열지 않았거나 잠시 잠갔어요. 선생님의 안내를 기다려 주세요.
           <div className="mt-3">
             <LinkButton to="/play" variant="secondary">
               사건 파일 목록으로
@@ -135,7 +154,7 @@ function ChapterHeader({
   const idx = stepIndex(step);
   return (
     <div className="mb-5">
-      <p className="typewriter text-[15px] text-ch-600">
+      <p className="text-[15px] font-semibold text-ch-600">
         CHAPTER {chapter.no} · {chapter.place}
       </p>
       <h1 ref={headingRef} tabIndex={-1} className="typewriter text-2xl font-bold text-ch-900 outline-none sm:text-3xl">
@@ -149,15 +168,15 @@ function ChapterHeader({
             <li
               key={d.step}
               aria-current={state === 'now' ? 'step' : undefined}
-              className={`typewriter rounded px-2 py-0.5 text-[14px] ${
+              className={`inline-flex items-center gap-0.5 rounded-full px-2.5 py-0.5 text-[14px] ${
                 state === 'now'
                   ? 'bg-ch-900 font-bold text-white'
                   : state === 'done'
                     ? 'bg-ch-100 text-ch-900'
-                    : 'bg-paper-dark text-ink-soft'
+                    : 'bg-base-200 text-ink-soft'
               }`}
             >
-              {state === 'done' ? '✓ ' : ''}
+              {state === 'done' && <Check className="h-3.5 w-3.5" aria-hidden="true" />}
               {d.label}
               <span className="sr-only">{state === 'done' ? ' (끝냄)' : state === 'now' ? ' (지금)' : ''}</span>
             </li>
@@ -198,7 +217,10 @@ function IntroView({ chapter, onStart }: { chapter: Chapter; onStart: () => void
 
       {chapter.introFactIds.length > 0 && (
         <section className="flex flex-col gap-3">
-          <h2 className="text-lg font-bold">📂 먼저 알아 둘 역사 기록</h2>
+          <h2 className="flex items-center gap-2 text-lg font-bold">
+            <FileSearch className="h-5 w-5 text-ch-600" aria-hidden="true" />
+            먼저 알아 둘 역사 기록
+          </h2>
           {chapter.introFactIds.map((id) => (
             <FactCardView key={id} fact={getFact(id)} />
           ))}
@@ -219,7 +241,8 @@ function IntroView({ chapter, onStart }: { chapter: Chapter; onStart: () => void
           setBusy(false);
         }}
       >
-        장면 1 시작하기 ▶
+        <Play className="h-5 w-5" aria-hidden="true" />
+        장면 1 시작하기
       </Button>
     </div>
   );
@@ -280,7 +303,11 @@ function SceneView({ chapter, scene, onNext }: { chapter: Chapter; scene: Scene;
           <EmotionPicker value={emotion} onChange={setEmotion} characterName={chapter.character.name} />
 
           <fieldset className="flex flex-col gap-2">
-            <legend className="mb-2 text-[18px] font-bold">② {scene.question}</legend>
+            <legend className="mb-2 flex flex-wrap items-center gap-x-2 text-[18px] font-bold">
+              <span className="badge badge-secondary h-7 w-7 rounded-full p-0 text-[15px]">2</span>
+              <MessageCircleQuestion className="h-5 w-5 text-stamp" aria-hidden="true" />
+              {scene.question}
+            </legend>
             <div
               role="radiogroup"
               aria-label={scene.question}
@@ -297,17 +324,17 @@ function SceneView({ chapter, scene, onNext }: { chapter: Chapter; scene: Scene;
                     aria-checked={on}
                     tabIndex={radioTabIndex(choice, c.id, i)}
                     onClick={() => setChoice(c.id)}
-                    className={`flex min-h-14 items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-[18px] transition-colors ${
-                      on ? 'border-ch-900 bg-ch-100 font-bold' : 'border-line bg-white hover:bg-paper'
+                    className={`flex min-h-14 items-center gap-3 rounded-box border-2 px-4 py-3 text-left text-[18px] transition-colors ${
+                      on ? 'border-ch-900 bg-ch-100 font-bold' : 'border-base-300 bg-white hover:bg-base-200'
                     }`}
                   >
                     <span
                       aria-hidden="true"
                       className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 ${
-                        on ? 'border-ch-900 bg-ch-900 text-white' : 'border-line'
+                        on ? 'border-ch-900 bg-ch-900 text-white' : 'border-base-300'
                       }`}
                     >
-                      {on ? '✓' : ''}
+                      {on && <Check className="h-4 w-4" strokeWidth={3} />}
                     </span>
                     {c.label}
                   </button>
@@ -338,10 +365,14 @@ function SceneView({ chapter, scene, onNext }: { chapter: Chapter; scene: Scene;
               내가 고른 마음: <strong className="text-ink">{emo ? `${emo.emoji} ${emo.label}` : '-'}</strong> · 내 선택:{' '}
               <strong className="text-ink">{chosen?.label}</strong>
             </p>
-            <h3 className="typewriter text-lg font-bold">이 선택이 가져올 수 있는 결과</h3>
+            <h3 className="typewriter flex items-center gap-2 text-lg font-bold">
+              <ArrowRight className="h-5 w-5 text-ch-600" aria-hidden="true" />
+              이 선택이 가져올 수 있는 결과
+            </h3>
             <p className="text-[18px] leading-relaxed">{chosen?.result}</p>
-            <p className="rounded bg-paper px-3 py-2 text-[16px]">
-              💭 내가 고른 마음(<strong>{emo?.label}</strong>)은 {chapter.character.name}의 선택에 어떤 영향을 주었을까요? 활동지 감정 기록표에 적어 보세요.
+            <p className="flex gap-2 rounded-box bg-base-200 px-3 py-2 text-[16px]">
+              <MessageCircleHeart className="mt-1 h-4 w-4 shrink-0 text-stamp" aria-hidden="true" />
+              <span>내가 고른 마음(<strong>{emo?.label}</strong>)은 {chapter.character.name}의 선택에 어떤 영향을 주었을까요? 활동지 감정 기록표에 적어 보세요.</span>
             </p>
           </section>
 
@@ -354,16 +385,21 @@ function SceneView({ chapter, scene, onNext }: { chapter: Chapter; scene: Scene;
                 setTimeout(() => factsRef.current?.focus(), 50);
               }}
             >
-              📂 실제 역사에서는? (기밀 문서 열기)
+              <FolderOpen className="h-5 w-5" aria-hidden="true" />
+              실제 역사에서는? (기밀 문서 열기)
             </Button>
           ) : (
             <section ref={factsRef} tabIndex={-1} className="flex flex-col gap-3 outline-none" aria-label="실제 역사에서는">
-              <h3 className="text-lg font-bold">📂 실제 역사에서는?</h3>
+              <h3 className="flex items-center gap-2 text-lg font-bold">
+                <FolderOpen className="h-5 w-5 text-ch-600" aria-hidden="true" />
+                실제 역사에서는?
+              </h3>
               {scene.factIds.map((id) => (
                 <FactCardView key={id} fact={getFact(id)} animate />
               ))}
               <Button variant="chapter" className="mt-2 text-[19px]" onClick={() => void onNext()}>
-                {isLast ? 'AI 시대와 연결하러 가기 ▶' : `장면 ${scene.no + 1}로 ▶`}
+                {isLast ? 'AI 시대와 연결하러 가기' : `장면 ${scene.no + 1}로`}
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </Button>
             </section>
           )}
@@ -406,7 +442,12 @@ function ReflectionView({ chapter, onAwarded }: { chapter: Chapter; onAwarded: (
   return (
     <div className="flex flex-col gap-5">
       <div className="dossier p-5">
-        <h2 className="typewriter text-xl font-bold">🤖 AI 시대와 연결하기</h2>
+        <h2 className="typewriter flex items-center gap-2 text-xl font-bold">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-content">
+            <Bot className="h-5 w-5" aria-hidden="true" />
+          </span>
+          AI 시대와 연결하기
+        </h2>
         <p className="mt-1">
           냉전 시대의 이야기를 오늘날 AI와 이어 생각해 봐요. 질문 {questions.length}개 가운데{' '}
           <strong>
@@ -415,8 +456,10 @@ function ReflectionView({ chapter, onAwarded }: { chapter: Chapter; onAwarded: (
           에 <strong>{minLength}자 이상</strong> 답하면 원칙 카드를 받아요.
         </p>
         <p className="mt-2 flex flex-wrap items-center justify-between gap-2">
-          <span className="typewriter font-bold">
-            지금 {done} / {minAnswers}개 {ready ? '✔ 완료' : ''}
+          <span className="flex items-center gap-2 font-bold">
+            <progress className="progress progress-primary w-28" value={Math.min(done, minAnswers)} max={minAnswers} aria-hidden="true" />
+            지금 {done} / {minAnswers}개
+            {ready && <CircleCheckBig className="h-5 w-5 text-declass" aria-label="완료" />}
           </span>
           <SaveBadge status={saver.status} />
         </p>
@@ -443,8 +486,13 @@ function ReflectionView({ chapter, onAwarded }: { chapter: Chapter; onAwarded: (
                 {q.principleIds.map((pid) => {
                   const p = getPrinciple(pid);
                   return (
-                    <span key={pid} className="rounded-full px-2.5 py-0.5 text-[14px] font-bold text-white" style={{ backgroundColor: p.color }}>
-                      {p.icon} {p.name}
+                    <span
+                      key={pid}
+                      className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[14px] font-bold text-white"
+                      style={{ backgroundColor: p.color }}
+                    >
+                      <PrincipleIcon id={pid} className="h-3.5 w-3.5" />
+                      {p.name}
                     </span>
                   );
                 })}
@@ -456,7 +504,8 @@ function ReflectionView({ chapter, onAwarded }: { chapter: Chapter; onAwarded: (
 
       {error && <Notice tone="error">{error}</Notice>}
       <Button variant="chapter" className="text-[19px]" disabled={!ready || busy} onClick={receive}>
-        {busy ? '카드 받는 중…' : ready ? '🗂️ 원칙 카드 받기' : `${minAnswers - done}개 더 답하면 카드를 받을 수 있어요`}
+        {ready && <Award className="h-5 w-5" aria-hidden="true" />}
+        {busy ? '카드 받는 중…' : ready ? '원칙 카드 받기' : `${minAnswers - done}개 더 답하면 카드를 받을 수 있어요`}
       </Button>
     </div>
   );
@@ -489,7 +538,10 @@ function WrapupView({ chapter, justAwarded, onDone }: { chapter: Chapter; justAw
   return (
     <div className="flex flex-col gap-6">
       <section className="flex flex-col gap-3" aria-label="받은 원칙 카드">
-        <h2 className="typewriter text-xl font-bold">{justAwarded ? '🎉 원칙 카드를 받았어요!' : '🗂️ 이 챕터에서 받은 원칙 카드'}</h2>
+        <h2 className="typewriter flex items-center gap-2 text-xl font-bold">
+          <Award className="h-6 w-6 text-stamp" aria-hidden="true" />
+          {justAwarded ? '원칙 카드를 받았어요!' : '이 챕터에서 받은 원칙 카드'}
+        </h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {chapter.principleIds.map((id) => (
             <PrincipleCardView key={id} principle={getPrinciple(id)} animate={justAwarded} />
@@ -499,7 +551,10 @@ function WrapupView({ chapter, justAwarded, onDone }: { chapter: Chapter; justAw
 
       {chapter.outroFactIds.length > 0 && (
         <section className="flex flex-col gap-3">
-          <h2 className="text-lg font-bold">📂 그 뒤의 역사</h2>
+          <h2 className="flex items-center gap-2 text-lg font-bold">
+            <History className="h-5 w-5 text-ch-600" aria-hidden="true" />
+            그 뒤의 역사
+          </h2>
           {chapter.outroFactIds.map((id) => (
             <FactCardView key={id} fact={getFact(id)} />
           ))}
@@ -508,7 +563,10 @@ function WrapupView({ chapter, justAwarded, onDone }: { chapter: Chapter; justAw
 
       {cls.showDistribution && (
         <section className="dossier p-5" aria-label="학급 선택 분포">
-          <h2 className="typewriter text-xl font-bold">👥 다른 친구들은 어떤 선택을 했을까?</h2>
+          <h2 className="typewriter flex items-center gap-2 text-xl font-bold">
+            <UsersRound className="h-6 w-6 text-ch-600" aria-hidden="true" />
+            다른 친구들은 어떤 선택을 했을까?
+          </h2>
           <p className="mb-4 text-ink-soft">우리 반 친구들의 선택이에요. 누가 무엇을 골랐는지는 보이지 않아요.</p>
           {stats ? (
             <DistributionChart scenes={chapter.scenes} stats={stats} mine={student.choices as Record<string, ChoiceId>} />
@@ -519,7 +577,8 @@ function WrapupView({ chapter, justAwarded, onDone }: { chapter: Chapter; justAw
       )}
 
       <section className="dossier flex flex-col gap-3 p-5" aria-label="챕터 마무리 성찰">
-        <p className="typewriter text-[15px] text-ink-soft">
+        <p className="flex items-center gap-1.5 text-[15px] font-semibold text-ink-soft">
+          <MessageCircleHeart className="h-4 w-4 text-stamp" aria-hidden="true" />
           마음 돌아보기 · {chapter.curriculum.ksel.competencies.map((id) => getKselCompetency(id).name).join(' · ')}
         </p>
         <h2 className="text-[19px] font-bold">{chapter.kselFocus.question}</h2>
@@ -539,7 +598,8 @@ function WrapupView({ chapter, justAwarded, onDone }: { chapter: Chapter; justAw
 
       {error && <Notice tone="error">{error}</Notice>}
       <Button variant="chapter" className="text-[19px]" disabled={!enough || busy} onClick={finish}>
-        {busy ? '저장하는 중…' : enough ? '📁 파일 닫기 (챕터 마치기)' : `마음 쓰기를 ${WRAPUP_MIN}자 이상 채워 주세요`}
+        {enough && <FolderClosed className="h-5 w-5" aria-hidden="true" />}
+        {busy ? '저장하는 중…' : enough ? '파일 닫기 (챕터 마치기)' : `마음 쓰기를 ${WRAPUP_MIN}자 이상 채워 주세요`}
       </Button>
     </div>
   );
@@ -556,6 +616,7 @@ function DoneView({ chapter, justDone }: { chapter: Chapter; justDone: boolean }
     <div className="flex flex-col gap-5">
       <section className="dossier relative flex flex-col items-center gap-3 p-6 text-center">
         <Stamp tone="declass" animate={justDone} className="text-3xl">
+          <CircleCheckBig className="h-7 w-7" />
           기밀 해제
         </Stamp>
         <h2 className="typewriter mt-2 text-2xl font-bold">CHAPTER {chapter.no} 완료!</h2>
@@ -566,19 +627,23 @@ function DoneView({ chapter, justDone }: { chapter: Chapter; justDone: boolean }
           </LinkButton>
           {nextOpen && (
             <Button variant="primary" onClick={() => nav(`/play/chapter/${next.id}`)}>
-              다음 파일: 「{next.title}」 ▶
+              다음 파일: 「{next.title}」
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Button>
           )}
           {!next && cls.unlocked.finale && (
             <LinkButton to="/play/finale" variant="primary">
-              선언문 쓰러 가기 ▶
+              <ScrollText className="h-5 w-5" aria-hidden="true" />
+              선언문 쓰러 가기
             </LinkButton>
           )}
         </div>
       </section>
 
       <section className="flex flex-col gap-3" aria-label="내 기록">
-        <h2 className="typewriter text-xl font-bold">📋 내 기록</h2>
+        <h2 className="typewriter flex items-center gap-2 text-xl font-bold">
+          <ClipboardList className="h-6 w-6 text-ch-600" aria-hidden="true" />내 기록
+        </h2>
         {chapter.scenes.map((s) => {
           const c = s.choices.find((x) => x.id === student.choices[s.id]);
           const e = EMOTIONS.find((x) => x.id === student.emotions[s.id]);

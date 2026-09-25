@@ -1,4 +1,5 @@
-import { useId } from 'react';
+import { useId, type ReactNode } from 'react';
+import { Lightbulb, PencilLine } from 'lucide-react';
 import { TextArea } from './ui';
 import { countChars } from '../lib/progress';
 
@@ -25,7 +26,7 @@ export function WritingBox({
   onBlur?: () => void;
   minLength?: number;
   maxLength: number;
-  chips?: React.ReactNode;
+  chips?: ReactNode;
 }) {
   const hintId = useId();
   const add = (s: string) => {
@@ -47,19 +48,23 @@ export function WritingBox({
         describedBy={hint ? hintId : undefined}
       />
       {hint && (
-        <p id={hintId} className="-mt-1 text-[15px] text-ink-soft">
-          💡 {hint}
+        <p id={hintId} className="-mt-1 flex items-start gap-1.5 text-[15px] text-ink-soft">
+          <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-[#b7791f]" aria-hidden="true" />
+          {hint}
         </p>
       )}
       <div>
-        <p className="text-[15px] font-bold text-ink-soft">✏️ 막히면 이렇게 시작해 보세요 (누르면 칸에 들어가요)</p>
+        <p className="flex items-center gap-1.5 text-[15px] font-bold text-ink-soft">
+          <PencilLine className="h-4 w-4" aria-hidden="true" />
+          막히면 이렇게 시작해 보세요 (누르면 칸에 들어가요)
+        </p>
         <div className="mt-1 flex flex-wrap gap-2">
           {starters.map((s) => (
             <button
               key={s}
               type="button"
               onClick={() => add(s)}
-              className="min-h-10 rounded-full border border-line bg-white px-3 text-[15px] hover:bg-paper"
+              className="btn btn-sm h-auto min-h-10 rounded-full border-base-300 bg-white px-3 text-[15px] font-medium hover:bg-accent"
             >
               {s} …
             </button>
