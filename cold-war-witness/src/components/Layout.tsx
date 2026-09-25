@@ -11,11 +11,12 @@ export function MotionToggle() {
     <button
       type="button"
       role="switch"
-      aria-checked={off}
+      aria-checked={!off}
+      aria-label="움직임 효과"
       onClick={() => setOff((v) => !v)}
       className="no-print min-h-10 rounded-md border border-line bg-white/70 px-3 text-[15px] hover:bg-white"
     >
-      움직임 끄기 {off ? '켜짐' : '꺼짐'}
+      움직임 효과 {off ? '끔' : '켬'}
     </button>
   );
 }

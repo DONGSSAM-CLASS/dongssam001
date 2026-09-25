@@ -189,6 +189,8 @@ export function Modal({
   children: ReactNode;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
+  const openRef = useRef(open);
+  openRef.current = open;
   const titleId = useId();
   useEffect(() => {
     const d = ref.current;
@@ -200,7 +202,10 @@ export function Modal({
     <dialog
       ref={ref}
       aria-labelledby={titleId}
-      onClose={onClose}
+      // 화면 코드가 닫은 경우(open=false)는 무시하고, 사용자가 Esc 로 닫았을 때만 알린다.
+      onClose={() => {
+        if (openRef.current) onClose();
+      }}
       className="dossier m-auto w-[min(92vw,34rem)] p-0 text-ink"
     >
       <div className="flex flex-col gap-4 p-5">

@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { EMOTIONS, EMOTION_PROMPT } from '../data/emotions';
 import type { EmotionId } from '../types/content';
+import { onRadioKeyDown, radioTabIndex } from './radioKeys';
 
 /** 감정 체크 (K-SEL 자기인식·관리) — 선택 전에 인물의 마음 고르기 */
 export function EmotionPicker({
@@ -20,8 +21,13 @@ export function EmotionPicker({
       <legend id={id} className="mb-2 text-[18px] font-bold">
         ① {EMOTION_PROMPT} <span className="font-normal text-ink-soft">({characterName}의 마음을 골라 보세요)</span>
       </legend>
-      <div className="grid grid-cols-5 gap-1.5 sm:gap-2" role="radiogroup" aria-labelledby={id}>
-        {EMOTIONS.map((e) => {
+      <div
+        className="grid grid-cols-5 gap-1 sm:gap-2"
+        role="radiogroup"
+        aria-labelledby={id}
+        onKeyDown={(e) => onRadioKeyDown(e, EMOTIONS.map((x) => x.id), value, onChange)}
+      >
+        {EMOTIONS.map((e, i) => {
           const on = value === e.id;
           return (
             <button
@@ -29,15 +35,16 @@ export function EmotionPicker({
               type="button"
               role="radio"
               aria-checked={on}
+              tabIndex={radioTabIndex(value, e.id, i)}
               onClick={() => onChange(e.id)}
-              className={`flex min-h-20 flex-col items-center justify-center rounded-lg border-2 px-1 py-2 transition-colors ${
+              className={`flex min-h-20 flex-col items-center justify-center rounded-lg border-2 px-0.5 py-2 transition-colors ${
                 on ? 'border-ch-900 bg-ch-100 font-bold' : 'border-line bg-white hover:bg-paper'
               }`}
             >
               <span className="text-3xl" aria-hidden="true">
                 {e.emoji}
               </span>
-              <span className="text-[16px]">{e.label}</span>
+              <span className="whitespace-nowrap text-[16px]">{e.label}</span>
             </button>
           );
         })}

@@ -15,6 +15,7 @@ import { PRINCIPLES } from '../../data/principles';
 import { chapterStatus, stepLabel } from '../../lib/progress';
 import { computeChoiceStats } from '../../lib/stats';
 import { buildCsv } from '../../lib/csv';
+import { declarationSentence } from '../../lib/josa';
 import { deleteClassCompletely, resetStudentPin, setHighlights, setShowDistribution, setUnlocked } from '../../lib/db';
 import type { ChapterId } from '../../types/content';
 import type { ClassRecord, StudentRecord } from '../../types/db';
@@ -118,7 +119,19 @@ function Dashboard() {
 
 /* ─────────────── 잠금·공개 스위치 ─────────────── */
 
-function Toggle({ label, on, onChange, sub }: { label: string; on: boolean; onChange: (v: boolean) => Promise<void>; sub?: string }) {
+function Toggle({
+  label,
+  on,
+  onChange,
+  sub,
+  icons = ['🔓', '🔒'],
+}: {
+  label: string;
+  on: boolean;
+  onChange: (v: boolean) => Promise<void>;
+  sub?: string;
+  icons?: [string, string];
+}) {
   const [busy, setBusy] = useState(false);
   return (
     <button
@@ -139,7 +152,7 @@ function Toggle({ label, on, onChange, sub }: { label: string; on: boolean; onCh
       }`}
     >
       <span className="font-bold">
-        {on ? '🔓' : '🔒'} {label}
+        {on ? icons[0] : icons[1]} {label}
       </span>
       <span className="text-[14px] text-ink-soft">{sub ?? (on ? '열림 — 누르면 잠가요' : '잠김 — 누르면 열어요')}</span>
     </button>
@@ -171,6 +184,7 @@ function Controls({ cls }: { cls: ClassRecord }) {
         <Toggle label="선언문 (3차시 후반)" on={cls.unlocked.finale} onChange={(v) => run(() => setUnlocked(cls.id, 'finale', v))} />
         <Toggle
           label="선택 분포 학생 공개"
+          icons={['👀', '🙈']}
           on={cls.showDistribution}
           sub={cls.showDistribution ? '학생 마무리 화면에 보여요' : '선생님만 봐요'}
           onChange={(v) => run(() => setShowDistribution(cls.id, v))}
@@ -319,7 +333,7 @@ export function answerOf(s: StudentRecord, id: string): string {
   if (id === 'declaration') {
     const d = s.declaration;
     if (!d) return '';
-    return `나는 AI를 사용할 때 ${d.keep}을(를) 지키겠습니다. 왜냐하면 냉전 시대의 ${d.era}에서 ${d.lesson}을(를) 배웠기 때문입니다.${d.free ? `\n${d.free}` : ''}`;
+    return `${declarationSentence(d)}${d.free ? `\n${d.free}` : ''}`;
   }
   return s.answers[id] ?? '';
 }
@@ -417,8 +431,10 @@ function ManageTab({ cls, students }: { cls: ClassRecord; students: StudentRecor
     a.href = url;
     const d = new Date();
     a.download = `${cls.name}_냉전의목격자_${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}.csv`;
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(url);
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
   };
 
   const doReset = async () => {

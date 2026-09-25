@@ -6,6 +6,7 @@ import { useReadyStudent } from '../../app/StudentContext';
 import { PRINCIPLES } from '../../data/principles';
 import { APP_TITLE } from '../../config';
 import { drawCertificate } from '../../lib/certificate';
+import { declarationSentence } from '../../lib/josa';
 
 export default function CertificatePage() {
   const { student, session } = useReadyStudent();
@@ -25,7 +26,7 @@ export default function CertificatePage() {
     );
   }
 
-  const sentence = `나는 AI를 사용할 때 ${d.keep}을(를) 지키겠습니다. 왜냐하면 냉전 시대의 ${d.era}에서 ${d.lesson}을(를) 배웠기 때문입니다.`;
+  const sentence = declarationSentence(d);
   const cards = PRINCIPLES.filter((p) => student.cards.includes(p.id));
   const date = d.submittedAt?.toDate?.() ?? new Date();
   const dateText = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
@@ -46,7 +47,9 @@ export default function CertificatePage() {
       const a = document.createElement('a');
       a.href = url;
       a.download = `AI윤리실천인증서_${student.number}번.png`;
+      document.body.appendChild(a);
       a.click();
+      a.remove();
     } finally {
       setBusy(false);
     }

@@ -152,3 +152,16 @@ describe('보안 규칙과 앱 데이터가 같은 값을 쓰는지', () => {
     expect(CLASS_CODE_ALPHABET).toHaveLength(31);
   });
 });
+
+describe('조사 고르기', async () => {
+  const { eulReul, declarationSentence } = await import('../src/lib/josa');
+  it('받침 있으면 을, 없으면 를, 한글이 아니면 을(를)', () => {
+    expect(eulReul('프라이버시 보호')).toBe('를');
+    expect(eulReul('투명성')).toBe('을');
+    expect(eulReul('것 ')).toBe('을');
+    expect(eulReul('AI')).toBe('을(를)');
+    expect(declarationSentence({ keep: '투명성', era: '쿠바 미사일 위기', lesson: '숨긴 사실이 불안을 키운다는 것' })).toBe(
+      '나는 AI를 사용할 때 투명성을 지키겠습니다. 왜냐하면 냉전 시대의 쿠바 미사일 위기에서 숨긴 사실이 불안을 키운다는 것을 배웠기 때문입니다.',
+    );
+  });
+});

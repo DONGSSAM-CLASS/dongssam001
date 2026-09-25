@@ -40,7 +40,9 @@ cold-war-witness/
 │       └── print/             # 과정안·활동지·가이드 인쇄용 A4 페이지
 └── tests/
     ├── content.test.ts        # 콘텐츠 데이터 점검 (장면 수, 선택지 수, 사실 카드 참조, 출처, 교육과정 원문 일치)
-    └── rules.test.ts          # Phase 5: 보안 규칙 에뮬레이터 테스트
+    ├── unit.test.ts           # 분포·CSV·진행·코드·해시·조사, 규칙과 데이터 id 목록 일치
+    ├── rules.test.ts          # 보안 규칙 에뮬레이터 테스트 (39개)
+    └── e2e/                   # 브라우저 전체 흐름·키보드·접근성 (npm run e2e)
 ```
 
 ## 2. 로그인 방식

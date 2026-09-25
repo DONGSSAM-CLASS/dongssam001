@@ -81,7 +81,7 @@ export async function drawCertificate(d: CertificateData): Promise<string> {
   }
 
   // 모은 원칙 카드
-  y = Math.max(y + 40, 1180);
+  y = Math.max(y + 70, 900);
   ctx.fillStyle = '#564c40';
   ctx.font = `28px ${sans}`;
   ctx.fillText(`모은 원칙 카드 ${d.cards.length}장`, 130, y);

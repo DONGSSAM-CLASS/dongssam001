@@ -125,7 +125,8 @@ body {
   border-radius: 6px;
   padding: 0.1em 0.6em;
   transform: rotate(-8deg);
-  opacity: 0.92;
+  /* 도장 글자가 뒤의 글자와 겹쳐도 읽히도록 옅은 바탕을 깐다 (명도 대비 AA) */
+  background: rgba(255, 255, 255, 0.9);
 }
 
 @keyframes stamp {
@@ -138,7 +139,7 @@ body {
     transform: scale(0.92) rotate(-8deg);
   }
   100% {
-    opacity: 0.92;
+    opacity: 1;
     transform: scale(1) rotate(-8deg);
   }
 }

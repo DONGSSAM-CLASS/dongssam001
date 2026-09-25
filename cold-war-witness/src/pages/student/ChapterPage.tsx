@@ -14,6 +14,7 @@ import { EmotionPicker } from '../../components/EmotionPicker';
 import { DistributionChart } from '../../components/DistributionChart';
 import { WritingBox } from '../../components/WritingBox';
 import { ChapterIllustration } from '../../components/Illustration';
+import { onRadioKeyDown, radioTabIndex } from '../../components/radioKeys';
 import { StudentBadge } from './StudentHome';
 import { useReadyStudent } from '../../app/StudentContext';
 import { CHAPTERS } from '../../data/scenarios';
@@ -280,8 +281,13 @@ function SceneView({ chapter, scene, onNext }: { chapter: Chapter; scene: Scene;
 
           <fieldset className="flex flex-col gap-2">
             <legend className="mb-2 text-[18px] font-bold">② {scene.question}</legend>
-            <div role="radiogroup" className="flex flex-col gap-2">
-              {scene.choices.map((c) => {
+            <div
+              role="radiogroup"
+              aria-label={scene.question}
+              className="flex flex-col gap-2"
+              onKeyDown={(e) => onRadioKeyDown(e, scene.choices.map((c) => c.id), choice, setChoice)}
+            >
+              {scene.choices.map((c, i) => {
                 const on = choice === c.id;
                 return (
                   <button
@@ -289,6 +295,7 @@ function SceneView({ chapter, scene, onNext }: { chapter: Chapter; scene: Scene;
                     type="button"
                     role="radio"
                     aria-checked={on}
+                    tabIndex={radioTabIndex(choice, c.id, i)}
                     onClick={() => setChoice(c.id)}
                     className={`flex min-h-14 items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-[18px] transition-colors ${
                       on ? 'border-ch-900 bg-ch-100 font-bold' : 'border-line bg-white hover:bg-paper'

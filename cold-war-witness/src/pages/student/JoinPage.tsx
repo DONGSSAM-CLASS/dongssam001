@@ -208,7 +208,14 @@ function NewJoin({ initialCode }: { initialCode: string }) {
           <TextInput label="PIN 한 번 더" type="password" value={pin2} onChange={(v) => setPin2(v.replace(/[^0-9]/g, ''))} inputMode="numeric" maxLength={4} autoComplete="new-password" />
           {error && <Notice tone="error">{error}</Notice>}
           <div className="flex gap-2">
-            <Button variant="secondary" onClick={() => setStep(2)} disabled={busy}>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setError(null);
+                setStep(2);
+              }}
+              disabled={busy}
+            >
               이전
             </Button>
             <Button type="submit" className="flex-1" disabled={busy}>

@@ -14,6 +14,7 @@ import { CORE_VALUES, PRINCIPLES } from '../../data/principles';
 import { saveDeclaration } from '../../lib/db';
 import { LIMITS } from '../../config';
 import type { PrincipleId } from '../../types/content';
+import { eulReul } from '../../lib/josa';
 
 /** ‘냉전 시대의 ___에서’ 빈칸 추천 (챕터 이야기에서) */
 const ERA_SUGGESTIONS = ['슈타지의 감시', '매카시의 명단', '쿠바 미사일 위기'];
@@ -165,7 +166,9 @@ export default function FinalePage() {
 
         <div className="rounded-md border-2 border-dashed border-ink bg-white p-4 text-[18px] leading-loose" aria-live="polite">
           <p className="text-[15px] text-ink-soft">미리 보기</p>
-          나는 AI를 사용할 때{blank(keep)}을(를) 지키겠습니다. 왜냐하면 냉전 시대의{blank(era)}에서{blank(lesson)}을(를) 배웠기 때문입니다.
+          나는 AI를 사용할 때{blank(keep)}
+          {keep.trim() ? eulReul(keep) : '을(를)'} 지키겠습니다. 왜냐하면 냉전 시대의{blank(era)}에서{blank(lesson)}
+          {lesson.trim() ? eulReul(lesson) : '을(를)'} 배웠기 때문입니다.
         </div>
 
         <WritingBox
