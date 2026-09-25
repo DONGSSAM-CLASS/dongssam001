@@ -1,7 +1,8 @@
 # Codex 에 넣을 프롬프트
 
 아래 블록을 통째로 복사해서 Codex 첫 메시지로 넣으세요.
-(저장소 `dongssam001` 을 열고, 작업 폴더는 `cold-war-witness/` 입니다.)
+- Codex 가 GitHub 저장소 `DONGSSAM-CLASS/dongssam001` 에 접근할 수 있으면 그것만으로 충분합니다.
+- 접근할 수 없으면(비공개 저장소 등) **`cold-war-witness-source.zip` 을 함께 첨부**하세요. 앱 소스 전체가 들어 있습니다.
 
 ---
 
@@ -15,6 +16,18 @@
 중학교 2학년 역사 6차시 「디지털 인공지능 윤리 콘텐츠 창작 및 발표 수업」의 모든 차시에서 쓰는 웹앱(냉전 의사결정 시뮬레이션 + 모둠 AI 윤리 콘텐츠 기획·창작·발표)이고, 2026 인공지능 윤리교육 콘텐츠 공모전 출품작이다.
 앱 기능(학생 6차시 활동·교사 대시보드·인쇄 자료·보안 규칙)과 디자인(daisyUI cupcake · lucide · Pretendard)은 모두 완성되어
 테스트가 통과하는 상태다. 이전 작업 환경에서 네트워크가 막혀 Firebase 배포만 하지 못했다.
+
+## 소스 코드 위치 (먼저 확인 — 앱을 새로 만들지 마라)
+
+앱 소스 코드는 이미 완성되어 있다. 문서만 보고 새로 만들지 말고, 아래 코드를 받아서 이어서 작업해라.
+- GitHub 저장소: https://github.com/DONGSSAM-CLASS/dongssam001  (브랜치: main)
+- 앱 폴더: 저장소 안의 cold-war-witness/  (다른 폴더는 다른 수업 앱이니 건드리지 마라)
+- 받는 방법:
+    git clone https://github.com/DONGSSAM-CLASS/dongssam001.git
+    cd dongssam001/cold-war-witness
+- 저장소에 접근할 수 없으면(비공개 저장소 등): 사용자가 첨부한 cold-war-witness-source.zip 을 풀어서 쓴다.
+  zip 을 풀면 cold-war-witness/ 폴더가 나온다. (node_modules 는 없으니 npm install 부터)
+- 받은 뒤 cold-war-witness/package.json, src/, firestore.rules, tests/ 가 있는지 확인하고, 없으면 멈추고 사용자에게 물어라.
 
 ## 먼저 할 일 (코드를 고치기 전에)
 

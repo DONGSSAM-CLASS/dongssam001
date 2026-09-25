@@ -8,6 +8,11 @@
 
 **앱 기능은 모두 완성·검증되었고, 남은 핵심 일은 Firebase 새 프로젝트 생성과 배포입니다.** (6장)
 
+> **소스 코드 위치** — 앱을 새로 만들지 말고 이 코드를 이어서 쓰세요.
+> - GitHub: https://github.com/DONGSSAM-CLASS/dongssam001 (브랜치 `main`) 의 `cold-war-witness/` 폴더
+>   `git clone https://github.com/DONGSSAM-CLASS/dongssam001.git && cd dongssam001/cold-war-witness`
+> - 저장소에 접근할 수 없으면 교사가 첨부한 `cold-war-witness-source.zip` 을 풀어서 쓰세요(node_modules 제외, `npm install` 필요).
+
 ---
 
 ## 0. 30초 요약
