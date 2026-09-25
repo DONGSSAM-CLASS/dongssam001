@@ -14,7 +14,9 @@ cold-war-witness/
 ├── firebase.json / .firebaserc / firestore.rules / firestore.indexes.json   # Phase 5
 ├── docs/
 │   ├── data-model.md          # ← 이 문서
-│   └── work-log.md            # 작업 로그, [검증필요] 목록, 결정 사항
+│   ├── work-log.md            # 작업 로그, [검증필요] 목록, 결정 사항
+│   ├── fact-cards.md          # 사실 카드 검토표 (자동 생성)
+│   └── curriculum-map.md      # 교육과정 연계표 (자동 생성)
 ├── public/favicon.svg
 ├── src/
 │   ├── config.ts              # APP_TITLE, 입력 길이 제한 등 앱 설정
@@ -25,7 +27,8 @@ cold-war-witness/
 │   ├── data/                  # ★ 교사가 문장을 고치는 곳 (코드와 분리)
 │   │   ├── scenarios.ts       # 3개 챕터: 인물·인트로·장면 1~5·선택·결과·성찰 질문
 │   │   ├── facts.ts           # 사실 카드 (출처 포함)
-│   │   ├── principles.ts      # 7대 원칙 · 3대 가치 · K-SEL 역량
+│   │   ├── principles.ts      # 7대 원칙 · 3대 가치
+│   │   ├── curriculum.ts      # 교육과정 원문 (역사 성취기준, K-SEL 4대 역량·성취기준·내용 요소)
 │   │   ├── emotions.ts        # 감정 체크 5종
 │   │   ├── lessonMaterials.ts # 교수·학습 과정안 · 활동지 · 교사용 가이드
 │   │   └── appInfo.ts         # 앱 정보 페이지 (개발자·성취기준·생성형 AI 활용 범위)
@@ -36,7 +39,7 @@ cold-war-witness/
 │       ├── teacher/           # 대시보드 → 학급 관리·진행 현황·분포·성찰 열람·CSV
 │       └── print/             # 과정안·활동지·가이드 인쇄용 A4 페이지
 └── tests/
-    ├── content.test.ts        # 콘텐츠 데이터 점검 (장면 수, 선택지 수, 사실 카드 참조, 출처)
+    ├── content.test.ts        # 콘텐츠 데이터 점검 (장면 수, 선택지 수, 사실 카드 참조, 출처, 교육과정 원문 일치)
     └── rules.test.ts          # Phase 5: 보안 규칙 에뮬레이터 테스트
 ```
 

@@ -6,6 +6,15 @@ import { describe, expect, it } from 'vitest';
 import { CHAPTERS, ALL_ANSWER_IDS, ALL_SCENE_IDS } from '../src/data/scenarios';
 import { FACTS } from '../src/data/facts';
 import { CORE_VALUES, PRINCIPLES } from '../src/data/principles';
+import {
+  FINALE_CURRICULUM,
+  HISTORY_CONTENT,
+  HISTORY_STANDARDS,
+  KSEL_COMPETENCIES,
+  KSEL_MIDDLE_CONTENT,
+  KSEL_STANDARDS,
+} from '../src/data/curriculum';
+import type { CurriculumLink } from '../src/types/content';
 import { EMOTIONS } from '../src/data/emotions';
 import { LESSON_PLANS, WORKSHEETS } from '../src/data/lessonMaterials';
 
@@ -111,10 +120,53 @@ describe('원칙·가치·감정', () => {
   });
 });
 
+describe('교육과정 연계 (첨부 문서 원문과 일치하는지)', () => {
+  const links: [string, CurriculumLink][] = [
+    ...CHAPTERS.map((c) => [c.id, c.curriculum] as [string, CurriculumLink]),
+    ['finale', FINALE_CURRICULUM],
+    ...LESSON_PLANS.map((l) => [`${l.session}차시`, l.curriculum] as [string, CurriculumLink]),
+  ];
+
+  it('역사 성취기준 2개, K-SEL 4대 역량, 중학교 성취기준 6개', () => {
+    expect(HISTORY_STANDARDS.map((s) => s.code)).toEqual(['[9역07-01]', '[9역07-02]']);
+    expect(KSEL_COMPETENCIES.map((c) => c.name)).toEqual(['자기인식·관리', '소통·협력', '책임', '마음돌봄']);
+    expect(KSEL_STANDARDS).toHaveLength(6);
+  });
+
+  it('챕터·선언문·과정안이 쓰는 성취기준과 내용 요소는 모두 원문 목록에 있다', () => {
+    const kselCodes = new Set(KSEL_STANDARDS.map((s) => s.code));
+    const historyCodes = new Set(HISTORY_STANDARDS.map((s) => s.code));
+    for (const [where, l] of links) {
+      expect(l.history.standards.length, where).toBeGreaterThan(0);
+      expect(l.ksel.standards.length, where).toBeGreaterThan(0);
+      for (const c of l.history.standards) expect(historyCodes.has(c), `${where} ${c}`).toBe(true);
+      for (const c of l.ksel.standards) expect(kselCodes.has(c), `${where} ${c}`).toBe(true);
+      for (const k of l.history.knowledge) expect(HISTORY_CONTENT.knowledge, where).toContain(k);
+      for (const k of l.history.skills) expect(HISTORY_CONTENT.skills, where).toContain(k);
+      for (const k of l.history.values) expect(HISTORY_CONTENT.values, where).toContain(k);
+      for (const k of l.ksel.knowledge) expect(KSEL_MIDDLE_CONTENT.knowledge, where).toContain(k);
+      for (const k of l.ksel.skills) expect(KSEL_MIDDLE_CONTENT.skills, where).toContain(k);
+      for (const k of l.ksel.values) expect(KSEL_MIDDLE_CONTENT.values, where).toContain(k);
+      // 성취기준의 영역이 domains 에 들어 있어야 한다
+      for (const c of l.ksel.standards) {
+        expect(l.ksel.domains, `${where} ${c}`).toContain(KSEL_STANDARDS.find((s) => s.code === c)!.domain);
+      }
+    }
+  });
+
+  it('K-SEL 4대 역량이 3차시 안에서 모두 한 번 이상 다뤄진다', () => {
+    const used = new Set(LESSON_PLANS.flatMap((l) => l.curriculum.ksel.competencies));
+    expect([...used].sort()).toEqual(KSEL_COMPETENCIES.map((c) => c.id).sort());
+  });
+});
+
 describe('수업 자료', () => {
   it('과정안·활동지 3차시, 과정안은 45분', () => {
     expect(LESSON_PLANS.map((l) => l.session)).toEqual([1, 2, 3]);
     expect(WORKSHEETS.map((w) => w.session)).toEqual([1, 2, 3]);
+    for (const w of WORKSHEETS) {
+      expect(w.sections.some((x) => x.type === 'selfAssessment'), w.title).toBe(true);
+    }
     for (const l of LESSON_PLANS) {
       expect(l.steps.reduce((sum, s) => sum + s.minutes, 0), `${l.session}차시`).toBe(45);
     }

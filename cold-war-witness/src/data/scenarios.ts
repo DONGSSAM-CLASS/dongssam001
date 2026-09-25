@@ -210,8 +210,23 @@ export const CHAPTERS: Chapter[] = [
     ],
     outroFactIds: [],
     principleIds: ['privacy', 'humanCentric'],
+    curriculum: {
+      history: {
+        standards: ['[9역07-01]', '[9역07-02]'],
+        knowledge: ['냉전 체제와 제3 세계의 형성', '민주주의와 인권의 확산'],
+        skills: ['적절하고 타당한 근거를 가지고 역사적 사실에 대해 해석, 판단하기'],
+        values: ['역사에 성찰적으로 접근하는 태도'],
+      },
+      ksel: {
+        competencies: ['selfAwarenessManagement', 'mindCare'],
+        standards: ['[9정서03-01]'],
+        domains: ['마음건강'],
+        knowledge: ['나의 감정 표현으로 인한 영향', '스트레스 관리'],
+        skills: ['나의 감정 표현이나 행동으로 인한 영향 인식하기', '스트레스에 따른 신체적·정서적 반응 인식하기'],
+        values: ['자기 조절 실천 태도'],
+      },
+    },
     kselFocus: {
-      ids: ['selfAwareness'],
       question: '누군가 내 일상을 기록하고 있다면 어떤 감정이 들까요?',
     },
     reflection: {
@@ -432,8 +447,23 @@ export const CHAPTERS: Chapter[] = [
     ],
     outroFactIds: [],
     principleIds: ['fairness', 'accountability'],
+    curriculum: {
+      history: {
+        standards: ['[9역07-01]', '[9역07-02]'],
+        knowledge: ['냉전 체제와 제3 세계의 형성', '민주주의와 인권의 확산'],
+        skills: ['자료의 선택·분석·해석과 논쟁을 통해 역사 지식을 형성하기'],
+        values: ['타인의 역사적 해석을 존중하는 태도'],
+      },
+      ksel: {
+        competencies: ['communicationCooperation', 'responsibility'],
+        standards: ['[9정서02-01]'],
+        domains: ['대인관계·공동체'],
+        knowledge: ['나와 타인의 관점', '편견의 원인과 반편견'],
+        skills: ['나와 타인의 관점 비교하기', '내가 가진 고정관념과 편견 의식하기', '공동체에서 나의 역할 인식하기'],
+        values: ['타인 존중', '다양성 존중'],
+      },
+    },
     kselFocus: {
-      ids: ['socialAwareness', 'relationshipSkills'],
       question: '근거 없는 낙인이 공동체에 어떤 상처를 남길까요?',
     },
     reflection: {
@@ -659,8 +689,23 @@ export const CHAPTERS: Chapter[] = [
     ],
     outroFactIds: ['c3-hotline', 'c3-arms'],
     principleIds: ['reliability', 'safety', 'transparency'],
+    curriculum: {
+      history: {
+        standards: ['[9역07-01]'],
+        knowledge: ['냉전 체제와 제3 세계의 형성'],
+        skills: ['자료의 선택·분석·해석과 논쟁을 통해 역사 지식을 형성하기', '역사적 개념을 이해하고 활용하기'],
+        values: ['자신을 역사적 존재로 인식하고 실천하는 자세'],
+      },
+      ksel: {
+        competencies: ['mindCare', 'responsibility', 'selfAwarenessManagement'],
+        standards: ['[9정서03-02]', '[9정서02-02]'],
+        domains: ['마음건강', '대인관계·공동체'],
+        knowledge: ['스트레스 관리', '정신건강과 마음 챙김', '의사결정 방법'],
+        skills: ['스트레스에 따른 신체적·정서적 반응 인식하기', '마음 챙김으로 정신건강 관리하기', '협력적으로 의사소통하여 문제 해결하기'],
+        values: ['공동체 가치 인식', '마음건강 문제 해결 의지'],
+      },
+    },
     kselFocus: {
-      ids: ['selfManagement', 'responsibleDecision'],
       question: '불확실하고 불안할 때, 나는 어떻게 판단하나요?',
     },
     reflection: {

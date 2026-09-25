@@ -6,7 +6,7 @@
  * - coldWarLink(냉전 연결 한 줄)는 이 앱의 장면·사실 카드에서만 가져와 썼습니다.
  * - 3대 가치의 설명(description)은 명세서에 없어 새로 쓴 것입니다 → 원문과 대조가 필요합니다. [검증필요]
  */
-import type { CoreValue, KselCompetency, Principle, PrincipleId } from '../types/content';
+import type { CoreValue, Principle, PrincipleId } from '../types/content';
 
 /** 원칙 발표 표기 (명세서 기준) */
 export const PRINCIPLES_TITLE = '대한민국 인공지능 윤리원칙';
@@ -108,12 +108,3 @@ export function getPrinciple(id: PrincipleId): Principle {
   if (!principle) throw new Error(`원칙을 찾을 수 없어요: ${id}`);
   return principle;
 }
-
-/** K-SEL(한국형 사회정서학습) 5개 역량 — 학생용 짧은 풀이 */
-export const KSEL: KselCompetency[] = [
-  { id: 'selfAwareness', name: '자기인식', description: '내 감정과 생각을 알아차리는 힘' },
-  { id: 'selfManagement', name: '자기관리', description: '불안하거나 화가 날 때 마음을 다스리는 힘' },
-  { id: 'socialAwareness', name: '사회적 인식', description: '다른 사람의 처지와 마음을 헤아리는 힘' },
-  { id: 'relationshipSkills', name: '관계 기술', description: '다른 사람과 믿음을 쌓고 함께 지내는 힘' },
-  { id: 'responsibleDecision', name: '책임 있는 의사결정', description: '결과를 생각하며 올바르게 판단하는 힘' },
-];
