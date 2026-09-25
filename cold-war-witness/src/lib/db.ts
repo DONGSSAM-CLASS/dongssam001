@@ -6,6 +6,7 @@ import {
   arrayUnion,
   collection,
   deleteDoc,
+  deleteField,
   doc,
   getDoc,
   getDocs,
@@ -23,7 +24,8 @@ import {
 import { db } from './firebase';
 import { studentDocId, randomPin } from './hash';
 import { generateClassCode } from './code';
-import type { ChapterId, EmotionId, PrincipleId } from '../types/content';
+import type { ChapterId, EmotionId, PrincipleId, RoleId, SessionNo } from '../types/content';
+import { MAX_GROUPS, PLAN_FIELDS } from '../data/project';
 import type {
   ChapterStep,
   ChoiceId,
@@ -31,7 +33,15 @@ import type {
   ClassDoc,
   ClassRecord,
   Declaration,
+  FinalReviewDoc,
+  GroupDoc,
+  GroupPlan,
+  GroupRecord,
   HighlightsDoc,
+  PlanStatus,
+  ReviewDoc,
+  ReviewRecord,
+  RubricScores,
   StatsDoc,
   StudentDoc,
   StudentRecord,
@@ -47,6 +57,8 @@ const seatRef = (classId: string, number: number) => doc(db(), 'classes', classI
 const memberRef = (classId: string, uid: string) => doc(db(), 'classes', classId, 'members', uid);
 const statsRef = (classId: string) => doc(db(), 'classes', classId, 'public', 'stats');
 const highlightsRef = (classId: string) => doc(db(), 'classes', classId, 'teacherOnly', 'highlights');
+const groupRef = (classId: string, no: number) => doc(db(), 'classes', classId, 'groups', `g${no}`);
+const reviewsCol = (classId: string) => collection(db(), 'classes', classId, 'reviews');
 
 /** Firestore 오류 코드 꺼내기 */
 export function errorCode(e: unknown): string {
@@ -87,6 +99,7 @@ export async function joinClass(
     uid,
     number,
     nickname,
+    groupNo: 0,
     progress: {},
     choices: {},
     emotions: {},
@@ -246,7 +259,8 @@ export async function createClass(uid: string, name: string): Promise<{ classId:
           name,
           code,
           teacherUid: uid,
-          unlocked: { ch1: false, ch2: false, ch3: false, finale: false },
+          session: 1,
+          groupCount: 0,
           showDistribution: false,
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp(),
@@ -262,8 +276,20 @@ export async function createClass(uid: string, name: string): Promise<{ classId:
   throw new Error('학급 코드를 만들지 못했어요. 잠시 뒤 다시 시도해 주세요.');
 }
 
-export function setUnlocked(classId: string, key: ChapterId | 'finale', value: boolean) {
-  return updateDoc(classRef(classId), { [`unlocked.${key}`]: value, updatedAt: serverTimestamp() });
+/** 지금 차시 바꾸기 (학생 화면이 그 차시까지의 활동을 연다) */
+export function setSession(classId: string, session: SessionNo) {
+  return updateDoc(classRef(classId), { session, updatedAt: serverTimestamp() });
+}
+
+/** 모둠 수 바꾸기: 아직 없는 모둠 문서는 같은 배치로 빈 문서를 만든다. (줄여도 문서는 남는다) */
+export async function setGroupCount(classId: string, count: number, existing: number[]) {
+  const n = Math.max(0, Math.min(MAX_GROUPS, count));
+  const batch = writeBatch(db());
+  batch.update(classRef(classId), { groupCount: n, updatedAt: serverTimestamp() });
+  for (let no = 1; no <= n; no++) {
+    if (!existing.includes(no)) batch.set(groupRef(classId, no), emptyGroup(no));
+  }
+  await batch.commit();
 }
 
 export function setShowDistribution(classId: string, value: boolean) {
@@ -326,9 +352,9 @@ export async function resetStudentPin(classId: string, student: StudentRecord): 
   return pin;
 }
 
-/** 학급 삭제(데이터 파기): 학생·자리·멤버·통계·하이라이트·코드·학급 문서를 모두 지운다. */
+/** 학급 삭제(데이터 파기): 학생·자리·멤버·모둠·검토·통계·하이라이트·코드·학급 문서를 모두 지운다. */
 export async function deleteClassCompletely(classId: string, code: string): Promise<void> {
-  const subs = ['students', 'seats', 'members', 'public', 'teacherOnly'];
+  const subs = ['students', 'seats', 'members', 'groups', 'reviews', 'public', 'teacherOnly'];
   for (const sub of subs) {
     const snap = await getDocs(collection(db(), 'classes', classId, sub));
     for (let i = 0; i < snap.docs.length; i += 400) {
@@ -340,3 +366,208 @@ export async function deleteClassCompletely(classId: string, code: string): Prom
   await deleteDoc(codeRef(code));
   await deleteDoc(classRef(classId));
 }
+
+/* ═════════════════════ 모둠 프로젝트 ═════════════════════ */
+
+export function emptyPlan(): GroupPlan {
+  const text = Object.fromEntries(PLAN_FIELDS.map((f) => [f.id, ''])) as Record<(typeof PLAN_FIELDS)[number]['id'], string>;
+  return { ...text, format: null, formatOther: '', factIds: [], principleIds: [], aspectTags: [], valueIds: [] };
+}
+
+function emptyGroup(no: number): Record<keyof GroupDoc, unknown> {
+  return {
+    no,
+    name: '',
+    caseId: null,
+    pledge: '',
+    members: {},
+    plan: emptyPlan(),
+    planChecks: {},
+    finalChecks: {},
+    planStatus: 'draft',
+    teacherComment: '',
+    storyboard: {},
+    stage: 'idea',
+    aiLog: { tools: '', where: '', human: '', label: '' },
+    sources: '',
+    submission: null,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  };
+}
+
+export function subscribeGroups(
+  classId: string,
+  onData: (list: GroupRecord[]) => void,
+  onError: (e: unknown) => void,
+): Unsubscribe {
+  return onSnapshot(
+    collection(db(), 'classes', classId, 'groups'),
+    (snap) => {
+      const list = snap.docs.map((d) => ({ id: d.id, ...(d.data() as GroupDoc) }));
+      list.sort((a, b) => a.no - b.no);
+      onData(list);
+    },
+    onError,
+  );
+}
+
+/** 모둠 하나 구독 (학생은 자기 모둠만 늘 구독한다 — 무료 읽기 한도를 아끼기 위해) */
+export function subscribeGroup(
+  classId: string,
+  no: number,
+  onData: (g: GroupRecord | null) => void,
+  onError: (e: unknown) => void,
+): Unsubscribe {
+  return onSnapshot(
+    groupRef(classId, no),
+    (snap) => onData(snap.exists() ? { id: snap.id, ...(snap.data() as GroupDoc) } : null),
+    onError,
+  );
+}
+
+/**
+ * 학생이 모둠 고르기·옮기기: 내 기록의 모둠 번호 + 예전 모둠 명단에서 빠지기 + 새 모둠 명단에 들어가기를 한 번에.
+ * to 가 0 이면 모둠에서 나가기만 한다.
+ */
+export async function joinGroup(
+  classId: string,
+  studentId: string,
+  me: { number: number; nickname: string },
+  from: number,
+  to: number,
+) {
+  const key = `members.${me.number}`;
+  const batch = writeBatch(db());
+  batch.update(studentRef(classId, studentId), { groupNo: to, updatedAt: serverTimestamp() });
+  if (from > 0 && from !== to) batch.update(groupRef(classId, from), { [key]: deleteField(), updatedAt: serverTimestamp() });
+  if (to > 0) batch.update(groupRef(classId, to), { [key]: { nickname: me.nickname, roles: [] }, updatedAt: serverTimestamp() });
+  await batch.commit();
+}
+
+/** 내 역할 고르기 */
+export function setMyRoles(classId: string, groupNo: number, me: { number: number; nickname: string }, roles: RoleId[]) {
+  return updateDoc(groupRef(classId, groupNo), {
+    [`members.${me.number}`]: { nickname: me.nickname, roles },
+    updatedAt: serverTimestamp(),
+  });
+}
+
+/**
+ * 모둠 공동 기록 고치기. 키는 점으로 이은 필드 경로 (예: 'plan.title', 'planChecks.hc1', 'storyboard.c2', 'stage').
+ * 필드 단위로 쓰기 때문에 모둠원이 동시에 다른 칸을 고쳐도 서로 덮어쓰지 않는다.
+ */
+export function updateGroup(classId: string, groupNo: number, fields: Record<string, unknown>) {
+  return updateDoc(groupRef(classId, groupNo), { ...fields, updatedAt: serverTimestamp() });
+}
+
+/** 기획서 제출 / 제출 취소 (학생은 ‘작성 중’과 ‘제출’만 고를 수 있다) */
+export function setPlanSubmitted(classId: string, groupNo: number, submitted: boolean) {
+  return updateGroup(classId, groupNo, { planStatus: submitted ? 'submitted' : 'draft' });
+}
+
+/** 작품 제출 (5차시) */
+export function submitWork(classId: string, groupNo: number, w: { url: string; intro: string; note: string }) {
+  return updateGroup(classId, groupNo, { submission: { ...w, submittedAt: serverTimestamp() }, stage: 'done' });
+}
+
+export function cancelSubmission(classId: string, groupNo: number) {
+  return updateGroup(classId, groupNo, { submission: null });
+}
+
+/* ───── 교사: 모둠 관리 ───── */
+
+/** 기획서 승인 또는 고칠 점 보내기 */
+export function reviewPlanAsTeacher(classId: string, groupNo: number, status: PlanStatus, comment: string) {
+  return updateGroup(classId, groupNo, { planStatus: status, teacherComment: comment });
+}
+
+/** 학생 모둠 옮기기 (교사). 역할은 새 모둠에서 다시 고른다. */
+export async function moveStudentAsTeacher(classId: string, student: StudentRecord, to: number) {
+  const from = student.groupNo ?? 0;
+  if (from === to) return;
+  const key = `members.${student.number}`;
+  const batch = writeBatch(db());
+  batch.update(studentRef(classId, student.id), { groupNo: to, updatedAt: serverTimestamp() });
+  if (from > 0) batch.update(groupRef(classId, from), { [key]: deleteField(), updatedAt: serverTimestamp() });
+  if (to > 0) batch.update(groupRef(classId, to), { [key]: { nickname: student.nickname, roles: [] }, updatedAt: serverTimestamp() });
+  await batch.commit();
+}
+
+/* ───── 검토·평가 ───── */
+
+export const planReviewId = (from: number, to: number) => `plan_g${from}_g${to}`;
+export const finalReviewId = (to: number, number: number) => `final_g${to}_n${number}`;
+
+/**
+ * 기획서 동료 검토 저장 (보낸 모둠이 함께 쓴다).
+ * 이미 있는 문서는 고친 칸만 합쳐 써서, 모둠원이 동시에 다른 칸을 써도 덮어쓰지 않는다.
+ */
+export function savePlanReviewField(
+  classId: string,
+  from: number,
+  to: number,
+  authorNumber: number,
+  key: 'praise' | 'suggest' | 'ethics',
+  text: string,
+  exists: boolean,
+) {
+  const head = { kind: 'plan', fromGroup: from, toGroup: to, authorNumber, updatedAt: serverTimestamp() };
+  const ref = doc(reviewsCol(classId), planReviewId(from, to));
+  if (exists) return setDoc(ref, { ...head, [key]: text }, { merge: true });
+  return setDoc(ref, { ...head, praise: '', suggest: '', ethics: '', [key]: text });
+}
+
+/** 발표 평가 저장 (학생 한 명이 다른 모둠 하나에 하나) */
+export function saveFinalReview(
+  classId: string,
+  to: number,
+  authorNumber: number,
+  r: { scores: RubricScores; praise: string; suggest: string },
+) {
+  return setDoc(doc(reviewsCol(classId), finalReviewId(to, authorNumber)), {
+    kind: 'final',
+    toGroup: to,
+    ...r,
+    authorNumber,
+    updatedAt: serverTimestamp(),
+  });
+}
+
+function subscribeReviewQuery(
+  q: ReturnType<typeof query>,
+  onData: (list: ReviewRecord[]) => void,
+  onError: (e: unknown) => void,
+): Unsubscribe {
+  return onSnapshot(q, (snap) => onData(snap.docs.map((d) => ({ id: d.id, ...(d.data() as ReviewDoc) }))), onError);
+}
+
+/** 우리 모둠이 받은 검토·평가 */
+export function subscribeReviewsTo(classId: string, groupNo: number, onData: (l: ReviewRecord[]) => void, onError: (e: unknown) => void) {
+  return subscribeReviewQuery(query(reviewsCol(classId), where('toGroup', '==', groupNo)), onData, onError);
+}
+
+/** 우리 모둠이 쓴 기획서 검토 */
+export function subscribePlanReviewsFrom(classId: string, groupNo: number, onData: (l: ReviewRecord[]) => void, onError: (e: unknown) => void) {
+  return subscribeReviewQuery(
+    query(reviewsCol(classId), where('kind', '==', 'plan'), where('fromGroup', '==', groupNo)),
+    onData,
+    onError,
+  );
+}
+
+/** 내가 쓴 발표 평가 */
+export function subscribeMyFinalReviews(classId: string, number: number, onData: (l: ReviewRecord[]) => void, onError: (e: unknown) => void) {
+  return subscribeReviewQuery(
+    query(reviewsCol(classId), where('kind', '==', 'final'), where('authorNumber', '==', number)),
+    onData,
+    onError,
+  );
+}
+
+/** 교사: 학급의 모든 검토·평가 */
+export function subscribeAllReviews(classId: string, onData: (l: ReviewRecord[]) => void, onError: (e: unknown) => void) {
+  return subscribeReviewQuery(query(reviewsCol(classId)), onData, onError);
+}
+
+export type { FinalReviewDoc };

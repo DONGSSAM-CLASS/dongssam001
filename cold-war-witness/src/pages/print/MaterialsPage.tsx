@@ -1,6 +1,6 @@
 /**
  * 수업 자료 인쇄 페이지 — 브라우저 인쇄(Ctrl+P)로 A4 인쇄 또는 PDF 저장.
- * 모든 문장은 src/data/lessonMaterials.ts · curriculum.ts · scenarios.ts · facts.ts 에서 가져온다.
+ * 모든 문장은 src/data/lessonMaterials.ts · project.ts · principles.ts · curriculum.ts · facts.ts 에서 가져온다.
  */
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
@@ -8,11 +8,23 @@ import { ArrowLeft, Printer } from 'lucide-react';
 import { Button } from '../../components/ui';
 import { MotionToggle } from '../../components/Layout';
 import { LESSON_PLANS, TEACHER_GUIDE, WORKSHEETS } from '../../data/lessonMaterials';
-import { getChapter } from '../../data/scenarios';
-import { getPrinciple } from '../../data/principles';
+import { CORE_VALUES, PRINCIPLES, PRINCIPLES_NOTE, PRINCIPLES_TITLE, getPrinciple } from '../../data/principles';
+import {
+  ACTIVITY_LABEL,
+  AI_LOG_FIELDS,
+  ETHICS_CHECKS,
+  FORMATS,
+  HISTORY_CHECKS,
+  LESSON_SESSIONS,
+  PLAN_FIELDS,
+  PLAN_LIMITS,
+  PROJECT_TITLE,
+  ROLES,
+  RUBRIC,
+  getSession,
+} from '../../data/project';
 import { FACTS } from '../../data/facts';
 import {
-  FINALE_CURRICULUM,
   HISTORY_DOC,
   HISTORY_QUOTES,
   HISTORY_STANDARDS,
@@ -26,17 +38,14 @@ import {
 import { APP_TITLE } from '../../config';
 import type { CurriculumLink, LessonPlan, Worksheet } from '../../types/content';
 
-type DocKey = `plan${1 | 2 | 3}` | `sheet${1 | 2 | 3}` | 'guide' | 'curriculum' | 'all';
+type SessionKey = 1 | 2 | 3 | 4 | 5 | 6;
+type DocKey = `plan${SessionKey}` | `sheet${SessionKey}` | 'guide' | 'curriculum' | 'all';
 
 const DOCS: [DocKey, string][] = [
-  ['plan1', '1차시 과정안'],
-  ['plan2', '2차시 과정안'],
-  ['plan3', '3차시 과정안'],
-  ['sheet1', '1차시 활동지'],
-  ['sheet2', '2차시 활동지'],
-  ['sheet3', '3차시 활동지'],
+  ...LESSON_SESSIONS.map((s) => [`plan${s.no}`, `${s.no}차시 과정안`] as [DocKey, string]),
+  ...LESSON_SESSIONS.map((s) => [`sheet${s.no}`, `${s.no}차시 활동지`] as [DocKey, string]),
   ['guide', '교사용 가이드'],
-  ['curriculum', '교육과정 연계표'],
+  ['curriculum', '교육과정·AI 윤리원칙 연계표'],
   ['all', '전체'],
 ];
 
@@ -148,15 +157,18 @@ function LinkTable({ link }: { link: CurriculumLink }) {
 }
 
 function PlanPrint({ plan }: { plan: LessonPlan }) {
-  const ch = getChapter(plan.chapter);
+  const ses = getSession(plan.session);
   return (
     <Page>
       <p className="text-[12px] text-ink-soft">
-        {APP_TITLE} · 교수·학습 과정안 · 중학교 역사① {HISTORY_DOC.area}
+        {PROJECT_TITLE} · 교수·학습 과정안 · 중학교 역사① {HISTORY_DOC.area}
       </p>
       <h1 className="typewriter mt-1 text-[20px] font-bold">
         {plan.session}차시 — {plan.title}
       </h1>
+      <p className="text-[13px] text-ink-soft">
+        수업 개요 {ses.block}: {ses.blockTitle} · 45분
+      </p>
       <table className="mt-2 w-full border-collapse">
         <tbody>
           <tr>
@@ -171,13 +183,14 @@ function PlanPrint({ plan }: { plan: LessonPlan }) {
           </tr>
           <tr>
             <th className={th}>AI 윤리원칙</th>
-            <td className={td}>{plan.principleIds.map((id) => `${getPrinciple(id).icon} ${getPrinciple(id).name}`).join(' · ')}</td>
+            <td className={td}>
+              {plan.principleIds.map((id) => getPrinciple(id).name).join(' · ')}
+              <span className="text-ink-soft"> — 「{PRINCIPLES_TITLE}」</span>
+            </td>
           </tr>
           <tr>
-            <th className={th}>앱 챕터</th>
-            <td className={td}>
-              CHAPTER {ch.no} 「{ch.title}」 ({ch.period}, {ch.place}) — 인물: {ch.character.name}({ch.character.role}, 가상 인물)
-            </td>
+            <th className={th}>앱 활동</th>
+            <td className={td}>{ses.activities.map((a) => ACTIVITY_LABEL[a].name).join(' · ')}</td>
           </tr>
           <tr>
             <th className={th}>준비물</th>
@@ -253,19 +266,19 @@ function Lines({ n }: { n: number }) {
 }
 
 function SheetPrint({ sheet }: { sheet: Worksheet }) {
-  const ch = getChapter(sheet.chapter);
   return (
     <Page>
       <div className="flex items-end justify-between gap-4 border-b-2 border-ink pb-2">
         <div>
-          <p className="text-[12px] text-ink-soft">{APP_TITLE}</p>
+          <p className="text-[12px] text-ink-soft">{PROJECT_TITLE}</p>
           <h1 className="typewriter text-[20px] font-bold">{sheet.title}</h1>
         </div>
-        <p className="shrink-0 text-[14px]">2학년 ___반 ___번 이름: ____________</p>
+        <p className="shrink-0 text-right text-[14px]">
+          2학년 ___반 ___번 이름: ____________
+          <br />
+          ___모둠 · 내 역할: ____________
+        </p>
       </div>
-      <p className="mt-1 text-[12px] text-ink-soft">
-        나는 CHAPTER {ch.no}에서 {ch.character.role} ‘{ch.character.name}’(가상 인물)이 됩니다.
-      </p>
       {sheet.sections.map((sec) => (
         <div key={sec.heading} className="avoid-break mt-4">
           <h2 className="font-bold">{sec.heading}</h2>
@@ -283,11 +296,9 @@ function SheetPrint({ sheet }: { sheet: Worksheet }) {
                 </tr>
               </thead>
               <tbody>
-                {ch.scenes.map((s) => (
-                  <tr key={s.id}>
-                    <td className={`${td} h-10`}>
-                      {s.no}. {s.title}
-                    </td>
+                {[1, 2, 3, 4, 5].map((no) => (
+                  <tr key={no}>
+                    <td className={`${td} h-10`}>장면 {no}</td>
                     {(sec.columns ?? ['', '']).map((c) => (
                       <td key={c} className={td} />
                     ))}
@@ -296,15 +307,12 @@ function SheetPrint({ sheet }: { sheet: Worksheet }) {
               </tbody>
             </table>
           )}
-          {sec.type === 'appReflection' &&
-            ch.reflection.questions.map((q, i) => (
-              <div key={q.id} className="mt-2">
-                <p>
-                  질문 {i + 1}. {q.text}
-                </p>
-                <Lines n={sec.lines ?? 3} />
-              </div>
-            ))}
+          {sec.type === 'roleTable' && <RoleTable />}
+          {sec.type === 'planForm' && <PlanForm />}
+          {sec.type === 'ethicsChecklist' && <EthicsChecklist />}
+          {sec.type === 'storyboard' && <Storyboard />}
+          {sec.type === 'aiLog' && <AiLogTable />}
+          {sec.type === 'rubric' && <RubricTable />}
           {sec.type === 'questions' &&
             sec.items?.map((q) => (
               <div key={q} className="mt-2">
@@ -334,15 +342,223 @@ function SheetPrint({ sheet }: { sheet: Worksheet }) {
           )}
         </div>
       ))}
-      <p className="mt-4 text-[11px] text-ink-soft">※ 앱의 인물은 실제 역사적 상황을 바탕으로 만든 가상 인물입니다.</p>
+      <p className="mt-4 text-[11px] text-ink-soft">
+        ※ 앱의 인물은 실제 역사적 상황을 바탕으로 만든 가상 인물입니다. 윤리 점검의 근거는 「{PRINCIPLES_TITLE}」({PRINCIPLES_NOTE})의 ‘이용자’ 역할 문장입니다.
+      </p>
     </Page>
+  );
+}
+
+function RoleTable() {
+  return (
+    <table className="mt-1 w-full border-collapse">
+      <thead>
+        <tr>
+          <th className={`${th} w-40`}>역할</th>
+          <th className={th}>하는 일</th>
+          <th className={`${th} w-28`}>이어지는 원칙</th>
+          <th className={`${th} w-32`}>맡을 사람</th>
+        </tr>
+      </thead>
+      <tbody>
+        {ROLES.map((r) => (
+          <tr key={r.id}>
+            <td className={`${td} font-bold`}>{r.name}</td>
+            <td className={td}>
+              {r.tasks.map((t) => (
+                <div key={t}>• {t}</div>
+              ))}
+            </td>
+            <td className={td}>{r.principleIds.map((id) => getPrinciple(id).name).join(', ')}</td>
+            <td className={td} />
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+function PlanForm() {
+  const box = (rows: number) => ({ height: `${Math.max(1, rows) * 1.9}rem` });
+  return (
+    <table className="mt-1 w-full border-collapse">
+      <tbody>
+        {PLAN_FIELDS.slice(0, 2).map((f) => (
+          <tr key={f.id}>
+            <th className={`${th} w-40`}>{f.label}</th>
+            <td className={td} style={box(f.rows)} />
+          </tr>
+        ))}
+        <tr>
+          <th className={th}>콘텐츠 형식</th>
+          <td className={td}>{FORMATS.map((f) => `☐ ${f.name}`).join('  ')}</td>
+        </tr>
+        <tr>
+          <th className={th}>근거 사실 카드 (최대 {PLAN_LIMITS.facts}장)</th>
+          <td className={td} style={box(2)} />
+        </tr>
+        <tr>
+          <th className={th}>
+            중심 원칙 (최대 {PLAN_LIMITS.principles}개)
+            <br />· 세부 항목 · 가치
+          </th>
+          <td className={td} style={box(2)} />
+        </tr>
+        {PLAN_FIELDS.slice(2).map((f) => (
+          <tr key={f.id}>
+            <th className={th}>{f.label}</th>
+            <td className={`${td} text-[12px] text-ink-soft`} style={box(Math.min(f.rows, 4))}>
+              {f.hint}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+function EthicsChecklist() {
+  return (
+    <>
+      <table className="mt-1 w-full border-collapse text-[13px]">
+        <thead>
+          <tr>
+            <th className={`${th} w-24`}>원칙 · 항목</th>
+            <th className={th}>점검 질문</th>
+            <th className={th}>근거 — 원문의 ‘이용자’ 역할</th>
+            <th className={`${th} w-10 text-center`}>☑</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ETHICS_CHECKS.map((c) => (
+            <tr key={c.id} className="avoid-break">
+              <td className={td}>
+                <strong>{getPrinciple(c.principleId).name}</strong>
+                <br />
+                <span className="text-[12px]">{c.aspectTag}</span>
+              </td>
+              <td className={td}>{c.question}</td>
+              <td className={`${td} text-[12px] text-ink-soft`}>{c.basis}</td>
+              <td className={`${td} text-center`}>☐</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <table className="avoid-break mt-2 w-full border-collapse text-[13px]">
+        <thead>
+          <tr>
+            <th className={th}>역사 정확성 점검</th>
+            <th className={`${th} w-10 text-center`}>☑</th>
+          </tr>
+        </thead>
+        <tbody>
+          {HISTORY_CHECKS.map((c) => (
+            <tr key={c.id}>
+              <td className={td}>{c.question}</td>
+              <td className={`${td} text-center`}>☐</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+}
+
+function Storyboard() {
+  return (
+    <div className="mt-1 grid grid-cols-3 gap-2">
+      {[1, 2, 3, 4, 5, 6].map((no) => (
+        <div key={no} className="avoid-break border border-ink">
+          <p className="border-b border-ink bg-[#efe8d8] px-2 text-[12px] font-bold">{no}</p>
+          <div className="h-28" />
+          <div className="border-t border-dashed border-ink-soft px-2 text-[11px] text-ink-soft">대사·자막</div>
+          <div className="h-10" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function AiLogTable() {
+  return (
+    <table className="mt-1 w-full border-collapse">
+      <tbody>
+        {AI_LOG_FIELDS.map((f) => (
+          <tr key={f.id}>
+            <th className={`${th} w-44`}>{f.label}</th>
+            <td className={`${td} h-14 text-[12px] text-ink-soft`}>{f.hint}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+function RubricTable() {
+  return (
+    <>
+      <table className="mt-1 w-full border-collapse text-[12px]">
+        <thead>
+          <tr>
+            <th className={`${th} w-24`}>기준</th>
+            <th className={th}>☆</th>
+            <th className={th}>☆☆</th>
+            <th className={th}>☆☆☆</th>
+          </tr>
+        </thead>
+        <tbody>
+          {RUBRIC.map((r) => (
+            <tr key={r.id}>
+              <td className={td}>
+                <strong>{r.name}</strong>
+                <br />
+                {r.description}
+              </td>
+              {r.levels.map((l) => (
+                <td key={l} className={td}>
+                  {l}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <table className="mt-2 w-full border-collapse">
+        <thead>
+          <tr>
+            <th className={`${th} w-20`}>모둠</th>
+            {RUBRIC.map((r) => (
+              <th key={r.id} className={`${th} w-24 text-center`}>
+                {r.name}
+              </th>
+            ))}
+            <th className={th}>한 줄 피드백</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[1, 2, 3, 4, 5, 6].map((no) => (
+            <tr key={no}>
+              <td className={`${td} h-10`}>____모둠</td>
+              {RUBRIC.map((r) => (
+                <td key={r.id} className={`${td} text-center tracking-widest`}>
+                  ☆☆☆
+                </td>
+              ))}
+              <td className={td} />
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 }
 
 function GuidePrint() {
   return (
     <Page>
-      <p className="text-[12px] text-ink-soft">{APP_TITLE}</p>
+      <p className="text-[12px] text-ink-soft">
+        {PROJECT_TITLE} · {APP_TITLE}
+      </p>
       <h1 className="typewriter text-[20px] font-bold">{TEACHER_GUIDE.title}</h1>
       {TEACHER_GUIDE.sections.map((sec, idx) => (
         <div key={sec.heading} className="mt-4">
@@ -424,11 +640,62 @@ function GuidePrint() {
 function CurriculumPrint() {
   return (
     <Page>
-      <p className="text-[12px] text-ink-soft">{APP_TITLE}</p>
-      <h1 className="typewriter text-[20px] font-bold">교육과정 연계표</h1>
+      <p className="text-[12px] text-ink-soft">{PROJECT_TITLE}</p>
+      <h1 className="typewriter text-[20px] font-bold">교육과정·AI 윤리원칙 연계표</h1>
       <p className="text-[12px] text-ink-soft">
-        출처: ① {HISTORY_DOC.title} ② 「{KSEL_DOC.title}」({KSEL_DOC.reportNo}, {KSEL_DOC.publisher}, {KSEL_DOC.year})
+        출처: ① {HISTORY_DOC.title} ② 「{KSEL_DOC.title}」({KSEL_DOC.reportNo}, {KSEL_DOC.publisher}, {KSEL_DOC.year}) ③ 「
+        {PRINCIPLES_TITLE}」({PRINCIPLES_NOTE})
       </p>
+      <h2 className="mt-3 font-bold">「{PRINCIPLES_TITLE}」 3대 가치</h2>
+      <table className="mt-1 w-full border-collapse text-[12px]">
+        <tbody>
+          {CORE_VALUES.map((v) => (
+            <tr key={v.id} className="avoid-break">
+              <th className={`${th} w-28`}>{v.name}</th>
+              <td className={td}>
+                {v.official.map((o) => (
+                  <div key={o}>• {o}</div>
+                ))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2 className="mt-3 font-bold">7대 원칙과 이 수업</h2>
+      <table className="mt-1 w-full border-collapse text-[12px]">
+        <thead>
+          <tr>
+            <th className={`${th} w-24`}>원칙</th>
+            <th className={th}>원문</th>
+            <th className={`${th} w-36`}>세부 항목</th>
+            <th className={`${th} w-32`}>중심 차시 · 점검 문항</th>
+          </tr>
+        </thead>
+        <tbody>
+          {PRINCIPLES.map((p) => (
+            <tr key={p.id} className="avoid-break">
+              <td className={td}>
+                <strong>{p.name}</strong>
+              </td>
+              <td className={td}>
+                {p.official.map((o) => (
+                  <div key={o}>{o}</div>
+                ))}
+              </td>
+              <td className={td}>{p.aspects.map((a) => a.tag).join(' · ')}</td>
+              <td className={td}>
+                {LESSON_SESSIONS.filter((s) => s.no !== 2 && s.principleIds.includes(p.id))
+                  .map((s) => `${s.no}차시`)
+                  .join(', ') || '2차시'}
+                <br />
+                {ETHICS_CHECKS.filter((c) => c.principleId === p.id)
+                  .map((c) => c.id)
+                  .join(', ')}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <h2 className="mt-3 font-bold">K-SEL 4대 사회정서역량 (중학교 목표)</h2>
       <table className="mt-1 w-full border-collapse">
         <tbody>
@@ -453,18 +720,17 @@ function CurriculumPrint() {
           ))}
         </tbody>
       </table>
-      {[1, 2, 3].map((no) => (
-        <div key={no} className="mt-3">
+      {LESSON_SESSIONS.map((ses) => (
+        <div key={ses.no} className="mt-3">
           <h2 className="font-bold">
-            {no}차시 · CHAPTER {no} 「{getChapter(`ch${no}` as 'ch1').title}」
+            {ses.no}차시 · {ses.title}
           </h2>
-          <LinkTable link={getChapter(`ch${no}` as 'ch1').curriculum} />
+          <p className="text-[12px] text-ink-soft">
+            AI 윤리원칙: {ses.principleIds.map((id) => getPrinciple(id).name).join(' · ')}
+          </p>
+          <LinkTable link={ses.curriculum} />
         </div>
       ))}
-      <div className="mt-3">
-        <h2 className="font-bold">3차시 후반 · 나의 AI 윤리 실천 선언문</h2>
-        <LinkTable link={FINALE_CURRICULUM} />
-      </div>
       <h2 className="mt-4 font-bold">설계 근거 — 교육과정 원문과 이 앱의 반영</h2>
       <table className="mt-1 w-full border-collapse text-[12px]">
         <thead>

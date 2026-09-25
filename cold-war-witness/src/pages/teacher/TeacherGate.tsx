@@ -27,7 +27,7 @@ export function TeacherGate({ children }: { children: ReactNode }) {
           <GraduationCap className="h-7 w-7 text-declass" aria-hidden="true" />
           선생님 로그인
         </h1>
-        <p>학급을 만들고, 챕터를 열고, 학생들의 진행 상황과 성찰을 볼 수 있어요.</p>
+        <p>학급을 만들고, 차시를 열고, 모둠 기획서·작품과 학생들의 진행 상황을 볼 수 있어요.</p>
         {studentHere && (
           <Notice tone="warn">
             이 기기에서는 지금 <strong>학생</strong>으로 들어와 있어요. 선생님으로 로그인하면 학생 입장이 풀려요. (학생 기록은 지워지지

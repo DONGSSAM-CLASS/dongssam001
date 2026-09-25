@@ -9,6 +9,8 @@ export interface CertificateData {
   sentence: string;
   free: string;
   cards: { icon: string; name: string; color: string }[];
+  /** 모둠 프로젝트 한 줄 (예: ‘3모둠 · 파란눈 「누가 내 하루를 적을까?」 · 역할: 역사 탐구원’) */
+  project?: string;
   dateText: string;
 }
 
@@ -77,6 +79,21 @@ export async function drawCertificate(d: CertificateData): Promise<string> {
     for (const line of wrap(ctx, d.free, W - 260).slice(0, 12)) {
       ctx.fillText(line, 130, y);
       y += 50;
+    }
+  }
+
+  // 모둠 프로젝트
+  if (d.project) {
+    y += 40;
+    ctx.fillStyle = '#564c40';
+    ctx.font = `28px ${sans}`;
+    ctx.fillText('함께 만든 AI 윤리 콘텐츠', 130, y);
+    y += 46;
+    ctx.fillStyle = '#2b2620';
+    ctx.font = `bold 30px ${sans}`;
+    for (const line of wrap(ctx, d.project, W - 260).slice(0, 3)) {
+      ctx.fillText(line, 130, y);
+      y += 46;
     }
   }
 

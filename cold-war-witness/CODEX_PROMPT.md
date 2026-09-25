@@ -12,8 +12,8 @@
 ## 작업 대상
 
 저장소의 cold-war-witness/ 폴더는 「냉전의 목격자 — 감시 속에서 내리는 선택」이다.
-중학교 2학년 역사 3차시 수업용 의사결정 시뮬레이션 웹앱이고, 2026 인공지능 윤리교육 콘텐츠 공모전 출품작이다.
-앱 기능(학생 화면·교사 대시보드·인쇄 자료·보안 규칙)과 디자인(daisyUI cupcake · lucide · Pretendard)은 모두 완성되어
+중학교 2학년 역사 6차시 「디지털 인공지능 윤리 콘텐츠 창작 및 발표 수업」의 모든 차시에서 쓰는 웹앱(냉전 의사결정 시뮬레이션 + 모둠 AI 윤리 콘텐츠 기획·창작·발표)이고, 2026 인공지능 윤리교육 콘텐츠 공모전 출품작이다.
+앱 기능(학생 6차시 활동·교사 대시보드·인쇄 자료·보안 규칙)과 디자인(daisyUI cupcake · lucide · Pretendard)은 모두 완성되어
 테스트가 통과하는 상태다. 이전 작업 환경에서 네트워크가 막혀 Firebase 배포만 하지 못했다.
 
 ## 먼저 할 일 (코드를 고치기 전에)
@@ -28,9 +28,9 @@
 읽은 뒤 아래 검사를 돌려 지금 상태가 초록색인지 확인하고 결과를 보고해라.
     cd cold-war-witness
     npm install
-    npm test            (29개 통과해야 함)
+    npm test            (42개 통과해야 함)
     npm run build
-    npm run test:rules  (Java 가 있으면. 39개 통과해야 함)
+    npm run test:rules  (Java 가 있으면. 60개 통과해야 함)
 
 ## 이번에 할 일: Firebase 새 프로젝트를 만들고 배포 (CODEX_HANDOFF.md 6장 순서대로)
 
@@ -57,7 +57,7 @@
 1. Firebase Spark(무료) 요금제 전용이다. Cloud Functions·유료 기능·외부 AI API·외부 분석 도구(GA 등)를 추가하지 마라.
    권한 통제는 firestore.rules 로만 한다.
 2. 역사적 사실(사건·날짜·수치·실존 인물의 행동·인용문)을 새로 만들어 넣지 마라.
-   사실은 src/data/facts.ts 의 사실 카드에만 있다. 꼭 필요하면 needsCheck 표시 + work-log 의 [검증필요] 목록에 적어라.
+   사실은 src/data/facts.ts 의 사실 카드에만 있다. src/data/principles.ts 의 official·aspects 는 「대한민국 인공지능 윤리원칙」 원문이니 고치지 마라. 꼭 필요하면 needsCheck 표시 + work-log 의 [검증필요] 목록에 적어라.
    실존 인물의 말을 따옴표로 직접 인용하지 마라. 동독·미국 어느 한 진영을 선·악으로 그리지 마라.
 3. 장면·질문·감정·원칙 id 는 src/data/* 와 firestore.rules 가 함께 쓴다. 하나를 바꾸면 다른 쪽도 바꾸고 npm test 로 확인해라.
 4. PIN 설계(학생 문서 id = PIN 해시, seats 로 번호 중복 방지)를 되돌리지 마라. PIN 원문을 저장하지 마라.

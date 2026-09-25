@@ -9,15 +9,30 @@ import { answeredCount, chapterStatus, countChars, nextStep, reflectionReady, sc
 import { generateClassCode, isValidClassCode, normalizeClassCode } from '../src/lib/code';
 import { isValidPin, randomPin, sha256Hex, studentDocId } from '../src/lib/hash';
 import { ALL_ANSWER_IDS, ALL_SCENE_IDS, CHAPTERS } from '../src/data/scenarios';
-import { PRINCIPLES } from '../src/data/principles';
+import { CORE_VALUES, PRINCIPLES } from '../src/data/principles';
+import { FACTS } from '../src/data/facts';
+import {
+  AI_LOG_FIELDS,
+  ALL_CHECK_IDS,
+  ALL_FORMAT_IDS,
+  ALL_ROLE_IDS,
+  ALL_STAGE_IDS,
+  MAX_CUTS,
+  MAX_GROUP_MEMBERS,
+  MAX_GROUPS,
+  PLAN_FIELDS,
+  PLAN_LIMITS,
+  RUBRIC,
+} from '../src/data/project';
 import { EMOTIONS } from '../src/data/emotions';
 import { STEPS } from '../src/lib/progress';
 import { CLASS_CODE_ALPHABET, LIMITS } from '../src/config';
 import type { StudentDoc } from '../src/types/db';
 
-const base: Pick<StudentDoc, 'number' | 'nickname' | 'progress' | 'choices' | 'emotions' | 'answers' | 'cards' | 'declaration'> = {
+const base: Pick<StudentDoc, 'number' | 'nickname' | 'groupNo' | 'progress' | 'choices' | 'emotions' | 'answers' | 'cards' | 'declaration'> = {
   number: 1,
   nickname: '파란연필',
+  groupNo: 0,
   progress: {},
   choices: {},
   emotions: {},
@@ -136,6 +151,30 @@ describe('보안 규칙과 앱 데이터가 같은 값을 쓰는지', () => {
     expect(listIn('emotionIds')).toEqual(EMOTIONS.map((e) => e.id));
     expect(listIn('principleIds')).toEqual(PRINCIPLES.map((p) => p.id));
   });
+  it('모둠 프로젝트 id (사실 카드·세부 항목·가치·역할·형식·단계·점검 문항·칸)', () => {
+    expect(listIn('factIds')).toEqual(FACTS.map((f) => f.id));
+    expect(listIn('aspectTags')).toEqual(PRINCIPLES.flatMap((p) => p.aspects.map((a) => a.tag)));
+    expect(listIn('valueIds')).toEqual(CORE_VALUES.map((v) => v.id));
+    expect(listIn('roleIds')).toEqual(ALL_ROLE_IDS);
+    expect(listIn('formatIds')).toEqual(ALL_FORMAT_IDS);
+    expect(listIn('stageIds')).toEqual(ALL_STAGE_IDS);
+    expect(listIn('checkIds')).toEqual(ALL_CHECK_IDS);
+    expect(listIn('cutIds')).toEqual(Array.from({ length: MAX_CUTS }, (_, i) => `c${i + 1}`));
+    expect(listIn('planKeys').slice(0, PLAN_FIELDS.length)).toEqual(PLAN_FIELDS.map((f) => f.id));
+    expect(listIn('groupKeys')).toContain('submission');
+  });
+  it('모둠 프로젝트 길이·개수 제한', () => {
+    for (const f of PLAN_FIELDS) expect(rules).toContain(`strLen(a.${f.id}, 0, ${f.max})`);
+    for (const f of AI_LOG_FIELDS) expect(rules).toContain(`strLen(l.${f.id}, 0, ${f.max})`);
+    expect(rules).toContain(`a.factIds.size() <= ${PLAN_LIMITS.facts}`);
+    expect(rules).toContain(`a.principleIds.size() <= ${PLAN_LIMITS.principles}`);
+    expect(rules).toContain(`a.aspectTags.size() <= ${PLAN_LIMITS.aspects}`);
+    expect(rules).toContain(`a.valueIds.size() <= ${PLAN_LIMITS.values}`);
+    expect(rules).toContain(`a.members.size() <= ${MAX_GROUP_MEMBERS}`);
+    expect(rules).toContain(`d.no <= ${MAX_GROUPS}`);
+    expect(rules).toContain(`d.groupCount <= ${MAX_GROUPS}`);
+    expect(rules).toContain(`scores.keys().hasOnly([${RUBRIC.map((r) => `'${r.id}'`).join(', ')}])`);
+  });
   it('길이 제한', () => {
     expect(rules).toContain(`a[k].size() <= ${LIMITS.answer}`);
     expect(rules).toContain(`strLen(d.nickname, 1, ${LIMITS.nickname})`);
@@ -163,5 +202,104 @@ describe('조사 고르기', async () => {
     expect(declarationSentence({ keep: '투명성', era: '쿠바 미사일 위기', lesson: '숨긴 사실이 불안을 키운다는 것' })).toBe(
       '나는 AI를 사용할 때 투명성을 지키겠습니다. 왜냐하면 냉전 시대의 쿠바 미사일 위기에서 숨긴 사실이 불안을 키운다는 것을 배웠기 때문입니다.',
     );
+  });
+});
+
+describe('모둠 프로젝트 계산', async () => {
+  const P = await import('../src/lib/project');
+  const { buildGroupCsv } = await import('../src/lib/csv');
+  const emptyPlan = () => ({
+    ...(Object.fromEntries(PLAN_FIELDS.map((f) => [f.id, ''])) as Record<(typeof PLAN_FIELDS)[number]['id'], string>),
+    format: null,
+    formatOther: '',
+    factIds: [] as string[],
+    principleIds: [] as never[],
+    aspectTags: [] as string[],
+    valueIds: [] as never[],
+  });
+
+  it('활동은 정해진 차시부터 열리고, 지난 차시 활동은 계속 열려 있다', () => {
+    expect(P.isActivityOpen('guide', 1)).toBe(true);
+    expect(P.isActivityOpen('plan', 1)).toBe(false);
+    expect(P.isActivityOpen('plan', 2)).toBe(true);
+    expect(P.isActivityOpen('plan', 6)).toBe(true);
+    expect(P.isActivityOpen('submit', 4)).toBe(false);
+    expect(P.isActivityOpen('declare', 6)).toBe(true);
+  });
+
+  it('동료 검토 상대: 다음 모둠, 마지막 모둠은 1모둠', () => {
+    expect(P.reviewTarget(1, 4)).toBe(2);
+    expect(P.reviewTarget(4, 4)).toBe(1);
+    expect(P.reviewTarget(1, 1)).toBeNull();
+    expect(P.reviewTarget(0, 4)).toBeNull();
+    expect(P.reviewTarget(5, 4)).toBeNull();
+  });
+
+  it('기획서 빠진 곳 찾기', () => {
+    const plan = emptyPlan();
+    expect(P.planMissing(plan).length).toBe(PLAN_FIELDS.length + 3);
+    const full = {
+      ...plan,
+      ...Object.fromEntries(PLAN_FIELDS.map((f) => [f.id, '가'.repeat(f.min)])),
+      format: 'other' as const,
+      formatOther: '',
+      factIds: ['c1-files'],
+      principleIds: ['privacy' as const],
+    };
+    expect(P.planMissing(full)).toEqual(['기타 형식 이름']);
+    expect(P.planMissing({ ...full, formatOther: '보드게임' })).toEqual([]);
+  });
+
+  it('점검표 개수 · AI 표기 문구 추천 · 제출 링크 검사', () => {
+    expect(P.checksDone({ hc1: true, hc2: false }).done).toBe(1);
+    expect(P.checksDone(Object.fromEntries(ALL_CHECK_IDS.map((id) => [id, true]))).all).toBe(true);
+    expect(P.suggestAiLabel({ tools: '없음' })).toContain('사용하지 않고');
+    expect(P.suggestAiLabel({ tools: '이미지 생성 AI' })).toBe('이 작품은 이미지 생성 AI를 활용해 만들었고, 모둠이 직접 검토하고 고쳤습니다.');
+    expect(P.isValidWorkUrl('https://padlet.com/abc')).toBe(true);
+    expect(P.isValidWorkUrl('http://padlet.com/abc')).toBe(false);
+    expect(P.isValidWorkUrl('https://a b.com')).toBe(false);
+    expect(P.isValidWorkUrl('javascript:alert(1)')).toBe(false);
+  });
+
+  it('역할 빈자리 · 평균 별점', () => {
+    expect(P.missingRoles({ '3': { nickname: 'a', roles: ['leader', 'creator'] } })).toEqual(['historian', 'ethicist', 'presenter']);
+    const avg = P.averageScores([
+      { scores: { ethics: 3, history: 2, creative: 1, delivery: 3 } },
+      { scores: { ethics: 2, history: 2, creative: 2, delivery: 2 } },
+    ]);
+    expect(avg).toEqual({ ethics: 2.5, history: 2, creative: 1.5, delivery: 2.5, count: 2 });
+    expect(P.averageScores([]).count).toBe(0);
+  });
+
+  it('모둠별 CSV: 머리글, 한 모둠 한 줄, 수식 막기', () => {
+    const g = {
+      no: 2,
+      name: '=파란',
+      caseId: 'ch1' as const,
+      pledge: '',
+      members: { '7': { nickname: '연필', roles: ['leader' as const] } },
+      plan: { ...emptyPlan(), title: '누가 내 하루를' },
+      planChecks: {},
+      finalChecks: {},
+      planStatus: 'approved' as const,
+      teacherComment: '',
+      storyboard: { c2: '둘', c1: '하나' },
+      stage: 'done' as const,
+      aiLog: { tools: '', where: '', human: '', label: '' },
+      sources: '',
+      submission: null,
+      createdAt: null as never,
+      updatedAt: null as never,
+    };
+    const csv = buildGroupCsv([g], [
+      { kind: 'final', toGroup: 2, scores: { ethics: 3, history: 3, creative: 3, delivery: 3 }, praise: '좋아요', suggest: '', authorNumber: 9, updatedAt: null as never },
+    ]);
+    const lines = csv.replace(/^﻿/, '').split('\r\n');
+    expect(lines).toHaveLength(2);
+    expect(lines[0]).toContain('"모둠 이름"');
+    expect(lines[1]).toContain(`"'=파란"`);
+    expect(lines[1]).toContain('"7 연필: 모둠장"');
+    expect(lines[1]).toContain('"1: 하나\n2: 둘"');
+    expect(lines[1]).toContain('"승인"');
   });
 });

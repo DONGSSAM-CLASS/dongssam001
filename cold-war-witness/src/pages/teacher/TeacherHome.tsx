@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { FolderOpen, LayoutDashboard, Lock, LockOpen, Plus, Printer, School } from 'lucide-react';
+import { FolderOpen, LayoutDashboard, Plus, Printer, School } from 'lucide-react';
 import { Layout } from '../../components/Layout';
 import { Button, LinkButton, Loading, Notice, TextInput, friendlyError } from '../../components/ui';
 import { TeacherGate, TeacherMenu } from './TeacherGate';
@@ -8,6 +8,7 @@ import { useAuth } from '../../app/AuthContext';
 import { createClass, subscribeTeacherClasses } from '../../lib/db';
 import { LIMITS } from '../../config';
 import type { ClassRecord } from '../../types/db';
+import { LESSON_SESSIONS } from '../../data/project';
 
 function Home() {
   const { user } = useAuth();
@@ -92,14 +93,8 @@ function Home() {
                   <span>
                     학급 코드 <strong className="badge badge-lg h-auto border-0 bg-secondary py-1 tracking-widest text-secondary-content">{c.code}</strong>
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[15px] text-ink-soft">
-                    {(['ch1', 'ch2', 'ch3'] as const).some((k) => c.unlocked[k]) ? (
-                      <LockOpen className="h-4 w-4" aria-hidden="true" />
-                    ) : (
-                      <Lock className="h-4 w-4" aria-hidden="true" />
-                    )}
-                    열린 챕터: {(['ch1', 'ch2', 'ch3'] as const).filter((k) => c.unlocked[k]).map((k) => k.toUpperCase()).join(', ') || '없음'}
-                    {c.unlocked.finale ? ' · 선언문' : ''}
+                  <span className="text-[15px] text-ink-soft">
+                    지금 {c.session}차시 · {LESSON_SESSIONS[c.session - 1]?.title} · 모둠 {c.groupCount}개
                   </span>
                 </Link>
               </li>

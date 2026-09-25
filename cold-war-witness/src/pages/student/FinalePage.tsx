@@ -17,13 +17,14 @@ import { saveDeclaration } from '../../lib/db';
 import { LIMITS } from '../../config';
 import type { PrincipleId } from '../../types/content';
 import { eulReul } from '../../lib/josa';
+import { groupLabel, isActivityOpen } from '../../lib/project';
 
 /** ‘냉전 시대의 ___에서’ 빈칸 추천 (챕터 이야기에서) */
 const ERA_SUGGESTIONS = ['슈타지의 감시', '매카시의 명단', '쿠바 미사일 위기'];
 const FREE_STARTERS = ['AI를 쓸 때 나는', '친구들과 함께 지키고 싶은 것은', '냉전 시대를 살았던 사람들에게 하고 싶은 말은'];
 
 export default function FinalePage() {
-  const { student, cls, session } = useReadyStudent();
+  const { student, cls, session, group } = useReadyStudent();
   const nav = useNavigate();
   const d = student.declaration;
   const [keep, setKeep] = useState(d?.keep ?? '');
@@ -34,14 +35,14 @@ export default function FinalePage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  if (!cls.unlocked.finale) {
+  if (!isActivityOpen('declare', cls.session)) {
     return (
       <Layout right={<StudentBadge />}>
         <Notice tone="warn">
-          <Lock className="mr-1 inline h-4 w-4" aria-hidden="true" />선언문은 선생님이 열어 줄 때 쓸 수 있어요.
+          <Lock className="mr-1 inline h-4 w-4" aria-hidden="true" />선언문은 6차시에 열려요. 선생님의 안내를 기다려 주세요.
           <div className="mt-3">
             <LinkButton to="/play" variant="secondary">
-              사건 파일 목록으로
+              6차시 로드맵으로
             </LinkButton>
           </div>
         </Notice>
@@ -85,7 +86,20 @@ export default function FinalePage() {
       <h1 className="typewriter flex items-center gap-2 text-2xl font-bold">
         <ScrollText className="h-7 w-7 text-declass" aria-hidden="true" />나의 AI 윤리 실천 선언문
       </h1>
-      <p className="text-ink-soft">세 챕터에서 모은 원칙 카드를 살펴보고, 나에게 가장 중요한 가치를 골라 선언문을 써요.</p>
+      <p className="text-ink-soft">사건 파일에서 모은 원칙 카드와 우리 모둠이 만든 작품을 돌아보며, 나에게 가장 중요한 가치를 골라 선언문을 써요.</p>
+
+      {group && (
+        <section className="dossier mt-5 p-4" aria-label="우리 모둠 작품">
+          <p className="text-[15px] text-ink-soft">우리 모둠 작품</p>
+          <p className="typewriter text-lg font-bold">
+            {groupLabel(group)} {group.plan.title && `「${group.plan.title}」`}
+          </p>
+          {group.plan.message && <p className="text-[16px]">핵심 메시지: {group.plan.message}</p>}
+          {group.plan.principleIds.length > 0 && (
+            <p className="text-[15px] text-ink-soft">담은 원칙: {group.plan.principleIds.map((id) => PRINCIPLES.find((p) => p.id === id)!.name).join(' · ')}</p>
+          )}
+        </section>
+      )}
 
       {/* 카드 보드: 3대 가치를 위에, 7장의 원칙 카드를 아래에 */}
       <section className="dossier mt-5 p-4 sm:p-5" aria-label="원칙 카드 보드">

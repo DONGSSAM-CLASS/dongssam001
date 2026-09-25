@@ -7,6 +7,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import {
+  ClipboardPen,
   ArrowRight,
   Award,
   Bot,
@@ -42,8 +43,9 @@ import { getPrinciple } from '../../data/principles';
 import { EMOTIONS } from '../../data/emotions';
 import { getKselCompetency } from '../../data/curriculum';
 import { awardCards, saveAnswer, saveSceneChoice, setStep } from '../../lib/db';
-import { answeredCount, countChars, nextStep, reflectionReady, sceneNoOf, stepIndex, WRAPUP_MIN } from '../../lib/progress';
+import { answeredCount, chapterStatus, countChars, nextStep, reflectionReady, sceneNoOf, stepIndex, WRAPUP_MIN } from '../../lib/progress';
 import { useDraftSaver } from '../../lib/useDraftSaver';
+import { isActivityOpen } from '../../lib/project';
 import { LIMITS } from '../../config';
 import type { Chapter, EmotionId, Scene } from '../../types/content';
 import type { ChapterStep, ChoiceId } from '../../types/db';
@@ -61,10 +63,10 @@ export default function ChapterPage() {
 
   // 처음 연 챕터는 ‘인트로’로 기록해 교사 화면에 보이게 한다.
   useEffect(() => {
-    if (chapter && !step && cls.unlocked[chapter.id]) {
+    if (chapter && !step && isActivityOpen('explore', cls.session)) {
       setStep(session.classId, session.studentId, chapter.id, 'intro').catch(() => undefined);
     }
-  }, [chapter, step, cls.unlocked, session]);
+  }, [chapter, step, cls.session, session]);
 
   // 단계가 바뀌면 제목으로 초점을 옮겨, 키보드·화면 읽기 사용자도 새 내용을 바로 알 수 있게 한다.
   useEffect(() => {
@@ -75,7 +77,7 @@ export default function ChapterPage() {
   if (!chapter) return <Navigate to="/play" replace />;
 
   const current: ChapterStep = step ?? 'intro';
-  const locked = !cls.unlocked[chapter.id] && current !== 'done';
+  const locked = !isActivityOpen('explore', cls.session) && current !== 'done';
 
   const go = async (to: ChapterStep) => {
     setError(null);
@@ -96,10 +98,10 @@ export default function ChapterPage() {
       )}
       {locked ? (
         <Notice tone="warn">
-          <Lock className="mr-1 inline h-4 w-4" aria-hidden="true" />선생님이 이 파일을 아직 열지 않았거나 잠시 잠갔어요. 선생님의 안내를 기다려 주세요.
+          <Lock className="mr-1 inline h-4 w-4" aria-hidden="true" />사건 파일은 2차시에 열려요. 선생님의 안내를 기다려 주세요.
           <div className="mt-3">
             <LinkButton to="/play" variant="secondary">
-              사건 파일 목록으로
+              6차시 로드맵으로
             </LinkButton>
           </div>
         </Notice>
@@ -608,10 +610,11 @@ function WrapupView({ chapter, justAwarded, onDone }: { chapter: Chapter; justAw
 /* ─────────────── 완료 · 내 기록 보기 ─────────────── */
 
 function DoneView({ chapter, justDone }: { chapter: Chapter; justDone: boolean }) {
-  const { student, cls } = useReadyStudent();
+  const { student, cls, group } = useReadyStudent();
   const nav = useNavigate();
-  const next = CHAPTERS.find((c) => c.no === chapter.no + 1);
-  const nextOpen = next && cls.unlocked[next.id];
+  // 모둠 사건 파일을 마쳤으면 기획서로, 아니면 아직 안 끝낸 다른 파일로
+  const ours = group?.caseId === chapter.id;
+  const next = ours ? undefined : CHAPTERS.find((c) => c.id !== chapter.id && chapterStatus(student, c.id) !== 'done');
   return (
     <div className="flex flex-col gap-5">
       <section className="dossier relative flex flex-col items-center gap-3 p-6 text-center">
@@ -622,16 +625,22 @@ function DoneView({ chapter, justDone }: { chapter: Chapter; justDone: boolean }
         <h2 className="typewriter mt-2 text-2xl font-bold">CHAPTER {chapter.no} 완료!</h2>
         <p>「{chapter.title}」 파일을 모두 읽었어요. 수고했어요.</p>
         <div className="mt-2 flex flex-wrap justify-center gap-2">
-          <LinkButton to="/play" variant="secondary">
+          <LinkButton to="/play/explore" variant="secondary">
             사건 파일 목록
           </LinkButton>
-          {nextOpen && (
+          {isActivityOpen('plan', cls.session) && (
+            <LinkButton to="/play/plan" variant={ours ? 'primary' : 'secondary'}>
+              <ClipboardPen className="h-5 w-5" aria-hidden="true" />
+              모둠 기획서 쓰러 가기
+            </LinkButton>
+          )}
+          {next && !ours && (
             <Button variant="primary" onClick={() => nav(`/play/chapter/${next.id}`)}>
               다음 파일: 「{next.title}」
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Button>
           )}
-          {!next && cls.unlocked.finale && (
+          {isActivityOpen('declare', cls.session) && !student.declaration && (
             <LinkButton to="/play/finale" variant="primary">
               <ScrollText className="h-5 w-5" aria-hidden="true" />
               선언문 쓰러 가기

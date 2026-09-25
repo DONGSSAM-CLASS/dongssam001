@@ -5,8 +5,8 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import { useAuth } from './AuthContext';
 import { clearSession, loadSession, saveSession, type StudentSession } from '../lib/session';
-import { subscribeClass, subscribeStats, subscribeStudent } from '../lib/db';
-import type { ClassRecord, StudentRecord } from '../types/db';
+import { subscribeClass, subscribeGroup, subscribeStats, subscribeStudent } from '../lib/db';
+import type { ClassRecord, GroupRecord, StudentRecord } from '../types/db';
 import type { ChoiceStats } from '../lib/stats';
 
 /** none: 입장 전 / lost: 기록을 찾을 수 없음(PIN 초기화·다른 기기로 옮김) */
@@ -18,6 +18,8 @@ interface StudentState {
   student: StudentRecord | null;
   cls: ClassRecord | null;
   stats: ChoiceStats | null;
+  /** 내 모둠 (모둠이 없거나 아직 불러오는 중이면 null) */
+  group: GroupRecord | null;
   start: (s: StudentSession) => void;
   leave: () => Promise<void>;
 }
@@ -30,6 +32,7 @@ export function StudentProvider({ children }: { children: ReactNode }) {
   const [student, setStudent] = useState<StudentRecord | null>(null);
   const [cls, setCls] = useState<ClassRecord | null>(null);
   const [stats, setStats] = useState<ChoiceStats | null>(null);
+  const [group, setGroup] = useState<GroupRecord | null>(null);
   const [status, setStatus] = useState<StudentStatus>('loading');
 
   const uid = user?.isAnonymous ? user.uid : null;
@@ -95,6 +98,14 @@ export function StudentProvider({ children }: { children: ReactNode }) {
     return subscribeStats(session.classId, setStats, () => setStats(null));
   }, [session, showDist, status]);
 
+  // 내 모둠만 실시간으로 받는다.
+  const groupNo = status === 'ready' ? (student?.groupNo ?? 0) : 0;
+  useEffect(() => {
+    setGroup(null);
+    if (!session || groupNo < 1) return;
+    return subscribeGroup(session.classId, groupNo, setGroup, () => setGroup(null));
+  }, [session, groupNo]);
+
   const start = useCallback((s: StudentSession) => {
     saveSession(s);
     setSession(s);
@@ -114,7 +125,7 @@ export function StudentProvider({ children }: { children: ReactNode }) {
   else if (status === 'ready' && (student?.id !== session.studentId || cls?.id !== session.classId)) effective = 'loading';
 
   return (
-    <Ctx.Provider value={{ status: effective, session, student, cls, stats, start, leave }}>{children}</Ctx.Provider>
+    <Ctx.Provider value={{ status: effective, session, student, cls, stats, group: group && group.no === groupNo ? group : null, start, leave }}>{children}</Ctx.Provider>
   );
 }
 

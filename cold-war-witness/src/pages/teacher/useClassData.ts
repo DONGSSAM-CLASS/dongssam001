@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { publishStats, subscribeClass, subscribeHighlights, subscribeStudents } from '../../lib/db';
+import { publishStats, subscribeAllReviews, subscribeClass, subscribeGroups, subscribeHighlights, subscribeStudents } from '../../lib/db';
 import { computeChoiceStats, statsKey } from '../../lib/stats';
-import type { ClassRecord, StudentRecord } from '../../types/db';
+import type { ClassRecord, GroupRecord, ReviewRecord, StudentRecord } from '../../types/db';
 
 export type LoadState = 'loading' | 'ready' | 'missing' | 'error';
 
-/** 교사 화면: 학급 + 학생 전체 + 하이라이트를 실시간으로 받는다. */
+/** 교사 화면: 학급 + 학생 전체 + 모둠 + 검토·평가 + 하이라이트를 실시간으로 받는다. */
 export function useClassData(classId: string | undefined) {
   const [cls, setCls] = useState<ClassRecord | null>(null);
   const [students, setStudents] = useState<StudentRecord[]>([]);
   const [highlights, setHighlights] = useState<Record<string, true>>({});
+  const [groups, setGroups] = useState<GroupRecord[]>([]);
+  const [reviews, setReviews] = useState<ReviewRecord[]>([]);
   const [state, setState] = useState<LoadState>('loading');
 
   useEffect(() => {
@@ -28,14 +30,18 @@ export function useClassData(classId: string | undefined) {
     );
     const u2 = subscribeStudents(classId, setStudents, () => undefined);
     const u3 = subscribeHighlights(classId, setHighlights, () => undefined);
+    const u4 = subscribeGroups(classId, setGroups, () => undefined);
+    const u5 = subscribeAllReviews(classId, setReviews, () => undefined);
     return () => {
       u1();
       u2();
       u3();
+      u4();
+      u5();
     };
   }, [classId]);
 
-  return { cls, students, highlights, state };
+  return { cls, students, highlights, groups, reviews, state };
 }
 
 /**

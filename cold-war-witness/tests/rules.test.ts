@@ -14,6 +14,7 @@ import {
 import {
   collection,
   deleteDoc,
+  deleteField,
   doc,
   getDoc,
   getDocs,
@@ -29,6 +30,7 @@ import {
   type Firestore,
 } from 'firebase/firestore';
 import { studentDocId } from '../src/lib/hash';
+import { PLAN_FIELDS } from '../src/data/project';
 
 let env: RulesTestEnvironment;
 
@@ -37,6 +39,7 @@ const OTHER_TEACHER = 'teacherB';
 const STUDENT = 'anonStudent1';
 const STUDENT2 = 'anonStudent2';
 const NEW_DEVICE = 'anonStudent1-newDevice';
+const STUDENT3 = 'anonStudent3';
 const OUTSIDER = 'anonOutsider';
 
 const CLASS = 'classA';
@@ -60,7 +63,8 @@ async function createClass(db: Firestore, classId = CLASS, code = CODE, uid = TE
     name: '2학년 3반',
     code,
     teacherUid: uid,
-    unlocked: { ch1: false, ch2: false, ch3: false, finale: false },
+    session: 1,
+    groupCount: 0,
     showDistribution: false,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
@@ -74,6 +78,7 @@ function freshStudent(uid: string, number: number, nickname = '파란연필') {
     uid,
     number,
     nickname,
+    groupNo: 0,
     progress: {},
     choices: {},
     emotions: {},
@@ -144,19 +149,23 @@ describe('학급과 학급 코드', () => {
     await assertFails(createClass(teacherDb(), 'classC', 'AB0DEO'));
   });
 
-  it('교사는 챕터 잠금·분포 공개만 바꿀 수 있고, 학급 주인은 바꿀 수 없다', async () => {
+  it('교사는 지금 차시·모둠 수·분포 공개만 바꿀 수 있고, 학급 주인은 바꿀 수 없다', async () => {
     const t = teacherDb();
-    await assertSucceeds(updateDoc(doc(t, 'classes', CLASS), { 'unlocked.ch1': true, updatedAt: serverTimestamp() }));
+    await assertSucceeds(updateDoc(doc(t, 'classes', CLASS), { session: 4, updatedAt: serverTimestamp() }));
+    await assertSucceeds(updateDoc(doc(t, 'classes', CLASS), { groupCount: 6, updatedAt: serverTimestamp() }));
     await assertSucceeds(updateDoc(doc(t, 'classes', CLASS), { showDistribution: true, updatedAt: serverTimestamp() }));
     await assertFails(updateDoc(doc(t, 'classes', CLASS), { teacherUid: OTHER_TEACHER, updatedAt: serverTimestamp() }));
-    await assertFails(updateDoc(doc(t, 'classes', CLASS), { 'unlocked.ch9': true, updatedAt: serverTimestamp() }));
-    await assertFails(updateDoc(doc(teacherDb(OTHER_TEACHER), 'classes', CLASS), { 'unlocked.ch1': true, updatedAt: serverTimestamp() }));
+    await assertFails(updateDoc(doc(t, 'classes', CLASS), { session: 7, updatedAt: serverTimestamp() }));
+    await assertFails(updateDoc(doc(t, 'classes', CLASS), { session: 0, updatedAt: serverTimestamp() }));
+    await assertFails(updateDoc(doc(t, 'classes', CLASS), { groupCount: 9, updatedAt: serverTimestamp() }));
+    await assertFails(updateDoc(doc(t, 'classes', CLASS), { unlocked: {}, updatedAt: serverTimestamp() }));
+    await assertFails(updateDoc(doc(teacherDb(OTHER_TEACHER), 'classes', CLASS), { session: 2, updatedAt: serverTimestamp() }));
   });
 
   it('학생은 학급 설정을 바꿀 수 없다', async () => {
     const s = anonDb(STUDENT);
     await join(s, STUDENT, 7);
-    await assertFails(updateDoc(doc(s, 'classes', CLASS), { 'unlocked.ch1': true, updatedAt: serverTimestamp() }));
+    await assertFails(updateDoc(doc(s, 'classes', CLASS), { session: 6, updatedAt: serverTimestamp() }));
   });
 });
 
@@ -428,6 +437,307 @@ describe('선택 분포 공개 · 하이라이트', () => {
     await assertFails(getDoc(doc(anonDb(STUDENT), 'classes', CLASS, 'teacherOnly', 'highlights')));
     await assertFails(setDoc(doc(anonDb(STUDENT), 'classes', CLASS, 'teacherOnly', 'highlights'), item));
     await assertFails(getDoc(doc(teacherDb(OTHER_TEACHER), 'classes', CLASS, 'teacherOnly', 'highlights')));
+  });
+});
+
+/* ═════════════════════ 6차시 모둠 프로젝트 ═════════════════════ */
+
+function emptyGroup(no: number) {
+  return {
+    no,
+    name: '',
+    caseId: null,
+    pledge: '',
+    members: {},
+    plan: {
+      ...Object.fromEntries(PLAN_FIELDS.map((f) => [f.id, ''])),
+      format: null,
+      formatOther: '',
+      factIds: [],
+      principleIds: [],
+      aspectTags: [],
+      valueIds: [],
+    },
+    planChecks: {},
+    finalChecks: {},
+    planStatus: 'draft',
+    teacherComment: '',
+    storyboard: {},
+    stage: 'idea',
+    aiLog: { tools: '', where: '', human: '', label: '' },
+    sources: '',
+    submission: null,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  };
+}
+
+/** 교사가 모둠 수를 정하고 빈 모둠 문서를 만든다 (앱과 같은 방식) */
+async function makeGroups(n: number) {
+  const t = teacherDb();
+  const b = writeBatch(t);
+  b.update(doc(t, 'classes', CLASS), { groupCount: n, updatedAt: serverTimestamp() });
+  for (let no = 1; no <= n; no++) b.set(doc(t, 'classes', CLASS, 'groups', `g${no}`), emptyGroup(no));
+  await b.commit();
+}
+
+/** 학생이 모둠을 고르거나 옮긴다 (앱과 같은 방식: 내 모둠 번호 + 예전 명단 빠지기 + 새 명단 들어가기) */
+function moveGroup(db: Firestore, sid: string, number: number, from: number, to: number, nickname = '파란연필') {
+  const b = writeBatch(db);
+  b.update(doc(db, 'classes', CLASS, 'students', sid), { groupNo: to, updatedAt: serverTimestamp() });
+  if (from > 0) b.update(doc(db, 'classes', CLASS, 'groups', `g${from}`), { [`members.${number}`]: deleteField(), updatedAt: serverTimestamp() });
+  if (to > 0) b.update(doc(db, 'classes', CLASS, 'groups', `g${to}`), { [`members.${number}`]: { nickname, roles: [] }, updatedAt: serverTimestamp() });
+  return b.commit();
+}
+
+const g = (db: Firestore, no: number) => doc(db, 'classes', CLASS, 'groups', `g${no}`);
+const upd = (db: Firestore, no: number, fields: Record<string, unknown>) =>
+  updateDoc(g(db, no), { ...fields, updatedAt: serverTimestamp() });
+
+describe('모둠 만들기와 모둠 고르기', () => {
+  let sid7: string;
+  beforeEach(async () => {
+    sid7 = await join(anonDb(STUDENT), STUDENT, 7);
+    await makeGroups(3);
+  });
+
+  it('모둠 문서는 학급 교사만 만든다 (빈 문서, g{번호} 주소)', async () => {
+    await assertFails(setDoc(g(teacherDb(OTHER_TEACHER), 4), emptyGroup(4)));
+    await assertFails(setDoc(g(anonDb(STUDENT), 4), emptyGroup(4)));
+    await assertFails(setDoc(g(teacherDb(), 4), { ...emptyGroup(4), members: { 7: { nickname: 'x', roles: [] } } }));
+    await assertFails(setDoc(doc(teacherDb(), 'classes', CLASS, 'groups', 'g5'), emptyGroup(4)));
+    await assertFails(setDoc(g(teacherDb(), 9), emptyGroup(9)));
+    await assertSucceeds(setDoc(g(teacherDb(), 4), emptyGroup(4)));
+  });
+
+  it('모둠 8개를 한 번에 만들 수 있다 (규칙 계산 한도 안)', async () => {
+    const t = teacherDb();
+    const b = writeBatch(t);
+    b.update(doc(t, 'classes', CLASS), { groupCount: 8, updatedAt: serverTimestamp() });
+    for (let no = 4; no <= 8; no++) b.set(g(t, no), emptyGroup(no));
+    await assertSucceeds(b.commit());
+  });
+
+  it('학생은 모둠을 고르고, 같은 학급의 모둠을 읽는다. 입장하지 않은 사람은 못 읽는다', async () => {
+    const s = anonDb(STUDENT);
+    await assertSucceeds(moveGroup(s, sid7, 7, 0, 1));
+    await assertSucceeds(getDocs(collection(s, 'classes', CLASS, 'groups')));
+    await assertFails(getDoc(g(anonDb(OUTSIDER), 1)));
+    await assertFails(getDoc(g(teacherDb(OTHER_TEACHER), 1)));
+  });
+
+  it('모둠 수보다 큰 번호는 고를 수 없다', async () => {
+    const s = anonDb(STUDENT);
+    await assertFails(updateDoc(doc(s, 'classes', CLASS, 'students', sid7), { groupNo: 5, updatedAt: serverTimestamp() }));
+  });
+
+  it('모둠 번호를 바꾸지 않고 명단에만 들어갈 수는 없다', async () => {
+    const s = anonDb(STUDENT);
+    await assertFails(upd(s, 1, { 'members.7': { nickname: '파란연필', roles: [] } }));
+  });
+
+  it('명단에서는 내 칸만, 내 닉네임과 정해진 역할로만 쓴다', async () => {
+    const s = anonDb(STUDENT);
+    await moveGroup(s, sid7, 7, 0, 1);
+    await assertSucceeds(upd(s, 1, { 'members.7': { nickname: '파란연필', roles: ['leader', 'historian'] } }));
+    await assertFails(upd(s, 1, { 'members.7': { nickname: '다른이름', roles: [] } }));
+    await assertFails(upd(s, 1, { 'members.7': { nickname: '파란연필', roles: ['king'] } }));
+    await assertFails(upd(s, 1, { 'members.8': { nickname: '파란연필', roles: [] } }));
+  });
+
+  it('모둠 옮기기: 예전 모둠 기록은 더 이상 못 고치고, 새 모둠 기록을 고친다', async () => {
+    const s = anonDb(STUDENT);
+    await moveGroup(s, sid7, 7, 0, 1);
+    await assertSucceeds(moveGroup(s, sid7, 7, 1, 2));
+    const g1 = await getDoc(g(s, 1));
+    if ('7' in (g1.data()?.members ?? {})) throw new Error('예전 명단에 남아 있음');
+    await assertFails(upd(s, 1, { 'plan.title': '감시' }));
+    await assertSucceeds(upd(s, 2, { 'plan.title': '감시' }));
+  });
+
+  it('모둠이 6명으로 차면 더 들어갈 수 없다', async () => {
+    const t = teacherDb();
+    const six = Object.fromEntries([1, 2, 3, 4, 5, 6].map((n) => [String(n), { nickname: `학생${n}`, roles: [] }]));
+    await upd(t, 1, { members: six });
+    await assertFails(moveGroup(anonDb(STUDENT), sid7, 7, 0, 1));
+  });
+});
+
+describe('모둠 공동 기록 (기획서·제작·제출)', () => {
+  let sid7: string;
+  let sid8: string;
+  beforeEach(async () => {
+    sid7 = await join(anonDb(STUDENT), STUDENT, 7);
+    sid8 = await join(anonDb(STUDENT2), STUDENT2, 8);
+    await makeGroups(3);
+    await moveGroup(anonDb(STUDENT), sid7, 7, 0, 1);
+    await moveGroup(anonDb(STUDENT2), sid8, 8, 0, 2);
+  });
+
+  it('같은 모둠만 기획서를 고친다', async () => {
+    await assertSucceeds(upd(anonDb(STUDENT), 1, { 'plan.title': '누가 내 하루를 적을까?', name: '파란모둠', caseId: 'ch1' }));
+    await assertFails(upd(anonDb(STUDENT2), 1, { 'plan.title': '가로채기' }));
+    await assertFails(upd(anonDb(OUTSIDER), 1, { 'plan.title': '가로채기' }));
+  });
+
+  it('기획서 항목의 길이와 고를 수 있는 값을 검사한다', async () => {
+    const s = anonDb(STUDENT);
+    await assertFails(upd(s, 1, { 'plan.title': '가'.repeat(41) }));
+    await assertFails(upd(s, 1, { 'plan.outline': '가'.repeat(501) }));
+    await assertSucceeds(upd(s, 1, { 'plan.factIds': ['c1-files', 'c3-b59'], 'plan.principleIds': ['privacy'] }));
+    await assertFails(upd(s, 1, { 'plan.factIds': ['c9-fake'] }));
+    await assertFails(upd(s, 1, { 'plan.factIds': ['c1-files', 'c1-wall', 'c2-huac', 'c3-b59'] }));
+    await assertFails(upd(s, 1, { 'plan.principleIds': ['privacy', 'safety', 'fairness'] }));
+    await assertSucceeds(upd(s, 1, { 'plan.aspectTags': ['사생활 침해 방지', '과의존'], 'plan.valueIds': ['dignity'] }));
+    await assertFails(upd(s, 1, { 'plan.aspectTags': ['없는 항목'] }));
+    await assertFails(upd(s, 1, { 'plan.format': 'movie' }));
+    await assertFails(upd(s, 1, { 'plan.secret': 'x' }));
+    await assertFails(upd(s, 1, { caseId: 'ch4' }));
+  });
+
+  it('윤리 점검·스토리보드·AI 활용 기록·진행 단계 검사', async () => {
+    const s = anonDb(STUDENT);
+    await assertSucceeds(upd(s, 1, { 'planChecks.hc1': true, 'finalChecks.hs4': true }));
+    await assertFails(upd(s, 1, { 'planChecks.zz1': true }));
+    await assertFails(upd(s, 1, { 'planChecks.hc1': 'yes' }));
+    await assertSucceeds(upd(s, 1, { 'storyboard.c1': '1953년 동베를린의 아침', stage: 'storyboard' }));
+    await assertFails(upd(s, 1, { 'storyboard.c9': '칸 초과' }));
+    await assertFails(upd(s, 1, { 'storyboard.c2': '가'.repeat(301) }));
+    await assertSucceeds(upd(s, 1, { 'aiLog.tools': '이미지 생성 AI' }));
+    await assertFails(upd(s, 1, { 'aiLog.tools': '가'.repeat(101) }));
+    await assertFails(upd(s, 1, { stage: 'launched' }));
+  });
+
+  it('기획서 상태: 학생은 ‘작성 중·제출’만, 승인과 교사 의견은 교사만', async () => {
+    const s = anonDb(STUDENT);
+    await assertSucceeds(upd(s, 1, { planStatus: 'submitted' }));
+    await assertFails(upd(s, 1, { planStatus: 'approved' }));
+    await assertFails(upd(s, 1, { teacherComment: '좋아요' }));
+    const t = teacherDb();
+    await assertSucceeds(upd(t, 1, { planStatus: 'approved', teacherComment: '출처를 꼭 적어요.' }));
+    await assertFails(upd(t, 1, { 'plan.title': '교사가 고침' }));
+    await assertFails(upd(teacherDb(OTHER_TEACHER), 1, { planStatus: 'approved' }));
+    await assertFails(upd(t, 1, { teacherComment: '가'.repeat(301) }));
+  });
+
+  it('작품 제출: https 링크와 서버 시각만', async () => {
+    const s = anonDb(STUDENT);
+    const base = { intro: '냉전의 감시와 오늘날 AI를 잇는 4컷 웹툰', note: '' };
+    await assertFails(upd(s, 1, { submission: { ...base, url: 'http://example.com/a', submittedAt: serverTimestamp() } }));
+    await assertFails(upd(s, 1, { submission: { ...base, url: 'https://example.com/a', submittedAt: Timestamp.fromMillis(0) } }));
+    await assertFails(upd(s, 1, { submission: { ...base, intro: '', url: 'https://example.com/a', submittedAt: serverTimestamp() } }));
+    await assertSucceeds(upd(s, 1, { submission: { ...base, url: 'https://example.com/a', submittedAt: serverTimestamp() }, stage: 'done' }));
+    await assertSucceeds(upd(s, 1, { submission: null }));
+  });
+
+  it('교사는 학생의 모둠을 옮길 수 있다 (학생 기록은 모둠 번호만)', async () => {
+    const t = teacherDb();
+    const b = writeBatch(t);
+    b.update(doc(t, 'classes', CLASS, 'students', sid7), { groupNo: 3, updatedAt: serverTimestamp() });
+    b.update(g(t, 1), { 'members.7': deleteField(), updatedAt: serverTimestamp() });
+    b.update(g(t, 3), { 'members.7': { nickname: '파란연필', roles: [] }, updatedAt: serverTimestamp() });
+    await assertSucceeds(b.commit());
+    await assertFails(updateDoc(doc(t, 'classes', CLASS, 'students', sid7), { groupNo: 2, nickname: '바꿈', updatedAt: serverTimestamp() }));
+    await assertFails(updateDoc(doc(teacherDb(OTHER_TEACHER), 'classes', CLASS, 'students', sid7), { groupNo: 2, updatedAt: serverTimestamp() }));
+  });
+
+  it('모둠 문서는 교사만 지운다', async () => {
+    await assertFails(deleteDoc(g(anonDb(STUDENT), 1)));
+    await assertSucceeds(deleteDoc(g(teacherDb(), 1)));
+  });
+});
+
+describe('기획서 동료 검토 · 발표 평가', () => {
+  let sid7: string;
+  let sid8: string;
+  let sid9: string;
+  const rv = (db: Firestore, id: string) => doc(db, 'classes', CLASS, 'reviews', id);
+  const planReview = (from: number, to: number, author: number) => ({
+    kind: 'plan',
+    fromGroup: from,
+    toGroup: to,
+    praise: '장면 구성이 좋아요',
+    suggest: '출처를 더해요',
+    ethics: '얼굴 사진은 빼요 (프라이버시 보호)',
+    authorNumber: author,
+    updatedAt: serverTimestamp(),
+  });
+  const finalReview = (to: number, author: number, score = 3) => ({
+    kind: 'final',
+    toGroup: to,
+    scores: { ethics: score, history: 2, creative: 3, delivery: 2 },
+    praise: '메시지가 분명해요',
+    suggest: '',
+    authorNumber: author,
+    updatedAt: serverTimestamp(),
+  });
+  beforeEach(async () => {
+    sid7 = await join(anonDb(STUDENT), STUDENT, 7);
+    sid8 = await join(anonDb(STUDENT2), STUDENT2, 8);
+    sid9 = await join(anonDb(STUDENT3), STUDENT3, 9);
+    await makeGroups(3);
+    await moveGroup(anonDb(STUDENT), sid7, 7, 0, 1);
+    await moveGroup(anonDb(STUDENT2), sid8, 8, 0, 2);
+    await moveGroup(anonDb(STUDENT3), sid9, 9, 0, 3);
+  });
+
+  it('기획서 검토는 우리 모둠 이름으로, 정해진 주소로만 쓴다', async () => {
+    const s = anonDb(STUDENT);
+    await assertSucceeds(setDoc(rv(s, 'plan_g1_g2'), planReview(1, 2, 7)));
+    await assertFails(setDoc(rv(s, 'plan_g1_g3'), planReview(1, 2, 7)));
+    await assertFails(setDoc(rv(s, 'plan_g2_g3'), planReview(2, 3, 7)));
+    await assertFails(setDoc(rv(s, 'plan_g1_g1'), planReview(1, 1, 7)));
+    await assertFails(setDoc(rv(s, 'plan_g1_g2'), planReview(1, 2, 8)));
+    await assertFails(setDoc(rv(s, 'plan_g1_g2'), { ...planReview(1, 2, 7), ethics: '가'.repeat(201) }));
+    await assertFails(setDoc(rv(anonDb(OUTSIDER), 'plan_g1_g2'), planReview(1, 2, 7)));
+  });
+
+  it('같은 모둠 친구는 검토의 한 칸만 합쳐 고칠 수 있다 (앱과 같은 방식)', async () => {
+    const sid10 = await join(anonDb('anonStudent4'), 'anonStudent4', 10);
+    await moveGroup(anonDb('anonStudent4'), sid10, 10, 0, 1);
+    await setDoc(rv(anonDb(STUDENT), 'plan_g1_g2'), planReview(1, 2, 7));
+    const f = anonDb('anonStudent4');
+    const head = { kind: 'plan', fromGroup: 1, toGroup: 2, authorNumber: 10, updatedAt: serverTimestamp() };
+    await assertSucceeds(setDoc(rv(f, 'plan_g1_g2'), { ...head, suggest: '자막을 크게' }, { merge: true }));
+    await assertFails(setDoc(rv(f, 'plan_g1_g2'), { ...head, authorNumber: 7, suggest: '남의 번호' }, { merge: true }));
+    await assertFails(setDoc(rv(anonDb(STUDENT2), 'plan_g1_g2'), { ...head, authorNumber: 8, suggest: '다른 모둠' }, { merge: true }));
+  });
+
+  it('검토는 받은 모둠·보낸 모둠·교사만 읽는다', async () => {
+    await setDoc(rv(anonDb(STUDENT), 'plan_g1_g2'), planReview(1, 2, 7));
+    const reviews = (db: Firestore) => collection(db, 'classes', CLASS, 'reviews');
+    await assertSucceeds(getDocs(query(reviews(anonDb(STUDENT2)), where('toGroup', '==', 2))));
+    await assertSucceeds(getDocs(query(reviews(anonDb(STUDENT)), where('kind', '==', 'plan'), where('fromGroup', '==', 1))));
+    await assertFails(getDocs(query(reviews(anonDb(STUDENT3)), where('toGroup', '==', 2))));
+    await assertFails(getDoc(rv(anonDb(STUDENT3), 'plan_g1_g2')));
+    await assertFails(getDocs(reviews(anonDb(STUDENT2))));
+    await assertSucceeds(getDocs(reviews(teacherDb())));
+    await assertFails(getDocs(reviews(teacherDb(OTHER_TEACHER))));
+  });
+
+  it('발표 평가: 다른 모둠만, 내 번호 주소로, 별 1~3개', async () => {
+    const s = anonDb(STUDENT);
+    await assertSucceeds(setDoc(rv(s, 'final_g2_n7'), finalReview(2, 7)));
+    await assertSucceeds(setDoc(rv(s, 'final_g2_n7'), finalReview(2, 7, 1)));
+    await assertFails(setDoc(rv(s, 'final_g1_n7'), finalReview(1, 7)));
+    await assertFails(setDoc(rv(s, 'final_g2_n8'), finalReview(2, 8)));
+    await assertFails(setDoc(rv(s, 'final_g2_n7'), finalReview(2, 7, 4)));
+    await assertFails(setDoc(rv(s, 'final_g2_n7'), { ...finalReview(2, 7), praise: '가'.repeat(151) }));
+  });
+
+  it('발표 평가는 받은 모둠·쓴 학생·교사만 읽는다', async () => {
+    await setDoc(rv(anonDb(STUDENT), 'final_g2_n7'), finalReview(2, 7));
+    const reviews = (db: Firestore) => collection(db, 'classes', CLASS, 'reviews');
+    await assertSucceeds(getDocs(query(reviews(anonDb(STUDENT2)), where('toGroup', '==', 2))));
+    await assertSucceeds(getDocs(query(reviews(anonDb(STUDENT)), where('kind', '==', 'final'), where('authorNumber', '==', 7))));
+    await assertFails(getDocs(query(reviews(anonDb(STUDENT3)), where('kind', '==', 'final'), where('authorNumber', '==', 7))));
+    await assertFails(getDoc(rv(anonDb(STUDENT3), 'final_g2_n7')));
+  });
+
+  it('검토·평가는 교사만 지운다', async () => {
+    await setDoc(rv(anonDb(STUDENT), 'final_g2_n7'), finalReview(2, 7));
+    await assertFails(deleteDoc(rv(anonDb(STUDENT), 'final_g2_n7')));
+    await assertSucceeds(deleteDoc(rv(teacherDb(), 'final_g2_n7')));
   });
 });
 

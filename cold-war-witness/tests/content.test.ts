@@ -17,6 +17,17 @@ import {
 import type { CurriculumLink } from '../src/types/content';
 import { EMOTIONS } from '../src/data/emotions';
 import { LESSON_PLANS, WORKSHEETS } from '../src/data/lessonMaterials';
+import {
+  ACTIVITY_LABEL,
+  ACTIVITY_OPENS,
+  ETHICS_CHECKS,
+  FORMATS,
+  HISTORY_CHECKS,
+  LESSON_SESSIONS,
+  MAX_CUTS,
+  ROLES,
+  RUBRIC,
+} from '../src/data/project';
 
 const factIds = new Set(FACTS.map((f) => f.id));
 
@@ -154,17 +165,74 @@ describe('교육과정 연계 (첨부 문서 원문과 일치하는지)', () => 
     }
   });
 
-  it('K-SEL 4대 역량이 3차시 안에서 모두 한 번 이상 다뤄진다', () => {
+  it('K-SEL 4대 역량이 6차시 안에서 모두 한 번 이상 다뤄진다', () => {
     const used = new Set(LESSON_PLANS.flatMap((l) => l.curriculum.ksel.competencies));
     expect([...used].sort()).toEqual(KSEL_COMPETENCIES.map((c) => c.id).sort());
   });
 });
 
+describe('6차시 모둠 프로젝트', () => {
+  it('수업 개요의 차시 묶음을 따른다 (1 / 2~3 / 4~5 / 6)', () => {
+    expect(LESSON_SESSIONS.map((s) => s.no)).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(LESSON_SESSIONS.map((s) => s.block)).toEqual(['1차시', '2~3차시', '2~3차시', '4~5차시', '4~5차시', '6차시']);
+    for (const s of LESSON_SESSIONS) {
+      for (const a of s.activities) expect(ACTIVITY_OPENS[a], `${s.no}차시 ${a}`).toBeLessThanOrEqual(s.no);
+    }
+    // 모든 활동이 어느 차시에선가 열린다
+    for (const a of Object.keys(ACTIVITY_LABEL)) {
+      expect(LESSON_SESSIONS.some((s) => s.activities.includes(a as never)), a).toBe(true);
+    }
+  });
+
+  it('6차시 동안 7대 원칙이 모두 다뤄진다', () => {
+    const used = new Set(LESSON_SESSIONS.flatMap((s) => s.principleIds));
+    expect([...used].sort()).toEqual(PRINCIPLES.map((p) => p.id).sort());
+  });
+
+  it('윤리 점검표: 원칙마다 2문항, 근거는 원문 ‘이용자’ 역할 문장 그대로', () => {
+    for (const p of PRINCIPLES) {
+      expect(ETHICS_CHECKS.filter((c) => c.principleId === p.id), p.id).toHaveLength(2);
+    }
+    for (const c of ETHICS_CHECKS) {
+      const p = PRINCIPLES.find((x) => x.id === c.principleId)!;
+      const aspect = p.aspects.find((a) => a.tag === c.aspectTag);
+      expect(aspect, `${c.id} ${c.aspectTag}`).toBeTruthy();
+      expect(aspect!.userRole, c.id).toContain(c.basis);
+    }
+    expect(new Set([...ETHICS_CHECKS, ...HISTORY_CHECKS].map((c) => c.id)).size).toBe(ETHICS_CHECKS.length + HISTORY_CHECKS.length);
+  });
+
+  it('원칙 원문: 7개 원칙 모두 원문 문장·세부 항목·이용자 역할이 있다', () => {
+    for (const p of PRINCIPLES) {
+      expect(p.official.length, p.id).toBeGreaterThan(0);
+      expect(p.aspects.length, p.id).toBeGreaterThanOrEqual(2);
+      for (const a of p.aspects) expect(a.userRole.length, `${p.id} ${a.tag}`).toBeGreaterThan(0);
+    }
+    for (const v of CORE_VALUES) expect(v.official.length, v.id).toBeGreaterThan(0);
+  });
+
+  it('역할 5개, 형식 6개, 루브릭 4항목 × 3단계', () => {
+    expect(ROLES).toHaveLength(5);
+    for (const r of ROLES) expect(r.principleIds.length, r.id).toBeGreaterThan(0);
+    expect(FORMATS).toHaveLength(6);
+    for (const f of FORMATS) expect(f.cuts, f.id).toBeLessThanOrEqual(MAX_CUTS);
+    expect(RUBRIC.map((r) => r.id)).toEqual(['ethics', 'history', 'creative', 'delivery']);
+    for (const r of RUBRIC) expect(r.levels).toHaveLength(3);
+  });
+});
+
 describe('수업 자료', () => {
-  it('과정안·활동지 3차시, 과정안은 45분', () => {
-    expect(LESSON_PLANS.map((l) => l.session)).toEqual([1, 2, 3]);
-    expect(WORKSHEETS.map((w) => w.session)).toEqual([1, 2, 3]);
-    for (const w of WORKSHEETS) {
+  it('과정안·활동지 6차시, 과정안은 45분, 차시 정보와 일치', () => {
+    expect(LESSON_PLANS.map((l) => l.session)).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(WORKSHEETS.map((w) => w.session)).toEqual([1, 2, 3, 4, 5, 6]);
+    for (const l of LESSON_PLANS) {
+      const s = LESSON_SESSIONS[l.session - 1];
+      expect(l.title).toBe(s.title);
+      expect(l.principleIds).toEqual(s.principleIds);
+      expect(l.curriculum).toBe(s.curriculum);
+    }
+    // 2차시 활동지를 뺀 모든 활동지에 자기 평가가 있다 (2차시는 감정 기록표로 성찰)
+    for (const w of WORKSHEETS.filter((x) => x.session !== 2)) {
       expect(w.sections.some((x) => x.type === 'selfAssessment'), w.title).toBe(true);
     }
     for (const l of LESSON_PLANS) {

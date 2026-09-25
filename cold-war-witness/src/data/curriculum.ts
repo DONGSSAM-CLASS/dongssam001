@@ -328,3 +328,114 @@ export const FINALE_CURRICULUM: CurriculumLink = {
     values: ['가치를 추구하는 태도', '자신에 대한 책임감'],
   },
 };
+
+/* ─────────────────────── 6차시 모둠 프로젝트 연계 ─────────────────────── */
+
+/**
+ * 차시별 교육과정 연계 — 「디지털 인공지능 윤리 콘텐츠 창작 및 발표 수업」
+ * 내용 요소는 모두 위 원문 목록(HISTORY_CONTENT, KSEL_MIDDLE_CONTENT)에 있는 표현만 쓴다. (tests 가 확인)
+ */
+export const SESSION_CURRICULUM: Record<1 | 2 | 3 | 4 | 5 | 6, CurriculumLink> = {
+  // 1차시 — 활동 안내, 모둠 편성 및 역할 분담
+  1: {
+    history: {
+      standards: ['[9역07-01]', '[9역07-02]'],
+      knowledge: ['냉전 체제와 제3 세계의 형성', '민주주의와 인권의 확산'],
+      skills: ['역사적 개념을 이해하고 활용하기'],
+      values: ['역사에 성찰적으로 접근하는 태도'],
+    },
+    ksel: {
+      competencies: ['communicationCooperation', 'responsibility', 'selfAwarenessManagement'],
+      standards: ['[9정서02-02]', '[9정서01-01]'],
+      domains: ['대인관계·공동체', '자기'],
+      knowledge: ['협력적 문제 해결', '나의 특성에 맞는 계획'],
+      skills: ['공동체에서 나의 역할 인식하기', '나의 특성을 구체적으로 인식하기'],
+      values: ['공동체 가치 인식', '자기 이해에 대한 관심과 의지'],
+    },
+  },
+  // 2차시 — 사건 파일 탐구(시뮬레이션) · 기획서 쓰기
+  2: {
+    history: {
+      standards: ['[9역07-01]', '[9역07-02]'],
+      knowledge: ['냉전 체제와 제3 세계의 형성', '민주주의와 인권의 확산'],
+      skills: ['자료의 선택·분석·해석과 논쟁을 통해 역사 지식을 형성하기'],
+      values: ['역사에 성찰적으로 접근하는 태도'],
+    },
+    ksel: {
+      competencies: ['selfAwarenessManagement', 'mindCare'],
+      standards: ['[9정서03-01]'],
+      domains: ['마음건강'],
+      knowledge: ['나의 감정 표현으로 인한 영향'],
+      skills: ['나의 감정 표현이나 행동으로 인한 영향 인식하기'],
+      values: ['자기 조절 실천 태도'],
+    },
+  },
+  // 3차시 — 기획서 완성 · 윤리 점검 · 동료 검토
+  3: {
+    history: {
+      standards: ['[9역07-01]', '[9역07-02]'],
+      knowledge: ['냉전 체제와 제3 세계의 형성'],
+      skills: ['적절하고 타당한 근거를 가지고 역사적 사실에 대해 해석, 판단하기'],
+      values: ['타인의 역사적 해석을 존중하는 태도'],
+    },
+    ksel: {
+      competencies: ['communicationCooperation', 'responsibility'],
+      standards: ['[9정서02-01]', '[9정서02-02]'],
+      domains: ['대인관계·공동체'],
+      knowledge: ['편견의 원인과 반편견', '협력적 문제 해결'],
+      skills: ['나와 타인의 관점 비교하기', '내가 가진 고정관념과 편견 의식하기', '협력적으로 의사소통하여 문제 해결하기'],
+      values: ['다양성 존중', '공동체 문제 해결 의지'],
+    },
+  },
+  // 4차시 — 창작 ① 스토리보드·초안·AI 활용 기록
+  4: {
+    history: {
+      standards: ['[9역07-01]', '[9역07-02]'],
+      knowledge: ['민주주의와 인권의 확산'],
+      skills: ['역사적 서사를 구성하여 다양한 방식으로 표현하기'],
+      values: ['역사에 성찰적으로 접근하는 태도'],
+    },
+    ksel: {
+      competencies: ['selfAwarenessManagement', 'communicationCooperation'],
+      standards: ['[9정서01-01]', '[9정서02-02]'],
+      domains: ['자기', '대인관계·공동체'],
+      knowledge: ['전략적 목표 수립과 성찰', '협력적 문제 해결'],
+      skills: ['목표 달성을 위한 단기 목표 설정하기', '협력적으로 의사소통하여 문제 해결하기'],
+      values: ['성공적인 삶을 위한 노력', '공동체 가치 인식'],
+    },
+  },
+  // 5차시 — 창작 ② 완성·최종 윤리 점검·제출
+  5: {
+    history: {
+      standards: ['[9역07-01]', '[9역07-02]'],
+      knowledge: ['민주주의와 인권의 확산'],
+      skills: ['역사적 서사를 구성하여 다양한 방식으로 표현하기', '적절하고 타당한 근거를 가지고 역사적 사실에 대해 해석, 판단하기'],
+      values: ['자신을 역사적 존재로 인식하고 실천하는 자세'],
+    },
+    ksel: {
+      competencies: ['responsibility', 'mindCare', 'selfAwarenessManagement'],
+      standards: ['[9정서01-01]', '[9정서03-02]'],
+      domains: ['자기', '마음건강'],
+      knowledge: ['전략적 목표 수립과 성찰', '스트레스 관리'],
+      skills: ['목표 달성을 위한 과정 분석하기', '스트레스에 따른 신체적·정서적 반응 인식하기'],
+      values: ['자신에 대한 책임감', '자기 조절 실천 태도'],
+    },
+  },
+  // 6차시 — 발표 및 피드백 · 나의 AI 윤리 실천 선언
+  6: {
+    history: {
+      standards: ['[9역07-02]'],
+      knowledge: ['민주주의와 인권의 확산'],
+      skills: ['역사적 서사를 구성하여 다양한 방식으로 표현하기'],
+      values: ['타인의 역사적 해석을 존중하는 태도', '자신을 역사적 존재로 인식하고 실천하는 자세'],
+    },
+    ksel: {
+      competencies: ['communicationCooperation', 'selfAwarenessManagement', 'responsibility'],
+      standards: ['[9정서03-01]', '[9정서01-02]'],
+      domains: ['마음건강', '자기', '대인관계·공동체'],
+      knowledge: ['나의 감정 표현으로 인한 영향', '나에게 중요한 가치'],
+      skills: ['나의 감정 표현이나 행동으로 인한 영향 인식하기', '자아상과 관련된 중요한 가치 인식하기'],
+      values: ['타인 존중', '공감적 소통의 실천의지', '가치를 추구하는 태도'],
+    },
+  },
+};

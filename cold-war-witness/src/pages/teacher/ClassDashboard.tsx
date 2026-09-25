@@ -1,13 +1,17 @@
 /**
- * 학급 대시보드
- *  - 챕터 잠금/해제, 선택 분포 학생 공개
- *  - 탭: 진행 현황 · 선택 분포 · 성찰·선언문 · 학급 관리(PIN 초기화·CSV·학급 삭제)
+ * 학급 대시보드 — 「디지털 인공지능 윤리 콘텐츠 창작 및 발표 수업」 6차시
+ *  - 수업 진행: 지금 차시(1~6) · 모둠 수 · 선택 분포 학생 공개
+ *  - 탭: 모둠 현황 · 기획서 검토 · 발표·평가 · 개인 현황 · 선택 분포 · 성찰·선언문 · 학급 관리
  */
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   Activity,
   ArrowLeft,
+  ClipboardPen,
+  GalleryHorizontalEnd,
+  Printer,
+  UsersRound,
   ChartColumn,
   CircleCheckBig,
   Download,
@@ -15,8 +19,6 @@ import {
   EyeOff,
   FolderOpen,
   KeyRound,
-  Lock,
-  LockOpen,
   Maximize2,
   MessagesSquare,
   Presentation,
@@ -30,19 +32,34 @@ import { Button, LinkButton, Loading, Modal, Notice, TextInput, friendlyError } 
 import { DistributionChart } from '../../components/DistributionChart';
 import { TeacherGate, TeacherMenu } from './TeacherGate';
 import { useClassData, useStatsPublisher } from './useClassData';
+import { GroupsTab, PlansTab, PresentTab } from './GroupTabs';
+import { LESSON_PLANS } from '../../data/lessonMaterials';
+import { LESSON_SESSIONS, MAX_GROUPS } from '../../data/project';
 import { CHAPTERS } from '../../data/scenarios';
 import { PRINCIPLES } from '../../data/principles';
 import { chapterStatus, stepLabel } from '../../lib/progress';
 import { computeChoiceStats } from '../../lib/stats';
-import { buildCsv } from '../../lib/csv';
+import { buildCsv, buildGroupCsv } from '../../lib/csv';
 import { declarationSentence } from '../../lib/josa';
-import { deleteClassCompletely, resetStudentPin, setHighlights, setShowDistribution, setUnlocked } from '../../lib/db';
-import type { ChapterId } from '../../types/content';
-import type { ClassRecord, StudentRecord } from '../../types/db';
+import {
+  deleteClassCompletely,
+  moveStudentAsTeacher,
+  resetStudentPin,
+  setGroupCount,
+  setHighlights,
+  setSession,
+  setShowDistribution,
+} from '../../lib/db';
+import { onRadioKeyDown, radioTabIndex } from '../../components/radioKeys';
+import type { ChapterId, SessionNo } from '../../types/content';
+import type { ClassRecord, GroupRecord, ReviewRecord, StudentRecord } from '../../types/db';
 
-type Tab = 'progress' | 'dist' | 'writing' | 'manage';
+type Tab = 'groups' | 'plans' | 'present' | 'progress' | 'dist' | 'writing' | 'manage';
 const TABS: [Tab, string, LucideIcon][] = [
-  ['progress', '진행 현황', Activity],
+  ['groups', '모둠 현황', UsersRound],
+  ['plans', '기획서 검토', ClipboardPen],
+  ['present', '발표·평가', GalleryHorizontalEnd],
+  ['progress', '개인 현황', Activity],
   ['dist', '선택 분포', ChartColumn],
   ['writing', '성찰·선언문', MessagesSquare],
   ['manage', '학급 관리', Settings],
@@ -58,9 +75,9 @@ export default function ClassDashboard() {
 
 function Dashboard() {
   const { classId } = useParams();
-  const { cls, students, highlights, state } = useClassData(classId);
+  const { cls, students, highlights, groups, reviews, state } = useClassData(classId);
   useStatsPublisher(cls, students);
-  const [tab, setTab] = useState<Tab>('progress');
+  const [tab, setTab] = useState<Tab>('groups');
   const [bigCode, setBigCode] = useState(false);
 
   if (state === 'loading')
@@ -109,7 +126,7 @@ function Dashboard() {
         </button>
       </div>
 
-      <Controls cls={cls} />
+      <Controls cls={cls} groups={groups} students={students} />
 
       <div className="mt-6 flex flex-wrap gap-1 rounded-box bg-base-200 p-1" role="tablist">
         {TABS.map(([t, label, Icon]) => (
@@ -129,10 +146,13 @@ function Dashboard() {
         ))}
       </div>
       <div className="mt-4" role="tabpanel">
-        {tab === 'progress' && <ProgressTab students={students} />}
+        {tab === 'groups' && <GroupsTab cls={cls} groups={groups} students={students} />}
+        {tab === 'plans' && <PlansTab cls={cls} groups={groups} reviews={reviews} />}
+        {tab === 'present' && <PresentTab cls={cls} groups={groups} reviews={reviews} />}
+        {tab === 'progress' && <ProgressTab cls={cls} students={students} />}
         {tab === 'dist' && <DistTab students={students} />}
         {tab === 'writing' && <WritingTab cls={cls} students={students} highlights={highlights} />}
-        {tab === 'manage' && <ManageTab cls={cls} students={students} />}
+        {tab === 'manage' && <ManageTab cls={cls} students={students} groups={groups} reviews={reviews} />}
       </div>
 
       <Modal open={bigCode} onClose={() => setBigCode(false)} title="학급 코드">
@@ -153,13 +173,13 @@ function Toggle({
   on,
   onChange,
   sub,
-  icons = [LockOpen, Lock],
+  icons,
 }: {
   label: string;
   on: boolean;
   onChange: (v: boolean) => Promise<void>;
   sub?: string;
-  icons?: [LucideIcon, LucideIcon];
+  icons: [LucideIcon, LucideIcon];
 }) {
   const [OnIcon, OffIcon] = icons;
   const [busy, setBusy] = useState(false);
@@ -192,42 +212,119 @@ function Toggle({
   );
 }
 
-function Controls({ cls }: { cls: ClassRecord }) {
+function Controls({ cls, groups, students }: { cls: ClassRecord; groups: GroupRecord[]; students: StudentRecord[] }) {
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
   const run = async (fn: () => Promise<void>) => {
     setError(null);
+    setBusy(true);
     try {
       await fn();
     } catch (e) {
       setError(friendlyError(e));
+    } finally {
+      setBusy(false);
     }
   };
+  const sessions = LESSON_SESSIONS.map((s) => s.no);
+  const plan = LESSON_PLANS[cls.session - 1];
+  // 모둠원이 있는 모둠보다 적게 줄일 수는 없다
+  const minGroups = Math.max(
+    0,
+    ...groups.filter((g) => Object.keys(g.members).length > 0).map((g) => g.no),
+    ...students.map((s) => s.groupNo),
+  );
   return (
-    <section className="dossier mt-4 p-4" aria-label="챕터 잠금과 공개 설정">
-      <h2 className="font-bold">수업 진행 스위치</h2>
-      <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
-        {CHAPTERS.map((c) => (
-          <Toggle
-            key={c.id}
-            label={`${c.no}차시 「${c.title}」`}
-            on={cls.unlocked[c.id]}
-            onChange={(v) => run(() => setUnlocked(cls.id, c.id, v))}
-          />
-        ))}
-        <Toggle label="선언문 (3차시 후반)" on={cls.unlocked.finale} onChange={(v) => run(() => setUnlocked(cls.id, 'finale', v))} />
+    <section className="dossier mt-4 flex flex-col gap-4 p-4" aria-label="수업 진행">
+      <div>
+        <h2 className="font-bold" id="session-label">
+          지금 차시 — 누르면 학생 화면에 그 차시 활동이 열려요 (지난 차시 활동도 계속 열려 있어요)
+        </h2>
+        <div
+          role="radiogroup"
+          aria-labelledby="session-label"
+          className="mt-2 grid gap-2 sm:grid-cols-3 lg:grid-cols-6"
+          onKeyDown={(e) => onRadioKeyDown(e, sessions, cls.session, (v: SessionNo) => void run(() => setSession(cls.id, v)))}
+        >
+          {LESSON_SESSIONS.map((s, i) => {
+            const on = cls.session === s.no;
+            return (
+              <button
+                key={s.no}
+                type="button"
+                role="radio"
+                aria-checked={on}
+                tabIndex={radioTabIndex(cls.session, s.no, i)}
+                disabled={busy}
+                onClick={() => void run(() => setSession(cls.id, s.no))}
+                className={`flex min-h-20 flex-col items-start gap-0.5 rounded-box border-2 px-3 py-2 text-left ${
+                  on ? 'border-primary-content bg-primary/50' : cls.session > s.no ? 'border-base-300 bg-base-200' : 'border-base-300 bg-white'
+                }`}
+              >
+                <span className="text-[14px] text-ink-soft">{s.block.includes('~') ? s.block : '\u00a0'}</span>
+                <span className="font-extrabold">{s.no}차시</span>
+                <span className="text-[14px] leading-snug">{s.title}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <details className="rounded-box bg-base-200 p-3">
+        <summary className="cursor-pointer font-bold">
+          {cls.session}차시 수업 흐름 보기 — {plan.title}
+        </summary>
+        <ol className="mt-2 flex flex-col gap-2 text-[15px]">
+          {plan.steps.map((st) => (
+            <li key={st.stage}>
+              <strong>
+                {st.stage} ({st.minutes}분)
+              </strong>{' '}
+              {st.teacher.join(' ')}
+              {st.app && <span className="block text-ink-soft">[앱] {st.app}</span>}
+            </li>
+          ))}
+        </ol>
+        <LinkButton to="/teacher/materials" variant="secondary" className="mt-2">
+          <Printer className="h-5 w-5" aria-hidden="true" />
+          과정안·활동지 인쇄
+        </LinkButton>
+      </details>
+
+      <div className="grid gap-2 sm:grid-cols-2">
+        <label className="flex min-h-16 items-center gap-3 rounded-box border-2 border-base-300 bg-white px-3 py-2">
+          <UsersRound className="h-6 w-6 shrink-0 text-ink-soft" aria-hidden="true" />
+          <span className="flex-1">
+            <span className="block font-bold">모둠 수</span>
+            <span className="text-[14px] text-ink-soft">
+              {minGroups > 0 ? `학생이 들어간 모둠이 있어 ${minGroups}개보다 줄일 수 없어요` : '1차시에 정해 주세요 (3~5명 모둠 권장)'}
+            </span>
+          </span>
+          <select
+            value={cls.groupCount}
+            disabled={busy}
+            onChange={(e) => void run(() => setGroupCount(cls.id, Number(e.target.value), groups.map((g) => g.no)))}
+            className="select h-12 w-24 border-2 border-base-300 bg-white text-[17px]"
+            aria-label="모둠 수"
+          >
+            {Array.from({ length: MAX_GROUPS + 1 }, (_, n) => n)
+              .filter((n) => n >= minGroups)
+              .map((n) => (
+                <option key={n} value={n}>
+                  {n}개
+                </option>
+              ))}
+          </select>
+        </label>
         <Toggle
-          label="선택 분포 학생 공개"
+          label="사건 파일 선택 분포 학생 공개"
           icons={[Eye, EyeOff]}
           on={cls.showDistribution}
           sub={cls.showDistribution ? '학생 마무리 화면에 보여요' : '선생님만 봐요'}
           onChange={(v) => run(() => setShowDistribution(cls.id, v))}
         />
       </div>
-      {error && (
-        <Notice tone="error" className="mt-2">
-          {error}
-        </Notice>
-      )}
+      {error && <Notice tone="error">{error}</Notice>}
     </section>
   );
 }
@@ -245,7 +342,16 @@ function ago(s: StudentRecord): string {
   return `${t.getMonth() + 1}/${t.getDate()}`;
 }
 
-function ProgressTab({ students }: { students: StudentRecord[] }) {
+function ProgressTab({ cls, students }: { cls: ClassRecord; students: StudentRecord[] }) {
+  const [error, setError] = useState<string | null>(null);
+  const move = async (s: StudentRecord, to: number) => {
+    setError(null);
+    try {
+      await moveStudentAsTeacher(cls.id, s, to);
+    } catch (e) {
+      setError(friendlyError(e));
+    }
+  };
   if (students.length === 0) return <p className="text-ink-soft">아직 입장한 학생이 없어요. 학급 코드를 알려 주세요.</p>;
   return (
     <div className="flex flex-col gap-4">
@@ -265,12 +371,14 @@ function ProgressTab({ students }: { students: StudentRecord[] }) {
           );
         })}
       </div>
+      {error && <Notice tone="error">{error}</Notice>}
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full min-w-[640px] rounded-box bg-white text-[16px]">
+        <table className="table table-zebra w-full min-w-[720px] rounded-box bg-white text-[16px]">
           <thead>
             <tr className="text-[15px] text-ink">
               <th className="p-2">번호</th>
               <th className="p-2">닉네임</th>
+              <th className="p-2">모둠 (옮기기)</th>
               {CHAPTERS.map((c) => (
                 <th key={c.id} className="p-2">
                   CH{c.no}
@@ -286,6 +394,22 @@ function ProgressTab({ students }: { students: StudentRecord[] }) {
               <tr key={s.id}>
                 <td className="p-2 font-bold">{s.number}</td>
                 <td className="p-2">{s.nickname}</td>
+                <td className="p-2">
+                  <select
+                    value={s.groupNo <= cls.groupCount ? s.groupNo : 0}
+                    onChange={(e) => void move(s, Number(e.target.value))}
+                    className="select select-sm h-10 border-base-300 bg-white"
+                    aria-label={`${s.number}번 모둠`}
+                    disabled={cls.groupCount === 0}
+                  >
+                    <option value={0}>없음</option>
+                    {Array.from({ length: cls.groupCount }, (_, i) => i + 1).map((n) => (
+                      <option key={n} value={n}>
+                        {n}모둠
+                      </option>
+                    ))}
+                  </select>
+                </td>
                 {CHAPTERS.map((c) => {
                   const st = chapterStatus(s, c.id);
                   return (
@@ -460,7 +584,17 @@ function WritingTab({ cls, students, highlights }: { cls: ClassRecord; students:
 
 /* ─────────────── 학급 관리 ─────────────── */
 
-function ManageTab({ cls, students }: { cls: ClassRecord; students: StudentRecord[] }) {
+function ManageTab({
+  cls,
+  students,
+  groups,
+  reviews,
+}: {
+  cls: ClassRecord;
+  students: StudentRecord[];
+  groups: GroupRecord[];
+  reviews: ReviewRecord[];
+}) {
   const nav = useNavigate();
   const [target, setTarget] = useState<StudentRecord | null>(null);
   const [tempPin, setTempPin] = useState<{ number: number; pin: string } | null>(null);
@@ -469,13 +603,15 @@ function ManageTab({ cls, students }: { cls: ClassRecord; students: StudentRecor
   const [delStep, setDelStep] = useState<0 | 1 | 2>(0);
   const [confirmName, setConfirmName] = useState('');
 
-  const downloadCsv = () => {
-    const blob = new Blob([buildCsv(students)], { type: 'text/csv;charset=utf-8' });
+  const downloadCsv = (kind: 'students' | 'groups') => {
+    const text = kind === 'students' ? buildCsv(students) : buildGroupCsv(groups.filter((g) => g.no <= cls.groupCount), reviews);
+    const blob = new Blob([text], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     const d = new Date();
-    a.download = `${cls.name}_냉전의목격자_${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}.csv`;
+    const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+    a.download = `${cls.name}_${kind === 'students' ? '학생별' : '모둠별'}_${ymd}.csv`;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -518,11 +654,21 @@ function ManageTab({ cls, students }: { cls: ClassRecord; students: StudentRecor
           <Download className="h-5 w-5 text-declass" aria-hidden="true" />
           CSV 내보내기
         </h2>
-        <p>번호·닉네임·감정·선택·성찰 답변·선언문을 엑셀에서 열 수 있는 표로 내려받아요. (평가·기록용)</p>
-        <Button className="mt-3" onClick={downloadCsv} disabled={students.length === 0}>
-          <Download className="h-5 w-5" aria-hidden="true" />
-          CSV 내려받기 ({students.length}명)
-        </Button>
+        <p>엑셀에서 열 수 있는 표로 내려받아요. (평가·기록용)</p>
+        <ul className="mt-1 list-disc pl-5 text-[15px]">
+          <li>학생별: 번호·닉네임·모둠·감정·선택·성찰 답변·선언문</li>
+          <li>모둠별: 모둠원·역할·기획서·윤리 점검·동료 검토·교사 의견·스토리보드·AI 활용 기록·출처·제출·평균 별점·피드백</li>
+        </ul>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Button onClick={() => downloadCsv('students')} disabled={students.length === 0}>
+            <Download className="h-5 w-5" aria-hidden="true" />
+            학생별 CSV ({students.length}명)
+          </Button>
+          <Button variant="secondary" onClick={() => downloadCsv('groups')} disabled={cls.groupCount === 0}>
+            <Download className="h-5 w-5" aria-hidden="true" />
+            모둠별 CSV ({cls.groupCount}모둠)
+          </Button>
+        </div>
       </section>
 
       <section className="dossier p-5">
@@ -554,7 +700,7 @@ function ManageTab({ cls, students }: { cls: ClassRecord; students: StudentRecor
           <Trash2 className="h-5 w-5" aria-hidden="true" />
           학급 삭제 (데이터 파기)
         </h2>
-        <p>학기가 끝나면 학급을 삭제해 학생 기록을 모두 지우세요. 선택·성찰·선언문이 모두 사라지며 되돌릴 수 없어요. 필요하면 먼저 CSV를 내려받으세요.</p>
+        <p>학기가 끝나면 학급을 삭제해 학생 기록을 모두 지우세요. 선택·성찰·선언문·모둠 기획서·평가가 모두 사라지며 되돌릴 수 없어요. 필요하면 먼저 CSV를 내려받으세요.</p>
         <Button variant="danger" className="mt-3" onClick={() => setDelStep(1)}>
           학급 삭제하기
         </Button>

@@ -12,6 +12,13 @@ import ChapterPage from './pages/student/ChapterPage';
 import CardsPage from './pages/student/CardsPage';
 import FinalePage from './pages/student/FinalePage';
 import CertificatePage from './pages/student/CertificatePage';
+import GuidePage from './pages/student/project/GuidePage';
+import TeamPage from './pages/student/project/TeamPage';
+import ExplorePage from './pages/student/project/ExplorePage';
+import PlanPage from './pages/student/project/PlanPage';
+import ReviewPage from './pages/student/project/ReviewPage';
+import CreatePage from './pages/student/project/CreatePage';
+import GalleryPage from './pages/student/project/GalleryPage';
 import AboutPage from './pages/AboutPage';
 
 // 교사 화면과 인쇄 자료는 학생이 받을 필요가 없으므로 따로 내려받는다.
@@ -102,6 +109,13 @@ export default function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/join" element={<JoinPage />} />
               <Route path="/play" element={<StudentGate><StudentHome /></StudentGate>} />
+              <Route path="/play/guide" element={<StudentGate><GuidePage /></StudentGate>} />
+              <Route path="/play/team" element={<StudentGate><TeamPage /></StudentGate>} />
+              <Route path="/play/explore" element={<StudentGate><ExplorePage /></StudentGate>} />
+              <Route path="/play/plan" element={<StudentGate><PlanPage /></StudentGate>} />
+              <Route path="/play/review" element={<StudentGate><ReviewPage /></StudentGate>} />
+              <Route path="/play/create" element={<StudentGate><CreatePage /></StudentGate>} />
+              <Route path="/play/gallery" element={<StudentGate><GalleryPage /></StudentGate>} />
               <Route path="/play/chapter/:chapterId" element={<StudentGate><ChapterPage /></StudentGate>} />
               <Route path="/play/cards" element={<StudentGate><CardsPage /></StudentGate>} />
               <Route path="/play/finale" element={<StudentGate><FinalePage /></StudentGate>} />

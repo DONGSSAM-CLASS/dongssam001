@@ -193,14 +193,29 @@ export interface Chapter {
   wrapupId: string;
 }
 
+/** 원칙의 세부 항목 (원문의 [주체성] [과의존] 같은 꼬리표) */
+export interface PrincipleAspect {
+  /** 원문 꼬리표 (예: '과의존') */
+  tag: string;
+  /** 원문 문장 */
+  statement: string;
+  /** 원문 ‘주체별 역할’ 가운데 이용자 역할 (원문) — 학생이 콘텐츠를 만들 때의 약속으로 쓴다 */
+  userRole: string[];
+}
+
 export interface Principle {
   id: PrincipleId;
   name: string;
+  english: string;
   icon: string;
   /** 카드 색 (hex) */
   color: string;
-  /** 학생용 설명 */
+  /** 학생용 설명 (쉬운 말) */
   description: string;
+  /** 원문 3.2절 문장 */
+  official: string[];
+  /** 원문 ‘설명 및 주체별 역할’의 세부 항목 */
+  aspects: PrincipleAspect[];
   /** 냉전 연결 한 줄 */
   coldWarLink: string;
   chapter: ChapterId;
@@ -209,8 +224,12 @@ export interface Principle {
 export interface CoreValue {
   id: ValueId;
   name: string;
+  english: string;
   icon: string;
+  /** 학생용 설명 (쉬운 말) */
   description: string;
+  /** 원문 3.1절 문장 */
+  official: string[];
 }
 
 export interface KselCompetency {
@@ -262,8 +281,7 @@ export interface LessonStep {
 }
 
 export interface LessonPlan {
-  session: 1 | 2 | 3;
-  chapter: ChapterId;
+  session: SessionNo;
   title: string;
   objectives: string[];
   curriculum: CurriculumLink;
@@ -277,14 +295,30 @@ export interface WorksheetSection {
   heading: string;
   instruction?: string;
   /**
-   * 'emotionTable'  장면 1~5 감정·선택 기록표 (장면 제목은 scenarios.ts 에서 가져옴)
-   * 'appReflection' 앱의 AI 시대 연결 질문 (scenarios.ts 에서 가져옴 — 문장을 두 번 쓰지 않기 위해)
-   * 'questions'     질문 목록 + 쓰기 칸
-   * 'lines'         쓰기 줄만
-   * 'checklist'     체크 목록
-   * 'selfAssessment' 자기 평가 (items 마다 ☆☆☆ 세 단계 표시)
+   * 'emotionTable'    장면 1~5 감정·선택 기록표
+   * 'questions'       질문 목록 + 쓰기 칸
+   * 'lines'           쓰기 줄만
+   * 'checklist'       체크 목록
+   * 'selfAssessment'  자기 평가 (items 마다 ☆☆☆)
+   * 'roleTable'       역할 분담표 (project.ts 의 ROLES)
+   * 'planForm'        기획서 양식 (project.ts 의 PLAN_FIELDS)
+   * 'ethicsChecklist' 7대 원칙 윤리 점검표 + 역사 정확성 점검 (project.ts)
+   * 'storyboard'      스토리보드 칸
+   * 'aiLog'           AI 활용 기록 (project.ts 의 AI_LOG_FIELDS)
+   * 'rubric'          다른 모둠 평가표 (project.ts 의 RUBRIC)
    */
-  type: 'emotionTable' | 'appReflection' | 'questions' | 'lines' | 'checklist' | 'selfAssessment';
+  type:
+    | 'emotionTable'
+    | 'questions'
+    | 'lines'
+    | 'checklist'
+    | 'selfAssessment'
+    | 'roleTable'
+    | 'planForm'
+    | 'ethicsChecklist'
+    | 'storyboard'
+    | 'aiLog'
+    | 'rubric';
   items?: string[];
   lines?: number;
   /** 'emotionTable' 의 열 제목 (장면 열 다음에 붙는다) */
@@ -292,8 +326,7 @@ export interface WorksheetSection {
 }
 
 export interface Worksheet {
-  session: 1 | 2 | 3;
-  chapter: ChapterId;
+  session: SessionNo;
   title: string;
   sections: WorksheetSection[];
 }
@@ -309,4 +342,89 @@ export interface GuideSection {
 export interface TeacherGuide {
   title: string;
   sections: GuideSection[];
+}
+
+/* ───────────────────── 6차시 모둠 프로젝트 ───────────────────── */
+
+/** 차시 번호 */
+export type SessionNo = 1 | 2 | 3 | 4 | 5 | 6;
+
+export interface LessonSession {
+  no: SessionNo;
+  /** 수업 개요의 묶음 (예: '2~3차시') */
+  block: string;
+  blockTitle: string;
+  /** 이 차시에서 하는 일 (짧게) */
+  title: string;
+  /** 학생 화면에서 이 차시에 쓰는 활동 id */
+  activities: ActivityId[];
+  /** 교육과정 연계 */
+  curriculum: CurriculumLink;
+  /** 이 차시에서 특히 드러나는 AI 윤리원칙 */
+  principleIds: PrincipleId[];
+}
+
+/** 학생 화면 활동 */
+export type ActivityId =
+  | 'guide' // 1차시 활동 안내
+  | 'team' // 1차시 모둠·역할·약속·사건 고르기
+  | 'explore' // 2차시 사건 파일 탐구 (챕터 시뮬레이션)
+  | 'plan' // 2~3차시 기획서
+  | 'review' // 3차시 기획서 동료 검토
+  | 'create' // 4~5차시 창작 (스토리보드·진행·AI 활용 기록·출처)
+  | 'submit' // 5차시 최종 점검·제출
+  | 'gallery' // 6차시 발표·상호평가
+  | 'declare'; // 6차시 개인 성찰·선언문·인증서
+
+export type RoleId = 'leader' | 'historian' | 'ethicist' | 'creator' | 'presenter';
+
+export interface TeamRole {
+  id: RoleId;
+  name: string;
+  /** 하는 일 */
+  tasks: string[];
+  /** 이 역할이 특히 챙기는 원칙 */
+  principleIds: PrincipleId[];
+  /** 이런 친구에게 잘 맞아요 (강점 탐색 — K-SEL [9정서01-01]) */
+  goodFor: string;
+}
+
+export type FormatId = 'shortform' | 'webtoon' | 'cardnews' | 'goods' | 'poster' | 'other';
+
+export interface ContentFormat {
+  id: FormatId;
+  name: string;
+  /** 권장 규격 */
+  spec: string;
+  /** 스토리보드 칸 이름 (예: 컷, 장면, 장) */
+  unit: string;
+  /** 스토리보드 권장 칸 수 */
+  cuts: number;
+  tools: string;
+}
+
+/** 윤리 점검 항목 — 원문의 이용자 역할에 근거 */
+export interface EthicsCheck {
+  id: string;
+  principleId: PrincipleId;
+  /** 원문 세부 항목 꼬리표 */
+  aspectTag: string;
+  /** 학생용 질문 */
+  question: string;
+  /** 근거가 되는 원문 문장 (이용자 역할) */
+  basis: string;
+}
+
+/** 역사 정확성 점검 항목 (이 앱의 역사 콘텐츠 원칙) */
+export interface HistoryCheck {
+  id: string;
+  question: string;
+}
+
+export interface RubricItem {
+  id: 'ethics' | 'history' | 'creative' | 'delivery';
+  name: string;
+  description: string;
+  /** 1~3 별의 뜻 */
+  levels: [string, string, string];
 }

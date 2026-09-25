@@ -13,9 +13,26 @@ await fetch('http://127.0.0.1:8080/emulator/v1/projects/demo-cold-war-witness/da
 const admin = { Authorization: 'Bearer owner', 'Content-Type': 'application/json' };
 const base = 'http://127.0.0.1:8080/v1/projects/demo-cold-war-witness/databases/(default)/documents';
 const now = new Date().toISOString();
-const unl = (v) => ({ mapValue: { fields: { ch1: { booleanValue: v }, ch2: { booleanValue: v }, ch3: { booleanValue: v }, finale: { booleanValue: v } } } });
-await fetch(`${base}/classes?documentId=kb`, { method: 'POST', headers: admin, body: JSON.stringify({ fields: { name: { stringValue: '키보드반' }, code: { stringValue: 'KBKBKB' }, teacherUid: { stringValue: 't' }, unlocked: unl(true), showDistribution: { booleanValue: false }, createdAt: { timestampValue: now }, updatedAt: { timestampValue: now } } }) });
-await fetch(`${base}/classCodes?documentId=KBKBKB`, { method: 'POST', headers: admin, body: JSON.stringify({ fields: { classId: { stringValue: 'kb' }, className: { stringValue: '키보드반' }, teacherUid: { stringValue: 't' }, createdAt: { timestampValue: now } } }) });
+// 관리자 권한(에뮬레이터 owner)으로 6차시가 열린 학급과 모둠 2개를 만든다
+const toValue = (v) => {
+  if (v === null) return { nullValue: null };
+  if (typeof v === 'string') return v === '__now__' ? { timestampValue: now } : { stringValue: v };
+  if (typeof v === 'number') return { integerValue: String(v) };
+  if (typeof v === 'boolean') return { booleanValue: v };
+  if (Array.isArray(v)) return { arrayValue: { values: v.map(toValue) } };
+  return { mapValue: { fields: Object.fromEntries(Object.entries(v).map(([k, x]) => [k, toValue(x)])) } };
+};
+const fields = (o) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, toValue(v)]));
+const put = (path, id, o) => fetch(`${base}/${path}?documentId=${id}`, { method: 'POST', headers: admin, body: JSON.stringify({ fields: fields(o) }) });
+await put('classes', 'kb', { name: '키보드반', code: 'KBKBKB', teacherUid: 't', session: 6, groupCount: 2, showDistribution: false, createdAt: '__now__', updatedAt: '__now__' });
+await put('classCodes', 'KBKBKB', { classId: 'kb', className: '키보드반', teacherUid: 't', createdAt: '__now__' });
+const plan = { title: '', audience: '', aiCase: '', message: '', outline: '', tools: '', aiUse: '', schedule: '', format: null, formatOther: '', factIds: [], principleIds: [], aspectTags: [], valueIds: [] };
+for (const no of [1, 2]) {
+  await put('classes/kb/groups', `g${no}`, {
+    no, name: '', caseId: null, pledge: '', members: {}, plan, planChecks: {}, finalChecks: {}, planStatus: 'draft', teacherComment: '',
+    storyboard: {}, stage: 'idea', aiLog: { tools: '', where: '', human: '', label: '' }, sources: '', submission: null, createdAt: '__now__', updatedAt: '__now__',
+  });
+}
 
 const b = await chromium.launch(launchOptions);
 const p = await b.newPage({ viewport: { width: 360, height: 740 } });
@@ -37,8 +54,21 @@ await tab(); await p.keyboard.type('키보드');
 await p.keyboard.press('Enter');
 await p.getByLabel('PIN (숫자 4개)').waitFor();
 await p.keyboard.type('2468'); await tab(); await p.keyboard.type('2468'); await p.keyboard.press('Enter');
-await p.getByRole('heading', { name: '사건 파일' }).waitFor(); await overflow('사건 파일');
+await p.getByRole('heading', { name: '6차시 로드맵' }).waitFor(); await overflow('6차시 로드맵');
 console.log('✓ 키보드로 입장');
+for (const [path, heading] of [['/play/guide', '활동 안내'], ['/play/team', '우리 모둠']]) {
+  await p.goto(`http://127.0.0.1:5173${path}`); await p.getByRole('heading', { name: heading }).waitFor(); await overflow(heading);
+}
+await p.getByRole('button', { name: '이 모둠 고르기' }).first().click();
+await p.getByText('우리 모둠', { exact: true }).first().waitFor();
+await p.getByRole('radio', { name: /슈타지의 벽/ }).focus();
+await p.keyboard.press('ArrowRight');
+await p.getByRole('radio', { name: /명단에 오른 이름/, checked: true }).waitFor();
+console.log('✓ 사건 파일 고르기: 화살표 키');
+await overflow('우리 모둠 (모둠 고른 뒤)');
+for (const [path, heading] of [['/play/explore', '사건 파일 탐구'], ['/play/plan', '콘텐츠 기획서'], ['/play/review', '기획서 검토'], ['/play/create', '창작 작업실'], ['/play/gallery', '발표·피드백']]) {
+  await p.goto(`http://127.0.0.1:5173${path}`); await p.getByRole('heading', { name: heading }).waitFor(); await overflow(heading);
+}
 await p.goto('http://127.0.0.1:5173/play/chapter/ch2');
 await p.getByRole('button', { name: /장면 1 시작하기/ }).focus();
 await p.keyboard.press('Enter');

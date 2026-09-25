@@ -1,14 +1,16 @@
-import { Bot, GraduationCap, History, Info, Play, Sparkles, Vote } from 'lucide-react';
+import { ClipboardPen, GalleryHorizontalEnd, GraduationCap, History, Info, Palette, Play, Sparkles } from 'lucide-react';
 import { APP_TITLE } from '../config';
+import { PROJECT_TITLE } from '../data/project';
 import { Layout } from '../components/Layout';
 import { LinkButton } from '../components/ui';
 import { useStudent } from '../app/StudentContext';
 import { useAuth } from '../app/AuthContext';
 
 const STEPS = [
-  { icon: History, title: '냉전 속 시민 되기', text: '1980년대 동베를린, 1950년대 뉴욕, 1962년 플로리다' },
-  { icon: Vote, title: '선택하고 확인하기', text: '내 선택의 결과와 실제 역사를 비교해요' },
-  { icon: Bot, title: 'AI 시대와 잇기', text: '성찰을 쓰고 AI 윤리 원칙 카드를 모아요' },
+  { icon: History, title: '냉전 속 시민 되기', text: '사건 파일을 체험하며 선택하고, 실제 역사와 비교해요' },
+  { icon: ClipboardPen, title: '모둠 기획서', text: 'AI 윤리원칙을 담은 콘텐츠를 기획하고 서로 검토해요' },
+  { icon: Palette, title: '콘텐츠 창작', text: '숏폼·웹툰·카드뉴스·굿즈를 만들고 AI 활용을 밝혀요' },
+  { icon: GalleryHorizontalEnd, title: '발표와 피드백', text: '작품을 발표하고 평가한 뒤 실천을 선언해요' },
 ];
 
 export default function LandingPage() {
@@ -35,8 +37,9 @@ export default function LandingPage() {
           {sub && <p className="mt-2 text-xl font-medium text-ink-soft">{sub}</p>}
           <p className="mx-auto mt-5 max-w-xl text-[18px]">
             여러분은 냉전 시대를 살아가는 <strong>평범한 시민</strong>이 됩니다. 누군가 지켜보는 세상에서 무엇을 선택할까요? 그리고 그 선택은
-            오늘날 <strong>AI</strong>와 어떻게 이어질까요?
+            오늘날 <strong>AI</strong>와 어떻게 이어질까요? 모둠이 함께 <strong>AI 윤리 콘텐츠</strong>를 만들어 알려요.
           </p>
+          <p className="mt-2 text-[15px] text-ink-soft">{PROJECT_TITLE} · 6차시</p>
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
             {status === 'ready' && session ? (
               <LinkButton to="/play" className="text-[19px] sm:min-w-60">
@@ -57,7 +60,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <ol className="mt-6 grid gap-3 sm:grid-cols-3">
+      <ol className="mt-6 grid gap-3 sm:grid-cols-2">
         {STEPS.map(({ icon: Icon, title, text }, i) => (
           <li key={title} className="dossier flex items-start gap-3 p-4 sm:flex-col sm:items-center sm:text-center">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary text-primary-content">

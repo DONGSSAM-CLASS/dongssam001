@@ -9,9 +9,11 @@ import { PRINCIPLES } from '../../data/principles';
 import { APP_TITLE } from '../../config';
 import { drawCertificate } from '../../lib/certificate';
 import { declarationSentence } from '../../lib/josa';
+import { groupLabel } from '../../lib/project';
+import { ROLES } from '../../data/project';
 
 export default function CertificatePage() {
-  const { student, session } = useReadyStudent();
+  const { student, session, group } = useReadyStudent();
   const [busy, setBusy] = useState(false);
   const d = student.declaration;
 
@@ -32,6 +34,12 @@ export default function CertificatePage() {
   const cards = PRINCIPLES.filter((p) => student.cards.includes(p.id));
   const date = d.submittedAt?.toDate?.() ?? new Date();
   const dateText = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+  const myRoles = group?.members[String(student.number)]?.roles ?? [];
+  const project = group
+    ? `${groupLabel(group)}${group.plan.title ? ` 「${group.plan.title}」` : ''}${
+        myRoles.length ? ` · 내 역할: ${myRoles.map((r) => ROLES.find((x) => x.id === r)!.name.split(' (')[0]).join(', ')}` : ''
+      }`
+    : '';
 
   const saveImage = async () => {
     setBusy(true);
@@ -44,6 +52,7 @@ export default function CertificatePage() {
         sentence,
         free: d.free,
         cards: cards.map((c) => ({ icon: c.icon, name: c.name, color: c.color })),
+        project: project || undefined,
         dateText,
       });
       const a = document.createElement('a');
@@ -74,7 +83,7 @@ export default function CertificatePage() {
         </LinkButton>
         <LinkButton to="/play" variant="ghost">
           <FolderOpen className="h-5 w-5" aria-hidden="true" />
-          사건 파일 목록
+          6차시 로드맵
         </LinkButton>
       </div>
 
@@ -92,6 +101,12 @@ export default function CertificatePage() {
         </p>
         <p className="text-left text-[20px] font-bold leading-relaxed">{sentence}</p>
         {d.free && <p className="whitespace-pre-wrap text-left text-[17px]">{d.free}</p>}
+        {project && (
+          <div className="text-left">
+            <p className="text-[15px] text-ink-soft">함께 만든 AI 윤리 콘텐츠</p>
+            <p className="text-[18px] font-bold">{project}</p>
+          </div>
+        )}
         <div>
           <p className="text-[15px] text-ink-soft">모은 원칙 카드 {cards.length}장</p>
           <ul className="mt-2 flex flex-wrap justify-center gap-2">

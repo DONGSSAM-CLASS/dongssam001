@@ -10,8 +10,14 @@ rules_version = '2';
 //  - 모든 쓰기에서 필드 이름·타입·길이를 검증한다. (서술형 답변 최대 500자)
 //  - Cloud Functions 없이 규칙만으로 통제한다. (무료 Spark 요금제)
 //
-// ⚠️ 아래 id 목록은 src/data/scenarios.ts · principles.ts · emotions.ts 와 같아야 한다.
-//    (tests/content.test.ts 가 두 쪽이 같은지 확인한다)
+// ⚠️ 아래 id 목록은 src/data/scenarios.ts · principles.ts · emotions.ts · facts.ts · project.ts 와 같아야 한다.
+//    (tests/unit.test.ts 가 두 쪽이 같은지 확인한다)
+//
+// 6차시 모둠 프로젝트
+//  - 학급 문서의 session(1~6)으로 지금 차시를, groupCount(0~8)로 모둠 수를 정한다.
+//  - 모둠 문서 groups/g1~g8: 교사가 만들고 지운다. 그 모둠 학생들이 함께 기획서·제작 기록·제출을 쓴다.
+//    같은 학급 학생은 모든 모둠을 읽을 수 있다(동료 검토·발표 평가).
+//  - 검토 문서 reviews/*: 기획서 동료 검토(모둠 → 모둠)와 발표 평가(학생 → 모둠).
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -40,6 +46,9 @@ service cloud.firestore {
     function codePath(code) {
       return /databases/$(database)/documents/classCodes/$(code);
     }
+    function memberPath(classId) {
+      return /databases/$(database)/documents/classes/$(classId)/members/$(request.auth.uid);
+    }
 
     function ownsClass(classId) {
       return isTeacher()
@@ -47,8 +56,21 @@ service cloud.firestore {
         && get(classPath(classId)).data.teacherUid == request.auth.uid;
     }
     function isMember(classId) {
-      return isAnon()
-        && exists(/databases/$(database)/documents/classes/$(classId)/members/$(request.auth.uid));
+      return isAnon() && exists(memberPath(classId));
+    }
+    // 이 익명 계정이 쓰는 학생 기록의 번호·모둠 (members → students 두 번 읽기)
+    function myNumber(classId) {
+      return get(memberPath(classId)).data.number;
+    }
+    function myStudent(classId) {
+      return get(studentPath(classId, get(memberPath(classId)).data.studentId)).data;
+    }
+    function myGroup(classId) {
+      return myStudent(classId).groupNo;
+    }
+    // 같은 배치에서 모둠을 옮길 때: 배치가 끝난 뒤의 모둠 번호
+    function myGroupAfter(classId) {
+      return getAfter(studentPath(classId, get(memberPath(classId)).data.studentId)).data.groupNo;
     }
 
     // ───────────── 허용 값 목록 ─────────────
@@ -70,6 +92,37 @@ service cloud.firestore {
     }
     function principleIds() {
       return ['humanCentric', 'privacy', 'fairness', 'accountability', 'safety', 'reliability', 'transparency'];
+    }
+    function valueIds() {
+      return ['dignity', 'commonGood', 'sustainability'];
+    }
+    function aspectTags() {
+      return ['주체성', '통제가능성', '과의존', '사생활 침해 방지', '개인정보 보호', '자기결정권 보호',
+              '편향 방지', '접근성', '참여', '책임 명확화', '피해 구제', '비례적 책임',
+              '안전 설계·이용', '적극적 보호조치', '사회적·체계적 위험으로부터의 안전',
+              '성능 기준', '목적 외 작동 방지', '안정적 작동', '투명성', '설명가능성'];
+    }
+    function factIds() {
+      return ['c1-founding', 'c1-staff', 'c1-im-count', 'c1-im-watch', 'c1-committees', 'c1-files', 'c1-wall',
+              'c2-huac', 'c2-blacklist', 'c2-wheeling', 'c2-murrow', 'c2-army', 'c2-censure', 'c2-context',
+              'c3-u2-photo', 'c3-quarantine', 'c3-ships', 'c3-u2-down', 'c3-withdraw', 'c3-turkey', 'c3-b59',
+              'c3-hotline', 'c3-arms'];
+    }
+    function roleIds() {
+      return ['leader', 'historian', 'ethicist', 'creator', 'presenter'];
+    }
+    function formatIds() {
+      return ['shortform', 'webtoon', 'cardnews', 'goods', 'poster', 'other'];
+    }
+    function stageIds() {
+      return ['idea', 'storyboard', 'draft', 'revise', 'done'];
+    }
+    function checkIds() {
+      return ['hc1', 'hc2', 'pv1', 'pv2', 'fi1', 'fi2', 'ac1', 'ac2', 'sf1', 'sf2', 'rl1', 'rl2', 'tr1', 'tr2',
+              'hs1', 'hs2', 'hs3', 'hs4'];
+    }
+    function cutIds() {
+      return ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8'];
     }
 
     // ───────────── 검증 도우미 ─────────────
@@ -103,7 +156,7 @@ service cloud.firestore {
       );
     }
     function studentKeys() {
-      return ['uid', 'number', 'nickname', 'progress', 'choices', 'emotions', 'answers', 'cards', 'declaration', 'createdAt', 'updatedAt'];
+      return ['uid', 'number', 'nickname', 'groupNo', 'progress', 'choices', 'emotions', 'answers', 'cards', 'declaration', 'createdAt', 'updatedAt'];
     }
     function okStudent(d) {
       return d.keys().hasOnly(studentKeys())
@@ -111,6 +164,7 @@ service cloud.firestore {
         && d.uid is string
         && d.number is int && d.number >= 1 && d.number <= 99
         && strLen(d.nickname, 1, 10)
+        && d.groupNo is int && d.groupNo >= 0 && d.groupNo <= 8
         && d.progress is map
         && d.progress.keys().hasOnly(['ch1', 'ch2', 'ch3'])
         && d.progress.values().hasOnly(stepIds())
@@ -129,11 +183,129 @@ service cloud.firestore {
     function isStudentId(sid) {
       return sid.matches('^[0-9a-f]{64}$');
     }
-    function okUnlocked(u) {
-      return u is map
-        && u.keys().hasOnly(['ch1', 'ch2', 'ch3', 'finale'])
-        && u.keys().hasAll(['ch1', 'ch2', 'ch3', 'finale'])
-        && u.values().hasOnly([true, false]);
+    function okSession(d) {
+      return d.session is int && d.session >= 1 && d.session <= 6
+        && d.groupCount is int && d.groupCount >= 0 && d.groupCount <= 8
+        && d.showDistribution is bool;
+    }
+
+    // ───────────── 모둠 문서 검증 ─────────────
+    // 규칙 한 번에 계산할 수 있는 식은 1000개까지라서, 고칠 때는 ‘바뀐 칸’만 검사한다.
+    // (만들 때는 모든 칸이 빈 값인지만 본다. 바뀐 칸만 검사해도 늘 올바른 모양이 유지된다)
+    function optStr(m, k, hi) {
+      return !(k in m) || strLen(m[k], 0, hi);
+    }
+    function planKeys() {
+      return ['title', 'audience', 'aiCase', 'message', 'outline', 'tools', 'aiUse', 'schedule',
+              'format', 'formatOther', 'factIds', 'principleIds', 'aspectTags', 'valueIds'];
+    }
+    function emptyPlan() {
+      return {'title': '', 'audience': '', 'aiCase': '', 'message': '', 'outline': '', 'tools': '', 'aiUse': '',
+              'schedule': '', 'format': null, 'formatOther': '', 'factIds': [], 'principleIds': [],
+              'aspectTags': [], 'valueIds': []};
+    }
+    function okPlanChange(b, a) {
+      let c = a.diff(b).affectedKeys();
+      return c.hasOnly(planKeys())
+        && (!('title' in c) || strLen(a.title, 0, 40))
+        && (!('audience' in c) || strLen(a.audience, 0, 60))
+        && (!('aiCase' in c) || strLen(a.aiCase, 0, 300))
+        && (!('message' in c) || strLen(a.message, 0, 100))
+        && (!('outline' in c) || strLen(a.outline, 0, 500))
+        && (!('tools' in c) || strLen(a.tools, 0, 200))
+        && (!('aiUse' in c) || strLen(a.aiUse, 0, 300))
+        && (!('schedule' in c) || strLen(a.schedule, 0, 300))
+        && (!('format' in c) || a.format == null || a.format in formatIds())
+        && (!('formatOther' in c) || strLen(a.formatOther, 0, 20))
+        && (!('factIds' in c) || (a.factIds is list && a.factIds.size() <= 3 && a.factIds.hasOnly(factIds())))
+        && (!('principleIds' in c) || (a.principleIds is list && a.principleIds.size() <= 2 && a.principleIds.hasOnly(principleIds())))
+        && (!('aspectTags' in c) || (a.aspectTags is list && a.aspectTags.size() <= 3 && a.aspectTags.hasOnly(aspectTags())))
+        && (!('valueIds' in c) || (a.valueIds is list && a.valueIds.size() <= 3 && a.valueIds.hasOnly(valueIds())));
+    }
+    function okChecks(c) {
+      return c is map && c.keys().hasOnly(checkIds()) && c.values().hasOnly([true, false]);
+    }
+    function okStoryboard(b) {
+      return b is map
+        && b.keys().hasOnly(cutIds())
+        && optStr(b, 'c1', 300) && optStr(b, 'c2', 300) && optStr(b, 'c3', 300) && optStr(b, 'c4', 300)
+        && optStr(b, 'c5', 300) && optStr(b, 'c6', 300) && optStr(b, 'c7', 300) && optStr(b, 'c8', 300);
+    }
+    function okAiLog(l) {
+      return l is map
+        && l.keys().hasOnly(['tools', 'where', 'human', 'label'])
+        && l.keys().hasAll(['tools', 'where', 'human', 'label'])
+        && strLen(l.tools, 0, 100)
+        && strLen(l.where, 0, 300)
+        && strLen(l.human, 0, 300)
+        && strLen(l.label, 0, 100);
+    }
+    function okSubmission(s) {
+      return s == null || (
+        s is map
+        && s.keys().hasOnly(['url', 'intro', 'note', 'submittedAt'])
+        && s.keys().hasAll(['url', 'intro', 'note', 'submittedAt'])
+        && strLen(s.url, 12, 300) && s.url.matches('^https://[^ ]+$')
+        && strLen(s.intro, 1, 300)
+        && strLen(s.note, 0, 300)
+        && s.submittedAt == request.time
+      );
+    }
+    function groupKeys() {
+      return ['no', 'name', 'caseId', 'pledge', 'members', 'plan', 'planChecks', 'finalChecks', 'planStatus',
+              'teacherComment', 'storyboard', 'stage', 'aiLog', 'sources', 'submission', 'createdAt', 'updatedAt'];
+    }
+    // 새 모둠: 모든 칸이 빈 값
+    function okNewGroup(d, g) {
+      return d.keys().hasOnly(groupKeys())
+        && d.keys().hasAll(groupKeys())
+        && d.no is int && d.no >= 1 && d.no <= 8 && g == 'g' + string(d.no)
+        && d.name == '' && d.caseId == null && d.pledge == ''
+        && d.members == {}
+        && d.plan == emptyPlan()
+        && d.planChecks == {} && d.finalChecks == {}
+        && d.planStatus == 'draft' && d.teacherComment == ''
+        && d.storyboard == {} && d.stage == 'idea'
+        && d.aiLog == {'tools': '', 'where': '', 'human': '', 'label': ''}
+        && d.sources == '' && d.submission == null
+        && d.createdAt == request.time && d.updatedAt == request.time;
+    }
+    // 고친 모둠: 바뀐 칸만 검사 (칸을 지우면 검사에서 오류가 나 거부된다)
+    function okGroupChange(b, a) {
+      let c = a.diff(b).affectedKeys();
+      return a.updatedAt == request.time
+        && (!('name' in c) || strLen(a.name, 0, 12))
+        && (!('caseId' in c) || a.caseId == null || a.caseId in ['ch1', 'ch2', 'ch3'])
+        && (!('pledge' in c) || strLen(a.pledge, 0, 200))
+        && (!('members' in c) || (a.members is map && a.members.size() <= 6))
+        && (!('plan' in c) || okPlanChange(b.plan, a.plan))
+        && (!('planChecks' in c) || okChecks(a.planChecks))
+        && (!('finalChecks' in c) || okChecks(a.finalChecks))
+        && (!('planStatus' in c) || a.planStatus in ['draft', 'submitted', 'approved', 'revise'])
+        && (!('teacherComment' in c) || strLen(a.teacherComment, 0, 300))
+        && (!('storyboard' in c) || okStoryboard(a.storyboard))
+        && (!('stage' in c) || a.stage in stageIds())
+        && (!('aiLog' in c) || okAiLog(a.aiLog))
+        && (!('sources' in c) || strLen(a.sources, 0, 500))
+        && (!('submission' in c) || okSubmission(a.submission));
+    }
+    // 모둠원 명단: 학생은 자기 번호 칸만 넣고·고치고·뺄 수 있다.
+    //  - 넣거나 고칠 때는 (같은 배치가 끝난 뒤) 자기 기록의 모둠 번호가 이 모둠이어야 한다.
+    //  - 칸 내용은 { nickname: 내 닉네임, roles: 역할 0~5개 }
+    function okMyMemberChange(classId, b, a) {
+      let key = string(myNumber(classId));
+      return a.members.diff(b.members).affectedKeys().hasOnly([key])
+        && (
+          !(key in a.members)
+          || (
+            myGroupAfter(classId) == a.no
+            && a.members[key].keys().hasOnly(['nickname', 'roles'])
+            && a.members[key].nickname == myStudent(classId).nickname
+            && a.members[key].roles is list
+            && a.members[key].roles.size() <= 5
+            && a.members[key].roles.hasOnly(roleIds())
+          )
+        );
     }
 
     // ═════════════ 학급 코드 ═════════════
@@ -160,23 +332,23 @@ service cloud.firestore {
       allow list: if isTeacher() && resource.data.teacherUid == request.auth.uid;
 
       allow create: if isTeacher()
-        && request.resource.data.keys().hasOnly(['name', 'code', 'teacherUid', 'unlocked', 'showDistribution', 'createdAt', 'updatedAt'])
-        && request.resource.data.keys().hasAll(['name', 'code', 'teacherUid', 'unlocked', 'showDistribution', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['name', 'code', 'teacherUid', 'session', 'groupCount', 'showDistribution', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['name', 'code', 'teacherUid', 'session', 'groupCount', 'showDistribution', 'createdAt', 'updatedAt'])
         && strLen(request.resource.data.name, 1, 30)
         && request.resource.data.code is string
         && request.resource.data.teacherUid == request.auth.uid
-        && okUnlocked(request.resource.data.unlocked)
+        && okSession(request.resource.data)
+        && request.resource.data.session == 1
         && request.resource.data.showDistribution == false
         && request.resource.data.createdAt == request.time
         && request.resource.data.updatedAt == request.time
         && getAfter(codePath(request.resource.data.code)).data.classId == classId;
 
-      // 교사는 챕터 잠금과 분포 공개만 바꾼다. (이름·코드·주인은 바꿀 수 없다)
+      // 교사는 지금 차시·모둠 수·분포 공개만 바꾼다. (이름·코드·주인은 바꿀 수 없다)
       allow update: if isTeacher()
         && resource.data.teacherUid == request.auth.uid
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['unlocked', 'showDistribution', 'updatedAt'])
-        && okUnlocked(request.resource.data.unlocked)
-        && request.resource.data.showDistribution is bool
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['session', 'groupCount', 'showDistribution', 'updatedAt'])
+        && okSession(request.resource.data)
         && request.resource.data.updatedAt == request.time;
 
       allow delete: if isTeacher() && resource.data.teacherUid == request.auth.uid;
@@ -229,6 +401,7 @@ service cloud.firestore {
           && request.resource.data.answers.size() == 0
           && request.resource.data.cards.size() == 0
           && request.resource.data.declaration == null
+          && request.resource.data.groupNo == 0
           && request.resource.data.createdAt == request.time
           && request.resource.data.updatedAt == request.time
           && getAfter(seatPath(classId, string(request.resource.data.number))).data.studentId == sid;
@@ -240,13 +413,16 @@ service cloud.firestore {
           && request.resource.data.updatedAt == request.time
           && getAfter(seatPath(classId, string(request.resource.data.number))).data.studentId == sid;
 
-        // 학생 본인: 진행·선택·감정·성찰·카드·선언문만 쓸 수 있다.
+        // 학생 본인: 모둠·진행·선택·감정·성찰·카드·선언문만 쓸 수 있다.
+        //  - 모둠 번호는 0(모둠 없음) 또는 학급의 모둠 수 이하.
         //  - 한 번 고른 선택과 감정은 바꾸거나 지울 수 없다.
         //  - 선언문을 바꿀 때는 제출 시각이 지금이어야 한다.
         allow update: if isAnon()
           && resource.data.uid == request.auth.uid
           && request.resource.data.diff(resource.data).affectedKeys()
-               .hasOnly(['progress', 'choices', 'emotions', 'answers', 'cards', 'declaration', 'updatedAt'])
+               .hasOnly(['groupNo', 'progress', 'choices', 'emotions', 'answers', 'cards', 'declaration', 'updatedAt'])
+          && (request.resource.data.groupNo == resource.data.groupNo
+              || request.resource.data.groupNo <= get(classPath(classId)).data.groupCount)
           && request.resource.data.updatedAt == request.time
           && okStudent(request.resource.data)
           && request.resource.data.choices.diff(resource.data.choices).changedKeys().size() == 0
@@ -265,6 +441,93 @@ service cloud.firestore {
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['uid', 'updatedAt'])
           && request.resource.data.uid == request.auth.uid
           && request.resource.data.updatedAt == request.time;
+
+        // 교사: 모둠 옮기기 (같은 배치로 모둠 명단도 고친다)
+        allow update: if ownsClass(classId)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['groupNo', 'updatedAt'])
+          && request.resource.data.groupNo is int
+          && request.resource.data.groupNo >= 0
+          && request.resource.data.groupNo <= 8
+          && request.resource.data.updatedAt == request.time;
+
+        allow delete: if ownsClass(classId);
+      }
+
+      // ───── 모둠 (g1~g8) ─────
+      match /groups/{g} {
+        allow read: if ownsClass(classId) || isMember(classId);
+
+        // 교사: 모둠 수를 정할 때 빈 모둠 문서를 만든다.
+        allow create: if ownsClass(classId) && okNewGroup(request.resource.data, g);
+
+        // 교사: 기획서 승인·고칠 점, 모둠 이름, 모둠원 옮기기
+        allow update: if ownsClass(classId)
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['name', 'members', 'planStatus', 'teacherComment', 'updatedAt'])
+          && okGroupChange(resource.data, request.resource.data);
+
+        // 학생: 같은 모둠이면 함께 쓴다. 명단은 자기 칸만. 기획서 상태는 ‘작성 중·제출’만.
+        allow update: if isMember(classId)
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['name', 'caseId', 'pledge', 'members', 'plan', 'planChecks', 'finalChecks', 'planStatus',
+                         'storyboard', 'stage', 'aiLog', 'sources', 'submission', 'updatedAt'])
+          && okGroupChange(resource.data, request.resource.data)
+          && (
+            // 명단에서 나가기만 할 때는 (다른 모둠으로 옮기는 중일 수 있으니) 모둠 번호 확인을 하지 않는다.
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['members', 'updatedAt'])
+            || myGroup(classId) == resource.data.no
+          )
+          && (request.resource.data.members == resource.data.members
+              || okMyMemberChange(classId, resource.data, request.resource.data))
+          && (request.resource.data.planStatus == resource.data.planStatus
+              || request.resource.data.planStatus in ['draft', 'submitted']);
+
+        allow delete: if ownsClass(classId);
+      }
+
+      // ───── 검토·평가 ─────
+      //  기획서 동료 검토  plan_g{보낸 모둠}_g{받는 모둠}   — 보낸 모둠이 함께 쓴다.
+      //  발표 평가        final_g{받는 모둠}_n{내 번호}    — 학생 한 명이 다른 모둠 하나에 하나.
+      match /reviews/{rid} {
+        allow read: if ownsClass(classId)
+          || (isMember(classId) && (
+            resource.data.toGroup == myGroup(classId)
+            || (resource.data.kind == 'plan' && resource.data.fromGroup == myGroup(classId))
+            || (resource.data.kind == 'final' && resource.data.authorNumber == myNumber(classId))
+          ));
+
+        allow create, update: if isMember(classId)
+          && request.resource.data.updatedAt == request.time
+          && request.resource.data.authorNumber == myNumber(classId)
+          && request.resource.data.toGroup is int
+          && request.resource.data.toGroup >= 1
+          && request.resource.data.toGroup <= 8
+          && (
+            (
+              request.resource.data.kind == 'plan'
+              && request.resource.data.keys().hasOnly(['kind', 'fromGroup', 'toGroup', 'praise', 'suggest', 'ethics', 'authorNumber', 'updatedAt'])
+              && request.resource.data.keys().hasAll(['kind', 'fromGroup', 'toGroup', 'praise', 'suggest', 'ethics', 'authorNumber', 'updatedAt'])
+              && request.resource.data.fromGroup == myGroup(classId)
+              && request.resource.data.fromGroup != request.resource.data.toGroup
+              && rid == 'plan_g' + string(request.resource.data.fromGroup) + '_g' + string(request.resource.data.toGroup)
+              && strLen(request.resource.data.praise, 0, 200)
+              && strLen(request.resource.data.suggest, 0, 200)
+              && strLen(request.resource.data.ethics, 0, 200)
+            )
+            || (
+              request.resource.data.kind == 'final'
+              && request.resource.data.keys().hasOnly(['kind', 'toGroup', 'scores', 'praise', 'suggest', 'authorNumber', 'updatedAt'])
+              && request.resource.data.keys().hasAll(['kind', 'toGroup', 'scores', 'praise', 'suggest', 'authorNumber', 'updatedAt'])
+              && request.resource.data.toGroup != myGroup(classId)
+              && rid == 'final_g' + string(request.resource.data.toGroup) + '_n' + string(myNumber(classId))
+              && request.resource.data.scores is map
+              && request.resource.data.scores.keys().hasOnly(['ethics', 'history', 'creative', 'delivery'])
+              && request.resource.data.scores.keys().hasAll(['ethics', 'history', 'creative', 'delivery'])
+              && request.resource.data.scores.values().hasOnly([1, 2, 3])
+              && strLen(request.resource.data.praise, 0, 150)
+              && strLen(request.resource.data.suggest, 0, 150)
+            )
+          );
 
         allow delete: if ownsClass(classId);
       }
