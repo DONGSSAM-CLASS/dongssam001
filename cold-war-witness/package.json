@@ -9,7 +9,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b",
-    "test": "vitest run tests/content.test.ts"
+    "test": "vitest run tests/content.test.ts",
+    "facts:doc": "vite-node scripts/fact-review.ts"
   },
   "dependencies": {
     "firebase": "^10.14.1",

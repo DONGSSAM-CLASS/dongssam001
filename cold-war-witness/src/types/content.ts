@@ -163,8 +163,6 @@ export interface CoreValue {
   name: string;
   icon: string;
   description: string;
-  /** 카드 보드에서 이 가치 아래에 놓을 원칙 */
-  principleIds: PrincipleId[];
 }
 
 export interface KselCompetency {
@@ -203,8 +201,14 @@ export interface LessonPlan {
 export interface WorksheetSection {
   heading: string;
   instruction?: string;
-  /** 'emotionTable' 은 장면 1~5 감정 기록표, 'lines' 는 쓰기 줄, 'questions' 는 질문 목록 */
-  type: 'emotionTable' | 'lines' | 'questions' | 'checklist';
+  /**
+   * 'emotionTable'  장면 1~5 감정·선택 기록표 (장면 제목은 scenarios.ts 에서 가져옴)
+   * 'appReflection' 앱의 AI 시대 연결 질문 (scenarios.ts 에서 가져옴 — 문장을 두 번 쓰지 않기 위해)
+   * 'questions'     질문 목록 + 쓰기 칸
+   * 'lines'         쓰기 줄만
+   * 'checklist'     체크 목록
+   */
+  type: 'emotionTable' | 'appReflection' | 'questions' | 'lines' | 'checklist';
   items?: string[];
   lines?: number;
 }
