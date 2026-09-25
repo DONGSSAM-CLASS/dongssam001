@@ -152,6 +152,8 @@ export interface ReflectionQuestion {
   principleIds: PrincipleId[];
   /** 생각을 여는 도움말 (선택) */
   hint?: string;
+  /** 문장 시작 도우미 — 누르면 쓰기 칸에 붙는다 (중학생이 빈 칸 앞에서 막히지 않도록) */
+  starters: string[];
 }
 
 export interface Chapter {
@@ -177,6 +179,8 @@ export interface Chapter {
   kselFocus: {
     /** 챕터 마무리 성찰 질문으로도 쓴다. */
     question: string;
+    /** 문장 시작 도우미 */
+    starters: string[];
   };
   reflection: {
     questions: ReflectionQuestion[];

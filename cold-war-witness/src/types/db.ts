@@ -10,6 +10,15 @@ export type ChapterStep = 'intro' | 's1' | 's2' | 's3' | 's4' | 's5' | 'reflect'
 
 export type ChoiceId = 'a' | 'b' | 'c';
 
+/** 문서 id 를 함께 들고 다니는 학생 기록 */
+export interface StudentRecord extends StudentDoc {
+  id: string;
+}
+
+export interface ClassRecord extends ClassDoc {
+  id: string;
+}
+
 /** classes/{classId} — 교사가 만든 학급 */
 export interface ClassDoc {
   name: string; // 1~30자
@@ -31,10 +40,16 @@ export interface ClassCodeDoc {
   createdAt: Timestamp;
 }
 
-/** classes/{classId}/members/{uid} — 이 익명 계정이 몇 번 학생인지 (학급 문서 읽기 권한 확인용) */
+/** classes/{classId}/members/{uid} — 이 익명 계정이 어느 학생 기록을 쓰는지 (학급 문서 읽기 권한 확인용) */
 export interface MemberDoc {
+  studentId: string;
   number: number;
   joinedAt: Timestamp;
+}
+
+/** classes/{classId}/seats/{number} — 번호 자리. 같은 번호로 두 명이 들어오지 못하게 한다. (교사만 읽음) */
+export interface SeatDoc {
+  studentId: string;
 }
 
 /** 선언문 */
@@ -53,16 +68,14 @@ export interface Declaration {
 }
 
 /**
- * classes/{classId}/students/{number} — 학생 한 명의 모든 기록.
- * 문서 id 는 번호(문자열). uid 는 지금 이 자리를 쓰는 익명 계정.
- * 기기가 바뀌면 PIN 으로 uid 를 새 계정으로 옮긴다.
+ * classes/{classId}/students/{studentId} — 학생 한 명의 모든 기록.
+ * 문서 id = SHA-256(앱 salt : classId : number : PIN) 16진수 64자. (PIN 을 알아야 주소를 알 수 있다)
+ * uid 는 지금 이 기록을 쓰는 익명 계정. 기기가 바뀌면 PIN 으로 문서 주소를 다시 계산해 uid 를 옮긴다.
  */
 export interface StudentDoc {
   uid: string;
   number: number; // 1~99
   nickname: string; // 1~10자
-  /** SHA-256(앱 salt : classId : number : PIN) 16진수 64자 */
-  pinHash: string;
   progress: Partial<Record<ChapterId, ChapterStep>>;
   /** 장면 id('ch1-s1') → 선택 */
   choices: Record<string, ChoiceId>;

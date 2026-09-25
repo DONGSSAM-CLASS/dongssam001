@@ -59,8 +59,9 @@ cold-war-witness/
 ```
 classCodes/{code}                          학급 코드 → 학급 id (get 만 허용, list 금지)
 classes/{classId}                          학급 설정 (교사 소유)
-classes/{classId}/members/{uid}            익명 계정 → 번호 (학급 문서 읽기 권한 확인용)
-classes/{classId}/students/{number}        학생 한 명의 모든 기록 (문서 id = 번호)
+classes/{classId}/members/{uid}            익명 계정 → 학생 기록 id (학급 문서 읽기 권한 확인용)
+classes/{classId}/seats/{number}           번호 자리 → 학생 기록 id (번호 중복 방지, 교사만 읽음)
+classes/{classId}/students/{studentId}     학생 한 명의 모든 기록 (문서 id = PIN 해시)
 classes/{classId}/public/stats             학급 선택 분포 (숫자만)
 classes/{classId}/teacherOnly/highlights   교사가 고른 우수 답변 표시
 ```
@@ -96,19 +97,28 @@ classes/{classId}/teacherOnly/highlights   교사가 고른 우수 답변 표시
 
 | 필드 | 타입 | 설명 |
 |---|---|---|
-| number | int | 이 계정이 쓰는 번호 |
+| studentId | string | 이 계정이 쓰는 학생 기록 id |
+| number | int | 번호 |
 | joinedAt | timestamp | |
 
 - 학생 문서를 만들거나 옮겨 올 때 같은 배치로 만듭니다. 규칙은 `getAfter()` 로 학생 문서의 `uid` 가 본인인지 확인합니다.
 
-### 3-4. `classes/{classId}/students/{number}` — 학생 기록
+### 3-3-1. `classes/{classId}/seats/{number}`
+
+| 필드 | 타입 | 설명 |
+|---|---|---|
+| studentId | string | 이 번호를 쓰는 학생 기록 id |
+
+- 처음 입장할 때 학생 기록과 같은 배치로 만듭니다. 이미 있으면 만들 수 없으므로(= 덮어쓰기는 거부) **같은 번호로 두 명이 들어올 수 없습니다.**
+- 학생은 읽을 수 없습니다(학생 기록 id = PIN 해시를 숨기기 위해). 교사는 PIN 초기화 때 새 id 로 바꿉니다.
+
+### 3-4. `classes/{classId}/students/{studentId}` — 학생 기록
 
 | 필드 | 타입 | 검증 |
 |---|---|---|
 | uid | string | 지금 이 번호를 쓰는 익명 계정 |
 | number | int | 1~99, 문서 id 와 같아야 함 |
 | nickname | string | 1~10자 |
-| pinHash | string | 16진수 64자 |
 | progress | map | 키: ch1·ch2·ch3 / 값: `intro, s1~s5, reflect, wrapup, done` |
 | choices | map | 키: 장면 id 15개 중 / 값: `a, b, c` |
 | emotions | map | 키: 장면 id 15개 중 / 값: `anxious, afraid, angry, hesitant, calm` |
@@ -117,8 +127,10 @@ classes/{classId}/teacherOnly/highlights   교사가 고른 우수 답변 표시
 | declaration | map 또는 null | keep ≤30, era ≤40, lesson ≤80, free ≤300, principleId, submittedAt |
 | createdAt, updatedAt | timestamp | `updatedAt == request.time` |
 
-**왜 문서 id 를 번호로 했나요?**
-기기가 바뀌면 익명 계정(uid)이 새로 생깁니다. 기록을 uid 아래에 두면 옮기기가 어렵기 때문에, 번호 자리에 기록을 두고 `uid` 필드만 새 계정으로 바꿉니다.
+**왜 문서 id 를 PIN 해시로 했나요?**
+문서 id = `SHA-256("cold-war-witness/v1:학급id:번호:PIN")` (16진수 64자). 기기가 바뀌면 익명 계정(uid)이 새로 생기는데, PIN 을 아는 사람만 이 주소를 계산할 수 있으므로 **주소를 아는 것 자체가 PIN 을 안다는 증명**이 됩니다. 그래서 새 기기는 `uid` 필드만 자기 계정으로 바꾸면 됩니다.
+
+> Phase 1 설계(문서 id = 번호, 문서 안에 pinHash 필드)는 버렸습니다. 규칙은 “보낸 필드”와 “원래 있던 필드”를 구분하지 못해서, 공격자가 pinHash 를 **아예 보내지 않고** uid 만 바꾸면 규칙을 통과하는 구멍이 있었기 때문입니다.
 
 **한 문서에 모두 담은 이유**
 교사 대시보드가 학생 문서 컬렉션 하나만 실시간으로 구독하면 진행 현황·선택·성찰을 모두 볼 수 있어 읽기 횟수가 줄어듭니다(무료 요금제 범위). 한 학생 기록은 수십 KB 수준이라 문서 크기 제한(1MB)에 여유가 있습니다.
@@ -149,12 +161,12 @@ classes/{classId}/teacherOnly/highlights   교사가 고른 우수 답변 표시
 
 ## 4. PIN 과 기기 바꾸기 (Cloud Functions 없이)
 
-1. 입장할 때 학생이 PIN 4자리를 정하면, 브라우저에서 `SHA-256("cold-war-witness/v1:classId:번호:PIN")` 을 계산해 `pinHash` 로 저장합니다. **PIN 원문은 어디에도 저장하지 않습니다.**
-2. 다른 기기에서는 새 익명 계정으로 로그인한 뒤, 같은 방식으로 해시를 계산해 학생 문서에 `{ uid: 새uid, pinHash: 계산값 }` 업데이트를 보냅니다.
-3. 규칙은 **보낸 pinHash 가 저장된 pinHash 와 같고, uid·updatedAt 만 바뀌는 경우에만** 허용합니다. 새 계정은 문서를 읽을 수 없으므로, PIN 을 알아야만 같은 해시를 만들 수 있습니다.
-4. 성공하면 같은 배치로 `members/{새uid}` 를 만들고, 그다음부터 새 기기에서 기록을 읽고 씁니다.
+1. 입장할 때 학생이 PIN 4자리를 정하면, 브라우저에서 `SHA-256("cold-war-witness/v1:classId:번호:PIN")` 을 계산해 **학생 기록의 문서 id** 로 씁니다. **PIN 원문은 어디에도 저장하지 않습니다.**
+2. 한 배치로 `students/{해시}`(빈 기록) + `seats/{번호}` + `members/{uid}` 를 만듭니다. 번호가 이미 있으면 거부되고, 앱은 같은 PIN 으로 ‘이어 하기’를 한 번 시도합니다(예전에 들어온 학생일 수 있으므로).
+3. 다른 기기에서는 새 익명 계정으로 로그인한 뒤, 같은 방식으로 해시를 계산해 그 문서에 `{ uid: 새uid, updatedAt }` 업데이트를 보냅니다. 규칙은 **uid·updatedAt 만 바뀌는 경우에만** 허용합니다. PIN 이 틀리면 주소가 달라서 “문서 없음”으로 실패합니다.
+4. 성공하면 같은 배치로 `members/{새uid}` 를 만들고, 그다음부터 새 기기에서 기록을 읽고 씁니다. 옛 기기는 uid 가 달라져 더 이상 읽지 못합니다.
 
-**교사 PIN 초기화**: 교사 화면에서 새 임시 PIN 4자리를 만들어 보여 주고, 그 해시를 `pinHash` 에 씁니다. 학생은 임시 PIN 으로 기기를 옮긴 뒤 원하면 새 PIN 으로 바꿉니다.
+**교사 PIN 초기화**: 교사 화면에서 새 임시 PIN 4자리를 만들고, 그 PIN 으로 계산한 새 주소에 기록을 복사한 뒤 옛 문서를 지우고 번호 자리(seats)를 새 주소로 바꿉니다(한 배치). 임시 PIN 을 학생에게 알려 주면 학생은 ‘이어 하기’로 들어옵니다. (학생이 PIN 을 스스로 바꾸는 기능은 명세에 없어 만들지 않았습니다.)
 
 **알려진 한계**: PIN 이 4자리라서 같은 반 학생이 작정하고 1만 번을 시도하면 뚫릴 수 있습니다(서버 기능 없이 시도 횟수를 막을 방법이 없음). 대신 기기 이동 시각(`updatedAt`)과 uid 변화를 교사 화면에서 볼 수 있고, 교사가 언제든 PIN 을 초기화할 수 있습니다. README 에 이 한계를 적어 둡니다.
 
@@ -165,12 +177,15 @@ classes/{classId}/teacherOnly/highlights   교사가 고른 우수 답변 표시
 | classCodes/{code} | get ✅ list ❌ | get ✅ | 생성·삭제 ✅ | get ✅ 삭제 ❌ |
 | classes/{id} | 읽기 ✅(멤버일 때) | ❌ | 읽기·쓰기·삭제 ✅ | ❌ |
 | members/{uid} | 본인 것 생성·읽기 | ❌ | 읽기·삭제 ✅ | ❌ |
-| students/{n} | 읽기·쓰기(uid 일치) | ❌ | 읽기 ✅, pinHash 만 수정, 삭제 ✅ | ❌ |
+| seats/{n} | 입장할 때 생성만 | ❌ | 읽기·쓰기·삭제 ✅ | ❌ |
+| students/{id} | 읽기·쓰기(uid 일치), PIN 으로 uid 옮기기 | ❌ | 읽기 ✅, PIN 초기화(옮기기)·삭제 ✅, 답변 수정 ❌ | ❌ |
 | public/stats | 읽기(공개 ON 일 때) | — | 읽기·쓰기 ✅ | ❌ |
 | teacherOnly/* | ❌ | ❌ | 읽기·쓰기 ✅ | ❌ |
 
 - 모든 쓰기에서 필드 이름·타입·길이를 검증합니다(서술형 최대 500자).
-- 학급 삭제(데이터 파기): 교사 화면에서 학생·멤버·통계·하이라이트·학급 코드·학급 문서를 배치로 모두 지웁니다(두 번 확인).
+- 한 번 고른 선택·감정은 학생도 바꾸거나 지울 수 없습니다.
+- 학급 삭제(데이터 파기): 교사 화면에서 학생·자리·멤버·통계·하이라이트·학급 코드·학급 문서를 배치로 모두 지웁니다(두 번 확인).
+- 규칙 테스트: `tests/rules.test.ts` (39개, `npm run test:rules`)
 
 ## 6. 무료 요금제(Spark) 사용량 어림
 

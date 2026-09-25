@@ -228,6 +228,7 @@ export const CHAPTERS: Chapter[] = [
     },
     kselFocus: {
       question: '누군가 내 일상을 기록하고 있다면 어떤 감정이 들까요?',
+      starters: ['누군가 내 일상을 기록한다면 나는', '카트린이 되어 보니 가장 크게 느낀 감정은', '그 감정 때문에 나는 아마'],
     },
     reflection: {
       questions: [
@@ -235,12 +236,14 @@ export const CHAPTERS: Chapter[] = [
           id: 'ch1-q1',
           text: '슈타지는 수만 명의 사람이 손으로 기록했습니다. 오늘날 AI는 CCTV 영상, 위치 정보, 검색 기록을 순식간에 분석할 수 있습니다. 내 정보가 ‘필요한 범위를 넘어’ 수집된다면 어떤 일이 생길까요?',
           principleIds: ['privacy'],
+          starters: ['내 정보가 필요 이상으로 모이면', '슈타지의 기록과 AI의 분석이 다른 점은', '내 정보를 지키려면'],
           hint: '카트린이 이웃의 질문을 받았을 때의 마음을 떠올려 보세요.',
         },
         {
           id: 'ch1-q2',
           text: 'AI가 ‘이 사람은 위험하다’고 판단하고 사람은 그 판단을 그대로 따른다면, 누가 결정한 것일까요?',
           principleIds: ['humanCentric'],
+          starters: ['AI의 판단을 그대로 따르면, 결정한 것은', '사람이 마지막에 꼭 확인해야 하는 까닭은', '카트린의 파일처럼'],
           hint: '판단을 내린 것과 책임을 지는 것은 같은 사람일까요?',
         },
       ],
@@ -465,6 +468,7 @@ export const CHAPTERS: Chapter[] = [
     },
     kselFocus: {
       question: '근거 없는 낙인이 공동체에 어떤 상처를 남길까요?',
+      starters: ['근거 없는 낙인은 공동체에', '토머스가 느꼈을 마음은', '낙인찍힌 친구가 있다면 나는'],
     },
     reflection: {
       questions: [
@@ -472,18 +476,21 @@ export const CHAPTERS: Chapter[] = [
           id: 'ch2-q1',
           text: '만약 AI가 과거 기록이나 친구 관계만 보고 사람을 ‘위험 인물’로 분류한다면? AI가 학습한 데이터가 한쪽으로 치우쳐 있다면 누가 피해를 볼까요?',
           principleIds: ['fairness'],
+          starters: ['데이터가 한쪽으로 치우치면', '친구 관계만 보고 사람을 판단하면', '토머스처럼'],
           hint: '토머스가 의심받은 이유를 떠올려 보세요.',
         },
         {
           id: 'ch2-q2',
           text: 'AI의 잘못된 판단으로 누군가 피해를 입었다면, 책임은 누구에게 있을까요? (개발한 회사 / AI를 사용한 기관 / 결과를 그대로 믿은 사람)',
           principleIds: ['accountability'],
+          starters: ['책임은 ○○에게 있다고 생각한다. 왜냐하면', '한 사람만의 책임이 아닌 까닭은', '피해를 되돌리려면'],
           hint: '한 사람에게만 책임이 있을까요, 여럿에게 나뉘어 있을까요?',
         },
         {
           id: 'ch2-q3',
           text: '딥페이크로 누군가를 거짓으로 고발하는 영상이 퍼진다면, 1950년대의 ‘명단’과 무엇이 비슷할까요?',
           principleIds: ['fairness', 'accountability'],
+          starters: ['딥페이크 영상과 1950년대 명단이 비슷한 점은', '증거 없이 퍼진 고발은', '이런 영상을 보면 나는 먼저'],
         },
       ],
       minAnswers: 2,
@@ -707,6 +714,7 @@ export const CHAPTERS: Chapter[] = [
     },
     kselFocus: {
       question: '불확실하고 불안할 때, 나는 어떻게 판단하나요?',
+      starters: ['불안할 때 나는 보통', '마리처럼 판단하려면 먼저', '불안한 마음을 가라앉히는 나만의 방법은'],
     },
     reflection: {
       questions: [
@@ -714,17 +722,20 @@ export const CHAPTERS: Chapter[] = [
           id: 'ch3-q1',
           text: '소문과 사실이 뒤섞일 때 사람들은 불안해집니다. AI가 만든 그럴듯한 가짜 뉴스가 위기 상황에 퍼진다면 어떤 일이 생길까요? AI가 알려주는 정보를 어떻게 확인해야 할까요?',
           principleIds: ['reliability'],
+          starters: ['AI가 만든 가짜 뉴스가 퍼지면', 'AI가 알려 준 정보를 확인하려면', '마리처럼 사실과 소문을 나누면'],
           hint: '마리가 소문 기사를 앞두고 고민한 장면을 떠올려 보세요.',
         },
         {
           id: 'ch3-q2',
           text: 'B-59 잠수함처럼 정보가 끊긴 상황에서, 만약 사람 대신 AI가 자동으로 발사를 결정했다면 어땠을까요?',
           principleIds: ['safety'],
+          starters: ['AI가 자동으로 결정했다면', '사람이 멈출 수 있어야 하는 까닭은', 'B-59의 장교처럼'],
         },
         {
           id: 'ch3-q3',
           text: 'AI가 어떤 결정을 내렸는지, 그 이유와 한계를 사람들에게 알려야 할까요? 비밀로 해도 될 때가 있을까요?',
           principleIds: ['transparency'],
+          starters: ['AI가 결정한 이유를 알려야 하는 까닭은', '비밀로 해도 되는 때가 있다면', '25년 넘게 비밀이었던 합의처럼'],
           hint: '25년 넘게 비밀이었던 합의를 떠올려 보세요.',
         },
       ],

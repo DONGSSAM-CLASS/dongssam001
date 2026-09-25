@@ -2,30 +2,70 @@
 
 /*
  * 디자인 콘셉트: 기밀 해제된 냉전 문서 보관소
- * 색은 여기서만 정한다. 챕터 색은 [data-theme] 로 바꿔 끼운다. (Phase 3 에서 확장)
+ * - 오래된 서류철(paper), 타자기 글씨(mono), 빨간 ‘기밀’ 도장 → 초록 ‘해제됨’ 도장
+ * - 챕터 색은 [data-chapter] 로 바꿔 끼운다.
+ * 명도 대비: 본문 글자는 모두 WCAG AA(4.5:1) 이상이 되도록 골랐다.
  */
 @theme {
   --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono: "Nanum Gothic Coding", "D2Coding", ui-monospace, monospace;
 
-  --color-paper: #f4ecd8; /* 오래된 서류 */
-  --color-ink: #2b2620; /* 타자기 잉크 */
-  --color-stamp: #b3261e; /* 빨간 기밀 도장 */
-  --color-declass: #1f6f43; /* 해제됨 도장 */
+  --color-paper: #f4ecd8;
+  --color-paper-dark: #e8dcc0;
+  --color-folder: #d9c49a;
+  --color-ink: #2b2620;
+  --color-ink-soft: #564c40;
+  --color-stamp: #b3261e;
+  --color-declass: #1f6f43;
+  --color-line: #c9b98f;
 
-  /* CH1 동베를린: 회청색 */
   --color-berlin-900: #26323d;
   --color-berlin-600: #4f6475;
   --color-berlin-100: #dfe6ec;
-  /* CH2 1950년대 뉴욕: 세피아·브라운 */
   --color-newyork-900: #3b2a1a;
   --color-newyork-600: #7a5634;
   --color-newyork-100: #efe2cf;
-  /* CH3 1962년 플로리다: 짙은 남색 + 경고 주황 */
   --color-florida-900: #14213d;
   --color-florida-600: #2c4a7a;
   --color-florida-100: #dde4f0;
-  --color-florida-warn: #c2570c;
+  --color-florida-warn: #b04e0a;
+
+  --animate-stamp: stamp 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  --animate-rise: rise 0.35s ease-out both;
+  --animate-unfold: unfold 0.4s ease-out both;
+}
+
+/* 챕터 색 — 화면은 ch-* 이름만 쓴다 */
+@theme inline {
+  --color-ch-900: var(--ch-900);
+  --color-ch-600: var(--ch-600);
+  --color-ch-100: var(--ch-100);
+  --color-ch-accent: var(--ch-accent);
+}
+
+:root {
+  --ch-900: #2b2620;
+  --ch-600: #564c40;
+  --ch-100: #efe6d0;
+  --ch-accent: #b3261e;
+}
+[data-chapter="berlin"] {
+  --ch-900: var(--color-berlin-900);
+  --ch-600: var(--color-berlin-600);
+  --ch-100: var(--color-berlin-100);
+  --ch-accent: #7a3b2e;
+}
+[data-chapter="newyork"] {
+  --ch-900: var(--color-newyork-900);
+  --ch-600: var(--color-newyork-600);
+  --ch-100: var(--color-newyork-100);
+  --ch-accent: #8a3a1c;
+}
+[data-chapter="florida"] {
+  --ch-900: var(--color-florida-900);
+  --ch-600: var(--color-florida-600);
+  --ch-100: var(--color-florida-100);
+  --ch-accent: var(--color-florida-warn);
 }
 
 html,
@@ -35,12 +75,93 @@ body {
 }
 
 body {
-  background: var(--color-paper);
+  background-color: var(--color-paper);
+  /* 종이 결: 아주 옅은 가로줄 */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 31px,
+    rgba(120, 100, 60, 0.05) 31px,
+    rgba(120, 100, 60, 0.05) 32px
+  );
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 17px; /* 본문 최소 16px */
-  line-height: 1.7;
-  word-break: keep-all; /* 한국어 낱말이 중간에서 잘리지 않게 한다. */
+  line-height: 1.75;
+  word-break: keep-all; /* 한국어 낱말이 중간에서 잘리지 않게 */
+  overflow-wrap: anywhere;
+}
+
+/* 키보드로 움직일 때 초점이 잘 보이게 */
+:focus-visible {
+  outline: 3px solid #1d4e89;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 서류철 카드 */
+.dossier {
+  background: #fbf6ea;
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.04),
+    0 8px 20px -12px rgba(60, 40, 10, 0.35);
+}
+
+/* 타자기 글씨 */
+.typewriter {
+  font-family: var(--font-mono);
+  letter-spacing: 0.01em;
+}
+
+/* 도장 */
+.stamp {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  border: 3px solid currentColor;
+  border-radius: 6px;
+  padding: 0.1em 0.6em;
+  transform: rotate(-8deg);
+  opacity: 0.92;
+}
+
+@keyframes stamp {
+  0% {
+    opacity: 0;
+    transform: scale(2.4) rotate(-20deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.92) rotate(-8deg);
+  }
+  100% {
+    opacity: 0.92;
+    transform: scale(1) rotate(-8deg);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes unfold {
+  from {
+    opacity: 0;
+    transform: scaleY(0.85);
+    transform-origin: top;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* 애니메이션 끄기: 운영체제 설정 또는 앱 설정(data-reduce-motion) */
@@ -49,6 +170,7 @@ body {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
@@ -56,5 +178,43 @@ body {
 [data-reduce-motion="true"] *::before,
 [data-reduce-motion="true"] *::after {
   animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
+}
+
+/* 모달 뒤 배경 */
+dialog::backdrop {
+  background: rgba(30, 24, 16, 0.55);
+}
+
+/* ─────────── 인쇄 ─────────── */
+@page {
+  size: A4;
+  margin: 15mm 14mm;
+}
+@media print {
+  body {
+    background: #fff;
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-page {
+    break-after: page;
+  }
+  .print-page:last-child {
+    break-after: auto;
+  }
+  .avoid-break {
+    break-inside: avoid;
+  }
+  .dossier {
+    box-shadow: none;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
