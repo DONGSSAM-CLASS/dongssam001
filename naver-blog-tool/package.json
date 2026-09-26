@@ -2,7 +2,7 @@
   "name": "naver-blog-tool",
   "version": "1.0.0",
   "private": true,
-  "description": "동쌤의 AI 활용 블로그 자동 작성 툴 — 사진 + 메모 → 초안 → 승인 후 네이버 임시저장 (발행은 사람이)",
+  "description": "동쌤 생활 돈 정보 블로그(애드포스트) 자동 작성 툴 — 캡처 + 메모 → 사실 검증 → 초안 → 승인 후 네이버 임시저장 (발행은 사람이)",
   "type": "commonjs",
   "scripts": {
     "login": "node scripts/naver_login.js",

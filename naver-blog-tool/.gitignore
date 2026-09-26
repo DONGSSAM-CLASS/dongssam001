@@ -12,4 +12,4 @@ input/videos/*
 # 초안·검증 산출물 (첫 테스트 초안만 추적)
 drafts/*
 !drafts/.gitkeep
-!drafts/20260925-ai-quiz-game.json
+!drafts/20260926-yearend-preview.json

@@ -12,6 +12,10 @@ const BREAK_TYPES = ['subtitle', 'image', 'quote', 'divider']; // 리듬 파괴 
 const AD_WORDS = ['최고의', '최저가', '무조건', '100%', '대박', '강추', '완벽한', '보장', '특가', '파격', '할인코드', '역대급', '필수템', '인생템'];
 // 협찬 글에서 쓰면 위법이 되는 거짓 부인 표현
 const FALSE_DENIAL = ['내돈내산', '내 돈 내 산', '광고 아님', '광고아님', '협찬 아님', '협찬아님', '광고 아닙니다', '협찬 아닙니다'];
+// 애드포스트 운영정책 위반 — 광고 클릭 유도
+const AD_CLICK_BAIT = /광고[^\n.!?]{0,10}(클릭|눌러|누르|터치|봐\s*주)/;
+// 돈 글: 본문 숫자(날짜·금액·비율 등) 추출 — 모두 facts 에 등록돼 있어야 한다
+const MONEY_NUMBER_RE = /\d[\d,.]*\s*(?:만\s*원|억\s*원|천\s*원|원|%|퍼센트|개월|년|월|일|세|명|회|배)/g;
 // 협찬 표기로 인정할 단서 (data/sponsored-disclosure.md 문구와 맞출 것)
 const DISCLOSURE_HINTS = ['제공받', '지원받', '협찬', '광고', '수수료', '원고료', '무상으로', '체험단'];
 // 제목 금지 특수문자
@@ -150,7 +154,7 @@ function checkDraft(draft, { requireFiles = true } = {}) {
   const charsNoSpace = strip(bodyJoined).length;
   const charsWithSpace = bodyJoined.replace(/\n/g, '').length;
   stats.chars = { noSpace: charsNoSpace, withSpace: charsWithSpace };
-  const isInfo = draft.postType === 'info';
+  const isInfo = draft.postType === 'info' || draft.postType === 'money';
   const maxChars = isInfo ? 3000 : 2500;
   if (charsNoSpace < 1800 || charsNoSpace > maxChars) warnings.push(`본문 ${charsNoSpace}자(공백 제외) — 1,800~${maxChars.toLocaleString()}자 권장.`);
 
@@ -209,6 +213,42 @@ function checkDraft(draft, { requireFiles = true } = {}) {
   const placeholders = allText.match(/\[[^\]\n]{1,30}\]|\{[^}\n]{1,30}\}|❓/g) || [];
   if (placeholders.length) errors.push(`채워지지 않은 자리표시자: ${[...new Set(placeholders)].slice(0, 5).join(', ')} — 사용자에게 확인 후 채우세요.`);
   if (!draft.persona) warnings.push('persona(검색자 페르소나)가 비어 있습니다 — 초안 검수 보고에 필수.');
+
+  // ── 애드포스트: 광고 클릭 유도 금지 (모든 글) ──
+  const bait = allText.split('\n').find((l) => AD_CLICK_BAIT.test(l));
+  if (bait) errors.push(`광고 클릭 유도 문구 (애드포스트 정책 위반): "${bait.slice(0, 40)}"`);
+
+  // ── 돈 정보 글: 공식 출처 · 사실 검증 · 기준일 ──
+  if (draft.postType === 'money') {
+    const sources = Array.isArray(draft.sources) ? draft.sources : [];
+    const facts = Array.isArray(draft.facts) ? draft.facts : [];
+    const ids = new Set(sources.map((x) => x && x.id));
+    if (!sources.length) errors.push('돈 정보 글은 sources(공식 1차 출처)가 필수입니다.');
+    sources.forEach((x, i) => {
+      if (!x || !x.id || !/^https?:\/\//.test(String(x.url || ''))) errors.push(`sources[${i}] 에 id 와 공식 URL 이 필요합니다.`);
+    });
+    if (!facts.length) errors.push('돈 정보 글은 facts(본문의 숫자·날짜·자격 주장 목록)가 필수입니다.');
+    const unverified = facts.filter((f) => f.verified !== true);
+    facts.forEach((f, i) => {
+      if (!ids.has(f.source)) errors.push(`facts[${i}] source "${f.source}" 가 sources 에 없습니다.`);
+      if (f.verified === true && !String(f.evidence || '').trim()) errors.push(`facts[${i}] verified 인데 evidence(출처 원문 발췌)가 없습니다.`);
+    });
+    if (unverified.length) errors.push(`미검증 사실 ${unverified.length}/${facts.length}건 — /verify-facts 로 공식 출처와 대조하세요. 예: "${String(unverified[0].claim).slice(0, 40)}"`);
+    const usedSrc = new Set(facts.filter((f) => f.verified === true).map((f) => f.source));
+    sources.filter((x) => usedSrc.has(x.id) && !x.checkedAt).forEach((x) => errors.push(`sources ${x.id} 확인 날짜(checkedAt)가 비어 있습니다.`));
+    stats.facts = { total: facts.length, verified: facts.length - unverified.length };
+
+    if (!draft.basisDate) errors.push('basisDate(정보 기준일)가 필요합니다.');
+    if (!/20\d{2}년[^\n]{0,20}기준/.test(allText)) errors.push('본문에 "20○○년 ○월 ○일 기준" 같은 기준일 문구가 없습니다.');
+
+    // 본문 숫자가 facts 에 등록돼 있는지 (등록 안 된 숫자 = 검증 안 된 숫자)
+    const claims = strip(facts.map((f) => f.claim).join(' '));
+    const bodyOnly = [draft.title, ...blocks.map(blockText)].join('\n').replace(/20\d{2}년[^\n]{0,20}기준/g, ''); // 기준일 문구 자체는 제외
+    const nums = [...new Set((bodyOnly.match(MONEY_NUMBER_RE) || []).map((n) => n.trim()))];
+    const unregistered = nums.filter((n) => !claims.includes(strip(n)));
+    stats.numbers = { total: nums.length, unregistered: unregistered.length };
+    if (unregistered.length) errors.push(`facts 에 없는 숫자 ${unregistered.length}개: ${unregistered.slice(0, 8).join(', ')} — facts 에 등록해 검증하거나 본문에서 빼세요.`);
+  }
 
   return { errors, warnings, info, stats };
 }

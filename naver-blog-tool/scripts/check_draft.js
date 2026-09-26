@@ -23,6 +23,8 @@ function main() {
   if (stats.chars) console.log(`본문 글자 수: 공백 제외 ${stats.chars.noSpace}자 / 공백 포함 ${stats.chars.withSpace}자`);
   console.log(`사진 ${stats.images ?? 0}장 · 인용구 ${stats.quotes ?? 0}개 · 소제목 ${stats.subtitles ?? 0}개 · 최대 텍스트 연속 ${stats.maxTextRun ?? 0}자`);
   if (stats.captions) console.log(`캡션 ${stats.captions.captioned}개 (키워드 포함 ${stats.captions.withKeyword}개)`);
+  if (stats.facts) console.log(`사실 검증 ${stats.facts.verified}/${stats.facts.total}건 · 본문 숫자 ${stats.numbers.total}개 (미등록 ${stats.numbers.unregistered}개) · 기준일 ${draft.basisDate || '없음'}`);
+  if (draft.shotList && draft.shotList.length) console.log(`캡처 목록(shotList) ${draft.shotList.length}장 — 사용자가 준비해야 함`);
   console.log(`태그 ${(draft.tags || []).length}개 · 지도 ${draft.place ? '있음' : '없음'} · 동영상 ${draft.video ? '있음' : '없음'} · 협찬 ${draft.sponsored === true ? '예' : draft.sponsored === false ? '아니오' : '미정'}`);
 
   const print = (label, arr) => {

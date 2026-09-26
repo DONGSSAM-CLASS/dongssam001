@@ -36,6 +36,18 @@ function render(draft) {
     .join('\n');
   const video = draft.video ? `<div class="meta-note">🎬 동영상: 첫 문단 바로 아래에 삽입 — ${esc(draft.video.path)}</div>` : '';
   const place = draft.place ? `<div class="meta-note">📍 지도: 글 맨 끝 — ${esc(draft.place.name)}</div>` : '';
+  const srcById = Object.fromEntries((draft.sources || []).map((x) => [x.id, x]));
+  const facts = (draft.facts || []).length
+    ? `<section class="facts"><h3>사실 검증 현황 (${draft.facts.filter((f) => f.verified === true).length}/${draft.facts.length}) · 기준일 ${esc(draft.basisDate || '-')}</h3><ul>${draft.facts
+        .map((f) => {
+          const src = srcById[f.source];
+          return `<li class="${f.verified === true ? 'ok' : 'todo'}">${f.verified === true ? '✅' : '⏳ 미검증'} ${esc(f.claim)} <small>— ${src ? `<a href="${esc(src.url)}">${esc(src.title || src.id)}</a>` : esc(f.source || '출처 없음')}</small></li>`;
+        })
+        .join('')}</ul></section>`
+    : '';
+  const shots = (draft.shotList || []).length
+    ? `<section class="facts"><h3>준비할 캡처 (${draft.shotList.length}장)</h3><ol>${draft.shotList.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></section>`
+    : '';
   const tags = (draft.tags || []).map((t) => `<span>#${esc(String(t).replace(/^#+/, ''))}</span>`).join('');
   return `<!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,6 +70,8 @@ figure { margin:22px -16px; } figure img { width:100%; display:block; }
 figcaption { font-size:13px; color:var(--sub); text-align:center; padding:8px 16px 0; }
 hr { border:0; border-top:1px solid var(--line); margin:34px 30%; }
 .tags { margin-top:30px; display:flex; flex-wrap:wrap; gap:6px; } .tags span { font-size:13px; color:var(--accent); }
+.facts { max-width:430px; margin:12px auto 0; padding:12px 16px; background:var(--paper); border-radius:12px; font-size:13px; line-height:1.6; }
+.facts h3 { font-size:14px; margin:0 0 6px; } .facts ul, .facts ol { margin:0; padding-left:18px; } .facts li.todo { color:#b45309; } .facts a { color:var(--accent); }
 .meta-note, .missing { font-size:13px; color:var(--sub); border:1px dashed var(--line); padding:8px 10px; border-radius:8px; margin:10px 0; }
 </style></head><body>
 <div class="meta">
@@ -65,6 +79,8 @@ hr { border:0; border-top:1px solid var(--line); margin:34px 30%; }
   <div><b>페르소나</b> ${esc(draft.persona || '-')}</div>
   <div><b>후킹</b> ${esc(draft.hookPattern || '-')} · <b>협찬</b> ${draft.sponsored ? '예' : '아니오'}</div>
 </div>
+${facts}
+${shots}
 <article>
 <h1>${esc(draft.title)}</h1>
 ${video}
