@@ -27,8 +27,10 @@ function render(draft) {
       if (b.type === 'quote') return `<blockquote>${lines(b.text)}</blockquote>`;
       if (b.type === 'divider') return '<hr>';
       if (b.type === 'image') {
-        const src = imgSrc(b.path);
-        const img = src ? `<img src="${src}" alt="${esc(b.caption || path.basename(b.path))}">` : `<div class="missing">사진 없음: ${esc(b.path)}</div>`;
+        const src = b.path ? imgSrc(b.path) : null;
+        const img = src
+          ? `<img src="${src}" alt="${esc(b.caption || path.basename(b.path))}">`
+          : `<div class="missing">📷 ${esc(b.label || `사진 없음: ${b.path || ''}`)}</div>`;
         return `<figure>${img}${b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : ''}</figure>`;
       }
       return '';

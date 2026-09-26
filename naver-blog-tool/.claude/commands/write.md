@@ -52,6 +52,10 @@ CLAUDE.md의 절대 규칙·글쓰기 공식·자가 검증 원칙을 전부 따
 
 수정 요청을 받으면 반영 → check_draft 재실행 → 다시 보고. 말투·구성 관련 피드백은 `data/blogger-profile.md` "교정 피드백 누적 기록"에 남긴다.
 
+## 7-M. (모바일 모드) 승인 후 붙여넣기 키트
+- 클라우드 세션이거나 사용자가 PC가 없으면 자동 임시저장 대신: `node scripts/mobile_kit.js drafts/<초안>.json` → 키트 파일을 사용자에게 보내고, 네이버 블로그 앱에서 순서대로 붙여넣고 **저장(임시저장)** 하도록 안내 (CLAUDE.md "모바일 모드").
+- 임시저장 후 앱 미리보기 캡처를 받으면 초안과 대조해 누락·서식 오류를 알려 준다.
+
 ## 7. 승인 후 임시저장
 - 셀렉터를 최근에 고쳤거나 첫 실행이면 먼저 `node scripts/naver_draft.js drafts/<초안>.json --dry-run`.
 - 본 실행: `node scripts/naver_draft.js drafts/<초안>.json`

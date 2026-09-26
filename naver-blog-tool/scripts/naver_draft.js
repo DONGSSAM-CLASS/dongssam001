@@ -527,6 +527,13 @@ async function main() {
   const base = path.basename(draft.__file, '.json');
   fs.mkdirSync(DRAFTS_DIR, { recursive: true });
 
+  // 자동 임시저장은 실제 사진 파일이 있어야 한다 (모바일 수동 모드 초안이라도 파일이 준비돼 있어야 함)
+  const missing = draft.blocks.filter((b) => b.type === 'image' && (!b.path || !fs.existsSync(resolvePath(b.path))));
+  if (missing.length) {
+    console.error(`❌ 사진 파일 ${missing.length}장이 없습니다 — PC 자동 임시저장은 input/photos/ 에 파일이 있어야 해요. (모바일에서는 scripts/mobile_kit.js 로 수동 붙여넣기)`);
+    missing.slice(0, 5).forEach((b) => console.error(`  - ${b.path || '(path 없음)'} ${b.label ? `— ${b.label}` : ''}`));
+    process.exit(1);
+  }
   const check = checkDraft(draft);
   if (check.errors.length) {
     console.error('❌ 초안 오류 — 임시저장 전에 수정하세요:');

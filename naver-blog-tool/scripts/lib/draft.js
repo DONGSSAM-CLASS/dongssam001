@@ -68,6 +68,9 @@ function checkDraft(draft, { requireFiles = true } = {}) {
   const errors = [];
   const warnings = [];
   const info = [];
+  // imageMode "manual" = 모바일 수동 모드: 사진은 사용자가 폰 갤러리에서 네이버 블로그 앱에 직접 넣는다 → 파일 대신 label 필수
+  const manualImages = draft.imageMode === 'manual';
+  if (manualImages) requireFiles = false;
 
   // ── 구조 ──
   if (!draft.title || typeof draft.title !== 'string') errors.push('title(제목)이 없습니다.');
@@ -78,14 +81,16 @@ function checkDraft(draft, { requireFiles = true } = {}) {
     if (!b || !BLOCK_TYPES.includes(b.type)) errors.push(`blocks[${i}] type 이 올바르지 않습니다 (${b && b.type}). 허용: ${BLOCK_TYPES.join('/')}`);
     else if (['text', 'subtitle', 'quote'].includes(b.type) && !strip(b.text)) errors.push(`blocks[${i}] (${b.type}) text 가 비어 있습니다.`);
     else if (b.type === 'image') {
-      if (!b.path) errors.push(`blocks[${i}] image path 가 없습니다.`);
+      if (manualImages) {
+        if (!String(b.label || '').trim()) errors.push(`blocks[${i}] 모바일 수동 모드 사진에는 label(어떤 캡처인지)이 필요합니다.`);
+      } else if (!b.path) errors.push(`blocks[${i}] image path 가 없습니다.`);
       else if (requireFiles && !fs.existsSync(resolvePath(b.path))) errors.push(`blocks[${i}] 사진 파일이 없습니다: ${b.path}`);
     }
   });
   if (blocks.length && blocks[0].type !== 'text') warnings.push('첫 블록이 text 가 아닙니다 — Yes-set 첫 문단(또는 협찬 표기)이 맨 앞에 와야 합니다.');
 
   // 사진 재사용 금지
-  const imgPaths = blocks.filter((b) => b.type === 'image').map((b) => path.normalize(String(b.path)));
+  const imgPaths = blocks.filter((b) => b.type === 'image' && b.path).map((b) => path.normalize(String(b.path)));
   const dup = imgPaths.filter((p, i) => imgPaths.indexOf(p) !== i);
   if (dup.length) errors.push(`같은 사진이 두 번 쓰였습니다: ${[...new Set(dup)].join(', ')}`);
 

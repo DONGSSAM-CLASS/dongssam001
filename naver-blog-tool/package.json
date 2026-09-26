@@ -10,6 +10,7 @@
     "draft": "node scripts/naver_draft.js",
     "draft:dry": "node scripts/naver_draft.js --dry-run",
     "preview": "node scripts/preview_draft.js",
+    "kit": "node scripts/mobile_kit.js",
     "mosaic": "node scripts/mosaic.js",
     "probe": "node scripts/probe_selectors.js"
   },
