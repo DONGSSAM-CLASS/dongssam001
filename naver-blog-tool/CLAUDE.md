@@ -185,7 +185,7 @@
 - [x] mosaic.js / 발행 차단 가드 / 한글·이모지 입력 브라우저 검증 (클라우드 세션)
 - [x] 첫 돈 정보 초안: `drafts/20260926-yearend-preview.json` ("연말정산 미리보기") — 본문 작성 완료, **facts 미검증 + 캡처 미첨부 상태라 check_draft가 의도적으로 막는 중**
 - [ ] 사용자 PC 설치: `npm install` → `npx playwright install chromium` → `/setup-login`
-- [x] 모바일 모드 추가(2026-09-26): 초안을 `imageMode: manual` + 손택스 캡처 라벨로 전환, 모바일 붙여넣기 키트 생성
+- [x] 모바일 모드 추가(2026-09-26) — 이후 사용자가 **PC 자동화로 진행**하기로 결정, 첫 초안은 PC 모드(홈택스 캡처 파일 `input/photos/yearend-01~11.png`)로 복귀
 - [ ] 사실 검증 — PC: `/verify-facts` / 모바일: 공식 페이지 캡처·원문을 채팅에 첨부 (클라우드 세션은 정부 사이트 접속 차단)
 - [ ] shotList대로 홈택스 캡처 → 모자이크 → 초안 이미지 경로 반영 → 승인 → `--dry-run` → 임시저장
 - [ ] 겸직허가 확인 (사용자), 애드포스트 가입 조건 확인 후 신청
