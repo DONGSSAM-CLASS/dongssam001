@@ -1,0 +1,26 @@
+{
+  "name": "tistory-blog-tool",
+  "version": "1.0.0",
+  "private": true,
+  "description": "티스토리 + 구글 애드센스 수익형 블로그 — 하루 최대 5개 고품질 글 자동 작성 파이프라인 (Claude Code + 품질 게이트 + Playwright 업로드)",
+  "type": "commonjs",
+  "scripts": {
+    "check": "node scripts/check.js",
+    "build": "node scripts/build.js",
+    "queue": "node scripts/queue.js",
+    "login": "node scripts/tistory_login.js",
+    "upload": "node scripts/tistory_upload.js",
+    "upload:dry": "node scripts/tistory_upload.js --dry-run",
+    "probe": "node scripts/probe.js",
+    "sync": "node scripts/sync_existing.js",
+    "test": "node scripts/selftest.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "marked": "^14.1.4",
+    "playwright": "^1.56.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

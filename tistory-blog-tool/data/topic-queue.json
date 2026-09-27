@@ -1,0 +1,4 @@
+{
+  "_format": "topics[]: { id, status(queued|writing|drafted|done|skipped), priority(1~5), cluster, category, format, mainKeyword, angle(검색 의도·각도 한 줄), window(\"YYYY-MM-DD~YYYY-MM-DD\" 발행 적기, 선택), ymyl, sourceHint(1차 출처 기관), experienceHint(experience-bank id, 선택), date, post, note }",
+  "topics": []
+}

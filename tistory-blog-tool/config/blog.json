@@ -1,0 +1,44 @@
+{
+  "_comment": "/setup-blog 가 채운다. ❓ 값은 사용자 확인 전 — 업로드 스크립트는 blogUrl 이 ❓면 멈춘다.",
+  "blogUrl": "❓ https://내블로그.tistory.com",
+  "blogName": "❓",
+  "niche": "❓ 예: 생활 돈 정보(정부지원금·세금·환급) — /setup-blog 로 확정",
+  "categories": [
+    "❓ 카테고리1",
+    "❓ 카테고리2"
+  ],
+  "dailyQuota": 5,
+  "minReviewScore": 80,
+  "pipelineMode": "review-first",
+  "_pipelineMode": "review-first = 초안·대시보드까지만 만들고 승인 후 /upload | private-auto = /daily 끝에 비공개 저장까지 자동",
+  "scheduleSlots": [
+    "07:40",
+    "10:30",
+    "13:10",
+    "18:40",
+    "21:20"
+  ],
+  "scheduleJitterMinutes": 12,
+  "minGapMinutes": 90,
+  "similarity": {
+    "error": 0.35,
+    "warn": 0.2
+  },
+  "length": {
+    "minError": 1500,
+    "min": 2000,
+    "max": 4500
+  },
+  "browser": {
+    "channel": null,
+    "executablePath": null,
+    "headless": false
+  },
+  "authorBox": true,
+  "author": {
+    "name": "❓ 필명",
+    "bio": "❓ 한 줄 소개 — 사실만 (예: 현직 중학교 교사, 공고문을 한 장으로 정리해 드려요)"
+  },
+  "aiDisclosure": null,
+  "_aiDisclosure": "선택: 글 끝에 넣을 문구 (예: \"이 글은 AI 도구로 초안을 만든 뒤 공식 자료로 직접 확인·수정했어요.\") — null 이면 넣지 않음"
+}
