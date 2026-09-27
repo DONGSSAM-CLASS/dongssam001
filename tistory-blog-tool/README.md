@@ -116,6 +116,7 @@ Windows 작업 스케줄러:
 | `npm run upload:dry -- <날짜> --only 1` | 저장 없이 입력만 테스트 |
 | `npm run probe` | 티스토리 화면 구조 진단 (업로드가 셀렉터 문제로 실패할 때) |
 | `npm run login` / `npm run sync` / `npm test` | 로그인 / 기존 글 동기화 / 자체 테스트 |
+| `node scripts/youtube_info.js <주소>` | 참고 유튜브 영상의 제목·설명·챕터·댓글 |
 
 ## 자주 막히는 지점
 
@@ -134,6 +135,7 @@ Windows 작업 스케줄러:
 
 ## 참고한 자료
 
-- 사용자가 준 유튜브 영상(`youtube.com/watch?v=wUFtsYHQOpI`)은 이 시스템을 만든 클라우드 환경에서 유튜브 접속이 막혀 직접 보지 못했어요. 영상 속 방법 중 넣고 싶은 게 있으면 말씀해 주세요.
+- 사용자가 준 유튜브 영상: 조코딩 「바이브 코딩 기초, 수익형 웹 사이트 만들고 돈 벌기」(2026-01-23) — 제목·설명·챕터·댓글로 확인(자막 전문은 못 받음). 티스토리 자동화가 아니라 **직접 만든 웹사이트에 애드센스를 붙이는 강의**라, 이 시스템에는 애드센스 주의 사항 쪽만 해당돼요 (이미 `data/policy-guardrails.md`에 반영).
+  - 다른 영상도 참고하려면: `node scripts/youtube_info.js <유튜브 주소>` (제목·설명·챕터·인기 댓글). 대본까지 필요하면 내 PC에서 `yt-dlp --skip-download --write-auto-subs --sub-langs ko <주소>`.
 - 티스토리 에디터 셀렉터: 공개 오픈소스 [Jinxxlog/auto_tstory](https://github.com/Jinxxlog/auto_tstory), [kgbae99/tistory-blog-auto](https://github.com/kgbae99/tistory-blog-auto)의 2026-09 실측값 (코드는 새로 작성)
 - 구글 검색 센터 스팸 정책·도움이 되는 콘텐츠·생성형 AI 안내, 애드센스 프로그램 정책 — 링크는 `data/policy-guardrails.md`

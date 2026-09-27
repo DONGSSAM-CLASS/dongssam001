@@ -62,6 +62,7 @@
 | `scripts/meta.js` | front matter 값 안전 변경 (상태·검수 점수·승인) |
 | `scripts/tistory_upload.js` | 티스토리 업로드 (기본 비공개 / `--schedule` / `--public` / `--dry-run`) |
 | `scripts/tistory_login.js` · `probe.js` · `sync_existing.js` | 로그인 1회 · 셀렉터 진단(읽기 전용) · 기존 글 동기화 |
+| `scripts/youtube_info.js` | 참고 유튜브 영상 제목·설명·챕터·댓글 (클라우드에서도 동작, 자막 전문은 PC 의 yt-dlp) |
 | `scripts/selftest.js` | 자체 테스트 (`npm test`) — 게이트·빌드·업로더(가짜 티스토리) |
 | `scripts/run-daily.ps1` · `run-daily.sh` | 매일 자동 실행용 (작업 스케줄러 / cron) |
 
