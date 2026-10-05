@@ -1,0 +1,19 @@
+{
+  "name": "content-studio",
+  "private": true,
+  "version": "0.1.0",
+  "description": "주제 하나로 판매용 수업 자료 패키지와 판매·홍보 문구를 한 번에 만드는 도구",
+  "type": "module",
+  "scripts": {
+    "make": "node src/cli.mjs",
+    "demo": "node src/cli.mjs --demo",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "zod": "^4.6.5"
+  }
+}
