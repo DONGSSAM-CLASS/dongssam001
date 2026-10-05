@@ -32,14 +32,14 @@ const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 // 장면 경계(프레임). 다음 장면은 이전 장면 끝보다 조금 일찍 시작해 찢어진 종이로 덮는다.
 export const SCENES = {
-  ur: [0, 150],
-  merchant: [138, 214],
-  offer: [204, 296],
-  angry: [284, 470],
-  night: [458, 506],
-  phone: [494, 624],
-  dig: [612, 732],
-  card: [720, 870],
+  ur: [0, 126],
+  merchant: [114, 178],
+  offer: [166, 230],
+  angry: [218, 372],
+  night: [360, 400],
+  phone: [388, 516],
+  dig: [504, 624],
+  card: [612, 780],
 } as const;
 
 const Scene: React.FC<{ k: keyof typeof SCENES; children: React.ReactNode; tear?: boolean; seed?: string }> = ({
@@ -59,19 +59,19 @@ const Scene: React.FC<{ k: keyof typeof SCENES; children: React.ReactNode; tear?
 /* 1. 3,750년 전 우르 */
 const UrScene: React.FC = () => (
   <AbsoluteFill>
-    <KenBurns src="img/s1_ur.jpg" dur={150} from={1.04} to={1.13} panX={-30} origin="40% 45%" />
+    <KenBurns src="img/s1_ur.jpg" dur={126} from={1.04} to={1.13} panX={-30} origin="40% 45%" />
     <PaperGrain />
-    <HandLabel text={TEXT.ur} x={1060} y={200} size={70} delay={s(2.5)} check rotate={-4} />
-    <Arrow d="M 1050 250 C 980 250, 930 270, 880 300" head={{ x: 880, y: 300, angle: 160 }} delay={s(2.9)} />
-    <HandLabel text={TEXT.ziggurat} x={230} y={650} size={56} delay={s(3.4)} rotate={3} />
-    <Arrow d="M 330 640 C 360 590, 400 560, 450 540" head={{ x: 450, y: 540, angle: -30 }} delay={s(3.6)} />
+    <HandLabel text={TEXT.ur} x={1060} y={200} size={70} delay={s(1.9)} check rotate={-4} />
+    <Arrow d="M 1050 250 C 980 250, 930 270, 880 300" head={{ x: 880, y: 300, angle: 160 }} delay={s(2.3)} />
+    <HandLabel text={TEXT.ziggurat} x={230} y={650} size={56} delay={s(2.9)} rotate={3} />
+    <Arrow d="M 330 640 C 360 590, 400 560, 450 540" head={{ x: 450, y: 540, angle: -30 }} delay={s(3.1)} />
   </AbsoluteFill>
 );
 
 /* 2. 구리 상인 에아나시르 */
 const MerchantScene: React.FC = () => (
   <AbsoluteFill>
-    <KenBurns src="img/s2_merchant.jpg" dur={76} from={1.05} to={1.11} origin="65% 30%" />
+    <KenBurns src="img/s2_merchant.jpg" dur={64} from={1.05} to={1.11} origin="65% 30%" />
     <PaperGrain />
     <HandLabel text={TEXT.merchant} x={110} y={170} size={72} delay={8} check rotate={-3} />
     <Arrow d="M 820 270 C 900 250, 960 260, 1030 300" head={{ x: 1030, y: 300, angle: 25 }} delay={14} />
@@ -83,31 +83,32 @@ const MerchantScene: React.FC = () => (
 /* 3. 불량 구리 + “살 거면 사고…” */
 const OfferScene: React.FC = () => (
   <AbsoluteFill>
-    <KenBurns src="img/s3_offer.jpg" dur={92} from={1.05} to={1.1} origin="40% 70%" />
+    <KenBurns src="img/s3_offer.jpg" dur={64} from={1.05} to={1.1} origin="40% 70%" />
     <PaperGrain />
     <Stamp text={TEXT.bad} x={560} y={780} delay={10} size={120} />
-    <Bubble text={TEXT.merchantSays} x={600} y={70} delay={26} size={60} />
-    <HandLabel text={TEXT.messenger} x={1330} y={930} size={56} delay={46} rotate={-2} />
+    <Bubble text={TEXT.merchantSays} x={600} y={70} delay={22} size={60} />
+    <HandLabel text={TEXT.messenger} x={1330} y={930} size={56} delay={38} rotate={-2} />
   </AbsoluteFill>
 );
 
 /* 4. 화난 난니 — 점토판에 항의 */
 const AngryScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const shoutOut = interpolate(frame, [s(13.9) - 284, s(14.3) - 284], [1, 0], clamp);
+  const A = SCENES.angry[0];
+  const shoutOut = interpolate(frame, [s(10.9) - A, s(11.2) - A], [1, 0], clamp);
   return (
     <AbsoluteFill>
-      <KenBurns src="img/s4_angry.jpg" dur={186} from={1.04} to={1.16} origin="55% 40%" />
+      <KenBurns src="img/s4_angry.jpg" dur={154} from={1.04} to={1.16} origin="55% 40%" />
       <PaperGrain />
-      <HandLabel text={TEXT.nanni} x={1390} y={200} size={72} delay={s(9.8) - 284} check rotate={3} />
-      <Arrow d="M 1380 250 C 1320 250, 1280 270, 1240 300" head={{ x: 1240, y: 300, angle: 150 }} delay={s(10.1) - 284} />
-      <Sticker src="stickers/tablet.png" x={1500} y={520} w={330} delay={s(11.0) - 284} rotate={8} />
-      <HandLabel text={TEXT.tablet} x={1330} y={890} size={58} delay={s(11.3) - 284} rotate={-3} />
+      <HandLabel text={TEXT.nanni} x={1390} y={200} size={72} delay={s(7.7) - A} check rotate={3} />
+      <Arrow d="M 1380 250 C 1320 250, 1280 270, 1240 300" head={{ x: 1240, y: 300, angle: 150 }} delay={s(7.95) - A} />
+      <Sticker src="stickers/tablet.png" x={1500} y={520} w={330} delay={s(8.4) - A} rotate={8} />
+      <HandLabel text={TEXT.tablet} x={1330} y={890} size={58} delay={s(8.65) - A} rotate={-3} />
       <div style={{ opacity: shoutOut }}>
-        <Shout text={TEXT.shout} x={250} y={590} delay={s(11.9) - 284} size={140} />
+        <Shout text={TEXT.shout} x={250} y={590} delay={s(9.28) - A} size={140} />
       </div>
-      <HandLabel text={TEXT.stylus} x={110} y={330} size={60} delay={s(14.1) - 284} rotate={-4} check />
-      <Arrow d="M 330 400 C 420 430, 560 440, 650 430" head={{ x: 650, y: 430, angle: -5 }} delay={s(14.4) - 284} />
+      <HandLabel text={TEXT.stylus} x={110} y={330} size={60} delay={s(11.0) - A} rotate={-4} check />
+      <Arrow d="M 330 400 C 420 430, 560 440, 650 430" head={{ x: 650, y: 430, angle: -5 }} delay={s(11.25) - A} />
     </AbsoluteFill>
   );
 };
@@ -156,11 +157,11 @@ const NightScene: React.FC = () => {
 /* 6. 오늘날 — 별점 1개의 조상 */
 const PhoneScene: React.FC = () => (
   <AbsoluteFill>
-    <KenBurns src="img/s7_phone.jpg" dur={130} from={1.03} to={1.1} origin="62% 55%" />
+    <KenBurns src="img/s7_phone.jpg" dur={128} from={1.03} to={1.1} origin="62% 55%" />
     <PaperGrain />
-    <HandLabel text={TEXT.oldest} x={930} y={170} size={64} delay={s(16.2) - 494} check rotate={-2} />
-    <Stamp text={TEXT.guinness} x={1060} y={850} delay={s(17.6) - 494} size={72} rotate={-7} color="#b8321f" paper />
-    <HandLabel text={TEXT.size} x={980} y={300} size={44} delay={s(18.7) - 494} rotate={1} bg="rgba(246,174,45,0.95)" />
+    <HandLabel text={TEXT.oldest} x={930} y={170} size={64} delay={s(13.5) - SCENES.phone[0]} check rotate={-2} />
+    <Stamp text={TEXT.guinness} x={1060} y={850} delay={s(14.3) - SCENES.phone[0]} size={72} rotate={-7} color="#b8321f" paper />
+    <HandLabel text={TEXT.size} x={980} y={300} size={44} delay={s(15.2) - SCENES.phone[0]} rotate={1} bg="rgba(246,174,45,0.95)" />
   </AbsoluteFill>
 );
 
@@ -274,7 +275,7 @@ const CardScene: React.FC = () => {
 /* 타이틀(랜섬 노트) — 가운데에서 등장 후 우상단 배지로 이동 */
 const TitleBadge: React.FC = () => {
   const frame = useCurrentFrame();
-  const t = interpolate(frame, [52, 74], [0, 1], { ...clamp, easing: Easing.inOut(Easing.cubic) });
+  const t = interpolate(frame, [38, 58], [0, 1], { ...clamp, easing: Easing.inOut(Easing.cubic) });
   const hide = frame >= SCENES.night[0] + 10;
   if (hide) return null;
   return (
