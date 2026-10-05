@@ -22,12 +22,12 @@ const SPECS = [
 ];
 
 // 한글 폰트는 유니코드 구간별로 쪼개져 있으므로, 실제로 쓰는 글자를 미리 불러 둔 뒤 렌더한다.
-export const FontGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const FontGate: React.FC<{ children: React.ReactNode; text?: string }> = ({ children, text = ALL_TEXT }) => {
   const [handle] = useState(() => delayRender("Loading Korean fonts"));
   useEffect(() => {
-    Promise.all(SPECS.map((f) => document.fonts.load(f, ALL_TEXT)))
+    Promise.all(SPECS.map((f) => document.fonts.load(f, text)))
       .then(() => continueRender(handle))
       .catch(() => continueRender(handle));
-  }, [handle]);
+  }, [handle, text]);
   return <>{children}</>;
 };

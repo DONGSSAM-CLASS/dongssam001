@@ -465,3 +465,44 @@ export const Shout: React.FC<{ text: string; delay?: number; x: number; y: numbe
     </div>
   );
 };
+
+/* ---------- 시간 점프(별밤 + 랜섬 노트) ---------- */
+export const TimeJump: React.FC<{ chars: string[]; seed?: string }> = ({ chars, seed = "jump" }) => {
+  const frame = useCurrentFrame();
+  const { width, height } = useVideoConfig();
+  const stars = new Array(46).fill(0).map((_, i) => ({
+    x: random(`sx${i}`) * width,
+    y: random(`sy${i}`) * height,
+    r: 3 + random(`sr${i}`) * 7,
+    ph: random(`sp${i}`) * 6,
+  }));
+  const shoot = interpolate(frame, [4, 26], [0, 1], { ...clamp, easing: Easing.out(Easing.quad) });
+  return (
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 40%, #1d2f6b 0%, #101a40 60%, #0a1030 100%)" }}>
+      <svg width={width} height={height} style={{ position: "absolute" }}>
+        {stars.map((st, i) => (
+          <path
+            key={i}
+            transform={`translate(${st.x} ${st.y}) scale(${st.r / 10})`}
+            d="M0 -10 L2.4 -3 L10 -3 L4 1.6 L6.2 9 L0 4.6 L-6.2 9 L-4 1.6 L-10 -3 L-2.4 -3 Z"
+            fill="#f6c945"
+            opacity={0.55 + 0.45 * Math.sin(frame / 5 + st.ph)}
+          />
+        ))}
+        <path
+          d={`M 260 220 L ${260 + 520 * shoot} ${220 + 150 * shoot}`}
+          stroke="#fffbe8"
+          strokeWidth={4}
+          strokeDasharray="14 12"
+          strokeLinecap="round"
+        />
+        <circle cx={1580} cy={230} r={86} fill="#f3e3b3" />
+        <circle cx={1620} cy={205} r={80} fill="#15225a" />
+      </svg>
+      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+        <Ransom chars={chars} size={170} seed={seed} delay={3} stagger={3} />
+      </AbsoluteFill>
+      <PaperGrain opacity={0.12} />
+    </AbsoluteFill>
+  );
+};

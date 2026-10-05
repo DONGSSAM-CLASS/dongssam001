@@ -4,7 +4,6 @@ import {
   AbsoluteFill,
   Easing,
   interpolate,
-  random,
   Sequence,
   staticFile,
   useCurrentFrame,
@@ -25,6 +24,7 @@ import {
   Shout,
   Stamp,
   Sticker,
+  TimeJump,
   TornReveal,
 } from "./parts";
 
@@ -114,45 +114,7 @@ const AngryScene: React.FC = () => {
 };
 
 /* 5. 시간 점프 — 3,750년 뒤 */
-const NightScene: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { width, height } = useVideoConfig();
-  const stars = new Array(46).fill(0).map((_, i) => ({
-    x: random(`sx${i}`) * width,
-    y: random(`sy${i}`) * height,
-    r: 3 + random(`sr${i}`) * 7,
-    ph: random(`sp${i}`) * 6,
-  }));
-  const shoot = interpolate(frame, [4, 26], [0, 1], { ...clamp, easing: Easing.out(Easing.quad) });
-  return (
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 40%, #1d2f6b 0%, #101a40 60%, #0a1030 100%)" }}>
-      <svg width={width} height={height} style={{ position: "absolute" }}>
-        {stars.map((st, i) => (
-          <path
-            key={i}
-            transform={`translate(${st.x} ${st.y}) scale(${st.r / 10})`}
-            d="M0 -10 L2.4 -3 L10 -3 L4 1.6 L6.2 9 L0 4.6 L-6.2 9 L-4 1.6 L-10 -3 L-2.4 -3 Z"
-            fill="#f6c945"
-            opacity={0.55 + 0.45 * Math.sin(frame / 5 + st.ph)}
-          />
-        ))}
-        <path
-          d={`M 260 220 L ${260 + 520 * shoot} ${220 + 150 * shoot}`}
-          stroke="#fffbe8"
-          strokeWidth={4}
-          strokeDasharray="14 12"
-          strokeLinecap="round"
-        />
-        <circle cx={1580} cy={230} r={86} fill="#f3e3b3" />
-        <circle cx={1620} cy={205} r={80} fill="#15225a" />
-      </svg>
-      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
-        <Ransom chars={TEXT.titleLater} size={170} seed="later" delay={3} stagger={3} />
-      </AbsoluteFill>
-      <PaperGrain opacity={0.12} />
-    </AbsoluteFill>
-  );
-};
+const NightScene: React.FC = () => <TimeJump chars={TEXT.titleLater} seed="later" />;
 
 /* 6. 오늘날 — 별점 1개의 조상 */
 const PhoneScene: React.FC = () => (
@@ -236,7 +198,7 @@ const CardScene: React.FC = () => {
           “{TEXT.textbookQuote}”
         </div>
         <div style={{ fontFamily: BODY, fontWeight: 500, fontSize: 26, color: "#6b5a44", marginTop: 12 }}>
-          — 중학교 역사 교과서 Ⅱ단원 「문명의 발생」 (22쪽)
+          — 중학교 역사 · 메소포타미아 문명
         </div>
       </div>
       <div

@@ -6,19 +6,25 @@ import { Main } from "./Main";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
-// 세로형(9:16) 릴스/쇼츠 버전 — 레퍼런스 영상처럼 위에 초록 제목 박스, 가운데 16:9 영상, 아래 자막
-export const Reels: React.FC = () => {
+// 세로형(9:16) 릴스/쇼츠 틀 — 위에 초록 제목 박스, 가운데 16:9 영상, 아래 자막
+export const ReelsFrame: React.FC<{
+  children: React.ReactNode;
+  captions: [number, number, string][];
+  series: string;
+  headline: [string, string];
+  footer: string;
+}> = ({ children, captions, series, headline, footer }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / FPS;
-  const cap = CAPTIONS.find(([a, b]) => t >= a && t < b);
+  const cap = captions.find(([a, b]) => t >= a && t < b);
   const capIn = cap ? spring({ frame: frame - Math.round(cap[0] * FPS), fps, config: { damping: 14 } }) : 0;
   const scale = 1080 / 1920;
   return (
     <AbsoluteFill style={{ backgroundColor: "#17130f" }}>
       <div style={{ position: "absolute", top: 250, left: 0, right: 0, textAlign: "center" }}>
         <div style={{ fontFamily: BODY, fontWeight: 800, fontSize: 40, color: "#fff" }}>
-          동쌤의 <span style={{ color: "#39ff14" }}>뒷담사(史)</span> · 고대 문명 편
+          동쌤의 <span style={{ color: "#39ff14" }}>뒷담사(史)</span> · {series}
         </div>
         <div
           style={{
@@ -33,9 +39,9 @@ export const Reels: React.FC = () => {
             color: "#111",
           }}
         >
-          3,750년 전에도
+          {headline[0]}
           <br />
-          별점 테러가 있었다?!
+          {headline[1]}
         </div>
       </div>
 
@@ -51,7 +57,7 @@ export const Reels: React.FC = () => {
           overflow: "hidden",
         }}
       >
-        <Main />
+        {children}
       </div>
 
       <div style={{ position: "absolute", top: 1380, left: 40, right: 40, textAlign: "center" }}>
@@ -86,8 +92,20 @@ export const Reels: React.FC = () => {
           color: "rgba(255,255,255,0.6)",
         }}
       >
-        중학교 역사 · 메소포타미아 문명 × 쐐기 문자
+        {footer}
       </div>
     </AbsoluteFill>
   );
 };
+
+// 1화 — 세계 최초의 고객 불만 편지
+export const Reels: React.FC = () => (
+  <ReelsFrame
+    captions={CAPTIONS}
+    series="고대 문명 편"
+    headline={["3,750년 전에도", "별점 테러가 있었다?!"]}
+    footer="중학교 역사 · 메소포타미아 문명 × 쐐기 문자"
+  >
+    <Main />
+  </ReelsFrame>
+);
