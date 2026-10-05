@@ -48,3 +48,15 @@ export function marketingPrompt({ product, platforms }) {
     '판매처마다 listings 항목을 하나씩 만들고, 블로그 글·SNS 글(인스타그램, 스레드, 네이버 밴드)·숏폼 대본을 써 주세요.',
   ].join('\n');
 }
+
+// 웹 화면(claude.ai 아티팩트)에서는 시스템 프롬프트를 따로 줄 수 없어 한 덩어리로 합친다.
+export function jsonOnlyPrompt(system, user, jsonSchema) {
+  return [
+    system,
+    '',
+    user,
+    '',
+    '아래 JSON 스키마에 맞는 JSON 객체 하나만 출력하세요. 설명이나 코드 블록 표시 없이 JSON만 씁니다.',
+    JSON.stringify(jsonSchema),
+  ].join('\n');
+}

@@ -48,3 +48,11 @@ test('비용 추정은 알려진 모델만 계산한다', () => {
   assert.equal(estimateCostUSD('claude-opus-5-5', { input_tokens: 1_000_000, output_tokens: 0 }), 4);
   assert.equal(estimateCostUSD('unknown-model', { input_tokens: 1 }), null);
 });
+
+test('웹 화면용 프롬프트에 지시문·요청·JSON 스키마가 모두 들어간다', async () => {
+  const { jsonOnlyPrompt } = await import('../src/prompts.mjs');
+  const text = jsonOnlyPrompt('SYS', 'USER', { type: 'object' });
+  assert.ok(text.startsWith('SYS'));
+  assert.ok(text.includes('USER'));
+  assert.ok(text.endsWith('{"type":"object"}'));
+});

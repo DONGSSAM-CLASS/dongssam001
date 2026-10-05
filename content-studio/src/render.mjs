@@ -34,8 +34,37 @@ function answerBlock(q, i) {
   return `<li><p><b>${i + 1}. 정답:</b> ${escapeHtml(q.answer)}</p><p class="muted">${escapeHtml(q.explanation)}</p></li>`;
 }
 
-// A4 인쇄용 단일 HTML. 브라우저에서 열고 "PDF로 저장"하면 그대로 판매 파일이 된다.
-export function renderProductHtml(product, { author = '' } = {}) {
+// 자료 본문 스타일. 웹 화면의 미리보기(Shadow DOM)에서도 그대로 쓰도록 .sheet 안으로 범위를 묶었다.
+export const PRODUCT_CSS = `
+  .sheet { --ink: #1d2433; --muted: #5b6475; --line: #d5dae3; --accent: #2f5bd3; --paper: #ffffff;
+    background: var(--paper); color: var(--ink); max-width: 180mm; margin: 0 auto; padding: 12mm 0;
+    font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-size: 11pt; line-height: 1.7; }
+  .sheet * { box-sizing: border-box; }
+  .sheet .cover { border-bottom: 3px solid var(--accent); padding-bottom: 6mm; margin-bottom: 8mm; }
+  .sheet .cover h1 { font-size: 22pt; margin: 0 0 2mm; line-height: 1.3; }
+  .sheet .cover .sub { font-size: 13pt; color: var(--muted); margin: 0; }
+  .sheet .meta { margin-top: 4mm; font-size: 10pt; color: var(--muted); }
+  .sheet h2 { font-size: 14pt; border-left: 5px solid var(--accent); padding-left: 3mm; margin: 8mm 0 3mm; }
+  .sheet .muted { color: var(--muted); }
+  .sheet .terms span { display: inline-block; border: 1px solid var(--line); border-radius: 4px; padding: 0 2mm; margin: 0 1mm 1mm 0; }
+  .sheet .goals li, .sheet .activities li { margin-bottom: 2mm; }
+  .sheet .page-break { break-before: page; }
+  .sheet .name-row { display: flex; gap: 8mm; border: 1px solid var(--line); padding: 3mm 4mm; margin-bottom: 5mm; }
+  .sheet .name-row span { flex: 1; border-bottom: 1px solid var(--ink); }
+  .sheet ol.questions, .sheet ol.answers { padding-left: 0; list-style: none; }
+  .sheet .question { break-inside: avoid; margin-bottom: 6mm; }
+  .sheet .question em { font-style: normal; color: var(--accent); font-size: 9.5pt; }
+  .sheet ol.choices { list-style: none; padding-left: 5mm; margin: 1mm 0; }
+  .sheet ol.choices span { color: var(--muted); }
+  .sheet .answer-space { border-bottom: 1px solid var(--line); height: 12mm; }
+  .sheet .answer-space.long { height: 40mm; border: 1px solid var(--line); border-radius: 4px; }
+  .sheet .answers li { break-inside: avoid; margin-bottom: 3mm; }
+  .sheet footer { margin-top: 10mm; font-size: 9pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 3mm; }
+  @media screen and (max-width: 640px) { .sheet { padding: 16px; } .sheet .cover h1 { font-size: 20pt; } }
+`;
+
+export function renderProductSheet(product, { author = '' } = {}) {
   const p = product;
   const sections = p.sections
     .map(
@@ -54,45 +83,7 @@ export function renderProductHtml(product, { author = '' } = {}) {
     )
     .join('');
 
-  return `<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${escapeHtml(p.title)}</title>
-<style>
-  @page { size: A4; margin: 16mm 15mm; }
-  :root { --ink: #1d2433; --muted: #5b6475; --line: #d5dae3; --accent: #2f5bd3; --paper: #ffffff; }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--paper); color: var(--ink);
-    font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-    font-size: 11pt; line-height: 1.7; }
-  main { max-width: 180mm; margin: 0 auto; padding: 12mm 0; }
-  .cover { border-bottom: 3px solid var(--accent); padding-bottom: 6mm; margin-bottom: 8mm; }
-  .cover h1 { font-size: 22pt; margin: 0 0 2mm; line-height: 1.3; }
-  .cover .sub { font-size: 13pt; color: var(--muted); margin: 0; }
-  .meta { margin-top: 4mm; font-size: 10pt; color: var(--muted); }
-  h2 { font-size: 14pt; border-left: 5px solid var(--accent); padding-left: 3mm; margin: 8mm 0 3mm; }
-  .muted { color: var(--muted); }
-  .terms span { display: inline-block; border: 1px solid var(--line); border-radius: 4px; padding: 0 2mm; margin: 0 1mm 1mm 0; }
-  .goals li, .activities li { margin-bottom: 2mm; }
-  .page-break { break-before: page; }
-  .name-row { display: flex; gap: 8mm; border: 1px solid var(--line); padding: 3mm 4mm; margin-bottom: 5mm; }
-  .name-row span { flex: 1; border-bottom: 1px solid var(--ink); }
-  ol.questions { padding-left: 0; list-style: none; }
-  .question { break-inside: avoid; margin-bottom: 6mm; }
-  .question em { font-style: normal; color: var(--accent); font-size: 9.5pt; }
-  ol.choices { list-style: none; padding-left: 5mm; margin: 1mm 0; }
-  ol.choices span { color: var(--muted); }
-  .answer-space { border-bottom: 1px solid var(--line); height: 12mm; }
-  .answer-space.long { height: 40mm; border: 1px solid var(--line); border-radius: 4px; }
-  .answers li { break-inside: avoid; margin-bottom: 3mm; }
-  footer { margin-top: 10mm; font-size: 9pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 3mm; }
-  @media screen and (max-width: 640px) { main { padding: 16px; } .cover h1 { font-size: 20pt; } }
-</style>
-</head>
-<body>
-<main>
+  return `<main class="sheet">
   <header class="cover">
     <h1>${escapeHtml(p.title)}</h1>
     <p class="sub">${escapeHtml(p.subtitle)}</p>
@@ -114,13 +105,30 @@ export function renderProductHtml(product, { author = '' } = {}) {
 
   <div class="page-break"></div>
   <h2>정답과 해설</h2>
-  <ol class="answers" style="list-style:none;padding-left:0">${p.questions.map(answerBlock).join('')}</ol>
+  <ol class="answers">${p.questions.map(answerBlock).join('')}</ol>
 
   <h2>지도 유의점</h2>
   <ul>${p.teacherNotes.map((n) => `<li>${escapeHtml(n)}</li>`).join('')}</ul>
 
   <footer>${author ? `© ${escapeHtml(author)}. ` : ''}이 자료는 구매자 본인의 수업·학습용으로만 사용할 수 있으며 무단 재배포를 금합니다.</footer>
-</main>
+</main>`;
+}
+
+// A4 인쇄용 단일 HTML. 브라우저에서 열고 "PDF로 저장"하면 그대로 판매 파일이 된다.
+export function renderProductHtml(product, opts) {
+  return `<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${escapeHtml(product.title)}</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm; }
+  body { margin: 0; background: #ffffff; }
+${PRODUCT_CSS}</style>
+</head>
+<body>
+${renderProductSheet(product, opts)}
 </body>
 </html>
 `;
@@ -186,36 +194,54 @@ export function renderSnsMd(marketing) {
 }
 
 // 판매 전 사람이 직접 확인해야 하는 항목. AI 결과물을 그대로 팔지 않게 하는 마지막 관문.
+// 웹 화면의 체크리스트도 이 목록을 그대로 쓴다.
+export function checklistSections(product) {
+  return [
+    {
+      title: '사실 검증 (AI가 표시한 항목)',
+      items: product.factCheck.map((f) => ({ text: f.claim, hint: `확인 방법: ${f.howToVerify}` })),
+    },
+    {
+      title: '내용 점검',
+      items: [
+        { text: '정답·해설을 직접 풀어 보고 오류가 없는지 확인했다' },
+        { text: '교과서·참고서·기출 문장과 똑같은 문장이 없다 (저작권)' },
+        { text: '사진·지도·그림을 추가했다면 공공누리·퍼블릭 도메인 등 이용 허락을 확인했다' },
+        { text: '학생 개인정보나 실제 학급 정보가 들어가 있지 않다' },
+      ],
+    },
+    {
+      title: '판매 자격·정산',
+      items: [
+        { text: '(현직 교원·공무원) 소속 기관에 겸직 허가가 필요한지 확인하고 필요하면 허가를 받았다' },
+        { text: '판매처의 디지털 상품(PDF) 판매 정책과 수수료를 확인했다' },
+        { text: '판매처에 정산받을 본인 명의 계좌와 판매자 정보(개인/사업자)를 등록했다' },
+        { text: '판매 수익의 세금 신고 방법(기타소득·사업소득 등)을 확인했다' },
+      ],
+    },
+    {
+      title: '업로드',
+      items: [
+        { text: 'product.html 을 브라우저로 열어 "인쇄 → PDF로 저장" 했다' },
+        { text: '미리보기용으로 표지·활동지 1쪽만 이미지로 캡처했다 (정답 페이지는 공개하지 않기)' },
+        { text: 'listing.md 문구로 상품을 등록하고, blog.md·sns.md 에 실제 판매 링크를 넣어 게시했다' },
+      ],
+    },
+  ];
+}
+
 export function renderChecklistMd(product) {
   return [
     '# 판매 전 체크리스트',
     '',
     '모든 칸에 체크한 뒤에 업로드하세요. AI가 만든 초안은 틀릴 수 있고, 책임은 판매자에게 있습니다.',
     '',
-    '## 1. 사실 검증 (AI가 표시한 항목)',
-    '',
-    ...product.factCheck.map((f) => `- [ ] ${f.claim}\n  - 확인 방법: ${f.howToVerify}`),
-    '',
-    '## 2. 내용 점검',
-    '',
-    '- [ ] 정답·해설을 직접 풀어 보고 오류가 없는지 확인했다',
-    '- [ ] 교과서·참고서·기출 문장과 똑같은 문장이 없다 (저작권)',
-    '- [ ] 사진·지도·그림을 추가했다면 공공누리·퍼블릭 도메인 등 이용 허락을 확인했다',
-    '- [ ] 학생 개인정보나 실제 학급 정보가 들어가 있지 않다',
-    '',
-    '## 3. 판매 자격·정산',
-    '',
-    '- [ ] (현직 교원·공무원) 소속 기관에 겸직 허가가 필요한지 확인하고 필요하면 허가를 받았다',
-    '- [ ] 판매처의 디지털 상품(PDF) 판매 정책과 수수료를 확인했다',
-    '- [ ] 판매처에 정산받을 본인 명의 계좌와 판매자 정보(개인/사업자)를 등록했다',
-    '- [ ] 판매 수익의 세금 신고 방법(기타소득·사업소득 등)을 확인했다',
-    '',
-    '## 4. 업로드',
-    '',
-    '- [ ] `product.html` 을 브라우저로 열어 "인쇄 → PDF로 저장" 했다',
-    '- [ ] 미리보기용으로 표지·활동지 1쪽만 이미지로 캡처했다 (정답 페이지는 공개하지 않기)',
-    '- [ ] `listing.md` 문구로 상품을 등록하고, `blog.md`·`sns.md` 에 실제 판매 링크를 넣어 게시했다',
-    '',
+    ...checklistSections(product).flatMap((sec, i) => [
+      `## ${i + 1}. ${sec.title}`,
+      '',
+      ...sec.items.map((it) => `- [ ] ${it.text}${it.hint ? `\n  - ${it.hint}` : ''}`),
+      '',
+    ]),
   ].join('\n');
 }
 

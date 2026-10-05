@@ -7,7 +7,8 @@
   "scripts": {
     "make": "node src/cli.mjs",
     "demo": "node src/cli.mjs --demo",
-    "test": "node --test"
+    "test": "node --test",
+    "build:web": "node scripts/build-web.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -15,5 +16,9 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0",
     "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "jszip": "^3.10.2"
   }
 }

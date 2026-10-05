@@ -31,6 +31,21 @@ npm run make  →  CHECKLIST 확인·수정  →  PDF 저장  →  판매처에 
 이 도구는 그 아이디어 중 "AI가 남이 돈을 내고 살 만한 결과물을 만든다"는 부분만 가져왔습니다.
 정산은 판매처를 통해 원화 계좌로 받고, 판매 전에 사람이 내용을 확인하는 단계를 두었습니다.
 
+## 웹 화면
+
+claude.ai에 올린 웹 화면에서도 같은 자료를 만들 수 있습니다. **API 키가 필요 없고** 로그인한 내 Claude 계정 사용량으로 만들어집니다.
+
+- 주소: https://claude.ai/artifact/FJTm4m77nqXEoATnZKDfuW (처음에는 본인만 열 수 있음. 공유는 페이지의 공유 메뉴에서)
+- 왼쪽에 주제를 넣고 **자료 만들기** → 자료 미리보기 · 판매 문구 · 블로그 글 · SNS·숏폼 · 판매 전 체크 탭으로 결과 확인
+- **자료 HTML 받기**, **전체 묶음 zip 받기**로 파일 저장. 받은 HTML은 브라우저에서 열고 인쇄 → "PDF로 저장"
+- 최근 만든 자료 8개와 체크리스트 진행 상태는 그 브라우저에만 저장됩니다
+
+화면 소스는 `web/` 에 있고, 명령줄 도구와 같은 프롬프트·스키마·렌더러(`src/`)를 씁니다. 고친 뒤에는 다시 묶어서 올립니다.
+
+```bash
+npm run build:web     # web/dist/content-studio.html 한 파일로 묶기
+```
+
 ## 설치
 
 Node.js 20 이상이 필요합니다.
@@ -102,6 +117,10 @@ content-studio/
 │   ├── schemas.mjs    # 구조화 출력 스키마 (zod)
 │   ├── render.mjs     # HTML·Markdown 렌더러 (API 호출 없음)
 │   └── sample.mjs     # --demo 용 예시 데이터
+├── web/
+│   ├── page.html      # 웹 화면 마크업·스타일
+│   └── app.mjs        # 웹 화면 동작 (claude.ai 의 sample·downloads 기능 사용)
+├── scripts/build-web.mjs  # 웹 화면을 HTML 한 파일로 묶기
 └── test/render.test.mjs   # npm test
 ```
 
