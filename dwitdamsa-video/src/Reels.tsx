@@ -68,6 +68,7 @@ export const ReelsFrame: React.FC<{
               fontFamily: DISPLAY,
               fontSize: 76,
               lineHeight: 1.25,
+              wordBreak: "keep-all",
               color: "#fff",
               WebkitTextStroke: "10px #000",
               paintOrder: "stroke fill",

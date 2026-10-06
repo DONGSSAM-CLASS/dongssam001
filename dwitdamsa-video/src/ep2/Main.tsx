@@ -92,7 +92,7 @@ const CaveScene: React.FC = () => (
     <PaperGrain />
     <HandLabel text={TEXT.found} x={90} y={160} size={58} delay={at("cave", 9.3)} rotate={-2} />
     <HandLabel text={TEXT.oldest} x={820} y={860} size={64} delay={at("cave", 10.2)} check rotate={-3} />
-    <Stamp text={TEXT.guinness} x={1180} y={240} delay={at("cave", 11.6)} size={70} rotate={8} color="#b8321f" paper />
+    <Stamp text={TEXT.guinness} x={1260} y={560} delay={at("cave", 11.6)} size={70} rotate={8} color="#b8321f" paper />
   </AbsoluteFill>
 );
 
@@ -139,8 +139,8 @@ const GraffitiScene: React.FC = () => (
     <KenBurns src={img("g7_graffiti.jpg")} dur={120} from={1.04} to={1.1} origin="50% 45%" />
     <PaperGrain />
     <HandLabel text={TEXT.gossipHead} x={90} y={160} size={62} delay={10} rotate={-2} />
-    <HandLabel text={TEXT.gang1} x={1120} y={700} size={76} delay={30} rotate={-5} bg="rgba(246,174,45,0.96)" />
-    <HandLabel text={TEXT.gang2} x={1060} y={840} size={76} delay={46} rotate={3} bg="rgba(255,252,240,0.96)" check />
+    <HandLabel text={TEXT.gang1} x={90} y={790} size={72} delay={30} rotate={-5} bg="rgba(246,174,45,0.96)" />
+    <HandLabel text={TEXT.gang2} x={150} y={920} size={72} delay={46} rotate={3} bg="rgba(255,252,240,0.96)" check />
   </AbsoluteFill>
 );
 
