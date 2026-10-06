@@ -31,6 +31,7 @@ export const TEXT = {
   logbook: "업무 일지 = 파피루스",
   block: "석회암 블록 1개 ≈ 2.5톤",
   route: "투라 채석장 → 기자 · 갈 때 2일, 올 때 1일",
+  mapCaption: "나일강 뱃길로 기자까지",
   everyday: "날마다 꼬박꼬박",
   found: "2013년 · 홍해 바닷가 옛 항구 유적의 굴",
   oldest: "글자가 적힌 가장 오래된 파피루스",

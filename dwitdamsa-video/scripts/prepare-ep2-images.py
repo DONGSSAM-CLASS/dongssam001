@@ -16,7 +16,10 @@ ROOT = Path(__file__).resolve().parent.parent / "public" / "ep2"
 RAW, IMG, STK = ROOT / "raw", ROOT / "img", ROOT / "stickers"
 SCENES = ["g1_giza", "g2_merer", "g3_boat", "g4_meal", "g5_map", "g6_cave", "g7_graffiti"]
 # 화면에서 중요한 부분이 위/아래 어디에 있는지(0=위, 0.5=가운데, 1=아래)
-VERTICAL_FOCUS = {"g1_giza": 0.45, "g5_map": 0.5}
+VERTICAL_FOCUS = {"g1_giza": 0.1, "g5_map": 0.5}
+# 원본에서 먼저 잘라 쓸 영역(left, top, right, bottom). 지도는 홍해 쪽 지형이 실제와 달라
+# 나일강·삼각주·기자 피라미드가 있는 부분만 쓴다.
+PRE_CROP = {"g5_map": (40, 40, 1000, 580)}
 STICKER_NAMES = ["papyrus", "block", "bread", "beer", "merer", "worker"]
 
 
@@ -41,7 +44,13 @@ def to_16x9(im: Image.Image, focus: float) -> Image.Image:
 def scenes() -> None:
     IMG.mkdir(parents=True, exist_ok=True)
     for name in SCENES:
-        im = Image.open(find_raw(name)).convert("RGB")
+        try:
+            im = Image.open(find_raw(name)).convert("RGB")
+        except FileNotFoundError:
+            print("건너뜀(원본 없음):", name)
+            continue
+        if name in PRE_CROP:
+            im = im.crop(PRE_CROP[name])
         out = to_16x9(im, VERTICAL_FOCUS.get(name, 0.5))
         out.save(IMG / f"{name}.jpg", quality=88, optimize=True)
         print(name, im.size, "->", out.size)
@@ -97,7 +106,11 @@ def components(mask: np.ndarray, min_px: int) -> list[tuple[int, int, int, int, 
 
 def stickers() -> None:
     STK.mkdir(parents=True, exist_ok=True)
-    im = Image.open(find_raw("stickers")).convert("RGB")
+    try:
+        im = Image.open(find_raw("stickers")).convert("RGB")
+    except FileNotFoundError:
+        print("건너뜀(원본 없음): stickers")
+        return
     a = np.asarray(im).astype(int)
     r, g, b = a[..., 0], a[..., 1], a[..., 2]
     green = (g > r + 20) & (g > b + 10)

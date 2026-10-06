@@ -51,10 +51,10 @@ const stk = (f: string) => `ep2/stickers/${f}`;
 /* 1. 쿠푸 왕의 피라미드 공사장 */
 const GizaScene: React.FC = () => (
   <AbsoluteFill>
-    <KenBurns src={img("g1_giza.jpg")} dur={110} from={1.04} to={1.12} panX={-24} origin="45% 40%" />
+    <KenBurns src={img("g1_giza.jpg")} dur={110} from={1.03} to={1.1} panX={-20} origin="50% 5%" />
     <PaperGrain />
-    <HandLabel text={TEXT.giza} x={1000} y={210} size={68} delay={s(1.7)} check rotate={-3} />
-    <Arrow d="M 990 260 C 930 270, 880 290, 840 320" head={{ x: 840, y: 320, angle: 150 }} delay={s(2.1)} />
+    <HandLabel text={TEXT.giza} x={1120} y={250} size={60} delay={s(1.7)} check rotate={-3} />
+    <Arrow d="M 1110 300 C 1060 300, 1020 310, 980 330" head={{ x: 980, y: 330, angle: 160 }} delay={s(2.1)} />
   </AbsoluteFill>
 );
 
@@ -76,7 +76,8 @@ const BoatScene: React.FC = () => (
     <KenBurns src={img("g3_boat.jpg")} dur={86} from={1.05} to={1.1} panX={30} origin="50% 55%" />
     <PaperGrain />
     <HandLabel text={TEXT.block} x={1080} y={150} size={58} delay={8} rotate={-2} />
-    <Polaroid src={img("g5_map.jpg")} x={90} y={90} w={560} delay={18} rotate={-5} caption={TEXT.route} />
+    <Polaroid src={img("g5_map.jpg")} x={90} y={90} w={560} delay={18} rotate={-5} caption={TEXT.mapCaption} />
+    <HandLabel text={TEXT.route} x={90} y={560} size={46} delay={30} rotate={-2} />
     <HandLabel text={TEXT.everyday} x={1180} y={880} size={66} delay={at("boat", 6.6)} check rotate={-4} bg="rgba(246,174,45,0.96)" />
   </AbsoluteFill>
 );
@@ -140,7 +141,6 @@ const GraffitiScene: React.FC = () => (
     <HandLabel text={TEXT.gossipHead} x={90} y={160} size={62} delay={10} rotate={-2} />
     <HandLabel text={TEXT.gang1} x={1120} y={700} size={76} delay={30} rotate={-5} bg="rgba(246,174,45,0.96)" />
     <HandLabel text={TEXT.gang2} x={1060} y={840} size={76} delay={46} rotate={3} bg="rgba(255,252,240,0.96)" check />
-    <Sticker src={stk("worker.png")} x={120} y={600} w={360} delay={56} rotate={-4} />
   </AbsoluteFill>
 );
 
