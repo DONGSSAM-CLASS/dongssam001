@@ -1,10 +1,12 @@
 import React from "react";
+import { Audio } from "@remotion/media";
 import {
   AbsoluteFill,
   Easing,
   Img,
   interpolate,
   random,
+  Sequence,
   spring,
   staticFile,
   useCurrentFrame,
@@ -504,5 +506,31 @@ export const TimeJump: React.FC<{ chars: string[]; seed?: string }> = ({ chars, 
       </AbsoluteFill>
       <PaperGrain opacity={0.12} />
     </AbsoluteFill>
+  );
+};
+
+/* ---------- 엔딩 음악: 내레이션이 끝나면 들어와서 영상 끝에 마지막 화음이 울리도록 ---------- */
+const ENDING_MUSIC_SECONDS = 16.0; // public/audio/ending.mp3 길이 (scripts/make-ending-music.py)
+
+export const EndingMusic: React.FC<{ fromSec: number; endSec: number; volume?: number }> = ({
+  fromSec,
+  endSec,
+  volume = 0.9,
+}) => {
+  const { fps } = useVideoConfig();
+  const from = Math.round(fromSec * fps);
+  const playFrames = Math.round(endSec * fps) - from;
+  const trimBefore = Math.max(0, Math.round(ENDING_MUSIC_SECONDS * fps) - playFrames);
+  return (
+    <Sequence from={from} durationInFrames={playFrames} name="ending-music">
+      <Audio
+        src={staticFile("audio/ending.mp3")}
+        trimBefore={trimBefore}
+        volume={(f) =>
+          volume *
+          interpolate(f, [0, Math.round(0.8 * fps), playFrames - Math.round(0.6 * fps), playFrames], [0, 1, 1, 0], clamp)
+        }
+      />
+    </Sequence>
   );
 };

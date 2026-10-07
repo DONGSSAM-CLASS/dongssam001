@@ -10,11 +10,12 @@ import {
   useVideoConfig,
   spring,
 } from "remotion";
-import { NARRATION_OFFSET, s, TEXT } from "./copy";
+import { DURATION, NARRATION_OFFSET, s, TEXT } from "./copy";
 import { BODY, DISPLAY, HAND } from "./fonts";
 import {
   Arrow,
   BrandBadge,
+  EndingMusic,
   Bubble,
   HandLabel,
   KenBurns,
@@ -298,6 +299,8 @@ export const Main: React.FC = () => {
       <Sequence from={s(NARRATION_OFFSET)}>
         <Audio src={staticFile("audio/narration.mp3")} />
       </Sequence>
+      {/* 내레이션(15.4초)이 끝나는 15.9초부터 엔딩 음악 */}
+      <EndingMusic fromSec={15.9} endSec={DURATION} />
     </AbsoluteFill>
   );
 };

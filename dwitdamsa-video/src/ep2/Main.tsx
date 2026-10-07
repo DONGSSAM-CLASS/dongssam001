@@ -6,6 +6,7 @@ import { BODY, DISPLAY, HAND } from "../fonts";
 import {
   Arrow,
   BrandBadge,
+  EndingMusic,
   HandLabel,
   KenBurns,
   PaperGrain,
@@ -16,7 +17,7 @@ import {
   TimeJump,
   TornReveal,
 } from "../parts";
-import { TEXT } from "./copy";
+import { DURATION, TEXT } from "./copy";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const OFFSET = 0.5; // 내레이션 시작(초)
@@ -303,5 +304,7 @@ export const Ep2Main: React.FC = () => (
     <Sequence from={s(OFFSET)}>
       <Audio src={staticFile("ep2/audio/narration.mp3")} />
     </Sequence>
+    {/* 내레이션(17.7초)이 끝나는 18.3초부터 엔딩 음악 */}
+    <EndingMusic fromSec={18.3} endSec={DURATION} />
   </AbsoluteFill>
 );

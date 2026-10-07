@@ -2,6 +2,8 @@ import { Composition } from "remotion";
 import { DURATION, FPS } from "./copy";
 import { Ep2Main } from "./ep2/Main";
 import { ALL_TEXT as EP2_TEXT, CAPTIONS as EP2_CAPTIONS, DURATION as EP2_DURATION } from "./ep2/copy";
+import { Ep3Main } from "./ep3/Main";
+import { ALL_TEXT as EP3_TEXT, CAPTIONS as EP3_CAPTIONS, DURATION as EP3_DURATION } from "./ep3/copy";
 import { FontGate } from "./fonts";
 import { Main } from "./Main";
 import { Reels, ReelsFrame } from "./Reels";
@@ -39,6 +41,26 @@ const Ep2ReelsWithFonts: React.FC = () => (
   </FontGate>
 );
 
+// 3화 — 도둑맞은 함무라비 법전
+const Ep3WithFonts: React.FC = () => (
+  <FontGate text={EP3_TEXT}>
+    <Ep3Main />
+  </FontGate>
+);
+
+const Ep3ReelsWithFonts: React.FC = () => (
+  <FontGate text={EP3_TEXT}>
+    <ReelsFrame
+      captions={EP3_CAPTIONS}
+      series="고대 문명 편"
+      headline={["함무라비 법전,", "도둑맞은 적 있다?!"]}
+      footer="중학교 역사 · 메소포타미아 문명 × 함무라비 법전"
+    >
+      <Ep3Main />
+    </ReelsFrame>
+  </FontGate>
+);
+
 export const RemotionRoot: React.FC = () => {
   return (
     <>
@@ -70,6 +92,22 @@ export const RemotionRoot: React.FC = () => {
         id="Dwitdamsa-Merer-Reels"
         component={Ep2ReelsWithFonts}
         durationInFrames={EP2_DURATION * FPS}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="Dwitdamsa-Hammurabi"
+        component={Ep3WithFonts}
+        durationInFrames={EP3_DURATION * FPS}
+        fps={FPS}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Dwitdamsa-Hammurabi-Reels"
+        component={Ep3ReelsWithFonts}
+        durationInFrames={EP3_DURATION * FPS}
         fps={FPS}
         width={1080}
         height={1920}
