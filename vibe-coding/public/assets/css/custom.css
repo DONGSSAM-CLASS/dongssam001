@@ -56,6 +56,20 @@ p, li, dd, dt, label { font-size: 1rem; }
   border-radius: 1rem;
   box-shadow: 0 10px 30px -18px rgba(59, 48, 66, .35);
 }
+
+.vc-book-number {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 1rem;
+  background: hsl(var(--p) / 0.13);
+  color: hsl(var(--p));
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
 .vc-section { scroll-margin-top: 6.5rem; }
 
 .vc-eyebrow {
