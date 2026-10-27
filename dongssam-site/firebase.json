@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "dongssam-home-20260914",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
