@@ -1,0 +1,7 @@
+{
+  "name": "dongssam-home-asset-tools",
+  "private": true,
+  "type": "module",
+  "scripts": { "build:icons": "node build-icons.mjs" },
+  "devDependencies": { "esbuild": "0.28.2", "lucide": "0.544.0" }
+}
